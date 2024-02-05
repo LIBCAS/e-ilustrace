@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --scrollbar-width: 8px;
+  --scrollbar-padding: 5px;
+  --super-light-gray: #e9ecef;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: calc(1760px - var(--scrollbar-width, 8px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+::-webkit-scrollbar-track {
+  width: var(--scrollbar-width);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--super-light-gray);
+  background-clip: padding-box;
+  border-radius: 20px;
+}
+
+/* ExploreDetail item styles */
+.explore-item {
+  position: relative;
+}
+.explore-item-text {
+  position: absolute;
+  bottom: -1rem;
+}
+.explore-item:hover .explore-item-text {
+  display: flex;
+}
+
+/* ExhibitionDetail Storyline styles*/
+.storyline {
+  grid-template-columns: 1fr 1px 1fr;
+}
+
+/* Temporary fix of react-quill bug when it shows two toolbars*/
+.quill > .ql-toolbar:first-child {
+  display: none !important;
+}
+
+/* Quill custom styles*/
+.quill .ql-toolbar.ql-snow {
+  border: 1px solid var(--super-light-gray);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.quill .ql-container.ql-snow {
+  min-height: 200px;
+  border: 1px solid var(--super-light-gray);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: rgb(
+    233 236 239 / 0.5
+  ); /* superlightgray with 50% opacity */
+}
+
+.button:hover .icon {
+  transform: translateX(5px);
+}
+
+/* from index.html */
+
+input[type='checkbox']:checked ~ .check-1 {
+  @apply text-opacity-100;
+}
+.sidebar-item {
+  @apply cursor-pointer w-full py-2;
+}
+@media only screen and (min-width: 768px) {
+  .sidebar-item:hover {
+    @apply border-r-[6px] border-white transition-all duration-200;
+  }
+  .sidebar-item:hover > a {
+    @apply pl-2;
+  }
+}
+.sidebar-item a {
+  @apply block transition-all duration-300;
+}
+.explore-item > .explore-item-text {
+  display: none;
+  @apply hidden;
+}
+.explore-item:hover img {
+  @apply scale-50;
+}
+.explore-item:hover svg {
+  /*@apply hover:top-[20%] hover:right-[20%];*/
+}
+
+.MuiAppBar-root {
+  z-index: 10 !important;
+}
+
+.quill > .ql-toolbar:first-child{
+  display: block !important;
+}

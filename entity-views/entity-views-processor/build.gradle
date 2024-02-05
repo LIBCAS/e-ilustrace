@@ -1,0 +1,36 @@
+compileJava {
+    doFirst {
+        options.compilerArgs = [
+                '--add-exports', 'jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED',
+                '--add-exports', 'jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED',
+                '--add-exports', 'jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
+                '--add-exports', 'jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED',
+                '--add-exports', 'jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED'
+        ]
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:31.0.1-jre'
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'com.github.olivergondza:maven-jdk-tools-wrapper:0.1'
+    testImplementation 'com.google.testing.compile:compile-testing:0.19'
+    testImplementation 'org.hibernate:hibernate-core:5.6.3.Final'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    testImplementation 'io.swagger.core.v3:swagger-annotations:2.1.12'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation project(':entity-views-api')
+}

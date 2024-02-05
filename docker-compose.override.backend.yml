@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  proxy:
+    ports:
+      - 8080:80
+  eilbe:
+    image: eu.gcr.io/inqool-1301/bcamp-api:latest
+    build:
+      dockerfile: eil-api/docker/dev.Dockerfile
+    tty: true
+  fe:
+    entrypoint: [ "echo", "Service fe disabled" ]
+  fe-admin:
+    entrypoint: [ "echo", "Service fe disabled" ]
+  indexfe:
+    entrypoint: [ "echo", "Service indexfe disabled" ]
+volumes:
+  eil_data:
+    external: true
+  import_volume:
+    external: true

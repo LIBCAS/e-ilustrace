@@ -1,0 +1,21 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%cyan(%d{HH:mm:ss.SSSXXX}) [%thread] %highlight(%-5level) %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="org.testcontainers" level="INFO"/>
+    <logger name="com.github.dockerjava" level="WARN"/>
+    <logger name="liquibase.executor.jvm.JdbcExecutor" level="WARN"/>
+    <logger name="org.springframework.test" level="WARN"/>
+
+    <logger name="cz.inqool.eas.common" level="INFO"/>
+
+    <!-- uncomment below to log ElasticSearch queries -->
+<!--    <logger name="cz.inqool.eas.common.domain.index" level="TRACE"/>-->
+</configuration>

@@ -1,0 +1,58 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="sequence:1" author="zamborsky">
+        <createTable tableName="eas_sequence">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_sequence_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- DictionaryObject -->
+            <column name="name" type="nvarchar(1024)"/>
+            <column name="active" type="boolean"/>
+            <column name="valid_from" type="timestamp"/>
+            <column name="valid_to" type="timestamp"/>
+            <column name="list_order" type="int"/>
+
+            <!-- Own properties -->
+            <column name="description" type="nclob"/>
+            <column name="format" type="nvarchar(2048)"/>
+            <column name="counter" type="bigint"/>
+            <column name="local" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="sequence:2" author="zamborsky">
+        <addColumn tableName="eas_sequence">
+            <column name="code" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="sequence:3" author="tirala">
+        <addColumn tableName="eas_sequence">
+            <column name="multi_name" type="nclob"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="sequence:4" author="camak">
+        <createIndex tableName="eas_sequence" indexName="eas_sequence_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

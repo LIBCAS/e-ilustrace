@@ -1,0 +1,18 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="reindex_queue:1" author="zamborsky">
+        <sql dbms="postgresql">
+            INSERT INTO eas_reindex_queue(id, repository_class, created)
+            VALUES ('ExportBatchRepository', 'cz.inqool.eas.common.export.batch.ExportBatchRepository', now())
+            ON CONFLICT DO NOTHING;
+
+            INSERT INTO eas_reindex_queue(id, repository_class, created)
+            VALUES ('ExportRequestRepository', 'cz.inqool.eas.common.export.request.ExportRequestRepository', now())
+            ON CONFLICT DO NOTHING;
+
+            INSERT INTO eas_reindex_queue(id, repository_class, created)
+            VALUES ('ExportTemplateRepository', 'cz.inqool.eas.common.export.template.ExportTemplateRepository', now())
+            ON CONFLICT DO NOTHING;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

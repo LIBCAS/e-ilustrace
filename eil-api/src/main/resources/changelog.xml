@@ -1,0 +1,879 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <property name="mail_table_name" value="eas_mail"/>
+    <property name="reindex_queue_table_name" value="eas_reindex_queue"/>
+
+    <property name="now" value="now()" dbms="postgresql"/>
+    <property name="now" value="getdate()" dbms="mssql"/>
+    <property name="now" value="CURRENT_TIMESTAMP" dbms="h2"/>
+
+    <property name="true" value="true" dbms="postgresql"/>
+    <property name="true" value="true" dbms="oracle"/>
+    <property name="true" value="1" dbms="mssql"/>
+
+    <include file="/changelog/storage.xml"/>
+    <include file="/changelog/user_settings.xml"/>
+    <include file="/changelog/app_settings.xml"/>
+    <include file="/changelog/named_settings.xml"/>
+    <include file="/changelog/index_reference_update.xml"/>
+    <include file="/changelog/export.xml"/>
+    <include file="/changelog/reindex.xml"/>
+    <include file="/changelog/mail.xml"/>
+
+    <include file="/changelog/reindex_queue.xml"/>
+
+    <changeSet id="eil:1" author="slana">
+        <createTable tableName="eil_author">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_author_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="regnal_number" type="varchar(256)"/>
+            <column name="name_supplement" type="varchar(256)"/>
+            <column name="birth_year" type="int"/>
+            <column name="death_year" type="int"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_institution">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_institution_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_publication_entry">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_publication_entry_PK"/>
+            </column>
+
+            <column name="date" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_publication_entry_place">
+            <column name="publication_entry_id" type="varchar(256)">
+                <constraints referencedTableName="eil_publication_entry" referencedColumnNames="id"
+                             foreignKeyName="eil_place_of_publication_publication_entry_FK"/>
+            </column>
+            <column name="place_of_publication" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_publication_entry_originator">
+            <column name="publication_entry_id" type="varchar(256)">
+                <constraints referencedTableName="eil_publication_entry" referencedColumnNames="id"
+                             foreignKeyName="eil_originator_publication_entry_FK"/>
+            </column>
+            <column name="originator" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_record_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Record -->
+            <column name="identifier" type="varchar(256)"/>
+            <column name="year_from" type="int"/>
+            <column name="year_to" type="int"/>
+            <column name="fixed_length_field" type="varchar(256)"/>
+            <column name="title" type="varchar(256)"/>
+            <column name="physical_description" type="varchar(256)"/>
+            <column name="technique" type="varchar(256)"/>
+            <column name="dimensions" type="varchar(256)"/>
+            <column name="dtype" type="varchar(256)"/>
+
+            <!-- Subclasses -->
+            <column name="book_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_illustration_book_FK"/>
+            </column>
+            <column name="print_entry_id" type="varchar(256)">
+                <constraints referencedTableName="eil_publication_entry" referencedColumnNames="id"
+                             foreignKeyName="eil_print_publication_entry_FK"/>
+            </column>
+            <column name="printing_plate_entry_id" type="varchar(256)">
+                <constraints referencedTableName="eil_publication_entry" referencedColumnNames="id"
+                             foreignKeyName="eil_printing_plate_publication_entry_FK"/>
+            </column>
+            <column name="defect" type="nvarchar(1024)"/>
+            <column name="publishing_entry_id" type="varchar(256)">
+                <constraints referencedTableName="eil_publication_entry" referencedColumnNames="id"
+                             foreignKeyName="eil_publishing_publication_entry_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_record_author">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_record_author_PK"/>
+            </column>
+
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_author_r_FK"/>
+            </column>
+            <column name="author_id" type="varchar(256)">
+                <constraints referencedTableName="eil_author" referencedColumnNames="id"
+                             foreignKeyName="eil_record_author_a_FK"/>
+            </column>
+            <column name="is_main_author" type="boolean"/>
+        </createTable>
+        <createTable tableName="eil_record_author_role">
+            <column name="record_author_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record_author" referencedColumnNames="id"
+                             foreignKeyName="eil_record_author_role_author_FK"/>
+            </column>
+            <column name="marc_role" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_institution">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_record_institution_PK"/>
+            </column>
+
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_institution_r_FK"/>
+            </column>
+            <column name="institution_id" type="varchar(256)">
+                <constraints referencedTableName="eil_institution" referencedColumnNames="id"
+                             foreignKeyName="eil_record_institution_i_FK"/>
+            </column>
+            <column name="is_main_workshop" type="boolean"/>
+        </createTable>
+        <createTable tableName="eil_record_institution_role">
+            <column name="record_institution_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record_institution" referencedColumnNames="id"
+                             foreignKeyName="eil_rec_inst_role_institution_FK"/>
+            </column>
+            <column name="marc_role" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_variant_title">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_variant_title_record_FK"/>
+            </column>
+            <column name="variant_title" type="nvarchar(512)"/>
+        </createTable>
+        <createTable tableName="eil_record_content_note">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_content_note_record_FK"/>
+            </column>
+            <column name="content_note" type="nvarchar(1024)"/>
+        </createTable>
+        <createTable tableName="eil_note">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_note_PK"/>
+            </column>
+
+            <column name="title" type="varchar(256)"/>
+            <column name="text" type="nclob"/>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_note_record_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_reference">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_reference_PK"/>
+            </column>
+
+            <column name="work_title" type="varchar(256)"/>
+            <column name="location" type="varchar(256)"/>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_reference_record_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:2" author="slana">
+        <createTable tableName="eil_subject_person">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_subject_person_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="regnal_number" type="varchar(256)"/>
+            <column name="name_supplement" type="varchar(256)"/>
+            <column name="birth_year" type="int"/>
+            <column name="death_year" type="int"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_subject_person">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_person_r_FK"/>
+            </column>
+            <column name="subject_person_id" type="varchar(256)">
+                <constraints referencedTableName="eil_subject_person" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_person_sp_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_subject_institution">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_subject_institution_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_subject_institution">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_person_r_FK"/>
+            </column>
+            <column name="subject_institution_id" type="varchar(256)">
+                <constraints referencedTableName="eil_subject_institution" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_institution_i_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_subject_entry">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_subject_entry_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="label" type="varchar(256)"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_subject_entry">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_entry_r_FK"/>
+            </column>
+            <column name="subject_entry_id" type="varchar(256)">
+                <constraints referencedTableName="eil_subject_entry" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_entry_e_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_subject_place">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_subject_place_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_subject_place">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_place_r_FK"/>
+            </column>
+            <column name="subject_place_id" type="varchar(256)">
+                <constraints referencedTableName="eil_subject_place" referencedColumnNames="id"
+                             foreignKeyName="eil_record_subject_place_sp_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_record_keyword">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_keyword_record_FK"/>
+            </column>
+            <column name="keyword" type="varchar(246)"/>
+        </createTable>
+        <createTable tableName="eil_genre">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_genre_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_genre">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_genre_r_FK"/>
+            </column>
+            <column name="genre_id" type="varchar(256)">
+                <constraints referencedTableName="eil_genre" referencedColumnNames="id"
+                             foreignKeyName="eil_record_genre_g_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_link">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_link_PK"/>
+            </column>
+
+            <column name="url" type="varchar(512)"/>
+            <column name="description" type="varchar(256)"/>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_link_record_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_owner">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_owner_PK"/>
+            </column>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="signature" type="varchar(256)"/>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_owner_record_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_publishing_place">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_publishing_place_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(256)"/>
+            <column name="country" type="varchar(256)"/>
+            <column name="authority_code" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_publishing_place">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_publishing_place_r_FK"/>
+            </column>
+            <column name="publishing_place_id" type="varchar(256)">
+                <constraints referencedTableName="eil_publishing_place" referencedColumnNames="id"
+                             foreignKeyName="eil_record_publishing_place_pp_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:3" author="slana">
+        <addColumn tableName="eil_record">
+            <column name="illustration_scan_id" type="varchar(256)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                             foreignKeyName="eil_record_file_il_FK"/>
+            </column>
+            <column name="illustration_page_scan_id" type="varchar(256)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                             foreignKeyName="eil_record_file_il_page_FK"/>
+            </column>
+        </addColumn>
+        <createTable tableName="eil_download_reference">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_download_reference_PK"/>
+            </column>
+
+            <column name="created" type="timestamp"/>
+            <column name="url" type="nvarchar(512)"/>
+            <column name="referenced_attribute" type="varchar(256)"/>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_download_reference_record_FK"/>
+            </column>
+            <column name="downloaded" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:4" author="slana">
+        <sql>
+            ALTER TABLE eil_record ALTER COLUMN title TYPE varchar(1024);
+            ALTER TABLE eil_reference ALTER COLUMN work_title TYPE varchar(1024);
+            ALTER TABLE eil_record_variant_title ALTER COLUMN variant_title TYPE varchar(2048);
+        </sql>
+        <addColumn tableName="eil_download_reference">
+            <column name="failed" type="boolean" value="false"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:5" author="slana">
+        <addColumn tableName="eil_record">
+            <column name="title_page_scan_id" type="varchar(256)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                             foreignKeyName="eil_record_file_t_page_FK"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:6" author="slana">
+        <createTable tableName="eil_user">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_user_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="email" type="varchar(256)"/>
+            <column name="first_name" type="varchar(256)"/>
+            <column name="last_name" type="varchar(256)"/>
+            <column name="password" type="varchar(256)"/>
+            <column name="role" type="varchar(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:7" author="slana">
+        <addColumn tableName="eil_user">
+            <column name="validated" type="boolean"/>
+        </addColumn>
+        <createTable tableName="eil_token">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_token_PK"/>
+            </column>
+
+            <column name="user_id" type="varchar(256)">
+                <constraints referencedTableName="eil_user" referencedColumnNames="id"
+                             foreignKeyName="eil_token_user_FK"/>
+            </column>
+            <column name="expiration" type="timestamp"/>
+            <column name="used" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:8" author="slana">
+        <renameColumn tableName="eil_record" oldColumnName="title_page_scan_id" newColumnName="front_page_scan_id"/>
+    </changeSet>
+    <changeSet id="eil:9" author="slana">
+        <createTable tableName="eil_iconclass_category">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_iconclass_category_PK"/>
+            </column>
+
+            <column name="code" type="varchar(256)"/>
+            <column name="name" type="varchar(512)"/>
+            <column name="url" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_iconclass_category">
+        <column name="record_id" type="varchar(256)">
+            <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                         foreignKeyName="eil_record_iconclass_category_r_FK"/>
+        </column>
+        <column name="iconclass_cat_id" type="varchar(256)">
+            <constraints referencedTableName="eil_iconclass_category" referencedColumnNames="id"
+                         foreignKeyName="eil_record_iconclass_category_ic_FK"/>
+        </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:10" author="slana">
+        <addColumn tableName="eil_iconclass_category">
+            <column name="created" type="timestamp" value="now()"/>
+            <column name="updated" type="timestamp" value="now()"/>
+            <column name="deleted" type="timestamp"/>
+        </addColumn>
+        <createTable tableName="eil_theme">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_theme_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <column name="name" type="varchar(512)"/>
+        </createTable>
+        <createTable tableName="eil_record_theme">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_theme_r_FK"/>
+            </column>
+            <column name="theme_id" type="varchar(256)">
+                <constraints referencedTableName="eil_theme" referencedColumnNames="id"
+                             foreignKeyName="eil_record_theme_t_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:11" author="slana">
+        <dropColumn tableName="eil_author">
+            <column name="name" type="varchar(256)"/>
+            <column name="regnal_number" type="varchar(256)"/>
+            <column name="name_supplement" type="varchar(256)"/>
+        </dropColumn>
+        <addColumn tableName="eil_author">
+            <column name="full_name" type="varchar(256)"/>
+        </addColumn>
+        <dropColumn tableName="eil_subject_person">
+            <column name="name" type="varchar(256)"/>
+            <column name="regnal_number" type="varchar(256)"/>
+            <column name="name_supplement" type="varchar(256)"/>
+        </dropColumn>
+        <addColumn tableName="eil_subject_person">
+            <column name="full_name" type="varchar(256)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:12" author="mach">
+        <addColumn tableName="eil_record">
+            <column name="iconclass_state" type="varchar(256)"/>
+            <column name="theme_state" type="varchar(256)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="ip:13" author="mach">
+        <update tableName="eil_record">
+            <column name="iconclass_state" value="UNENRICHED"/>
+            <where>iconclass_state IS NULL</where>
+        </update>
+        <update tableName="eil_record">
+            <column name="theme_state" value="UNENRICHED"/>
+            <where>theme_state IS NULL</where>
+        </update>
+        <update tableName="eil_record">
+            <column name="iconclass_state" value="INPROGRESS"/>
+            <where>iconclass_state = 'INPROGESS'</where>
+        </update>
+    </changeSet>
+    <changeSet id="eil:14" author="mach">
+        <createTable tableName="eil_exhibition">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_exhibition_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Own properties -->
+            <column name="published" type="timestamp"/>
+            <column name="name" type="nvarchar(256)"/>
+            <column name="description" type="nclob"/>
+            <column name="user_id" type="varchar(256)">
+                <constraints referencedTableName="eil_user" referencedColumnNames="id"
+                             foreignKeyName="eil_exhibition_user_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eil_exhibition_item">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_exhibition_item_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Own properties -->
+            <column name="description" type="nclob"/>
+            <column name="exhibition_id" type="varchar(256)">
+                <constraints referencedTableName="eil_exhibition" referencedColumnNames="id"
+                             foreignKeyName="eil_exhibition_item_exhibition_FK"/>
+            </column>
+            <column name="illustration_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_exhibition_item_illustration_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:15" author="mach">
+        <!-- NotificationTemplate -->
+        <createTable tableName="eil_notification_template">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" notNullConstraintName="not_null_id" primaryKey="true"
+                             primaryKeyName="eil_notification_template_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(256)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(256)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(256)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(256)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(256)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(256)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- NotificationTemplate -->
+            <column name="dtype" type="varchar(256)"/>
+            <column name="version" type="int" value="0" defaultValue="0">
+                <constraints nullable="false" notNullConstraintName="not_null_version"/>
+            </column>
+            <column name="name" type="nvarchar(1024)"/>
+            <column name="event" type="varchar(256)"/>
+            <column name="subject" type="nvarchar(1024)"/>
+            <column name="content" type="nclob"/>
+            <column name="active" type="boolean" defaultValue="false"/>
+
+            <!-- EmailNotificationTemplate -->
+            <column name="html" type="boolean"/>
+        </createTable>
+
+        <!-- Notification -->
+        <createTable tableName="eil_notification">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" notNullConstraintName="not_null_id" primaryKey="true"
+                             primaryKeyName="eil_notification_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Notification -->
+            <column name="dtype" type="varchar(256)"/>
+            <column name="event" type="varchar(256)"/>
+            <column name="recipient_id" type="varchar(256)">
+                <constraints referencedTableName="eil_user" referencedColumnNames="id"
+                             foreignKeyName="eil_notification_recipient_FK"/>
+            </column>
+            <column name="subject" type="nvarchar(1024)"/>
+            <column name="content" type="nclob"/>
+
+            <!-- EmailNotification -->
+            <column name="email" type="varchar(256)"/>
+            <column name="html" type="boolean"/>
+            <column name="mail_id" type="varchar(255)">
+                <constraints referencedTableName="eas_mail" referencedColumnNames="id"
+                             foreignKeyName="eil_notification_mail_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:16" author="mach">
+        <!-- Selection -->
+        <createTable tableName="eil_selection">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_selection_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Selection -->
+            <column name="user_id" type="varchar(256)">
+                <constraints referencedTableName="eil_user" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_user_FK"/>
+            </column>
+        </createTable>
+
+        <!-- Selection Illustrations-->
+        <createTable tableName="eil_selection_illustration">
+            <column name="selection_id" type="varchar(256)">
+                <constraints referencedTableName="eil_selection" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_illustration_s_FK"/>
+            </column>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_illustration_i_FK"/>
+            </column>
+        </createTable>
+
+        <!-- Selection Books-->
+        <createTable tableName="eil_selection_book">
+            <column name="selection_id" type="varchar(256)">
+                <constraints referencedTableName="eil_selection" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_book_s_FK"/>
+            </column>
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_book_b_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:17" author="mach">
+        <createTable tableName="eil_reindex_queue">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_reindex_queue_PK"/>
+            </column>
+
+            <!-- Own properties -->
+            <column name="repository_class" type="varchar(1024)"/>
+            <column name="created" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:18" author="mach">
+        <addColumn tableName="eil_record">
+            <column name="vise_file_id" type="varchar(256)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:19" author="mach">
+        <addColumn tableName="eil_exhibition">
+            <column name="radio" type="varchar(256)"/>
+        </addColumn>
+        <addColumn tableName="eil_exhibition_item">
+            <column name="name" type="nvarchar(256)"/>
+            <column name="year" type="varchar(256)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:20" author="mach">
+        <addColumn tableName="eil_record">
+            <column name="cantaloupe_illustration_scan_id" type="varchar(256)"/>
+            <column name="cantaloupe_page_scan_id" type="varchar(256)"/>
+            <column name="vise_ill_scan_copied" type="timestamp"/>
+            <column name="cantaloupe_ill_scan_copied" type="timestamp"/>
+            <column name="cantaloupe_page_scan_copied" type="timestamp"/>
+        </addColumn>
+        <sql>
+            UPDATE eil_record
+            SET vise_ill_scan_copied = now()
+            WHERE vise_file_id is not null
+        </sql>
+    </changeSet>
+    <changeSet id="eil:21" author="mach">
+        <renameColumn tableName="eil_record" oldColumnName="cantaloupe_illustration_scan_id" newColumnName="cantaloupe_ill_scan_id"/>
+    </changeSet>
+    <changeSet id="eil:22" author="mach">
+        <dropTable tableName="eil_selection_book"/>
+        <dropTable tableName="eil_selection_illustration"/>
+        <dropTable tableName="eil_selection"/>
+
+        <!-- Selection -->
+        <createTable tableName="eil_selection">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_selection_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Selection -->
+            <column name="user_id" type="varchar(256)">
+                <constraints referencedTableName="eil_user" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_user_FK"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="eil_selection_item">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_selection_item_PK"/>
+            </column>
+
+            <column name="mirador" type="boolean"/>
+            <column name="selection_id" type="varchar(256)">
+                <constraints referencedTableName="eil_selection" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_item_selection_FK"/>
+            </column>
+            <column name="illustration_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_item_illustration_FK"/>
+            </column>
+            <column name="book_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_selection_item_book_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:23" author="mach">
+        <modifyDataType tableName="eil_author" columnName="birth_year" newDataType="nvarchar(256)"/>
+        <modifyDataType tableName="eil_author" columnName="death_year" newDataType="nvarchar(256)"/>
+        <modifyDataType tableName="eil_subject_person" columnName="birth_year" newDataType="nvarchar(256)"/>
+        <modifyDataType tableName="eil_subject_person" columnName="death_year" newDataType="nvarchar(256)"/>
+    </changeSet>
+    <changeSet id="eil:24" author="mach">
+        <dropTable tableName="eil_record_keyword"/>
+        <createTable tableName="eil_keyword">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eil_keyword_PK"/>
+            </column>
+
+            <!-- Own properties -->
+            <column name="label" type="varchar(256)"/>
+        </createTable>
+        <createTable tableName="eil_record_keyword">
+            <column name="record_id" type="varchar(256)">
+                <constraints referencedTableName="eil_record" referencedColumnNames="id"
+                             foreignKeyName="eil_record_keyword_r_FK"/>
+            </column>
+            <column name="keyword_id" type="varchar(256)">
+                <constraints referencedTableName="eil_keyword" referencedColumnNames="id"
+                             foreignKeyName="eil_record_keyword_k_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="eil:25" author="mach">
+        <addColumn tableName="eil_exhibition_item">
+            <column name="preface" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:26" author="mach">
+        <update tableName="eil_exhibition_item">
+            <column name="preface" value="false"/>
+        </update>
+    </changeSet>
+    <changeSet id="eil:27" author="mach">
+        <addColumn tableName="eil_record_author">
+            <column name="from_book" type="boolean" value="false"/>
+            <column name="from_illustration" type="boolean" value="false"/>
+        </addColumn>
+        <addColumn tableName="eil_publishing_place">
+            <column name="from_book" type="boolean" value="false"/>
+            <column name="from_illustration" type="boolean" value="false"/>
+        </addColumn>
+        <addColumn tableName="eil_subject_entry">
+            <column name="from_book" type="boolean" value="false"/>
+            <column name="from_illustration" type="boolean" value="false"/>
+        </addColumn>
+        <addColumn tableName="eil_subject_person">
+            <column name="from_book" type="boolean" value="false"/>
+            <column name="from_illustration" type="boolean" value="false"/>
+        </addColumn>
+        <addColumn tableName="eil_subject_place">
+            <column name="from_book" type="boolean" value="false"/>
+            <column name="from_illustration" type="boolean" value="false"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

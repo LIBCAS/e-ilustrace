@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="antivirus:1" author="zamborsky">
+        <createTable tableName="eas_scan">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_scan_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Own properties -->
+            <column name="result" type="varchar(255)"/>
+            <column name="content_id" type="varchar(255)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                         foreignKeyName="eas_scan_content_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="antivirus:2" author="camak">
+        <createIndex tableName="eas_scan" indexName="eas_scan_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

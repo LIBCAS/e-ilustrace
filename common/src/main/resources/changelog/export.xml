@@ -1,0 +1,194 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <property name="blob_type" value="bytea" dbms="postgresql"/>
+    <property name="blob_type" value="blob" dbms="oracle"/>
+    <property name="blob_type" value="blob" dbms="mssql"/>
+
+    <changeSet id="export:1" author="zamborsky">
+        <createTable tableName="eas_export_template">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_export_template_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- DictionaryObject -->
+            <column name="name" type="nvarchar(1024)"/>
+            <column name="active" type="boolean"/>
+            <column name="valid_from" type="timestamp"/>
+            <column name="valid_to" type="timestamp"/>
+            <column name="code" type="varchar(255)"/>
+            <column name="multi_name" type="nclob"/>
+            <column name="list_order" type="int"/>
+
+            <!-- Own properties -->
+            <column name="label" type="nvarchar(1024)"/>
+            <column name="provider" type="varchar(255)"/>
+            <column name="design_provider" type="varchar(255)"/>
+            <column name="configuration" type="nvarchar(2048)"/>
+            <column name="restrict_by_permission" type="boolean" defaultValueBoolean="false"/>
+            <column name="content_id" type="varchar(255)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                             foreignKeyName="eas_export_template_rf_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eas_export_template_tag">
+            <column name="export_template_id" type="varchar(255)">
+                <constraints referencedTableName="eas_export_template" referencedColumnNames="id" foreignKeyName="eas_export_template_tag_FK"/>
+            </column>
+            <column name="tag" type="nvarchar(255)"/>
+        </createTable>
+
+        <createTable tableName="eas_export_request">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_export_request_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- Own properties -->
+            <column name="configuration" type="nclob"/>
+            <column name="type" type="varchar(255)"/>
+            <column name="priority" type="int"/>
+            <column name="security_context" type="${blob_type}"/>
+
+            <column name="state" type="varchar(255)"/>
+            <column name="message" type="nclob"/>
+
+            <column name="processing_start" type="timestamp"/>
+            <column name="processing_end" type="timestamp"/>
+
+            <column name="system_request" type="boolean" defaultValueBoolean="false"/>
+
+            <column name="template_id" type="varchar(255)">
+                <constraints referencedTableName="eas_export_template" referencedColumnNames="id"
+                             foreignKeyName="eas_export_request_rt_FK"/>
+            </column>
+            <column name="result_id" type="varchar(255)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                             foreignKeyName="eas_export_request_rr_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eas_export_template_types">
+            <column name="export_template_id" type="varchar(255)">
+                <constraints referencedTableName="eas_export_template" referencedColumnNames="id"
+                             foreignKeyName="export_template_types_t_FK"/>
+            </column>
+            <column name="type" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="eas_export_template_permissions">
+            <column name="export_template_id" type="varchar(255)">
+                <constraints referencedTableName="eas_export_template" referencedColumnNames="id"
+                             foreignKeyName="export_template_perms_t_FK"/>
+            </column>
+            <column name="permission" type="varchar(1024)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="export:2" author="zamborsky">
+        <renameColumn tableName="eas_export_template" oldColumnName="provider" newColumnName="data_provider"/>
+    </changeSet>
+    <changeSet id="export:3" author="zamborsky">
+        <createTable tableName="eas_export_batch">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_export_batch_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- Own properties -->
+            <column name="name" type="nvarchar(2048)"/>
+            <column name="state" type="varchar(255)"/>
+
+            <column name="result_id" type="varchar(255)">
+                <constraints referencedTableName="eas_file" referencedColumnNames="id"
+                             foreignKeyName="eas_export_batch_rr_FK"/>
+            </column>
+        </createTable>
+        <createTable tableName="eas_export_batch_requests">
+            <column name="batch_id" type="varchar(255)">
+                <constraints referencedTableName="eas_export_batch" referencedColumnNames="id" foreignKeyName="eas_export_batch_requests_b_FK"/>
+            </column>
+            <column name="request_id" type="varchar(255)">
+                <constraints referencedTableName="eas_export_request" referencedColumnNames="id" foreignKeyName="eas_export_batch_requests_r_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="export:4" author="zamborsky">
+        <addColumn tableName="eas_export_template">
+            <column name="file_name_template" type="nvarchar(1024)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="export:5" author="camak">
+        <createIndex tableName="eas_export_template" indexName="eas_export_template_created_idx">
+            <column name="created"/>
+        </createIndex>
+        <createIndex tableName="eas_export_request" indexName="eas_export_request_created_idx">
+            <column name="created"/>
+        </createIndex>
+        <createIndex tableName="eas_export_batch" indexName="eas_export_batch_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="export:6" author="jane">
+        <addColumn tableName="eas_export_template">
+            <column name="configuration_tmp" type="nclob" valueComputed="configuration"/>
+        </addColumn>
+        <dropColumn tableName="eas_export_template" columnName="configuration"/>
+        <renameColumn tableName="eas_export_template" oldColumnName="configuration_tmp" newColumnName="configuration"/>
+    </changeSet>
+</databaseChangeLog>

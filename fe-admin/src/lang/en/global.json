@@ -1,0 +1,107 @@
+{
+  "menu": {
+    "header": "Administration",
+    "users": "users",
+    "records": "Records",
+    "import": "Import",
+    "login": "Login in",
+    "logout": "Logout"
+  },
+  "urls": {
+    "users": "users",
+    "enrichment": "enrichment",
+    "records": "records",
+    "import": "import",
+    "login": "login"
+  },
+  "not_found": {
+    "text": "Page not found"
+  },
+  "common": {
+    "error_occurred_when_loading_data": "Error occurred when loading data",
+    "error_occurred_somewhere": "An error occurred somewhere",
+    "admin_rights_needed": "Amin rights needed",
+    "logged_successfully": "Přihlášení proběhlo úspešně",
+    "bad_credentials": "Wrong combination of username and password.",
+    "me_loading_error": "Error occured when loading your account",
+    "me_loading": "Loading your account data",
+    "logged_out_successfully": "Logged out successfully"
+  },
+  "search": {
+    "filter": "Fitler",
+    "filter_results": "Filtering of results",
+    "no_options": "No options",
+    "year": "Year",
+    "author": "Who",
+    "author_search": "Search author",
+    "place": "Where",
+    "place_search": "Search place",
+    "what": "What",
+    "object_search": "Search",
+    "iiif_format": "Available in IIIF format",
+    "books": "Books",
+    "illustrations": "Illustrations",
+    "book_name": "Name (Book) A-Z",
+    "category": "Select category",
+    "search": "Search",
+    "cancel_search": "Cancel search",
+    "search_expression": "Search for an expression...",
+    "records_count": "Records count: ",
+    "record_id": "Record ID",
+    "from": "From",
+    "to": "To",
+    "icc_state": "ICONCLASS state",
+    "theme_state": "Themes state",
+    "state_search": "Search state"
+  },
+  "filters": {
+    "filter_author": "Author",
+    "filter_year": "Year",
+    "filter_place": "Place",
+    "filter_object": "Object",
+    "filter_iiif_format": "Available in IIIF",
+    "category": "Category",
+    "vise": "Vise",
+    "sort": "Sort",
+    "delete_all": "Delete all"
+  },
+  "enrichment": {
+    "not_found": "No record was found",
+    "icc_not_found": "No ICONCLASS passwords was found",
+    "themes_not_found": "No Themes was found",
+    "select_iconclass_passwords": "Select ICONCLASS passwords",
+    "select_themes": "Select themes",
+    "save": "Save",
+    "back": "Back",
+    "save_successful": "Saved successfully",
+    "add_new_icc": "Add new ICONCLASS password",
+    "add_new_theme": "Add new theme",
+    "add": "Add",
+    "add_successful": "Added successfully",
+    "identifier": "Identifier",
+    "state": "State",
+    "iconclass_state": "State of ICONCLASS",
+    "themes_state": "State of themes",
+    "state_updated_successfully": "State updated successfully",
+    "states": {
+      "done": "Enriched",
+      "in_progress": "Enrichment in progress",
+      "unenriched": "Unenriched"
+    }
+  },
+  "import": {
+    "header": "Import",
+    "run": "Run import",
+    "success": "Import finished successfully"
+  },
+  "login": {
+    "header": "Login",
+    "email": "Email",
+    "password": "Password",
+    "do_login": "Log in"
+  },
+  "users": {
+    "role_changed": "Role changed successfully",
+    "role_error": "Error occurred when changing role"
+  }
+}

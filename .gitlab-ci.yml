@@ -1,0 +1,35 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - deploy
+
+deploy-test:
+  stage: deploy
+  tags:
+    - deploy-fixed-ip
+  only: 
+   - test
+  variables:
+    HOST: test.e-ilustrace.cz
+    USER: e-ilustrace-test
+    APP_DIR: /home/e-ilustrace-test/app
+    VITE_SENTRY_DEPLOY_ENV: Test
+  script:
+    - "rsync -O -arvce 'ssh -o StrictHostKeyChecking=no' --delete --exclude .git --exclude .env --exclude docker-compose.override.yml $PWD/ $USER@$HOST:$APP_DIR/"
+    - "ssh -o StrictHostKeyChecking=no $USER@$HOST \"source .profile; cd $APP_DIR; sed -i 's|http://localhost:8080|https://test.e-ilustrace.cz|g' mirador/public/manifest-mirador.json; docker compose up -d --build\""
+
+deploy-prod:
+  stage: deploy
+  tags:
+    - deploy-fixed-ip
+  only: 
+   - prod
+  variables:
+    HOST: app.e-ilustrace.cz
+    USER: e-ilustrace
+    APP_DIR: /home/e-ilustrace/app
+    SENTRY_DEPLOY_ENV: Production
+  script:
+    - "rsync -O -arvce 'ssh -o StrictHostKeyChecking=no' --delete --exclude .git --exclude .env --exclude docker-compose.override.yml $PWD/ $USER@$HOST:$APP_DIR/"
+    - "ssh -o StrictHostKeyChecking=no $USER@$HOST \"source .profile; cd $APP_DIR; sed -i 's|http://localhost:8080|https://app.e-ilustrace.cz|g' mirador/public/manifest-mirador.json; docker compose -f docker-compose.override.production.yml up -d --build\""

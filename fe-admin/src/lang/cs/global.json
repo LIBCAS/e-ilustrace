@@ -1,0 +1,107 @@
+{
+  "menu": {
+    "header": "Administrace",
+    "users": "Uživatelé",
+    "records": "Záznamy",
+    "import": "Import",
+    "login": "Přihlásit se",
+    "logout": "Odhlásit se"
+  },
+  "urls": {
+    "users": "uzivatele",
+    "enrichment": "obohaceni",
+    "records": "zaznamy",
+    "import": "import",
+    "login": "prihlaseni"
+  },
+  "not_found": {
+    "text": "Stránka nenalezena"
+  },
+  "common": {
+    "error_occurred_when_loading_data": "Nastala chyba při načítání dat, zkuste to prosím později",
+    "error_occurred_somewhere": "Někde nastala chyba",
+    "admin_rights_needed": "Nemáte dostatečná práva",
+    "logged_successfully": "Přihlášení proběhlo úspešně",
+    "bad_credentials": "Špatná kombinace uživatelského jména a hesla.",
+    "me_loading_error": "Nastala chyba při načítání vašeho účtu",
+    "me_loading": "Načítání informací o vašem účtu",
+    "logged_out_successfully": "Odhlášení proběhlo úspěšně"
+  },
+  "search": {
+    "filter": "Filtrovat",
+    "filter_results": "Filtrování výsledku",
+    "no_options": "Žádné možnosti",
+    "year": "Rok",
+    "author": "Kdo",
+    "author_search": "Vyhledej autora",
+    "place": "Kde",
+    "place_search": "Vyhledej místo",
+    "what": "Co",
+    "object_search": "Vyhledej",
+    "iiif_format": "Dostupné v IIIF formátu",
+    "books": "Knihy",
+    "illustrations": "Ilustrace",
+    "book_name": "Název (Knihy) A-Z",
+    "category": "Vybrat kategorii",
+    "search": "Vyhledávat",
+    "cancel_search": "Zrušit vyhledávání",
+    "search_expression": "Vyhledejte výraz...",
+    "records_count": "Počet záznamů: ",
+    "record_id": "ID záznamu",
+    "from": "Od",
+    "to": "Do",
+    "icc_state": "ICONCLASS stav",
+    "theme_state": "Stav témat",
+    "state_search": "Vyhledat stav"
+  },
+  "filters": {
+    "filter_author": "Autor",
+    "filter_year": "Rok",
+    "filter_place": "Místo",
+    "filter_object": "Předmět",
+    "filter_iiif_format": "Dostupné v IIIF",
+    "category": "Kategorie",
+    "vise": "Vise",
+    "sort": "Řazení",
+    "delete_all": "Odstranit vše"
+  },
+  "enrichment": {
+    "not_found": "Nebyl nalezen žádný záznam",
+    "icc_not_found": "Nebyly nalezeny žádné ICONCLASS hesla",
+    "themes_not_found": "Nebyly nalezeny žádné témata",
+    "select_iconclass_passwords": "Vyberte ICONCLASS hesla",
+    "select_themes": "Vyberte témata",
+    "save": "Uložit",
+    "back": "Zpět",
+    "save_successful": "Uložení proběhlo úspěšně",
+    "add_new_icc": "Přidejte nové ICONCLASS heslo",
+    "add_new_theme": "Přidejte nové téma",
+    "add": "Přidat",
+    "add_successful": "Přidání proběhlo úspěšně",
+    "identifier": "Identifikátor",
+    "state": "Stav",
+    "iconclass_state": "Stav IconClassu",
+    "themes_state": "Stav témat",
+    "state_updated_successfully": "Status byl úspěšně změněn",
+    "states": {
+      "done": "Obohaceno",
+      "in_progress": "Probíhá obohacování",
+      "unenriched": "Neobohaceno"
+    }
+  },
+  "import": {
+    "header": "Import",
+    "run": "Spustit import",
+    "success": "Import proběhl úspěšně"
+  },
+  "login": {
+    "header": "Přihlášení",
+    "email": "Email",
+    "password": "Heslo",
+    "do_login": "Přihlásit se"
+  },
+  "users": {
+    "role_changed": "Změna role proběhla úspěšně",
+    "role_error": "Nastala chyba při změně role"
+  }
+}

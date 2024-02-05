@@ -1,0 +1,54 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="soap_logger:1" author="zamborsky">
+        <createTable tableName="eas_soap_message">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_soap_message_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- Own properties -->
+            <column name="service" type="nvarchar(255)"/>
+            <column name="request" type="nclob"/>
+            <column name="response" type="nclob"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="soap_logger:2" author="camak">
+        <addColumn tableName="eas_soap_message">
+            <column name="local_part" type="nvarchar(256)" remarks="Operation name"/>
+            <column name="duration" type="bigint" remarks="Operation execution duration"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="soap_logger:3" author="camak">
+        <addColumn tableName="eas_soap_message">
+            <column name="http_status" type="int" remarks="Response HTTP status"/>
+            <column name="error" type="nclob" remarks="Exception (if any)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="soap_logger:4" author="camak">
+        <createIndex tableName="eas_soap_message" indexName="eas_soap_message_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

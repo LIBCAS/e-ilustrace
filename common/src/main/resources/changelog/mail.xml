@@ -1,0 +1,67 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="true" value="true" dbms="postgresql"/>
+    <property name="true" value="true" dbms="oracle"/>
+    <property name="true" value="1" dbms="mssql"/>
+
+    <changeSet id="mail:1" author="zamborsky">
+        <createTable tableName="${mail_table_name}">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="${mail_table_name}_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- Own properties -->
+            <column name="subject" type="nvarchar(2048)"/>
+            <column name="content_type" type="varchar(255)"/>
+            <column name="content" type="nclob"/>
+            <column name="to" type="varchar(255)"/>
+            <column name="sent" type="boolean"/>
+            <column name="error" type="nclob"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="mail:2" author="zamborsky">
+        <addColumn tableName="${mail_table_name}">
+            <column name="state" type="varchar(255)" defaultValue="QUEUED"/>
+            <column name="identifier" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="mail:3" author="zamborsky">
+        <validCheckSum>8:40a3f04da346e222c0a98d5d25e283f6</validCheckSum>
+        <update tableName="${mail_table_name}">
+            <column name="state" value="SENT"/>
+            <where>sent = 'true'</where>
+        </update>
+        <update tableName="${mail_table_name}">
+            <column name="state" value="ERROR"/>
+            <where>error IS NOT NULL</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="mail:4" author="camak">
+        <createIndex tableName="${mail_table_name}" indexName="${mail_table_name}_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

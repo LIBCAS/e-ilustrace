@@ -1,0 +1,73 @@
+plugins {
+    id 'com.avast.gradle.docker-compose' version "0.14.9"
+}
+
+group = 'cz.inqool.vise'
+version = '0.0.1'
+
+dockerCompose {
+    projectName = project.name
+    captureContainersOutput = false
+    waitForTcpPorts = false
+    forceRecreate = true
+    removeOrphans = true
+
+    eil {
+        projectName = project.name
+        startedServices = ['eilbe']
+    }
+
+    all {
+        projectName = project.name
+        removeVolumes = false
+    }
+
+    allAndClear {
+        projectName = project.name
+        removeVolumes = true
+    }
+}
+
+tasks.register("buildAll") {
+    group = 'build'
+    description = 'Build all microservices'
+    dependsOn buildEil
+}
+
+tasks.register("runAll") {
+    group = 'run'
+    description = 'Build and run all microservices'
+    dependsOn buildAll
+    finalizedBy allComposeUp
+}
+
+tasks.register("stopAll") {
+    group = 'run'
+    description = 'Stops all microservices and remove temporary files'
+    finalizedBy allComposeDown
+}
+
+tasks.register("stopAllAndClear") {
+    group = 'run'
+    description = 'Stops all microservices and remove temporary files'
+    finalizedBy allAndClearComposeDown
+}
+
+tasks.register("buildEil") {
+    group = 'build'
+    description = 'Build EIL microservice'
+    dependsOn gradle.includedBuild('eil-api').task(':build')
+}
+
+tasks.register("runEil") {
+    group = 'run'
+    description = 'Build and run EIL microservice'
+    dependsOn buildEil
+    finalizedBy eilComposeUp
+}
+
+tasks.register("stopEil") {
+    group = 'run'
+    description = 'Stop EIL microservice'
+    finalizedBy eilComposeDown
+}

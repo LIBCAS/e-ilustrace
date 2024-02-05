@@ -1,0 +1,1840 @@
+FAKULTA SOCIÁLNÍCH STUDIÍ
+Česká adaptace dotazníku Humor Styles Questionnaire a jeho
+souvislost s oceňováním humoru na sociálních sítích
+Bakalářská práce
+GABRIELA BINDEROVÁ
+Vedoucí práce: Mgr. Jan Širůček, Ph.D.
+Katedra psychologie
+Psychologie
+Brno 2019
+Abstrakt
+Cílem této práce byla adaptace dotazníku Humor Styles Questionnaire (HSQ) do českého
+jazyka a ověření jeho psychometrických vlastností. Dále byl zkoumán vztah mezi HSQ a
+oceňováním humoru na sociálních sítích. K tomuto účelu byl vytvořen dotazník z internetových
+memů odpovídajících jednotlivým škálám HSQ. Na datech od 259 českých studentů byla
+pomocí konfirmační faktorové analýzy ověřována 4-faktorová struktura obou dotazníků. Česká
+verze HSQ se ukázala mít předpokládanou strukturu a podobné psychometrické vlastnosti jako
+originální dotazník. Dotazník z memů oproti tomu vykazoval spíše 2-faktorovou strukturu a
+nekorespondoval tak se škálami HSQ. Vztah mezi HSQ a oceňováním memů nebyl jasně
+prokázán. Možné implikace těchto zjištění jsou adresovány v diskuzi.
+Klíčová slova: humor, Humor Styles Questionnaire, česká adaptace, konfirmační faktorová
+analýza, humor na sociálních sítích, memy
+The aim of this thesis was an adaptation of the Humor Styles Questionnaire (HSQ) into Czech
+language and verification of its psychometric properties. Next, the relationship between HSQ
+and humor appreciation on social networks was examined. For this purpose, a questionnaire of
+internet memes was constructed that corresponded with each HSQ scale. Confirmatory factor
+analyses was used to verify a 4-factor structure for both questionnaires on data from 259 Czech
+students. The Czech adaptation of HSQ showed expected structure and similar psychometric
+properties as the original questionnaire. Meanwhile, the memes questionnaire showed rather a
+2-factor structure and therefore did not correspond with the HSQ scales. The relationship
+between HSQ and memes questionnaire was not clearly confirmed. Possible implications of
+these findings are addressed in discussion.
+Keywords: humor, Humor Styles Questionnaire, Czech adaptation, confirmatory factor
+analysis, humor on social networks, memes
+Prohlašuji, že jsem práci vypracovala samostatně, a že jsem všechny použité informační zdroje
+uvedla v seznamu literatury.
+V Brně dne 15. prosince 2019 .......................................
+Gabriela Binderová
+Poděkování
+Na tomto místě bych nejprve ráda poděkovala svému vedoucímu Mgr. Janu Širůčkovi, Ph.D.
+za ochotu, trpělivost, cenné rady a také za jeho smysl pro humor v průběhu psaní celé této práce.
+Dále bych pak chtěla poděkovat všem lidem, kteří mi pomáhali s realizací výzkumu, ať už se
+jednalo o překlad, výběr a rozřazování memů či distribuci dotazníku. Všem svým přátelům pak
+děkuji za podporu, a v neposlední řadě patří veliké díky všem respondentům, kteří byli ochotní
+vyplnit můj dotazník a bez kterých by tato práce nikdy nemohla vzniknout.
+Obsah
+Obsah
+Abstrakt..........................................................................................................................2
+Úvod...............................................................................................................................7
+Studium humoru.........................................................................................................8
+Humor ........................................................................................................................8
+Historie humoru..........................................................................................................9
+Vývoj pojmu humor.................................................................................................9
+Vývoj vnímání humoru ............................................................................................9
+Humor ve filosofii..................................................................................................10
+Humor v psychologii – hlavní teorie ..........................................................................12
+Teorie nadřazenosti (superiority theory) ...............................................................12
+Teorie uvolnění (relief theory)...............................................................................14
+Teorie nesouladu (incongruity theory)...................................................................16
+Shrnutí..................................................................................................................18
+Smysl pro humor.......................................................................................................18
+Individuální rozdíly ve smyslu pro humor...............................................................19
+Snaha měřit smysl pro humor................................................................................20
+Smysl pro humor a zdraví ......................................................................................23
+Humor styles questionaire ....................................................................................25
+Cíl práce....................................................................................................................29
+Metoda.........................................................................................................................30
+Tvorba dotazníku ......................................................................................................30
+HSQ.......................................................................................................................30
+Memy ...................................................................................................................31
+Pilotní výzkum...........................................................................................................31
+Pilotní výzkum HSQ ...............................................................................................31
+Pilotní výzkum memů............................................................................................32
+Výzkum.....................................................................................................................33
+Vzorek a chybějící hodnoty....................................................................................33
+Výsledky .......................................................................................................................33
+HSQ ..........................................................................................................................34
+Konfirmační faktorová analýza HSQ.......................................................................37
+Položky s horšími vlastnostmi................................................................................40
+Dotazník memů.........................................................................................................40
+Vnitřní konzistence škál.........................................................................................41
+Korelační matice memů a celých škál ....................................................................44
+Konfirmační faktorová analýza ..............................................................................46
+Vztah HSQ a dotazníku z memů.................................................................................49
+Diskuze.........................................................................................................................49
+Zdroje...........................................................................................................................52
+Přílohy..........................................................................................................................58
+Příloha 1: Znění překladu a originálu HSQ..................................................................58
+Příloha 2: Použité memy ...........................................................................................62
+7
+Úvod
+Humor je zcela běžnou součástí našeho každodenního života, často bývá automatický
+a samovolný, a většinou nás nenapadne se nad ním více pozastavovat. Přesto je to fenomén,
+který využíváme v celé škále situací a k řadě různorodých účelů, humor nám např. usnadňuje
+navazování nových vztahů, pomáhá odlehčit stísněnou atmosféru, sbližuje nás více s přáteli,
+pomáhá nám naklonit si druhé lidi a udělat na ně dojem. Zároveň nám může zlepšit špatnou
+náladu, ušetřit nám vztek a zklamání, když se nám něco nepovede, a pomoci nám zvládnout
+náročné životní období. Oproti tomu nám však nevhodně zvolený humor může narušit vztahy,
+devalvovat nás v očích druhých, nebo nám poškodit kredibilitu v pracovním prostředí. Příliš
+cynický a nihilistický humor nás zase může utvrzovat v pesimistickém vnímání světa. Celkově
+tak lze říci, že humor má vliv na bezpočet oblastní našeho života.
+Krom samotné přítomnosti humoru v běžném životě je také třeba zmínit silnou lidskou
+motivaci humor aktivně vyhledávat, o čemž svědčí obliba knižních, televizních a divadelních
+komedií, sitkomů, komiků a stand-up komiků, ale i samotná tvorba a předávání vtipů a touha
+obklopovat se vtipnými lidmi. Význam humoru je velmi dobře patrný i v kontextu nových
+technologických výdobytků, kdy se na jakékoliv nově vzniklé internetové platformě záhy
+objeví nejen humor samotný, ale i konkrétní, typicky velmi populární místa, která se zabývají
+produkcí a shromažďováním humoru. Příkladem mohou být stránky s vtipy - memy, falešné
+parodické účty či komediální kanály na platformě youtube. Vzhledem k výše zmíněnému by se
+mohlo zdát, že je humor slibnou oblastí pro studium lidského myšlení, chování i povahy,
+v rámci psychologické vědy se však zdá být téma humoru překvapivě nevýrazné. Pokud si
+dobře pamatuji, nebylo v rámci žádného předmětu, který jsem za 3 roky svého studia
+absolvovala, věnováno humoru více jak několik slov v kontextu jiného tématu. Je škoda, že
+v rámci studia lidské psychiky není humoru věnován trochu větší prostor, protože v kontextu
+reálného lidského světa se rozhodně nejedná o takto okrajové téma. Cílem této práce je tak
+poukázat na humor jako na psychologické téma a pokusit se o převedení jednoho
+z v současnosti nejpoužívanějších dotazníků v kontextu humoru do českého jazyka. Domnívám
+se, že případný oficiální překlad tohoto dotazníku v budoucnu by mohl být přínosný pro různé
+psychologické účely v českém prostředí.
+8
+Studium humoru
+Ačkoliv je humor neodmyslitelnou součástí lidského života, nacházel se na okraji zájmu
+psychologie dlouhodobě. Odjakživa byl sice součástí studia mnoha myslitelů, ovšem i ti mu
+většinou věnovali pouze malý prostor v rámci svého bádání (Morreall, 2012). Se vznikem
+psychologie jako samostatné vědy koncem 19. století se na studium humoru začaly aplikovat
+empirické metody, které postupně přinášely množství zajímavých a tentokrát falsifikovatelných
+výsledků. I přes tento pokrok však humor zůstával i v následujícím 20. století většinově
+přehlížen a zájem o něj byl spíše nárazový (Ruch, 2008). Intenzivnější a souvislejší studium
+humoru poté přišlo až s rozvojem pozitivní psychologie na přelomu 20. a 21. století (tamtéž),
+kdy došlo ke zvýšení zájmu o zdravé oblasti lidské psychiky a humor začal přitahovat pozornost
+jako jedna z tzv. silných stránek osobnosti (Peterson a Seligman, 2004). Přesto zůstává humor
+i dnes spíše doplňkovou oblastí psychologie, o čemž svědčí i minimální zastoupení tématu
+v psychologických učebnicích (Roeckelein, 2002). Z dosavadních zjištění vědců zabývajících
+se humorem se však humor zdá být slibným tématem, jak z hlediska nových teoretických
+poznatků, tak z hlediska možné aplikovatelnosti v praxi. Výzkum humoru dosud přinesl některé
+slibné výsledky nasvědčující jeho možný přínos pro lidské zdraví, jak psychické, tak fyzické
+(Morreall, 2008a). Celkově je však výzkum praktického využití humoru stále ještě nedostatečný
+a do budoucna vyžaduje intenzivnější vědecký zájem (Martin, 2008).
+Humor
+Humor a s ním spojený smích jsou považovány za univerzální lidský prožitek, který se
+vyskytuje prakticky u všech jedinců napříč kulturami (Apte cit. podle Martin, 2007; Kruger,
+1996). Lidský smích je specifickým, snadno rozeznatelným zvukem, který se v jednotlivých
+kulturách neliší (Provine & Yong, 1991). Smích je dále jedním z prvních druhů vokalizace u
+novorozenců, objevující se zhruba ve 4. měsíci (Strofe a Waters, 1976) a byl zaznamenán i u
+hluchých a slepých dětí (Freeman cit. podle Mosak, 2014), což naznačuje jeho vrozený původ.
+Známky humoru ve formě sociální hry a smích lze nalézt i u některých primátů, především
+šimpanzů (Hoof a Preuschoft, 2003), o čemž původně dokládal důkazy již Darwin koncem 19.
+století (1872). Humor je tak pravděpodobně důsledkem evolučního výběru, kdy projevil
+adaptivní funkci zřejmě v udržování lepší skupinové koheze a v signalizaci bezpečí a
+nezávažnosti situace (Gervais a Wilson, 2005), Morreall (2008b) se dále domnívá, že schopnost
+humoru vedla k rozvoji abstraktního myšlení a racionality. I přes univerzalitu humoru se však
+jeho pojetí a exprese může lišit v kontextu odlišných kulturních norem (Martin, 2007), typicky
+například mezi západními a asijskými kulturami (např. Chen a Martin, 2007; Yue, Jiang, Lu a
+9
+Hiranandani, 2016). Bez ohledu na kulturu však humor zřejmě univerzálně sehrává především
+sociální funkci, převážná většina humoru se v životě člověka odehrává ve společnosti či
+domnělé společnosti ostatních (Martin a Kuiper, 1999).
+Historie humoru
+Vývoj pojmu humor
+Výraz „humor“ pochází z latinského slova „humorem“ znamenajícího tekutinu (Martin, 2007).
+Ke spojení tohoto výrazu s konceptem humoru, jak jej známe dnes, docházelo postupně. Na
+počátku, kolem 4. století př. n. l., stála Hippokratova teorie o čtyřech tělních tekutinách, kterou
+ve 2. století n. l. dále rozpracoval Galen, když spojil jednotlivé tělní tekutiny s určitými
+psychickými vlastnostmi a převahu některé s tekutin pak s jednotlivými temperamenty.
+S příchodem 15. století se slovem humor začal označovat temperament jako takový a v 16.
+století se poté nově spojoval i s přechodnými náladami (Wickberg, 1998). V 16. století se
+zároveň slovo humor začalo používat k pojmenování jedinců, kteří nějakým způsobem
+vybočovali z normy – takovým osobám se říkalo humoristi. Vzhledem k tomu, že tito jedinci
+bývali předmětem smíchu, se začala postupně s výrazem humor asociovat směšnost. Ti, kteří
+na zvláštnosti humoristů poukazovali a vyvolávali tak smích byli poté označováni jako lidé
+humoru (man of humour). Slovo humor tak začalo být spojováno se schopností rozesmát druhé
+a také s intelektuální činností. Až začátkem 18. století však užil pojem humor spojený
+s významem směšnosti jako první ve své eseji Shaftesbury (Morreall, 2008b). Koncem 17. a
+v průběhu 18. století docházelo k postupnému osvobození pojmu od původních fyziologických
+základů a humor se stále více asocioval se subjektivní vlastností lidské mysli. Až začátkem 19.
+století však humor nabyl svého dnešního moderního významu jakožto plně subjektivní kvality
+(Wickberg, 1998).
+Vývoj vnímání humoru
+Až do 18. století byl humor vnímán převážně jako totožný se zesměšněním (viz. Humor ve
+filosofii a Teorie nadřazenosti) a vyvolával spíše negativní konotace (Morreall, 2012; Wickberg,
+1998). V průběhu 18. století se začal humor spojovat více s kognitivním nesouladem než
+s ponižováním druhých (viz. Teorie nesouladu) a stal se tak přijatelnějším v kontextu tehdejších
+humanistických evropských hodnot (Ruch, 1998). Později koncem 19. století došlo k rozlišení
+dvou pojmů, vtipu a humoru, přičemž vtip byl spojován se zesměšněním, kdyžto humor spíše
+souvisel s vcítěním se do druhých a byl vnímán více pozitivně (Wickberg, 1998). V průběhu
+20. století se pak pojem vtip ve smyslu zesměšnění přestal používat a pojem humor se stal opět
+10
+shrnujícím názvem pro vše směšné, přičemž se zachovala předchozí pozitivní konotace pojmu
+(tamtéž). Dnes se tak užívá slovo humor převážně univerzálně, k většímu rozlišování (např.
+agresivní humor) dochází většinou spíše v kontextu zkoumání humoru.
+Humor ve filosofii
+Tématem humoru (či smíchu, v době před zavedením pojmu humor) se v průběhu času
+zabývala řada myslitelů, i když až do 20. století se většinou jednalo pouze o několik odstavců
+v rámci jiného tématu (Morreall, 2012). V následující části chronologicky uvedu významné
+postavy filosofie, které se na téma humor nějakým způsobem vyjádřily. Budu zde vycházet
+převážně z článků Morrealla (2008b, 2009, 2012), který se filosofií humoru již řadu let zabývá,
+a oproti jiným zdrojům (např. Keith-Spiegel, 1972) považuji jeho podání tématu za velmi
+důkladné a komplexní.
+Jak již bylo řečeno v předchozí kapitole, názory na humor byly až do 18. století vesměs
+negativní a v podstatě v souladu s později formulovanou teorií nadřazenosti (superiority theory)
+(Morreall, 2012). První zmínky o smíchu v západní kultuře pocházejí ze Starého a Nového
+zákona a ze spisů řeckých filosofů. V Bibli je smích zmiňován pouze v kontextu tří situací –
+nepřátelství, pošetilost nebo radost, přičemž nepřátelství je jednoznačně nejhojněji zastoupeno
+(Morreall, 2008b). Smích z nepřátelství jako výraz pokoření druhých je jako jediný přisuzován
+Bohu a jeho prorokům, naopak pokud tento druh smíchu někdo použije proti nim, je odsouzen
+k smrti. Až na vzácné případy smíchu z radosti je tak smích v Bibli hodnocen negativně, naopak
+je v ní vyzdvihován ideál smutného mudrce, a smutek je celkově považován za známku ctnosti
+a ušlechtilosti. Podle tohoto ideálu se poté řídili i mnozí ranní křesťanští učitelé, kteří zrazovali
+věřící od smíchu jako od něčeho hříšného, a naopak je nabádali k zármutku. Tento přístup byl
+obzvláště zřetelný v klášterních řádech a o mnoho století později během vlády puritánů v Anglii
+v 17. století, kdy dokonce došlo k zákazu komedií a uzavření divadel.
+Jako prvním z filosofů se tématem smíchu zabýval ve svých spisech Platón, který
+ztotožňoval smích výhradně se zesměšňováním. Člověk se podle něj směje především neřestem
+ostatních a smích je tak ze své podstaty asociální, navíc je známkou podlehnutí emočním
+pohnutkám na úkor rozumu, tudíž na něj celkově pohlížel jako na něco nehodného a
+neprospěšného, ohrožující lidské ctnosti. Platónův žák Aristoteles taktéž shledával příčinou
+smíchu nedostatky druhých, na rozdíl od Platóna však smích plošně neodsuzoval, podle něj
+nebyl smích ve zdravé míře škodlivý, naopak mohl sloužit jako zdravý odpočinek od seriózních
+lidských aktivit. Krom toho bral také v potaz alternativní příčinu humoru ve formě překvapení,
+čímž vlastně předznamenal budoucí teorii nesouladu. Za zmínku pak také stojí stoické hnutí,
+11
+které se ke smíchu stavělo odmítavě jako k narušení emoční vyrovnanosti a klidu. Později se
+tématu smíchu dotkla římská rétorika, především Cicero, který za hlavní zdroj smíchu opět
+považoval nějaký defekt objektu či osoby a varoval před užíváním takového humoru a
+nebezpečím ranění druhých. Mimo to také pokračoval v Aristotelově myšlence o efektu
+překvapení (Morreall, 2008b).
+V 13. století se o smíchu zmínil Tomáš Akvinský, který se silně ztotožňoval
+s Aristotelovým názorem, že přiměřený smích je zdravou formou odpočinku, pokud se
+nedotýká obscénních témat a není nepřátelský a ubližující. Jako první příslušník církve tak
+smích neodsuzoval, zcela naopak kritizoval strnulou vážnost a neschopnost poddat se smíchu
+(Morreall, 2009).
+V 17. století o smíchu pojednávali 2 významní myslitelé své doby – Descartes a Hobbes.
+Descartes opět navázal na pojetí smíchu jako výrazu hostilní nadřazenosti. Smíchu podle něj
+nejvíce holdují ti, kteří sami trpí nějakým defektem a těší se z ponížení ostatních na svou úroveň.
+Hobbes je poté považován za klasickou ukázku teorie nadřazenosti (Morreall, 2008b) či
+dokonce za otce této teorie jako takové. Oproti předchozím teoriím, které se spíše než na
+nadřazenost primárně odvolávaly na deformitu směšného objektu (Wickberg, 1998), totiž
+Hobbes považoval za podstatu smíchu právě touhu povýšit se nad ostatní, radost z vlastního
+úspěchu a z neúspěchu druhých.
+Vzhledem k tomu, že Hobbesova teorie byla velmi nesmlouvavá a radikální, a
+přisuzovala podstatu nadřazení i zdánlivě nevinným a na první pohled odporujícím předmětům
+smíchu (např. prostému vtipu či žertování na vlastní účet), vyvolala kritiku jiných myslitelů,
+z nichž nejvýznamnější byl Francis Hutcheson. Hutcheson popřel vztah mezi smíchem a
+pocitem nadřazenosti, za zdroj smíchu považoval nesoulad idejí a předznačil tak brzký vznik
+teorie nesouladu (incongruity theory). Navíc zmínil i přínosy humoru, jako zdroj radosti,
+pozitivní vliv na sociální vztahy a cvičení mentální flexibility (Morreall, 2008b).
+V již zmíněné eseji z počátku 18. století Shaftesbury pro změnu nastínil budoucí teorii
+uvolnění (relief theory) (Morreall, 2009). Podle něj vznikala směšnost a smích jako důsledek
+přetlaku energie, která nebyla využita k pohybu. Tato energie si posléze našla alternativní
+vyústění v podobě grimas či vtipkování, čímž se vlastně pomstila za původní restrikci. N tuto
+myšlenku navázal v 19. století Herbert Spencer, podle kterého emoce dávají vzniku energii,
+která poté pohybuje svaly. Smích je tak výsledkem stimulace dýchacích svalů a vzniká, když
+se v člověku nahromadí emoce, které jsou shledány jako nepatřičné. Toto nahromadění emocí
+podle něj vzniká jako reakce na určitý vnímaný nesoulad, a to pouze, pokud se jedná o nesoulad
+směrem k menší důležitosti (Morreall, 2008b).
+12
+Koncem 18. století se k tématu smíchu vyjádřil Immanuel Kant a to opět v souladu
+s narativem teorie nesouladu, totiž že smích vzniká jako reakce na absurdno, transformací
+původního očekávání v nic (Morreall, 2012). Začátkem 19. století přišel s obdobou teorie
+nesouladu i Arthur Schopenhauer, podle kterého se jedná o nesoulad mezi utvořenými
+abstraktními koncepty a vnímanou realitou. Teorii nesouladu zastával i Kierkegaard, který
+navíc jako křesťanský myslitel zpětně kritizoval tradiční křesťanské negativní pojetí humoru a
+glorifikaci vážnosti a zasmušilosti, naopak zdůrazňoval, že věřící by měli mít smysl pro humor,
+aby dokázali žít s nesoulady obsaženými v křesťanské nauce (Morreall, 2008b). Podle něj může
+být humor v mnoha případech moudřejší než smutek a přinést hlubší vhled do situace.
+V kontextu filosofie smíchu stojí za zmínku dosti propracovaná teorie Henryho
+Bergsona, která podle Morrealla (2008b) kombinuje prvky teorie nadřazenosti a nesouladu,
+ovšem tentokrát za vzniku nového originálního pojetí. Bergson vychází z představy, že
+v člověku se nachází intuitivní životní síla, která s sebou nese kreativitu a flexibilitu a je
+pohonem biologické i sociální evoluce. Tato síla je však potlačována přísným logickým
+myšlením, které člověka mechanizuje a odlidšťuje. Smích je podle Bergsona způsob, který si
+člověk vyvinul, aby se této mechanizaci bránil. Smích je tak reakcí na rigidní mechanické
+myšlení, které je ze své podstaty pro člověka nevýhodné. Funkcí smíchu je zesměšnit osoby,
+které si přemechanizovaný způsob myšlení osvojily, a donutit je tak k reflexi a navrácení ke
+zdravému kreativnímu myšlení.
+Humor v psychologii – hlavní teorie
+Teorie humoru lze rozdělit na 3 hlavní proudy: teorii nadřazenosti, teorii uvolnění a teorii
+nesouladu. Jak již bylo řečeno, až do 18. století silně převažovala v názorech na humor teorie
+nadřazenosti, teorie uvolnění a nesouladu se poté začaly rozvíjet až v průběhu 18. století
+(Morreall, 2012).
+Teorie nadřazenosti (superiority theory)
+Teorie nadřazenosti je nejstarším názorem na humor, tradujícím se již od dob sepsání Starého
+zákona a období klasické řecké filosofie (viz Humor ve filosofii). Podstatou této teorie je, že u
+zrodu humoru vždy stojí triumf získaný ze srovnání sebe s ostatními, přičemž zároveň dochází
+k ponížení druhých (Zillmann, 1983). V průběhu 20. století se někteří výzkumníci snažili tuto
+teorii více propracovat a specifikovat okolnosti, za kterých vede agrese k humoru. První
+modifikací byla myšlenka, že ponížení není zábavné univerzálně, ale záleží na vztahu člověka
+13
+k poníženému. Na počátku 20. století rozlišili Wollf, Smith a Muray (1934) mezi afiliativním a
+neafiliativním okolím osoby, přičemž s afiliativním okolím se osoba do jisté míry identifikuje
+a nezískává tak triumf z jeho ponížení, jak je tomu u neafiliativního okolí, ale naopak z jeho
+prosperity. Pokud jiní poníží afiliativní okolí, je osoba ponížena spolu s ním.
+Touto ideou se dále zabýval La Fave (1972), který zásadní dichotomii přesunul
+z afiliativního a neafiliativního okolí na pozitivní a negativní referenční skupinu, kterou ovšem,
+jak se později ukázalo, není možné odvozovat z pouhé objektivní příslušnosti jedince ke
+skupině, nýbrž z jeho subjektivního pocitu příslušnosti (La Fave, Haddad a Maesen, 1976).
+Zillman a Cantor (1976) poté navrhli tzv. dispoziční teorii humoru, v rámci které je vztah
+ponížení a směšnosti moderován afektivním vztahem přihlížejícího ke skupině, ke které náleží
+ponížený. Kritizovali však předchozí dichotomické rozlišení a sami měřili vztah na škálách
+pozitivity a intenzity afektu. Tato afektivní dispozice přitom pojímá momentální pocity vůči
+poníženému, nikoliv jen identifikaci s celou skupinou, která je většinou stálá, a tudíž má
+dispoziční teorie lepší prediktivní hodnotu.
+Předmětem debat byla také samotná povaha vztahu agrese/ponížení a směšnosti.
+Výsledky řady výzkumů nasvědčují tomu, že agresivita pozitivně souvisí se zábavností (např.
+McCauley, Woods, Coolidge a Kulick, 1983). Některé výzkumy však dále poukázaly na to, že
+tento vztah nemusí být lineární a že nejzábavnější se ukazuje být přiměřená míra agresivity
+(Bryant, 1977; Zillman, Bryant a Cantor, 1974).
+Z dnešního hlediska se však jeví teorie nadřazenosti jako nedostatečně opodstatněná a
+vědecky podpořená a je jen špatně aplikovatelná na některé druhy humoru (Martin, 2007), např.
+na slovní hříčky, které ze své podstaty nemají s agresí či ponížením v mnoha případech co
+dočinění. Těžce se s ní také vysvětluje schopnost člověka smát se sám sobě, což je vlastně
+v příkrém rozporu s nejčastější formulací teorie, tedy nějak povýšit sám sebe nad ostatní.
+V rámci několika faktorových analýz hodnocení vtipů opakovaně nebyl nalezen faktor
+související s agresí, jako zásadní pro hodnocení vtipů se ukazovaly být 2 faktory související se
+strukturou – rozřešení nesouladu a nesmysl (viz Teorie nesouladu) a 1 s tématem, kterým byla
+sexualita (Ruch, 1992). Současná replikace výzkumu McCauleye a kolektivu (1983) navíc
+došla k závěru, že podstatou větší zábavnosti vtipů není samotná agrese, nýbrž spíše chytřejší
+zápletka vtipu, která byla s agresivnějšími vtipy asociována (Stieger a Formann, 2014).
+Teorie nadřazenosti byla jako taková postupně vytlačena teorií nesouladu, která začala
+nabývat na síle koncem 20. století, a získala ve vědecké sféře větší kredibilitu (Martin, 2007).
+Ačkoliv agrese a ponížení druhých zřejmě hraje v humoru svou roli, myšlenka, že je tento faktor
+pro vznik humoru nezbytný, je dnes již spíše reliktem minulosti.
+14
+Teorie uvolnění (relief theory)
+Jak již bylo zmíněno, první nastínění teorie uvolnění poskytl ve své eseji Schaftesbury začátkem
+18. století a dále Spencer v 19. století. Hlavním představitele této teorie se však stal v 1.
+polovině 20. století Sigmund Freud (Morreall, 2009), ačkoliv jeho teorie bývá někdy uváděna
+jako samostatná kategorie s odkazem na teoretický rámec psychoanalýzy (např. Keith-Spiegel,
+1972; Martin, 2007). Freud stejně jako Schaftesbury a Spencer pracuje s představou smíchu
+jako regulátoru nevyužité energie. Ve svém spisu Vtip a jeho vztah k nevědomí Freud (1991)
+rozlišuje mezi 3 typy zábavnosti: vtip, komično a humor. Všechny 3 případy podle něj fungují
+na principu proměny přebytečné energie, ovšem vždy za odlišných okolností. Vtip vzniká ze
+snahy ega získat slast ze hry se slovy, která má své kořeny v dětství. Má povahu nevyžádané
+myšlenky, která je přetvořena v nevědomí procesem podobným snové práci – tedy tak, aby
+výsledný produkt prošel cenzurou vědomí. Energie, která by byla jinak použita k potlačení
+myšlenky, se tak stává zbytečnou a uvolňuje se smíchem. Komično spočívá v detekování
+neadekvátního chování druhých. Neadekvátnost je zjištěna pomyslným srovnáním s tím, jak by
+se zachoval pozorovatel. Srovnáním těchto dvou úsilí vzniká rozdíl v energii, který je opět
+uvolněn smíchem. Freud (1991) přitom zmiňuje, že vtip a komika může mít často agresivní
+podtext a touhu ponížit druhého, v čemž se přibližuje teorii nadřazenosti. Humor poté Freud
+považuje za nejvyšší obranný mechanismus, kdy je zabráněno vzniku nějakého (většinou
+negativního) afektu, kvůli přesměrování pozornosti na jiný vedlejší prvek situace, a psychická
+energie připravená na afekt je odvedena smíchem.
+V 2. polovině 20. let se poté vztahem humoru a energie zabýval Daniel Berlyne (1972),
+který primárně vycházel z optimální křivky nabuzení a předpokládal tak, že humor funguje na
+principu dosažení průměrné míry nabuzení, která je pro osobu příjemná. V tomto kontextu
+přišel se dvěma mechanismy, které se v rámci humoru uplatňují, jednak mechanismus nárůstu
+nabuzení, kdy dochází k navýšení nabuzení na optimální míru vlivem percepce tzv.
+komplexních proměnných (které mají v podstatě ráz nesouladu), a poté s mechanismem zlomu
+nabuzení, kdy se nabuzení navýší až za hranici příjemné míry, a je poté na příjemnou míru
+navráceno zpět vlivem rozřešení humoru v pointě. Oba tyto mechanismy jsou součástí vnímání
+humoru a oba zároveň přispívají k příjemnému zážitku, který vyvěrá z navrácení nabuzení na
+optimální míru, a je vyjádřen smíchem (Berlyne, 1972).
+Teorie uvolnění ve své původní podobě artikulovaná Spencerem, založená na představě
+člověka jako parního stroje (tzv. hydraulický model psychiky), který musí uvolňovat
+15
+přebytečné nahromaděnou energii, neodpovídá dnešním znalostem o fungování nervového
+systému a lidské psychiky (Martin, 2007). Podobně jako u teorie nadřazenosti se ani této teorii
+nedaří vysvětlit některé případy humoru, např. náhlé vtipy, kterým nepředcházelo žádné
+očekávání a nebylo tak možné aktivizovat nějakou energii, nebo pouhé hrátky se slovy
+(Morreall, 2009). Freudova teorie je problematická z vícera důvodů. Jeho představa práce
+s energií působí poněkud nerealisticky, vzhledem k tomu, že není vždy úplně jasné, odkud se
+energie uvolněná k smíchu bere. Např. v případě komična si má člověk utvářet mentální
+představy vlastního a cizího chování, přičemž Freud tvrdí, že člověk přitom vynaloží určité
+množství energie, které poměrově odpovídá skutečné vynaložené energii potřebné k danému
+chování (Freud, 1991). Člověk tak tím pádem vynakládá dvě různá množství energie, která od
+sebe odčítá a rozdíl uvolňuje smíchem. Problém však je, že by se mělo jednat o rozdíl již vydané
+energie, nikoliv o nashromážděnou energii, kterou je možné uvolnit (Morreall, 2009).
+Z Freudova tvrzení, že vtip je výrazem energie jinak potřebné k cenzuře nepřijatelných
+myšlenek, vyvodili někteří výzkumníci, že osoby, co tyto myšlenky běžně více potlačují, budou
+daný druh vtipů považovat za zábavnější. Ve většině výzkumů se však naopak ukázalo, že
+agresivní vtipy přijdou zábavnější lidem, kteří jsou sami více agresivní (např. Byrne, 1956;
+Epstein & Smith, 1956) a vtipy se sexuálním kontextem zase lidem, kteří jsou více otevření
+sexualitě (Ruch a Hehl, 1988). Rosenwald (1964) ovšem kritizoval tento přístup k Freudově
+teorii s tím, že míra potlačení nemusí souviset s projevy daného chování a v tomto kontextu je
+spíše důležité, nakolik je člověk schopen uvolnit obranné mechanismy vůči danému tématu.
+Rosenwald zjistil (ač na malém vzorku 29 středoškoláků), že nejvíce oceňovali agresivní humor
+ti, kteří předtím vykázali během TAT testu střední míru potlačování impulzů, oproti těm, kteří
+měli tuto míru vysokou či nízkou. Tento výsledek byl interpretován v souladu s Freudovým
+tvrzením, že inhibice, ovšem taková, která je flexibilní a dokáže povolit, je ideální pro produkci
+vtipů (Freud, 1991).
+Berlynovu teorii výzkumy částečně podpořily. Ukázalo se, že humor způsobuje nárůst
+nabuzení, neboli aktivaci funkcí sympatického nervového systému (např. Levi, 1965; Langevin
+a Day, 1972), což odpovídá Berlynovu mechanismu nárůstu, jeho mechanismus zlomu už
+ovšem potvrzen nebyl. Vztah nabuzení a humoru se zdál být napříč výzkumy lineární,
+s vyvrcholením vtipu se nabuzení nesnížilo zpět na průměrnou hladinu, ale dále se navýšilo,
+naopak větší měrou než u zbytku vtipu (Godkewitsch, 1976). To nasvědčuje tomu, že humor
+nesouvisí s dosažením průměrného nabuzení, ale spíše s nárůstem nabuzení jako takovým.
+Navíc se ukázalo, že zvýšení nabuzení vedlo k vyššímu hodnocení humoru (Cantor, Bryant a
+Zillmann, 1974; Schachter a Wheeler, 1962), tudíž je tento vztah zřejmě oboustranný.
+16
+Jak již bylo řečeno, teorie o vypouštění přebytečné nashromážděné energie
+Schaftesburryho a Spencera je dnes již překonána jako zastaralá představa fungování psychiky.
+Hypotézy vyvozené z teorie Freuda se spíše nepotvrdily, poukazujíc na to, že tzv. ohrožujícími
+tématy, jako je agrese a sexualita, se více baví lidé, kteří je příliš nepotlačují, otázka však je, do
+jaké míry tyto hypotézy skutečně odpovídají Freudovu pojetí. Pokročilejší Berlynova teorie, ač
+ne zcela akurátní, přinesla zajímavá zjištění o vztahu humoru s činností sympatického
+nervového systému a také myšlenku spojení kognitivních a afektivních procesů v humoru.
+Obojí je dodnes uznávanou součástí humoru a bylo podnětem pro řadu dalších výzkumů v rámci
+teorie nesouladu i v rámci dnešních psychofyziologických studií (Martin, 2007).
+Teorie nesouladu (incongruity theory)
+Teorie nesouladu je dnes vedoucí teorií v pojetí humoru (Martin, 2007). Stejně jako teorie
+uvolnění se začala prosazovat až v průběhu 18. století, zmínka o nesouladu jako o možném
+principu některého typu humoru se však objevovala už dávno předtím v teoriích Aristotela,
+Cicera či Hutchesona (viz Humor ve filosofii). Samotný pojem „nesoulad“ použil ve své eseji
+roku 1776 až James Beattie, který nesoulad považoval za celkový princip humoru (Morreall,
+2009). Beattie uvedl, že smích „zřejmě vzniká percepcí nesouladných věcí spojených v jednom
+celku“ (Beattie cit. podle Morreall, 2009). V souladu s touto představou se pak k humoru
+vyjadřovali Kant, Schopenhauer a Kierkegaard.
+V rámci psychologie teorii nesouladu dále rozpracoval Koestler (1964), který ve své
+teorii představil koncept tzv. bisociace. Bisociace je podle něj mentální proces, který vzniká,
+pokud dojde k percepci dvou různých referenčních rámců, jež jsou vzájemně neobvyklé.
+V 70. letech přišel Schultz s teorií, že podstatou humoru není nesoulad sám o sobě,
+nýbrž jeho rozřešení. Podle něj vytváří výpravná část vtipu jisté očekávání, které je však rozbito
+pointou a vzniká nesoulad. Posluchač si pak musí zpětně přehrát tělo vtipu, aby mu pointa
+začala dávat smysl a došlo tak k rozřešení nesouladu (Shultz, 1972). Pokud nedojde k rozřešení,
+nejedná se podle Shultze o humor, nýbrž o nesmysl. Nesoulad jako takový si podle něj mohou
+užívat jenom malé děti, dospělý člověk si jako racionální bytost naopak užívá vysvětlení
+nesouladu (Shultz, 1976).
+Současně se Shultzem přišel s důrazem na rozřešení nesouladu Suls (1972) ve svém
+dvouúrovňovém modelu porozumění humoru. Jeho teorie je prakticky totožná se Shultzovou,
+akorát podrobněji rozpracovaná. Tělo vtipu vyvolá v osobě určité očekávání, které je v pointě
+buď potvrzeno, nebo nikoliv. Pokud je potvrzeno, nevzniká nesoulad a tudíž ani smích, pokud
+17
+není, snaží se člověk najít nějaké pravidlo, kterým by bylo možné nesoulad vysvětlit. Je-li toto
+pravidlo nalezeno, dochází ke smíchu, pokud však nalezeno není, vede nevyřešený nesoulad ke
+zmatku a někdy až k frustraci (Suls, 1983).
+Za zmínku také stojí tzv. teorie výraznosti (salience theory) Goldsteina, Sulse a
+Anthonyho (1972), která se de facto pokusila zcela z humoru vyloučit význam agrese, který byl
+postulován primárně teorií nadřazenosti, nicméně byl částečně přijímán většinou teoretiků jako
+nezanedbatelný prvek alespoň některého druhu humoru. Podle této teorie není příčinou větší
+zábavnosti agresivních vtipů samotná agrese, ale zdůraznění nesouladu, který agrese poskytuje.
+Význam nesouladu v humoru byl podpořen např. výzkumem Nerhardta (1970), kdy
+stačilo k vyvolání smíchu respondentů pouhé porovnání vah, z nichž jedna byla neočekávaně
+neadekvátně těžká v porovnání se zbytkem, a dále faktorová analýza Wickera a kolegů (Wicker,
+Thorelli, Barron a Ponder, 1981) snažící se zjistit, jaké latentní proměnné se nacházejí v rámci
+vtipů a jakým způsobem souvisejí se zábavností. Ve výsledku byly v rámci vtipů nalezeny 3
+faktory (emocionalita, originalita a nadřazenost) přičemž byl pro hodnocení zábavnosti vtipů
+zásadní pouze faktor originality, který souvisel s kognitivním nesouladem.
+Pro význam rozřešení mluví výsledky výzkumů Schultze (např. Shultz, 1972; Shultz a
+Horibe, 1974), kdy docházelo k hodnocení originálních a upravovaných vtipů, buď s vyjmutou
+částí nesouladu, nebo rozřešení, přičemž jako nejzábavnější byl hodnocen originál, a jako
+nejméně zábavné vtipy bez rozřešení. Tento postup byl nicméně kritizován Nerhardtem (1977)
+za nevhodnou metodologii, neboť takovouto manipulací docházelo k narušení celkového
+smyslu vtipů. Proti Shultzově a Sulsově teorii mluví také výsledky výzkumu Pollia a Merse
+(1974), podle kterých byly za zábavnější považovány nikoliv vtipy s překvapivou pointou, jak
+Shultz i Suls naznačovali, ale naopak vtipy, u kterých respondenti danou pointu očekávali.
+Rozvoj teorie nesouladu byl výrazným obratem v pojímání humoru, ve kterém hrála
+kognice do té doby pouze marginální roli. Tato teorie navíc předznamenala směr výzkumu
+humoru až dodnes, kdy mu naopak kognitivní procesy vévodí (Martin, 2007). Ačkoliv není
+konkrétní role kognice v humoru dosud vyhrazena, její význam v tomto kontextu je již dnes
+prakticky nezpochybňován. Co se týče rozporu mezi teorií pouhého nesouladu a teorií rozřešení,
+je zcela dobře možné, že je obojí platné, každé však u jiného druhu humoru (Martin, 2007; Suls,
+1983).
+18
+Shrnutí
+Všechny tři teorie přinášejí unikátní vhled do problematiky studia humoru, i přesto, že jsou
+některé jejich koncepty již překonány. Lze říci, že každá teorie má svou oblast zájmu, kterou
+se snaží osvětlit, a že si tyto teorie navzájem nemusí konkurovat, ale mohou být vnímány jako
+komplementární (Martin, 2007; Raskin, 2012). Teorie nadřazenosti upozorňuje na fenomén
+agrese, který ač zřejmě není esenciálním předpokladem humoru, je jeho častou součástí, a ať
+už přímo či nepřímo v některých druzích humoru nejspíše sehrává roli. Teorie uvolnění klade
+důraz na energický ráz humoru, jeho souvislost s fyziologickými změnami organismu a později
+i s emočními prožitky. Teorie nesouladu se pak koncentruje na kognitivní zpracování humoru,
+které je v podstatě podmínkou pro obě předchozí teorie. Poznatky z jednotlivých proudů dosud
+vytvořily celistvější pohled na problematiku humoru, koncem 20. století se poté začala
+pozornost více věnovat i oblastem, které byly dříve v rámci teorií spíše okrajové, a sice oblast
+sociální, emoční a osobnostní (Martin, 2007).
+Smysl pro humor
+Pojem smysl pro humor lze poprvé nalézt v pramenech z 19. století (Wickberg, 1998).
+V průběhu 18. století se začaly v rámci jazyka ustanovovat různé druhy smyslu, jako schopnosti
+člověka vnímat a oceňovat jistý fenomén, příkladem je např. smysl pro morálku či smysl pro
+krásu. V rámci těchto pojmů se objevil i předchůdce smyslu pro humor, tzv. smysl pro výsměch
+či směšnost. Výraz smysl pro humor poté mohl vzniknout až v návaznosti na změnu vnímání
+humoru jako takového, kdy se tento pojem nejen oprostil od významu fyziologicky daného
+temperamentu, ale také od objektu smíchu, a začal se vázat na subjektivní prožívání (tamtéž;
+viz. Vývoj pojmu humor).
+V kontextu přetrvávajícího vlivu humanismu a nové konotace humoru jako
+benevolentního bavení se lidskou nedokonalostí a nesoulady života se stal smysl pro humor ve
+20. století velmi vyzdvihovanou a žádanou vlastností (Ruch, 1998). Ve druhé polovině 20.
+století se v kontextu humanistické psychologie a později poté na přelomu 20. a 21. století
+s nástupem pozitivní psychologie začal smysl pro humor vyzdvihovat jako přínosný pro
+mentální i fyzické lidské zdraví (Martin, 2007).
+Dnes je smysl pro humor obecně vnímán jako velmi pozitivní a žádaná vlastnost, podle
+výzkumu Allporta z 60. let (cit. podle Martin a Lefcourt, 1984) úspěšně replikovaného
+Lefcourtem a Martinem (1986) o sobě více jak 90 % respondentů uvedlo, že mají průměrný či
+nadprůměrný smysl pro humor, což z logiky předpokládaného normálního rozložení smyslu
+19
+pro humor zřejmě neodpovídá realitě. Cann a Calhoun (2001) dále zjistili, že respondenti
+asociovali nadprůměrný smysl pro humor s řadou dalších pozitivních vlastností (především
+s kreativitou, přátelskostí, chytrostí a také s extraverzí a přívětivostí) a osoba s nadprůměrným
+smyslem pro humor byla považována za více sociálně žádoucí než osoby s průměrným či
+podprůměrným smyslem pro humor.
+I přesto je však dnešní význam konceptu smyslu pro humor oproti původnímu pojetí
+v 19. století dosti široký a nejasný a mohou jím být myšleny různé věci, ani v rámci vědeckého
+zkoumání pak není operacionalizace smyslu pro humor jednotná (Ruch, 1998). Podle Hehla a
+Ruche (1985) se mohou rozdíly ve smyslu pro humor vztahovat k chápání humoru, oceňování
+humoru, ve vyjadřování humoru a v tvorbě humoru, dále pak zmiňují i motivaci vyhledávat
+humor, v paměti ohledně humoru a tendenci používat humor jako obranný mechanismus.
+V rámci této nejednoznačnosti navrhuje Martin (2007) přistupovat ke konceptu smyslu pro
+humor jako k pojmu zahrnujícímu skupinu různých vlastností, nikoliv jako k jedné konkrétní
+vlastnosti.
+Individuální rozdíly ve smyslu pro humor
+„Osobnostní přístup k humoru se snaží popsat, jak se lidé liší ve vnímání, interpretování a
+užívání si humorných podnětů a ve schopnosti a stylu je produkovat“ (volně přeloženo podle
+Ruch, 1998). Jako jeden z prvních pokusů zkoumat rozdíly ve smyslu pro humor bývá uváděn
+výzkum Kambouropoulouvé z roku 1926 (Martin, 1998), ve kterém analyzovala deníkové
+zápisy 70 studentek, které si měly zaznamenávat denní výskyt humorných prožitků. Dřívější
+filosofové a teoretici zmínění v kapitole Humor ve filosofii a Hlavní teorie humoru se převážně
+zabývali humorem obecně, v čem spočívá, jaké procesy zahrnuje a v jakých situacích se
+objevuje, individuálním rozdílům se pak téměř nevěnovali (Martin, 1998). Přesto se z těchto
+teorií někteří výzkumníci pokusili implikace pro individuální rozdíly vyvodit a následně je
+empiricky ověřovali. Některé (z mého pohledu nejpodstatnější) z výsledků těchto studií jsou
+zmíněny v kapitole Hlavní teorie humoru, jejich ucelenější přehled pak lze najít v Martinově
+článku (1998).
+Až do 80. let 20. století se potom výzkumy individuálních rozdílů týkaly především
+oceňování různého druhu humoru a jejich podstatou bylo převážně hodnocení vtipů a
+komiksových obrázků (Ruch, 1998b). Tyto výzkumy byly nejprve typicky deduktivního rázu a
+vycházely z předpokladů postulovaných některým ze tří hlavních teoretických proudů (Martin,
+2007). Ačkoliv jejich výsledky přinesly jistý vhled do daných teorií a zpochybnily či podpořily
+20
+některé jejich myšlenky, vzhledem k nedostatečné metodologii a nevalným či neznámým
+psychometrickým vlastnostem nebylo možné vyvozovat z nich širší důsledky pro výzkum
+smyslu pro humor (Ruch, 1992). Počínaje Eysenckem ve 40. letech se pak pro studium rozdílů
+v oceňování humoru začala používat metoda faktorové analýzy (Martin, 2007). S osvojením
+empiričtějších metod výzkumu pak byla umožněna konstrukce testů snažících se měřit rozdíly
+ve smyslu pro humor. Tyto testy však byly zpočátku stále jednostranně zaměřené na hodnocení
+humorných podnětů a ignorovaly ostatní aspekty smyslu pro humor. V polovině 70. let se poté
+začaly k měření smyslu pro humor používat dotazníky, které se spíše koncentrovaly na rozdíly
+v každodenním používání humoru (tamtéž).
+Snaha měřit smysl pro humor
+V této kapitole zmíním několik nejznámějších dotazníkových metod, pomocí kterých se
+výzkumníci snažili zjišťovat rozdíly ve smyslu pro humor. Pro celkový přehled dosud
+použitých testů doporučuji Ruchův seznam metod (1998b). Celkově bylo dodnes vytvořeno
+více než 60 různých měřících nástrojů, nejhojněji zastoupené jsou dotazníky a testy oceňování
+humorných podnětů, méně často se poté objevují metody deníkových záznamů, hodnocení
+přátel či pozorování chování (Ruch, 2008). Mnoho z těchto metod má však podstatné limity,
+některé byly použity pouze jednorázově v rámci jediné studie, obsahovaly různé metodologické
+nedostatky nebo neměly dostatečně definovaný měřený konstrukt (tamtéž). Vzhledem
+k nejednotnosti pojetí smyslu pro humor a různým metodologickým přístupům k jeho měření
+považuji za problematické uvádět zde celková zjištění individuálních rozdílů, když byla získána
+v kontextu odlišných strategií. Z toho důvodu budu nalezené rozdíly uvádět vždy v rámci
+jednotlivých zmíněných testů, rozdíly týkající se duševního zdraví poté uvedu v samostatné
+následující kapitole.
+Sense of Humor Questionnaire
+Sense of Humor Questionnaire sestrojil v polovině 70. let Svebak (1974) a byl tak jedním
+z prvních výzkumníků, který se odklonil od využívání humorného materiálnu k měření humoru
+a předznamenal tak následující éru obliby dotazníků (Martin, 2007). Sense of Humor
+Questionnaire se skládá z 3 dimenzí – senzitivita k meta-zprávám (neboli k humoru), obliba
+komických situací a vyjadřování veselosti (volně přeloženo), které Svebak vyvodil pomocí
+faktorové analýzy ze svého předchozího výzkumu (1974b). Vzhledem k tomu, že dimenze
+vyjadřování veselosti měla v pozdějších výzkumech velmi nízkou vnitřní konzistenci (Lefcourt
+21
+& Martin, 1986), vytvořil Svebak v roce 1996 novou, kratší a upravenou verzi, tzv. Sense of
+Humor Questionnaire - 6. V této verzi byla vypuštěna nevyhovující dimenze vyjadřování
+veselosti, počet položek zredukován na 6 (3 z dimenze meta-zpráv a 3 z obliby komických
+situací) a škála začala být považována za jednodimenzionální s přijatelnou vnitřní konzistencí
+(α > 0,80).
+Co se týče individuálních rozdílů, za použití staré SHQ škály zjistily Deanerová a
+McConathová (1993) na vzorku 129 vysokoškolských studentů, že vyšší skóry na dimenzích
+senzitivity k humoru a obliby komických situací negativně souvisí s neuroticismem (r = -0,32,
+r = -0,29, u obou p < 0,01) a dimenze senzitivity pak pozitivně s extraverzí (r = 0,27, p < 0,01),
+mezi pohlavími nebyly nalezeny rozdíly. S využitím této škály byl také zjištěn rozdíl mezi
+osobami žijícími ve městě a na venkově (Svebak, 1996), přičemž venkované měli průměrně
+větší smysl pro humor (F(1, 990) = 156.01, p < 0,001, velikost účinku nebyla uvedena). Jako možné
+vysvětlení uvádí Svebak větší tlak na konformitu u měšťanů.
+Coping Humor Scale
+Coping Humoe Scale byla vytvořena v roce 1983 Martinem a Lefcourtem specificky k měření
+smyslu pro humor ve vztahu k zvládání stresu. Dotazník sestává ze 7 položek, které jsou
+hodnoceny na 4 bodové Likertově škále. Vnitřní konzistence se neukázala jako nejlepší (α =
+0,6 – 0.7), škála má nicméně dobrou test-retest reliabilitu (α = 0,8), poměrně silně koreluje
+s hodnocením známých (r = 0,5, p < 0,001) (Martin a Lefcourt, 1986) a její validita byla
+podpořena pozitivním (r = 0,5, p < 0,01) vztahem se schopností produkovat humorný monolog
+ve stresové situaci, nicméně na malém vzorku (N = 25) (tamtéž).
+Na vzorku 129 studentů škála pozitivně souvisela s extraverzí (r = 0,42, p < 0,01) a
+negativně s neuroticismem (r = -0,35, p < 0,01), mezi pohlavími nebyly zjištěny rozdíly
+(Deaner a McConatha, 1993).
+Situational Humor Response Questionnaire
+Situational Humor Response Questionnaire byl opět vytvořen Martinem a Lefcourtem (1984).
+Cílem tohoto dotazníku bylo zachytit frekvenci a intenzitu prožívání humoru v různých
+situacích (příjemných, nepříjemných, obvyklých i spíše neobvyklých). Dotazník se skládá z 18
+popisů situací, na které respondent odpovídá na 5 bodové Guttmanově škále zda, a do jaké míry
+by na danou situaci reagoval humorem. Součástí dotazníku jsou dále 3 otázky ohledně významu
+humoru pro respondenta. Dotazník se ukázal mít přijatelné psychometrické vlastnosti, α = 0,70
+– 0,83 (N = 497), test-retest reliabilita po jednom měsíci (N = 33) = 0,70 (Martin a Lefcourt,
+22
+1984). Co se týče validity, výsledek dotazníku středně pozitivně souvisel s mírou smíchu
+respondentů (N = 38) při rozhovoru, s frekvencí (r = 0,3, p < 0,01) a s délkou smíchu (r = 0,46,
+p < 0,001) (Martin a Lefcourt, 1986) a s frekvencí smíchu během dne (N = 80, r = 0,31, p <
+0,001) (Martin a Kuiper, 1999). Hodnocení známých však výsledkům příliš dobře neodpovídalo,
+hodnota korelace se sice pohybovala kolem 0,3, na vzorku 38 studentů však vyšla
+nesignifikantní u žen a v další studii s 60 studenty u mužů (tamtéž).
+Při použití dotazníku nebyly nalezeny rozdíly mezi muži a ženami (Martin a Lefcourt,
+1984; Deckers a Ruch, 1992; Ruch a Deckers, 1993), jinak se dotazník ukázal na 2 vzorcích, 1.
+sestávající ze 165 německých dospělých a 2. ze 118 amerických studentů středně pozitivně
+souviset s extraverzí (r = 0,52; r = 0,36, u obou p < 0,01) a o něco méně také s psychoticismem
+(u obou r = 0,26, p < 0,05), což ovšem autoři hodnotili spíše jako důsledek některých
+nekonformních situací v dotazníku, kde může být smích pokládán za asociální a neempatický
+(Ruch a Deckers, 1993). Dotazník pak také na vzorku 206 amerických studentů a 159
+německých dospělých pozitivně souvisel s tendencí vyhledávání mimořádných zážitků (r =
+0,52, r = 0,43, obojí p < 0,001), nejvíce se subškálou TAS (vyhledávání napětí a dobrodružství)
+(Deckers a Ruch, 1992). V obou Deckersových a Ruchových výzkumech se pak skór na
+dotazníku ukázal klesat s věkem (r = -0,28, p < 0,01).
+State-Trait Cheerfulness Inventory
+State-Trait Cheerfulness Inventory byl vytvořen v letech 1996 a 1997 Ruchem, Kohlerem a
+Van Thrielem, přičemž autoři zároveň s konstrukcí dotazníků provedli replikační a validizační
+studie na několika německých a amerických vzorcích dospělých a studentů (N každého vzorku
+vždy vyšší než 100). Jedná se o sadu dvou dotazníků – jeden měřící aktuální stav a druhý trvalé
+vlastnosti osob. Oba dotazníky se skládají z 3 dimenzí – veselosti, vážnosti a špatné nálady.
+Veselost má umožňovat vznik humoru a vážnost a špatná nálada tomuto vzniku naopak
+zabraňovat, podle očekávání spolu u obou dotazníků dimenze vážnosti a špatné nálady
+pozitivně souvisí (pro rysový dotazník r = 0,24 – 0,36, p < 0,01; pro situační r = 0,36 - 0,56, p
+< 0,01), a obě pak negativně souvisí s veselostí (rysový dotazník: vážnost r = -0,30 - -0,43,
+špatná nálada r = -0,50 - -0,64, vše p < 0,001; situační dotazník: vážnost r = -0,41 - -0,59, špatná
+nálada r = -0,56 - -0,66, p < 0,001). Situační dotazník obsahuje 10 položek v každé ze tří
+dimenzí, rysový dotazník pak 20 položek v každé dimenzi, konkrétně se jedná o tvrzení
+hodnocená na 4 bodové Likertově škále. Jednotlivé dimenze v obou dotaznících měly dobré
+vnitřní konzistence (pro rysový α = 0,81 – 0,96; pro situační α = 0,85 – 0,84) a poměrně silně
+pozitivně souvisely s hodnocením známých (průměrná korelace 3 známých: veselost r = 0,66,
+23
+vážnost r = 0,53, špatná nálada r = 0,62). Všechny dimenze u rysového dotazníku měly také
+dobrou test-retest reliabilitu po 1 měsíci (N=48, veselost r = 0,85, vážnost r = 0,79, špatná
+nálada r = 0,87, pro vše p < 0,001) (Lau, Chiesi, Hofmann, Ruch a Saklofske, 2019).
+Na žádné z dimenzí obou dotazníků nebyl nalezen rozdíl mezi pohlavími, ale u obou
+souvisel věk přes 40 let s vyšší mírou vážnosti (Ruch, Kohler a Van Thriel, 1996, 1997). U
+rysového dotazníku na vzorku 104 italských studentů souvisela dimenze veselosti silně
+pozitivně s extraverzí (r = 0,64, p < 0,001) a negativně s emocionalitou (r = -0,28, p < 0,001),
+dimenze vážnosti pozitivně souvisela se svědomitostí (r = 0,39, p < 0,001) a otevřeností vůči
+zkušenostem (r = 0,35, p < 0,001), dimenze špatné nálady pak negativně souvisela s extraverzí
+(r = -0,47, p < 0.001) a přívětivostí (r = -0,31, p < 0,001) a pozitivně s emocionalitou (r = 0,43,
+p < 0,001).
+Shrnutí
+Výše zmíněné dotazníky reprezentují různé přístupy ke smyslu pro humor a jejich výsledky je
+tak obtížné přímo srovnávat. U všech dotazníků byl nicméně nalezen pozitivní vztah smyslu
+pro humor s extraverzí a dále absence rozdílů mezi pohlavími. V rámci výzkumů s The
+Situational Humor Response Questionnaire a State-Trait Cheerfulness Inventory byla dále
+nalezena podpora pro vztah smyslu pro humor s věkem. Podobná zjištění za použití různých
+měřících nástrojů naznačují, že by tyto faktory mohly skutečně sehrávat v rámci konstruktu
+smyslu pro humor roli. Je však také možné, že extraverze ani věk nemusí souviset se smyslem
+pro humor jako takovým, ale že zmíněné nástroje spíše zachycují extravertní vyjadřování
+smyslu pro humor, ke kterému navíc mohou mít mladší lidé více příležitostí.
+Smysl pro humor a zdraví
+Jak jsem již zmínila v kapitole Smysl pro humor, v kontextu humanistické a později pozitivní
+psychologie se začalo na smysl pro humor nahlížet jako na potenciálně zdraví přínosný
+fenomén, a to v rámci zdraví psychického i fyzického (Martin, 2007). Ačkoliv teoretici jako
+Maslow, Allport, Frankl nebo Peterson a Seligman vyzdvihovali efekt humoru na zdraví a tyto
+teoretické předpoklady začaly být prověřovány empirickým výzkumem, Martin (2001, 2008)
+došel při revidování existujících výzkumů k závěru, že jsou bohužel často metodologicky
+nedostatečné a poskytují málo přesvědčivé výsledky. Morreall (2008a) také poukazuje na to,
+že humor jako léčba a prevence různých psychologických neduhů, jako je např. stres a
+depresivita, je v posledních dvou dekádách často využíván nejen v rámci psychologické praxe,
+24
+ale také řadou amatérských koučů, pro které se jedná o dobrý byznys, ani v jednom případě
+však podle něj nejsou tyto intervence založené na humoru dostatečně podpořené výzkumy.
+Podle Martina (2001, 2008) jsou nejčastějšími problémy existujících výzkumů celkově slabé
+zjištěné vztahy, nezahrnutí kontrolních skupin, nedostatečné ošetření případných
+intervenujících proměnných a používání různých měřících nástrojů, které, jak je patrné i
+z předchozí kapitoly, často cílí na rozdílné aspekty smyslu pro humor. Výsledky některých
+výzkumů jsou ovšem slibné a poukazují na možný přínos humoru pro zdraví psychické i fyzické,
+pro získání přesvědčivější evidence je však dle Martina do budoucna nutné aplikovat ve
+výzkumech kvalitnější metodologii a pokoušet se o konstrukci dalších nových metod, které by
+byly schopné specifičtěji zaměřit různorodé aspekty smyslu pro humor (2007, 2008).
+V následující části uvádím některá zjištění spojená s psychickým zdravím získaná s pomocí
+výše zmíněných dotazníků.
+Měření smyslu pro humor a psychické zdraví
+S použitím Svebakova testu Sense of Humor Questionnaire bylo na malém vzorku 39 studentů
+zjištěno, že dimenze senzitivity k humoru pozitivně souvisí se spokojeností osob s jejich
+životními rolemi a vnímanou příjemností těchto rolí (r = 0,30, r = 0,35, u obou p < 0,05) (Kuiper,
+Martin a Dance, 1992). V tomto výzkumu se dimenze senzitivity k humoru také ukázala jako
+jediná přímo souviset s pozitivním afektem osob (r = 0,31, p < 0,05) oproti jiným měřícím
+nástrojům (Situational Humor Response Questionnaire, Coping Humor Scale). Dimenze obliby
+komických situací se zdála na malém vzorku 56 studentů moderovat vztah mezi negativními
+životními událostmi a negativními náladami F(1, 55) = 6,43, p < 0,05, ΔR2
+= 0,08, (Martin a
+Lefcourt, 1983), u osob s nižším skórem na dimenzi byla korelace negativních životních
+událostí a depresivity vyšší (r = 0,62, p < 0,001), než u osob s vyšším skórem (r = 0,29, p =
+0,05), tento rozdíl vyšel nad hladinou statistické významnosti (p = 0,07), což ovšem autoři
+přičítali použité split-half metodě. Podobné výsledky měly v tomto výzkumu i dotazníky
+Situation Humor Response Questionnaire a Coping Humor Scale. S použitím SHQ-6 byla pak
+na vzorku 1069 norských středoškoláků zjištěna souvislost škály s depresivitou F(6, 1063) =
+184,6, p < 0,001, ΔR2
+= 0,16 (Gotestam, Svebak a Jensen, 2008).
+Coping Humor Scale na vzorku 129 studentů slabě negativně souvisela s depresivitou
+(r = -0,19, p < 0,05) (Deaner a McConatha, 1993). Coping Humor Scale i Situational Humor
+Response Questionnaire dále na vzorku 227 amerických studentů pozitivně souvisely se
+sebevědomím (r = 0,35, p < 0,001, r = 0,22, p < 0,05) a negativně s vnímaným stresem (r = -
+0,34, p < 0,001, r = -0,25, p < 0,01), s dysfunkčním sebehodnocením (r = -0,36, p < 0,001, r =
+25
+-0,21, p < 0,05) a vnímanými depresivními charakteristikami (r = -0,40, p < 0,001, r = 0,19, p
+< 0,5) (Kuiper a Martin, 1993). Vztahy Coping Humor Scale byly celkově významnější, což
+souvisí se specifickým zaměřením tohoto dotazníku na humor jako copingovou strategii,
+zajímavé však je, že podobnu sílu vztahů měla v tomto výzkumu i Svebakova dimenze
+senzitivity k humoru.
+S využitím State-Trait Cheerfuness Inventory na vzorku 642 italských studentů byl také
+podpořen vztah veselosti a pocitu duševní pohody (Lau, Chiesi a Saklofske, 2019), tento vztah
+se ukázal být mediován resiliencí a moderován vážností (b = −0.37, t[638] = −3.33, p < .001).
+Vztah veselosti a pocitu duševní pohody byl silnější při nižší míře vážnosti (b = 0,27), než při
+střední (b = 0,22) či vysoké míře (b = 0,17). Při nižší míře veselosti však naopak znamenala
+vyšší vážnost silnější vztah s resiliencí (rozdíl oproti střední a nižší míře vážnosti F(2, 94) =
+9,06, p < 0,001, η2 = 0.16), což nasvědčuje tomu, že v případě nedostatku veselosti může
+vážnost účinek veselosti kompenzovat, např. skrze racionální uvažování v případě psychické
+nepohody.
+Je třeba říci, že zmíněná zjištění jsou pouze ilustrační a rozhodně ne vyčerpávající,
+ucelenější přehled výzkumů humoru v souvislosti se zdravím uvádí např. Martin (2007, 2008).
+Tyto výsledky nicméně podporují existenci souvislosti mezi humorem a duševní pohodou.
+Humor styles questionaire
+Humor Styles Questionnaire (dále HSQ) byl vytvořen v roce 2003 Martinem a kolegy (Martin,
+Puhlik-Doris, Larsen, Gray & Weir, 2003) pro účely lepšího výzkumu vlivu smyslu pro humor
+na zdraví. Martin (2001) ve své předchozí review existujících výzkumů zjistil pouze velmi
+omezený vztah mezi zdravím a nástroji měřícími smysl pro humor a za jednu z možných příčin
+považoval nerozlišování mezi pozitivním a spíše negativním používáním humoru. Z toho
+důvodu se pokusil sestrojit dotazník, který by zachycoval různé funkce humoru ve vztahu
+k psychosociálnímu zdraví. Součástí článku mapujícího konstrukci HSQ bylo i několik
+výzkumů zaměřených na souvislost dotazníku s dalšími konstrukty, výsledky prezentované
+v této kapitoly tak pochází z výzkumu Martina et al. (2003).
+Před konstrukcí dotazníku autoři prošli předešlou teoretickou a empirickou literaturu a
+snažili se vyvodit různé funkce, které byly v minulosti humoru připisovány. V návaznosti na to
+pak rozlišili humor podle toho, zda plní spíše intrapsychickou funkci, tedy funkci copingové
+26
+strategie osoby, nebo interpersonální funkci, kdy napomáhá navazování a udržování vztahů
+s druhými. Další rozlišení se poté nachází mezi pozitivním humorem, který je tolerantní
+k jedinci i jeho okolí, a negativním, nerespektujícím humorem, potenciálně škodlivým pro
+jedince nebo jeho sociální vztahy. Kombinací těchto dvou rozlišení poté vzniká mřížka 4
+různých typů humoru, pro přehlednost jdou uvedeny v tabulce 1.
+Tabulka 1: Styly humoru podle HSQ
+Pozitivní typ Negativní typ
+Interpersonální funkce Afiliativní humor Sebeshazující humor
+Intrapersonální funkce Sebepovzbuzující humor Agresivní humor
+1) Afiliativní humor (afiliative humor) je pozitivní interpersonální typ, který označuje
+spontánní přátelské vtipkování s okolím. Afiliativní humor může někdy obsahovat mírné
+agresivní prvky ve formě škádlení, jeho cílem ovšem není druhého skutečné zesměšnit.
+2) Sebepovzbuzující humor (selfenhancing humor) je intrapersonální pozitivní typ, jehož
+podstatou je humorný náhled na život a schopnost nacházet a udržet si humor i v nepříznivých
+situacích, a to nezávisle na přítomnosti druhých lidí. Tento typ tak odpovídá humoru jako
+obrannému mechanismu ve Freudově pojetí.
+3) Agresivní humor (aggressive humor) je intrapersonálním negativním typem, který spočívá
+v používání humoru ke kritizování a manipulování druhých. Intrapersonální funkce tohoto typu
+koresponduje s teorií nadřazenosti, kdy se osoba využíváním tohoto humoru snaží sama sebe
+povznést na úkor ostatních. Do této kategorie tak spadá sarkasmus a extrémnější formy humoru
+jako rasistický a sexistický humor. Autoři s tímto stylem asociují i nutkavé bezohledné
+využívání humoru v nevhodných situacích.
+4) Sebeshazující humor (selfdefeating humor) je interpersonálním negativním typem, jeho
+podstatou je devalvování sama sebe za účelem pobavení ostatních a získání jejich náklonosti
+nebo alespoň pozornosti. Autoři tento typ spojují i s používáním obranného mechanismu
+27
+popření, se zakrýváním skutečných, často negativních pocitů a s vyhýbáním se konstruktivnímu
+řešení vlastních problémů.
+Autoři ovšem zdůrazňují, že vytvořené typy nejsou oddělenými pevnými kategoriemi, ale že se
+mohou částečně prolínat (viz např. agresivní prvky v afiliativním humoru).
+Dotazník Humor Styles Questionnaire tedy sestává ze 4 dimenzí, 4-faktorovou strukturu
+opakovaně potvrdila faktorová analýza, a každou dimenzi tvoří 8 položek, na které se odpovídá
+pomocí 7 bodové Likertovy škály. Jednotlivé dimenze se na rozsáhlém vzorku 1195 osob
+rozmanitého věku ukázaly mít přijatelnou vnitřní konzistenci (α = 0,77 – 0,81). Škály
+afiliativního a sebepovzbuzujícího humoru spolu pozitivně souvisely (pro muže r = 0,33, pro
+ženy r = 0,36, p < 0,001), stejně jako škály afiliativního a agresivního humoru (pro muže r =
+0,28, pro ženy r = 0,22, p < 0,001), pozitivní vztah byl dále zjištěn i u agresivní a sebeshazující
+škály (pro muže r = 0,22, pro ženy r = 0,23, p < 0,001). Slabý vztah byl pak nalezen i mezi
+sebepovzbuzujícím humorem a agresivním a sebeshazujícím humorem, jejich signifikance však
+byla nižší a autoři se domnívali, že může být způsobena velkým vzorkem. Tyto vztahy škál
+nicméně odpovídají předpokladu autorů, že se jednotlivé vytvořené typy humorů do jisté míry
+prolínají. S použitím vzorku 179 osob se všechny škály také ukázaly mít dobrou test-retest
+reliabilitu po jednom týdnu (r = 0,80 – 0,85, p < 0,001).
+Na vzorku 1195 osob byly zjištěny rozdíly mezi pohlavími u škály agresivního (M muži
+= 32,3, M ženy = 26,3, t(1193) = 12,20, p < 0,001) a sebeshazujícího humoru (M muži = 27,8,
+M ženy = 24,5, t(1193) = 6,09, p < 0,001), svědčící o tom, že muži mají zřejmě větší tendenci
+používat negativní styly humoru než ženy. Na vzorku 588 osob se ukázaly i rozdíly s ohledem
+na věk, osoby mladší než 19 let skórovali výše na škálách afiliativního (F(1, 584) = 51,8, p <
+0,001) a agresivního humoru (F(1, 584) = 72,32, p < 0,001) oproti osobám starším 25 let, rozdíl
+v afiliativním humoru však může být podle autorů způsoben nižší mírou socializace starších
+lidí. (U žádných z výše zmíněných testů však autoři již neuvádí velikost účinku.)
+Na vzorku 165 studentů byl dále ověřován vztah HSQ s měřícími nástroji popsanými
+v kapitole Snaha měřit smysl pro humor. Situational Humor Response Questionnaire koreloval
+s afiliativní (r = 0,27, p < 0,001) a především sebepovzbuzující škálou (r = 0,43, p < 0,001).
+Coping Humor Scale opět souvisel nejvíce s sebepovzbuzující škálou (r = 0,55, p < 0,001), dále
+pak s afiliativní (r = 0,33, p < 0,001) a méně také s agresivní škálou (r = 0,21, p < 0,01). Sense
+of Humor Questionnaire-6 nejsilněji souvisel s afiliativním humorem (r = 0,54, p < 0,001) a
+dále s sebepovzbuzujícím humorem (r = 0,45, p < 0,001). V rámci dotazníku State-Trait
+Cheerfulness Inventory souvisely silně s dimenzí veselosti škály afiliativního (r = 0,65, p <
+28
+0,001) a sebepovzbuzujícího humoru (r = 0,55, p < 0,001). Dimenze vážnosti poté negativně
+souvisela nejvíce se škálou agresivního (r = -0,41, p < 0,001) a poté se škálou afiliativního
+humoru (r = -0,31, p < 0,001). Nakonec dimenze špatné nálady negativně souvisela se škálou
+sebepovzbuzujícího (r = -0,37, p < 0,001) a afiliativního humoru (r = -0,33, p < 0,001) a
+pozitivně se škálou sebeshazujícího humoru (r = 0,28, p < 0,01). Z těchto vztahů je patrné, že
+tyto dříve používané škály zachycovaly téměř výhradně jen pozitivní typy humoru, a rozlišení
+potenciálně maladaptivních stylů humoru je skutečně novým přínosem HSQ (Martin et al.,
+2003).
+Při zkoumání vztahů s dimenzemi Big Five škály afiliativního a sebepovzbuzujícího
+humoru pozitivně korelovaly s extraverzí (r = 0,47, r = 0,28, obojí p < 0,001), zbylé dvě škály
+pak s extraverzí nesouvisely. Agresivní a sebeshazující humor naopak negativně korelovaly se
+svědomitostí (r = -0,37, r = -0,34, obojí p < 0,001) a přívětivostí (r = -0,59, p < 0,001, r = -0,23,
+p < 0,01), pozitivní typy humoru pak s těmito konstrukty nesouvisely. Agresivní a sebeshazující
+humor pak podle předpokladů pozitivně souvisely s neuroticismem (r = 0,21, p < 0,05, r = 0,35,
+p < 0,001), kdyžto sebepovzbuzující humor s ním koreloval negativně (r = -0,37, p < 0,001).
+Otevřenost vůči zkušenosti pak pozitivně souvisela pouze s afiliativním a sebepovzbuzujícím
+humorem (r = 0,23, p < 0,01, r = 0,27, p < 0,001). Tato zjištění tak z velké části podpořila
+předpoklady autorů ohledně funkce jednotlivých škál, ale také ohledně přínosu rozdělení škál
+v HSQ, především zahrnutí negativních druhů humoru. Předchozí nástroje totiž vždy souvisely
+s extraverzí a ve srovnání s HSQ se tak zdají zachycovat (s výjimkou Coping Humor Scale)
+především afiliativní typ humoru (Martin et al., 2003).
+Autoři dále porovnávali dotazník s řadou nástrojů měřících konstrukty spojené
+s psychickým zdravým a duševní pohodou. S dotazníkem měřícím pocit duševní pohody podle
+očekávání nejsilněji souvisela škála sebepovzbuzujícího humoru (r = 0,46, p < 0,001),
+negativně s ním poté souvisela škála sebeshazujícího humoru (r = -0,24, p < 0,05).
+Sebepovzbuzující škála dále nejvíce souvisela se sebevědomím (r = 0,28, p < 0,001) a jako
+jediná s optimismem (r = 0,32, p < 0,01). Se sebevědomím poté souvisela i škála afiliativního
+humoru (r = 0,21, p < 0,001) a negativně škála sebeshazujícího humoru (r = -0,36, p < 0,001).
+Afiliativní a sebepovzbuzující škála pak negativně souvisely s úzkostností (r = -0,27 a r = -0,40,
+oboje p < 0,001) a depresivitou (r = -0,22 a r = -0,33, oboje p < 0,001). Škála sebeshazujícího
+humoru naopak s obojím souvisela pozitivně (u úzkostnosti r = 0,26, u depresivity r = 0,24,
+oboje p < 0,001). Škála agresivity pak navzdory očekávání nesouvisela s žádným měřeným
+konstruktem.
+29
+Vzhledem k těmto zjištěním, které se (s výjimkou agresivní škály) ukázaly být
+v souladu s teoretickými předpoklady, a vzhledem k tomu, že se HSQ celkově ukázal
+vysvětlovat významnější část rozptylu než předchozí dotazníky (11,8 % oproti 6,6 % 3 škál
+dohromady), se tento dotazník jeví jako slibný nástroj pro výzkum smyslu pro humor a jeho
+souvislostí s psychickým a fyzickým zdravím. Zřejmě se mu daří přidávat inkrementální
+validitu k dříve využívaným měřícím nástrojům a jeho použití pro tyto účely je tak přínosnější.
+Cíl práce
+Vzhledem k výše zmíněným výsledkům získaným pomocí HSQ se domnívám, že by adaptace
+dotazníku do českého jazyka mohla být užitečná pro tuzemský výzkum duševní pohody a
+případně i pro terapii. Seznámení se s myšlenkou 4 různých druhů humoru a s jejich rozdílnými
+souvislostmi s psychickým zdravím by mohlo vést k lepšímu porozumění klientovi a cílenější
+intervenci. Ačkoliv je směr vztahu mezi druhy humoru a duševní pohodou zatím neznámý, další
+výzkumná činnost s využitím HSQ by mohla objasnit, zda je možné skrze změnu v používání
+humoru ovlivnit i duševní prožívání. V rámci své práce jsem se proto rozhodla vytvořit překlad
+tohoto dotazníku a prověřit jeho vlastnosti. Chtěla jsem dále zjistit, zda a do jaké míry se
+preference určitého stylu humoru projeví ve vkusu respondentů ohledně humoru, a to konkrétně
+humoru přítomného na sociálních sítích. Pro mou generaci jsou dnes sociální sítě nedílnou
+součástí každodenního života a styl humoru, kterým se zde lidé zabývají, by v kontextu
+zjištěných vztahů škál HSQ s konstrukty psychického zdraví mohl souviset s jejich pocitem
+duševní pohody.
+30
+Metoda
+Cílem mého výzkumu bylo převedení dotazníku Humor Styles Questionaire (Martin et al.,
+2003) do českého jazyka a ověřit psychometrické vlastnosti této české verze. Dále jsem se
+pokoušela zjistit, zda výsledné skóry na jednotlivých škálách HSQ korespondují s oceňováním
+různého druhu humoru, konkrétně internetových vtipů, tzv. memů (tedy zda např. lidé s vyšším
+skóre na škále sebepovzbuzujícího humoru budou hodnotit vtipy, které svým obsahem
+odpovídají tomuto druhu humoru, jako zábavnější oproti ostatním vtipům.) Hypotéza č. 1 tedy
+zní: Český překlad HSQ bude mít obdobné psychometrické vlastnosti, jako originální anglická
+verze. Hypotéza č. 2: Vyšší skóre na jednotlivých škálách humoru v HSQ bude pozitivně
+korelovat s vnímanou zábavností memů odpovídajících danému typu humoru.
+Výzkum jsem prováděla pomocí internetového dotazníku, který se skládal ze dvou
+demografických otázek (pohlaví a věk), do češtiny přeloženého dotazníku HSQ a dále z části,
+ve které měli respondenti za úkol hodnotit zábavnost několika desítek internetových memů.
+Cílovou populací výzkumu byli stálí či bývalí vysokoškolští studenti ve věku 18 – 29 let,
+dotazník jsem proto distribuovala do několika facebookových skupin sdružujících studenty
+různých oborů.
+Tvorba dotazníku
+HSQ
+Znění anglických položek jsem převzala z Martinova původního výzkumu věnujícímu se
+konstrukci HSQ (Martin et al., 2003). Ke všem položkám byly vytvořeny tři alternativní české
+překlady, jeden mnou a další dva studentkami anglického jazyka. Finální znění položek jsem
+vytvořila srovnáváním těchto tří překladů, přičemž jsem se snažila docílit co nejpřesnějšího
+významu a zároveň co nejpřirozenější české formulace. V případě nejistoty jsem překlad dále
+konzultovala se studentkami angličtiny. Funkčnost překladu jsem poté ověřovala pilotním
+výzkumem. Místo původní 7 bodové Likertovy škály jsem se rozhodla využít pouze 4 bodovou,
+vzhledem k tomu, že delší škála neznamená automaticky lepší diferenciaci. Také jsem ve škále
+nevyužila střední hodnotu, abych zabránila nediferencovanosti a přiměla respondenty ke
+zvolení některé možnosti. Respondenti mohli nicméně kdykoliv na jakoukoliv z otázek
+neodpovědět.
+31
+Memy
+K ověřování vztahu HSQ a oceňování humoru jsem se rozhodla použít právě memy, protože
+jsem je považovala za jednu z nejčastějších a nejpřirozenějších forem vtipů mezi studenty.
+Abych zabránila intervenci dalších proměnných do hodnocení memů, rozhodla jsem se použít
+jako společné téma memy z běžného studentského života, ke kterým, jak jsem předpokládala,
+by měli mít všichni studenti zhruba stejně blízko bez ohledu na osobní vkus či obor studia.
+Nejprve jsem se pokusila shromáždit co největší položkovou banku memů, přičemž
+jsem čerpala především z různých facebookových stránek a skupin věnujících se studentskému
+životu a sdílení memů, dále jsem se memy snažila dohledat na stránkách googlu a pinterestu.
+Rozhodla jsem se použít memy v anglickém jazyce, neboť dohledatelné množství studentských
+memů v češtině bylo značně omezené, navíc se převážně jednalo o ne vždy zcela podařené
+překlady původních anglických memů. Předpokládala jsem, že pro vysokoškolské studenty,
+kteří dnes mají všichni povinnou základní znalost angličtiny, nebude porozumění prostému
+anglickému textu problémem.
+V dalším kroku jsem se snažila rozřadit memy do jednotlivých kategorií humoru podle
+HSQ (afiliativní, sebepovzbuzující, agresivní a sebeshazující), v případě nejistoty jsem memy
+konzultovala s okolím. Memy, které mi přišly pro účely dotazníku nejvhodnější (tzn., působily
+srozumitelněji, vtipněji a jejich obsah jasněji spadal do jedné z kategorií) jsem se dále rozhodla
+prověřit v pilotním výzkumu.
+Pilotní výzkum
+Pilotní výzkum se skládal ze dvou oddělených dotazníků vytvořených v softwaru Qualtrics,
+jeden byl tvořen překladem HSQ a druhý několika desítkami randomizovaných memů, oba pak
+obsahovaly 2 demografické otázky stejné jako u finálního dotazníku.
+Pilotní výzkum HSQ
+Vzorek tvořilo 61 stálých či bývalých studentů ve věku 18 – 29 let, 47 žen (77%) a 14 mužů
+(23%), obě pohlaví s průměrným věkem 22 let. Na datech jsem provedla položkovou analýzu
+v softwaru jamovi. Většina položek vykazovala známky zešikmení, častěji zleva, ale některé i
+zprava. Silné zešikmení zleva se objevilo především u položek škály afiliativního humoru,
+kdežto zešikmení zprava u položek agresivního humoru. Tento jev dával teoreticky smysl,
+32
+neboť položky afiliativního humoru se de facto ptají na používání humoru jako takového, a
+tudíž se dá snadno předpokládat, že se s nimi většina lidí ztotožní. U agresivního humoru pak
+může hrát roli sociální žádoucnost, kdy otázky na shazování druhých a výsměch mohou
+v respondentovi velmi snadno vyvolat negativní konotace. V souladu s tím popularita všech
+afiliativních položek byla větší než 0,5, polovina položek vykazovala popularitu vyšší než 0,8
+a dvě nejzešikmenější položky pak vyšší než 0.9. Škály agresivního a sebesrážejícího humoru
+celkově vykazovaly nižší popularitu ve srovnání s položkami afiliativního a
+sebepovzbuzujícího humoru.
+V dalším kroku jsem testovala vnitřní konzistenci jednotlivých škál. U všech škál byla
+vnitřní konzistence dobrá (α = 0,79 – 0,84). Většina všech položek dobře korelovala se zbytkem
+své škály (r > 0.5). S výjimkou afiliativního humoru se však také ve všech škálách vyskytly
+položky (celkem 5), které se zbytkem škály korelovaly méně než 0.4 a mírně zhoršovaly její
+vnitřní konzistenci. Jako nejproblematičtější se ukázala položka sebepovzbuzující škály SP 8 „Nepotřebuji
+být s ostatními lidmi, abych se bavil/a, obvykle si dokáži najít něco k smíchu, i
+když jsem sám/sama.“, která zhoršovala vnitřní konzistenci z 0,83 na 0,79 a se zbytkem škály
+korelovala pouze minimálně (r = 0,13).
+U všech položek, které se v pilotním výzkumu ukázaly jako problematické, jsem
+překontrolovala jejich české znění a znovu je porovnávala s alternativními překlady. Původní
+překlady se mi však stále zdály jako dobře odpovídající anglickému znění položek. Zvažovala
+jsem použití mírnějších formulací u silněji zešikmených položek (např. odebrání slova
+„nikdy“ z položky AG 2 „Druzí lidé nejsou nikdy dotčeni nebo zraněni mým smyslem pro
+humor“), ale vzhledem k tomu, že v angličtině byl dotazník běžně používán v této formě a
+nebyla jsem si vědoma rozdílné konotace slova „nikdy“ v českém a anglickém jazyce, nakonec
+jsem se rozhodla dostát původnímu znění a vyzkoušet dotazník bez modifikací na větším
+vzorku.
+Pilotní výzkum memů
+V tomto dotazníku měli respondenti za úkol ohodnotit zábavnost celkem 118 memů na
+Likertově škále 1 - 4 (1 = není zábavné, 4 = zábavné), u všech memů byla také přítomná
+možnost „nerozumím tomu“ (= 0) pro případ problémů s porozuměním angličtině nebo pro
+případ nepochopení vtipu v memu obsaženém.
+Respondenty byli opět stálí či bývalí studenti (N = 54) ve věku 18 – 29 let, M = 22,36 (SD =
+2,16), přičemž ženy tvořily 70 % (N = 38) a muži 30 % (N = 16). Na výsledných datech jsem
+33
+opět provedla položkovou analýzu, prověřila jsem vnitřní konzistenci podle předpokládaných
+škál humoru, do kterých jsem se předtím pokusila memy rozřadit, a vytvořila korelační matici
+memů. Z celkového množství jsem se snažila vybrat ty memy, které v rámci jedné škály
+vzájemně vykazovaly nejlepší vnitřní konzistenci a zároveň co nejméně souvisely s ostatními
+škálami. Tímto způsobem jsem vybrala 11 memů ze škály afiliativního, agresivního a
+sebeshazujícího humoru a 9 ze škály sebepovzbuzujícího humoru.
+Výzkum
+Finální dotazník tak sestával ze dvou demografických otázek, dále ze 42 vybraných
+randomizovaných memů a z českého překladu HSQ. Memy jsem v dotazníku uvedla jako první,
+aby případná identifikace druhů humoru v HSQ respondenty neovlivnila v jejich následném
+hodnocení.
+Vzorek a chybějící hodnoty
+Dotazník vyplnilo 259 studentů, z toho 194 žen (75 %) a 65 mužů (25 %), průměrný věk byl
+22,65 let (SD = 2,14) (ženy M = 22,43, SD = 1,91 muži M = 23,34, SD = 2,65), celkem 18
+respondentů věk neuvedlo. Několik respondentů vyplnilo pouze 1 z dotazníků (3 pouze
+dotazník z memů a 1 pouze HSQ), jejich data tak nebylo možné využít pro zjištění vztahu mezi
+HSQ a memy, využila jsem je však k analýzám jednotlivých dotazníků. V rámci HSQ jsem dále
+vyřadila z dalších analýz krom té položkové respondenta, kterému chybělo 7 položek (22 %
+dotazníku). Chybějící odpovědi se jinak v datech objevovaly pouze zřídka a náhodně a
+domnívám se tak, že se jednalo pouze o omylem přeskočené položky a nepovažovala jsem je
+tudíž za problém. V rámci dotazníku memů se však vyskytlo několik osob, které neporozuměly
+většímu množství položek. Rozhodla jsem se tolerovat neporozumění max. v 10 % případů,
+tudíž u čtyř memů. Musela jsem tak vyřadit celkem 11 respondentů z dalších analýz, abych
+zabránila zkreslení výsledků, jejich vyplněná hodnocení jsem nicméně využila k analýze
+jednotlivých memů. Velikost vzorku se tak pro jednotlivé analýzy mírně liší a vzorek využit ke
+zjištění vztahu obou dotazníků je menší než ten použitý k ostatním analýzám.
+Výsledky
+Data jsem analyzovala v softwaru jamovi. U HSQ i dotazníku z memů jsem udělala položkovou
+analýzu a t-testy kvůli zjištění případných rozdílů mezi pohlavími, dále jsem u obou škál
+ověřovala 4-faktorovou strukturu pomocí konfirmační faktorové analýzy. Nakonec jsem
+prověřila vzájemný vztah obou škál vytvořením korelační matice.
+34
+HSQ
+V rámci deskriptivních statistik vykazovaly některé položky zešikmení (převážně zleva) a těžší
+či lehčí konce. Nejvíce zleva zešikmené byly položky afiliativní škály, svědčící o nejvyšší
+popularitě těchto položek v rámci dotazníku. Škály se ukázaly mít ne vždy zcela nejlepší, avšak
+přijatelnou vnitřní konzistenci (α = 0,76 – 0,84). Vyšších hodnot dosahovala Cronbachova α u
+afiliativního a sebeshazujícího humoru (α = 0,83 a α = 0,84), o něco horší vnitřní konzistenci
+měly škály sebepovzbuzujícího a agresivního humoru (α = 0,77 a α = 0,76). Hodnoty vnitřní
+konzistence škál byly celkově velmi podobné hodnotám získaným Martinem a kolegy (2003)
+při konstrukci originálního dotazníku. Pouze škála sebepovzbuzujícího humoru měla oproti
+originálu o poznání horší konzistenci (originální α = 0,80).
+V tabulkách 1-4 jsou uvedeny vztahy jednotlivých položek se škálami. U afiliativního
+humoru korelovaly všechny položky dobře se zbytkem škály, nejnižší korelaci zde měla
+položka AF 3: „Zřídkakdy druhé lidi rozesměji vykládáním vtipných historek o sobě.“ (r = 0,48) a
+odebráním žádné z položek se konzistence nezlepšila. U sebepovzbuzující škály byly korelace
+položek se škálou nižší, jako nejhorší se opět ukázala položka SP 8: „Nepotřebuji být s ostatními
+lidmi, abych se bavil/a, obvykle si dokáži najít něco k smíchu, i když jsem sám/sama.“, která byla
+problematická již v pilotáži a ani na větším vzorku se její vlastnosti nezlepšily. Nyní sice přímo
+nezhoršovala vnitřní konzistenci škály, nicméně jí ani nezlepšovala. Podobně tomu bylo i u
+agresivního humoru, zde zůstala po odebrání nejhůře korelující položky AG 7: „Když někoho
+nemám rád/a, často používám humor nebo popichování, abych ho shodil/a.“ (r = 0.33) Cronbachova
+α stejná, došlo jen k drobnému snížení McDonaldovy ω, potenciální odebrání položky ze škály
+by tak nemělo význam. Škála sebeshazujícího humoru měla celkově nejlepší vnitřní konzistenci,
+krom dvou položek byly vždy korelace se zbytkem škály vyšší než 0.5. Po odebrání nejhůře
+korelující položky SS 7: „Když mám problémy nebo jsem nešťastný/á, často to zakrývám
+vtipkováním, takže ani mí nejbližší přátelé nevědí, jak se skutečně cítím.“ (r = 0,34) došlo
+k drobnému zlepšení obou ukazatelů vnitřní konzistence.
+35
+Tabulka 1: Reliabilita položek afiliativní škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. AF 1* 0,55 0,80 0,80
+2. AF 2 0,60 0,79 0,80
+3. AF 3* 0,48 0,81 0,81
+4. AF 4 0,53 0,80 0,80
+5. AF 5* 0,65 0,78 0,79
+6. AF 6 0,53 0,80 0,80
+7. AF 7* 0,48 0,81 0,81
+8. AF 8* 0,52 0,80 0,81
+AF = afiliativní škála
+*značí reverzní položky
+Tabulka 2: Reliabilita položek sebepovzbuzující škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. SP 1 0,46 0,73 0,74
+2. SP 2 0,39 0,75 0,75
+3. SP 3 0,65 0,70 0,70
+4. SP 4 0,38 0,75 0,75
+5. SP 5 0,54 0,72 0,72
+6. SP 6* 0,39 0,74 0,75
+7. SP 7 0,51 0,72 0,73
+8. SP 8 0,34 0,75 0,76
+SP = sebepovzbuzující škála
+*značí reverzní položky
+Tabulka 3: Reliabilita položek agresivní škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. AG 1 0,45 0,73 0,74
+2. AG 2* 0,47 0,73 0,73
+3. AG 3 0,48 0,73 0,73
+4. AG 4* 0,51 0,72 0,73
+5. AG 5 0,36 0,75 0,75
+6. AG 6* 0,49 0,72 0,73
+7. AG 7 0,33 0,75 0,76
+8. AG 8* 0,54 0,72 0,72
+AG = agresivní škála
+*značí reverzní položky
+36
+Tabulka 4: Reliabilita položek sebeshazující škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. SS 1 0,54 0,82 0,83
+2. SS 2 0,71 0,80 0,81
+3. SS 3 0,62 0,81 0,82
+4. SS 4* 0,59 0,82 0,83
+5. SS 5 0,71 0,80 0,81
+6. SS 6 0,47 0,83 0,84
+7. SS 7 0,34 0,85 0,85
+8. SS 8 0,61 0,82 0,83
+SS = sebeShazující škála
+*značí reverzní položky
+Celkově lze říci, že vlastnosti položek HSQ se až na výjimky zdají být uspokojivé. Všechny
+položky se svými škálami korelují alespoň hodnotou r > 0,3, ve většině případů silněji.
+Konzistenci škály narušovala pouze jedna položka, a to minimálně.
+V tabulce 5 je pak uvedena korelační matice jednotlivých škál. Nejvýše spolu korelují škály
+agresivního a sebeshazujícího humoru (r = 0,36; p < 0,001), nejméně spolu naopak souvisí
+škály humoru agresivního a sebepovzbuzujícího (r = 0,19, p < 0,01). Vztahy škál jsou podobné
+vztahům zjištěným v originálním dotazníku, výjimkou je škála sebeshazujícího humoru, která
+v mém překladu oproti originálu celkově více souvisí s ostatními škálami, nejvýraznější je
+rozdíl ve vztahu k afiliativnímu humoru, kde v původní studii nevyšel žádný vztah (r = 0,27, p
+< 0,001 vs. r = 0,06, p > 0,5).
+Tabulka 5: Korelační matice škál
+Correlation Matrix
+1. AF 2. SP 3. AG 4. SS
+1. AF — 0,32 *** 0,25 *** 0,27 ***
+2. SP — 0,19 ** 0,23 ***
+3. AG — 0,36 ***
+4. SS —
+AF = afiliativní škála, SP = sebepovzbuzující
+škála, AG = agresivní škála, SS = sebeshazující
+škála
+** p < 0,01, *** p < 0,001
+37
+Výsledky celých škál vykazovaly přibližně normální rozložení a to i pro obě pohlaví zvlášť.
+Průměrné zastoupení stylů humoru ve vzorku se ukázalo obdobné, jako u anglického originálu,
+nejvyššího průměrného skóre dosahovali respondenti na škále afiliativního humoru (M = 25,59,
+SD = 4,06), poté následoval sebepovzbuzující humor (M = 21,42, SD = 4,29), agresivní humor
+(M = 19,16, SD = 4,40) a sebeshazující humor (M = 18,58, SD = 5,13). Tyto výsledky
+odpovídají skutečnosti, že škála afiliativního humoru je velmi obecná a lze říci, že měří
+celkovou tendenci oddávat se humoru ve společnosti, což může bez potíží zahrnovat i agresivní
+a sebeshazující formy humoru (viz kapitola Humor Styles Questionnaire).
+Výsledky škál, jsem prověřila i u jednotlivých pohlaví zvlášť. Rozdíly v průměrných hodnotách
+mezi muži a ženami jsou malé, největší rozdíl o 3,48 bodů ve prospěch mužů se vyskytl u škály
+agresivního humoru. Průměry na afiliativní a sebepovzbuzující škále se lišily jen o několik
+desetin. Na všech škálách přesto skórovali výše muži. Pro zjištění významu těchto rozdílů jsem
+provedla nezávislé t-testy u všech škál. Jako signifikantní vyšly rozdíly u škály agresivního (M
+muži = 21,78, M ženy = 18,30, t(253) = -5,77, p < 0,01, d = -0,84) a sebeshazujícího humoru
+(M muži = 20,25, M ženy = 18,04, t(253) = -3,02, p < 0,01, d = -0,44). Vzhledem k tomu, že
+testy normality poukazovaly u všech škál kromě sebepovzbuzující na možné porušení normality
+rozložení a u agresivní i možné porušení homogenity rozptylu, provedla jsem i robustní t-test,
+jeho výsledky však byly obdobné.
+Konfirmační faktorová analýza HSQ
+Na datech jsem dále ověřovala 4-faktorovou strukturu (1 faktor odpovídá jednomu druhu
+humoru) pomocí konfirmační faktorové analýzy, výsledky jsou uvedeny v tabulce 6. Čtyři
+faktory se jevily jako adekvátní i při inspekci eigenvalues a scree plotu (1. faktor dosahoval
+hodnoty 5,48, 2. faktor 2,30, 3. faktor 1,52, 4. faktor 1,38, 5. faktor poté 0,48). Tento model
+uspokojivě seděl na data, χ2
+test vyšel sice signifikantní, ovšem to bylo pravděpodobně
+způsobeno větším vzorkem, vzhledem k tomu, že má tento test tendenci vycházet u větších
+vzorků signifikantní bez ohledu na adekvátnost modelu. Ostatní ukazatele vypovídaly o
+přijatelné shodě modelu s daty, CFI = 0,86, TLI = 0,85, RMSEA = 0,05 s 90% CI (0,05:0,06).
+Krom tří položek byly faktorové náboje větší než 0,4, u většiny položek pak větší než 0,5.
+Všechny faktory spolu pozitivně korelovaly, nejtěsnější byl vztah mezi faktorem agresivního a
+sebeshazujícího humoru (r = 0,42, p < 0,001). Vzhledem k tomu, že položky s nejmenším
+faktorovým nábojem - AG 7, SS 7 a SP 8 byly shledány jako problematické už v rámci
+38
+deskriptivních statistik, rozhodla jsem se je na zkoušku vyřadit z modelu a sledovat, zdali dojde
+ke zlepšení korespondence s daty. Ta se však ve výsledku nezlepšila, jedinou změnou bylo
+zvýšení RMSEA na 0,06, vezmu-li v potaz i minimální vliv na reliabilitu škál, tyto položky
+celkově působí poněkud přebytečně.
+39
+Tabulka 6: Konfirmační faktorová analýza HSQ
+Factor Loadings
+Factor Indicator Estimate SE Z P Stand. Estimate
+AF 1. AF 1* 0,42 0,04 10,25 < 0,001 0,62
+2. AF 2 0,55 0,05 10,79 < 0,001 0,65
+3. AF 3* 0,42 0,05 7,90 < 0,001 0,50
+4. AF 4 0,37 0,04 10,06 < 0,001 0,62
+5. AF 5* 0,70 0,06 12,60 < 0,001 0,73
+6. AF 6 0,42 0,04 10,33 < 0,001 0,63
+7. AF 7* 0,37 0,04 9,00 < 0,001 0,57
+8. AF 8* 0,50 0,05 9,20 < 0,001 0,58
+SP 1. SP 1 0,43 0,05 8,46 < 0,001 0,55
+2. SP 2 0,33 0,05 6,52 < 0,001 0,43
+3. SP 3 0,73 0,06 12,88 < 0,001 0,77
+4. SP 4 0,40 0,06 6,14 < 0,001 0,41
+5. SP 5 0,63 0,06 10,81 < 0,001 0,66
+6. SP 6* 0,39 0,06 6,88 < 0,001 0,46
+7. SP 7 0,55 0,06 9,81 < 0,001 0,61
+8. SP 8 0,28 0,06 5,10 < 0,001 0,35
+AG 1. AG 1 0,43 0,06 7,60 < 0,001 0,50
+2. AG 2* 0,45 0,05 8,32 < 0,001 0,54
+3. AG 3 0,53 0,06 9,16 < 0,001 0,59
+4. AG 4* 0,61 0,06 9,46 < 0,001 0,61
+5. AG 5 0,43 0,06 6,89 < 0,001 0,46
+6. AG 6* 0,51 0,06 9,12 < 0,001 0,59
+7. AG 7 0,34 0,06 5,41 < 0,001 0,37
+8. AG 8* 0,57 0,06 9,80 < 0,001 0,62
+SS 1. SS 1 0,50 0,05 9,28 < 0,001 0,56
+2. SS 2 0,83 0,06 14,96 < 0,001 0,81
+3. SS 3 0,65 0,05 11,84 < 0,001 0,68
+4. SS 4* 0,63 0,05 12,11 < 0,001 0,70
+5. SS 5 0,73 0,05 14,51 < 0,001 0,79
+6. SS 6 0,40 0,05 7,47 < 0,001 0,47
+7. SS 7 0,36 0,07 5,46 < 0,001 0,35
+8. SS 8 0,58 0,05 11,19 < 0,001 0,66
+AF = afiliativní škála; SP = sebepovzbuzující škála; AG = agresivní škála; SS = sebeshazující škála
+*Značí reverzní položky
+40
+Položky s horšími vlastnostmi
+Položky SS 7 ze sebeshazující škály („Když mám problémy nebo jsem nešťastný/á, často to
+zakrývám vtipkováním, takže ani mí nejbližší přátelé nevědí, jak se skutečně cítím.“) a SP 8 ze
+sebepovzbuzující škály („Nepotřebuji být s ostatními lidmi, abych se bavil/a, obvykle si dokáži
+najít něco k smíchu, i když jsem sám/sama.“) mírně zhoršovaly vnitřní konzistenci svých škál a
+spolu s položkou AG 7 z agresivní škály („Když někoho nemám rád/a, často používám humor
+nebo popichování, abych ho shodil/a.“) měly také nejnižší faktorové náboje. V originálním
+výzkumu konstrukce HSQ nebyly uvedeny korelace jednotlivých položek se škálou, jejich
+vztah ke škále bylo nicméně možné vyčíst z uvedených faktorových nábojů. Položky SS 7 i SP
+8 měly obě v rámci své škály nižší faktorový náboj, jejich horší vlastnosti tak zřejmě nebyly
+specifikem překladu. U SS 7 mi horší souvislost se škálou dává vzhledem k jejímu obsahu
+smysl, jako jediná ze škály totiž mluví o ukrývání skutečných emocí za humor, zbytek škály se
+oproti tomu zabývá pouze tím, zdali je respondent přespříliš terčem vlastního a cizího humoru.
+U položky SP 8 pak může odlišnost položky způsobovat explicitní vyjádření toho, že
+respondent nepotřebuje být s ostatními lidmi, aby se bavil. Domnívám se, že tato část položky
+může v respondentovi vyvolávat trochu jiné konotace než zbytek škály, který se ptá spíše na
+schopnost pobavit sám sebe a používat humor v nepříznivých situacích. Tato položka pak může
+více souviset spíše s introvertními sklony ososby, než se schopností zabavit sám sebe. Oproti
+těmto dvěma položkám vykazovala položka AG 7 v originálu spíše vyšší faktorový náboj
+v rámci škály, její horší vlastnosti v kontextu české verze tak byly pravděpodobně způsobeny
+překladem. Je možné, že oproti anglické verzi tato položka vyzněla příliš negativně, čemuž by
+odpovídal i její nejnižší průměr v celém dotazníku (M = 1,94, SD = 0,93). Výraz „shodit“ zde
+mohl působit příliš tvrdě a nepřátelsky oproti zbytku škály.
+Dotazník memů
+Dotazník s memy vyplnilo celkem 253 respondentů, 188 žen a 65 mužů (74 % a 26 %).
+S výjimkou agresivních memů vykazovaly všechny škály zešikmení zleva, nejsilněji zleva
+zešikmená byla položka AFM 11 (obrázek 1), která byla respondenty hodnocena jako
+nejzábavnější z celého dotazníku (M = 3,48, SD = 0,81). Naopak nejvíce zprava zešikmená a
+nejméně zábavná položka byla položka AGM 9 (obrázek 2) (M = 1,9, SD = 1,09). Nejvýraznější
+leptokurtické rozložení se objevovalo u afiliativních memů, v souvislosti s tím, že byly většinou
+respondentů shledávány zábavné. Naopak u agresivního humoru měly všechny memy silně
+platykurtické rozložení, což vypovídá o mnohem větší rozpolcenosti respondentů z hlediska
+41
+hodnocení memů. To celkově naznačuje lepší diferenciaci oproti memům afiliativního humoru,
+což by mohlo souviset s obecnějším zaměřením afiliativní škály HSQ a specifičtějším
+zaměřením agresivní škály.
+Obrázek 1: AFM 11 Obrázek 2: AGM 9
+Vnitřní konzistence škál
+Vnitřní konzistence jednotlivých pomyslných škál byla přijatelná (α = 0,78 – 0,84), přičemž
+nejlepší byla u agresivních memů. Výsledky jsou uvedeny v tabulkách 7-10. U afiliativního
+humoru byly korelace memů se zbytkem škály až na 3 položky větší než 0,4. Co se týče zbylých
+dvou memů s nejnižší korelací, AFM 11 (obrázek 1) (r = 0,36) neměla na vnitřní konzistenci
+vliv a AFM 2 (obrázek 3) (r = 0,22) jí drobně zhoršovala. AFM 11 vyšel jako nejvtipnější mem
+celého dotazníku a je tak možné, že se zbytkem škály souvisel méně právě kvůli větší
+zábavnosti oproti zbytku memů. Možné také je, že mem byl hodnocen jako vtipný spíše kvůli
+referenci na populární seriál Přátelé, než kvůli samotnému znění memu, což by vysvětlovalo
+nižší souvislost se škálou. AFM 2 pak nerozumělo velké množství respondentů (N = 20), což
+mohlo být způsobeno větší specifičností memu oproti ostatním. Jednalo se o narážku na tzv.
+pikachu memy (různé memy používající překvapenou tvář pokémona pikachu), které začaly
+být velmi populární cca rok před distribucí dotazníku. Je pravděpodobné, že někteří respondenti
+nebyli s tímto trendem seznámeni, což bylo nezbytné k porozumění této položce.
+42
+Obrázek 3: AFM Obrázek 4: SPM 9
+U sebepovzbuzující škály se vyskytly tři položky s korelací menší než 0,4, žádná však
+nenarušovala konzistenci škály, u nejméně korelující položky SPM 9 (r = 0,35) zůstaly oba
+ukazatele vnitřní konzistence nezměněné. SPM 9 (obrázek 4) a další nejméně korelující mem
+SPM 6 (obrázek 5) se opět ukázaly být pro respondenty méně srozumitelné (SPM 9 N = 18,
+SPM 6 N = 11). Mem SPM 9 byl opět více specifický, vyžadující znalost fenoménu
+Schrödingerovy kočky. Na druhou stranu se ve škále vyskytly ještě méně srozumitelné memy,
+které se zbytkem korelovaly o poznání lépe, je proto pravděpodobnější vysvětlení, že se
+zmíněné memy odlišují primárně větší specifičností, kdy respondenty spíše než předpokládaný
+styl humoru pobaví zakomponování daného specifického prvku.
+Obrázek 5: SPM 6 Obrázek 6: AGM 3
+U agresivní škály byly korelace položek celkově vyšší, 7 memů korelovalo výše jak 0,5
+a další mem se této hodnotě silně blížil. Dva hůře korelující memy (r = 0,4, r = 0,44) neměly
+43
+na vnitřní konzistenci vliv, u posledního memu AGM 3 (obrázek 6) pak vyšla korelace pouze r
+= 0,12 a jeho zařazení mírně zhoršilo konzistenci škály.
+Vztahy memů se škálou u sebeshazujícího humoru byly celkově slabší, korelace dosáhla
+hodnoty 0,5 pouze u 3 memů, u 4 nedosáhla ani hodnoty 0,4. Vyřazení žádné z položek
+nezlepšovalo konzistenci škály, ale ani ji zásadně nezhoršovalo.
+Tabulka 7: Reliabilita memů afiliativní škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. AFM 1 0,48 0,79 0,80
+2. AFM 2 0,22 0,82 0,82
+3. AFM 3 0,57 0,78 0,79
+4. AFM 4 0,53 0,78 0,80
+5. AFM 5 0,39 0,79 0,81
+6. AFM 6 0,53 0,78 0,80
+7. AFM 7 0,48 0,79 0,80
+8. AFM 8 0,57 0,78 0,79
+9. AFM 9 0,53 0,78 0,80
+10. AFM 10 0,55 0,78 0,79
+11. AFM 11 0,36 0,80 0,81
+AFM = afiliativní memy
+Tabulka 8: Reliabilita memů sebepovzbuzující škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. SPM 1 0,59 0,74 0,74
+2. SPM 2 0,54 0,74 0,75
+3. SPM 3 0,46 0,76 0,76
+4. SPM 4 0,52 0,75 0,75
+5. SPM 5 0,41 0,76 0,77
+6. SPM 6 0,38 0,77 0,77
+7. SPM 7 0,38 0,77 0,77
+8. SPM 8 0,54 0,75 0,75
+9. SPM 9 0,35 0,78 0,78
+SPM = sebepovzbuzující memy
+44
+Tabulka 9: Reliabilita memů agresivní škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. AGM 1 0,49 0,83 0,84
+2. AGM 2 0,60 0,82 0,84
+3. AGM 3 0,12 0,86 0,87
+4. AGM 4 0,44 0,84 0,85
+5. AGM 5 0,58 0,82 0,84
+6. AGM 6 0,58 0,82 0,84
+7. AGM 7 0,65 0,82 0,83
+8. AGM 8 0,40 0,84 0,85
+9. AGM 9 0,69 0,81 0,83
+10. AGM 10 0,60 0,82 0,84
+11. AGM 11 0,66 0,82 0,83
+AGM = agresivní memy
+Tabulka 10: Reliabilita memů sebeshazující škály
+if item dropped
+item-rest correlation Cronbach's α McDonald's ω
+1. SS 1 0,46 0,76 0,77
+2. SS 2 0,52 0,76 0,76
+3. SS 3 0,40 0,77 0,78
+4. SS 4 0,33 0,78 0,78
+5. SS 5 0,38 0,77 0,78
+6. SS 6 0,57 0,75 0,76
+7. SS 7 0,45 0,77 0,77
+8. SS 8 0,46 0,77 0,77
+9. SS 9 0,50 0,76 0,77
+10. SS 10 0,39 0,77 0,78
+11. SS 11 0,37 0,77 0,78
+SSM = sebeshazující memy
+Korelační matice memů a celých škál
+Pro bližší prozkoumání memů jsem prověřila jejich korelace s ostatními pomyslnými škálami
+v dotazníku. Podle očekávání všechny memy positivně korelovaly se všemi škálami,
+problematická byla nicméně síla těchto korelací. Korelace memů s jejich vlastní škálou byla
+převážně jen mírně vyšší, než korelace se škálami ostatními, v lepších případech, konkrétně u
+memů z afiliativní škály, přesáhla velikost rozdílu alespoň jednu desetinu. Z toho lze vyvodit,
+45
+že použité memy mají velmi malou rozlišovací schopnost a jsou si vesměs dost podobné,
+přičemž náležení k určitému druh humoru zde hraje malou roli, pokud vůbec. Některé memy
+navíc korelovaly silněji s jinou škálou, než ve které byly zařazeny, což nasvědčuje, že se mi je
+během konstrukce dotazníku nepodařilo správně zařadit, nebo že s memy odlišných škál souvisí
+z jiného důvodu, než je druh humoru, a tento důvod je zřejmě důležitější. Lze tak očekávat, že
+jednotlivé škály memů nebudou příliš vypovídat o míře daného stylu humoru respondenta.
+Z hlediska vztahu ke vlastní škále nejhůře dopadly memy sebepovzbuzujícího humoru,
+kde 4 položky silněji korelovaly s jinou škálou a zbylé položky měly se svou škálou pouze o
+málo silnější vztah než se škálami ostatními. Naopak nejlépe dopadly agresivní memy, kdy
+celých 7 memů korelovalo se svou škálou výrazně lépe, než se škálami ostatními (rozdíly r o
+0,2 a výše). Ve škále se zároveň vyskytoval pouze 1 mem, který více souvisel s jinou škálou.
+Jednalo se přitom o mem AGM 3 (obrázek 6), který dopadl nejhůře v položkové analýze a se
+škálou téměř nekoreloval, paradoxně však koreloval se všemi ostatními škálami. Korelační
+matice nyní ukázala, že by bylo vhodnější jej zařadit do škály sebeshazujících memů, se kterou
+středně silně koreloval. Nicméně ani tam by nemusel vykazovat nejvhodnější vlastnosti
+vzhledem k tomu, že vztah k ostatním škálám nebyl o mnoho menší. Podobně tomu bylo i u
+dalších položek, které měly horší vlastnosti v položkové analýze. Menší souvislost těchto
+memů s vlastními škálami tak mohla být způsobená špatným určením humoru, možné však je,
+že naměřené korelace se škálami nemusí se styly humoru souviset a jsou způsobeny jiným
+společným faktorem. Pro potřeby dalších analýz jsem tyto položky ze škál vyřadila, i když to
+znamenalo pokles memů v sebepovzbuzující škále na pouhých 5, nicméně ponechávat ve
+škálách zjevně neadekvátní položky nemělo smysl.
+Po vyřazení problémových memů se značně snížily vzájemné korelace škál, před
+vyřazením se pohybovaly od r = 0,52 po r = 0,74, poté od r = 0,43 po r = 0,60. Nejsilněji
+souvisela škála sebeshazujících memů s afiliativními memy a sebepovzbuzujícími memy, škála
+agresivních memů celkově souvisela s ostatními méně, nejméně s afiliativní škálou. I tak jsou
+však korelace škál stále vysoké a je otázkou, do jaké míry jsou tak jednotlivé škály schopny
+rozlišovat mezi předpokládanými druhy humoru.
+Při zkoumání výsledků pro pohlaví zvlášť se ukázalo, že jako vtipnější hodnotily
+všechny škály ženy. Jako nejzábavnější byla u obou pohlaví hodnocena afiliativní škála a jako
+nejméně zábavná sebepovzbuzující škála. Rozdíl v celkovém skóru byl největší u afiliativní
+škály, více jak o 3 body. U agresivní a sebeshazující škály pak více jak o 2 body a nejmenší
+rozdíl se vyskytl u sebepovzbuzující škály přibližně o 1 bod. Rozdíly u všech škál se ukázaly
+jako signifikantní afiliativní t(245) = 4,07, p < 0,001; sebeshazující t(245) = 3,00, p < 0,01;
+46
+agresivní t(251) = 2,59, p < 0,05; sebeshazující t(246) = 3,11, p < 0.01, vše s malou až střední
+velikostí účinku (d = 0,37 – 0,59), nejmenší účinek u agresivní a největší u afiliativní škály.
+Vzhledem k možnému porušení normality u všech škál a homogenity rozptylů u afiliativní
+škály jsem výsledky ověřila i v robustním t-testu, který však vyšel obdobně. Z toho lze vyvodit,
+že ženy skutečně hodnotily všechny memy jako mírně zábavnější než muži.
+Konfirmační faktorová analýza
+Pomocí konfirmační faktorové analýzy jsem nejprve ověřovala původní předpoklad 4 faktorů
+podle druhů humoru, výsledky jsou uvedeny v tabulce 11. S výjimkou problematické položky
+AFM 11 (obrázek 1) byly všechny faktorové náboje vyšší než 0,4, ve většině případů pak vyšší
+než 0,5. Model vysvětloval data poměrně dobře, CFI a TLI dosáhly hodnoty 0,91, RMSEA 0,04
+(90% CI 0,03;0,05). Vyřazením položky AFM 11 se fit modelu nezměnil. Model by se tak mohl
+zdát uspokojivý, avšak jednotlivé faktory spolu velmi silně korelovaly, především faktory
+afiliativní, sebepovzbuzující a sebeshazující škály (r = 0,73 – 0,84, p < 0,001), vztahy
+s agresivní škálou pak byly o něco nižší, i když stále silné (r = 0,49 – 0,61, p < 0,001). Po
+inspekci eigenvalues a scree plotu se jevilo jako vhodnější předpokládat v datech 2 faktory
+(hodnota eigenvalues 1. faktoru byla 7,73, 2. faktoru pak 2,14, 3. faktor měl poté hodnotu 0,89),
+zkusila jsem tudíž ještě vytvořit model se společným faktorem afiliativní, sebepovzbuzující a
+sebeshazující škály a s faktorem agresivní škály. Výsledky jsou uvedeny v tabulce 12. Vztah
+modelu s daty se mírně zhoršil, stále byl však přijatelný (CFI = 0,88, TLI = 0,87, RMSEA =
+0,05, 90% CI 0,04;0,06). Snížily se také náboje některých společných položek. Korelace obou
+faktorů byla stále vysoká (r = 0,56, p < 0,001). Zkusila jsem proto vytvořit ještě model s jedním
+společným faktorem. Tento model však o dost hůře vysvětloval data (CFI = 0,72, TLI = 0,70,
+RMSEA = 0,07), navíc se snížily náboje většího množství položek. Z výsledků tak lze usoudit,
+že memy afiliativní, sebepovzbuzující a sebeshazující škály jsou si vesměs velmi podobné a
+mezi předpokládanými druhy humoru zřejmě příliš nerozlišují. Memy z agresivní škály jsou
+pak nějakým způsobem unikátní, i když s ostatními stále silně souvisí. Možné je, že agresivní
+typ humoru je natolik výrazný, že bylo snazší jej v memech rozpoznat, kdyžto ostatní druhy
+humoru byly v memech méně jednoznačné a vzájemně spolu splývaly.
+47
+Tabulka 11: Konfirmační faktorová analýza dotazníku memů – 4 faktory
+Factor Loadings
+Factor Indicator Estimate SE Z p
+Stand.
+Estimate
+AF memy 1. AFM 1 0,61 0,07 9,28 < 0,001 0,57
+2. AFM 3 0,64 0,06 10,38 < 0,001 0,63
+3. AFM 4 0,53 0,05 10,64 < 0,001 0,64
+4. AFM 6 0,60 0,06 9,62 < 0,001 0,59
+5. AFM 7 0,61 0,07 8,52 < 0,001 0,54
+6. AFM 8 0,56 0,05 10,96 < 0,001 0,65
+7. AFM 9 0,60 0,06 9,59 < 0,001 0,59
+8. AFM 10 0,59 0,06 10,04 < 0,001 0,61
+9. AFM 11 0,32 0,05 6,11 < 0,001 0,39
+SP memy 1. SPM 1 0,69 0,06 11,50 < 0,001 0,70
+2. SPM 4 0,62 0,07 9,29 < 0,001 0,58
+3. SPM 6 0,47 0,07 6,77 < 0,001 0,44
+4. SPM 8 0,66 0,07 9,29 < 0,001 0,60
+5. SPM 9 0,46 0,08 5,91 < 0,001 0,41
+AG memy 1. AGM 1 0,54 0,06 8,50 < 0,001 0,52
+2. AGM 2 0,71 0,06 11,24 < 0,001 0,65
+3. AGM 4 0,55 0,07 7,44 < 0,001 0,47
+4. AGM 5 0,70 0,07 10,61 < 0,001 0,63
+5. AGM 6 0,72 0,06 11,39 < 0,001 0,66
+6. AGM 7 0,80 0,06 12,71 < 0,001 0,72
+7. AGM 8 0,44 0,07 6,63 < 0,001 0,42
+8. AGM 9 0,83 0,06 13,84 < 0,001 0,76
+9. AGM 10 0,70 0,06 11,43 < 0,001 0,67
+10. AGM 11 0,79 0,06 12,23 < 0,001 0,70
+SS memy 1. SSM 1 0,53 0,06 8,41 < 0,001 0,53
+2. SSM 2 0,61 0,06 9,77 < 0,001 0,61
+3. SSM 3 0,49 0,08 6,52 < 0,001 0,43
+4. SSM 5 0,48 0,07 6,88 < 0,001 0,45
+5. SSM 6 0,67 0,06 11,04 < 0,001 0,66
+6. SSM 8 0,50 0,06 8,96 < 0,001 0,56
+7. SSM 9 0,57 0,06 8,98 < 0,001 0,58
+8. SSM 11 0,46 0,07 6,65 < 0,001 0,43
+AF = afiliativní škála; SP = sebepovzbuzující škála; AG = agresivní škála; SS =
+sebeshazující škála, AFM = afiliativní memy, SPM = sebepovzbuzující memy, AGM =
+egresivní memy, SSM = sebeshazující memy
+48
+Tabulka 12: Konfirmační faktorová analýza MQ – 2 faktory
+Factor Loadings
+Factor Indicator
+Estima
+te
+SE Z p
+Stand.
+Estimate
+1. AF, SP a SS
+memy
+1. AFM 1 0,60 0,06 9,33 <0 ,001 0,56
+2. AFM 3 0,58 0,06 9,51 <0 ,001 0,57
+3. AFM 4 0,52 0,05 10,54 <0 ,001 0,62
+4. AFM 6 0,55 0,06 8,86 <0 ,001 0,54
+5. AFM 7 0,60 0,07 8,57 <0 ,001 0,53
+6. AFM 8 0,50 0,05 9,81 <0 ,001 0,59
+7. AFM 9 0,57 0,06 9,22 <0 ,001 0,56
+8. AFM 10 0,53 0,06 8,98 <0 ,001 0,54
+9. AFM 11 0,30 0,05 5,91 <0 ,001 0,37
+10. SPM 1 0,59 0,06 10,07 <0 ,001 0,60
+11. SPM 4 0,58 0,06 8,90 <0 ,001 0,54
+12. SPM 6 0,42 0,07 6,25 <0 ,001 0,40
+13. SPM 8 0,63 0,07 9,32 <0 ,001 0,57
+14. SPM 9 0,37 0,08 4,85 <0 ,001 0,32
+15. SSM 1 0,48 0,06 7,87 <0 ,001 0,49
+16. SSM 2 0,56 0,06 9,26 <0 ,001 0,56
+17. SSM 3 0,45 0,07 6,07 <0 ,001 0,40
+18. SSM 5 0,45 0,07 6,61 <0 ,001 0,42
+19. SSM 6 0,63 0,06 10,78 <0 ,001 0,63
+20. SSM 8 0,48 0,05 9,00 <0 ,001 0,54
+21. SSM 9 0,51 0,06 8,31 <0 ,001 0,52
+22. SSM 11 0,42 0,07 6,31 <0 ,001 0,40
+2. AG memy 1. AGM 1 0,54 0,06 8,46 <0 ,001 0,52
+2. AGM 2 0,71 0,06 11,32 <0 ,001 0,66
+3. AGM 4 0,55 0,07 7,40 <0 ,001 0,46
+4. AGM 5 0,70 0,07 10,55 <0 ,001 0,63
+5. AGM 6 0,72 0,06 11,46 <0 ,001 0,67
+6. AGM 7 0,80 0,06 12,67 <0 ,001 0,72
+7. AGM 8 0,44 0,07 6,58 <0 ,001 0,42
+8. AGM 9 0,83 0,06 13,83 <0 ,001 0,76
+9. AGM 10 0,70 0,06 11,40 <0 ,001 0,66
+10. AGM11 0,80 0,06 12,29 <0 ,001 0,70
+AF = afiliativní škála; SP = sebepovzbuzující škála; AG = agresivní škála; SS = sebeshazující škála, AFM = afiliativní
+memy, SPM = sebepovzbuzující memy, AGM = egresivní memy, SSM = sebeshazující memy
+49
+Vztah HSQ a dotazníku z memů
+Posledním krokem v rámci analýz bylo prověřit hypotézu o souvislosti stylů humoru
+s vnímanou zábavností memů. Vzhledem k pravděpodobné 2-faktorové struktuře dotazníku s
+memy jsem očekávala jiný výsledek, než prve předpokládaný v hypotéze. V tabulce 13 je
+zobrazená korelační matice jednotlivých škál. Jak je vidět, mezi škálami memů a škálami HSQ
+není téměř žádný vztah, jediné signifikantní korelace byly zjištěny mezi afiliativní škálou HSQ
+a afiliativními memy (r = 0,15, p < 0,05) a sebeshazující škálou HSQ a sebeshazujícími memy
+(r = 0,21, p < 0,01), oba vztahy jsou však příliš slabé na to, aby z nich bylo možné vyvozovat
+nějaké významnější souvislosti. Vzhledem k jiné než předpokládané faktorové struktuře
+dotazníku memů je navíc tyto vztahy obtížné interpretovat. Možné je, že se afiliativní a
+sebeshazující škále memů podařilo alespoň částečně zachytit odpovídající styly humoru, ale
+zároveň z jiných důvodů příliš souvisely s memy jiných škál, než aby utvořily dostatečně
+samostatný faktor.
+Tabulka č. 14: Korelační matice HSQ a dotazníku memů
+Correlation Matrix
+1. AF 2. SP 3. AG 4. SS
+1. AF memy 0,15* 0,08 -0,02 0,09
+2. SP memy 0,12 0,06 0,08 0,10
+3. AG memy 0,06 0,12 0,12 0,06
+4. SS memy 0,13 0,02 0,04 0,21**
+AF = afiliativní škála; SP = sebepovzbuzující škála; AG =
+agresivní škála; SS = sebeshazující škála
+* p < 0,05, ** p < 0,01
+Diskuze
+Cílem této práce bylo převést dotazník Humor Styles Questionnaire do českého jazyka a
+prověřit jeho psychometrické vlastnosti. Domnívám se, že se tento úkol zdařil, česká verze
+dotazníku se ukázala mít adekvátní vlastnosti. Jednotlivé subškály dotazníku vykazovaly
+přijatelnou vnitřní konzistenci, oproti originálu ovšem měly mezi sebou navzájem silnější
+vztahy, a to i na místech, kde se v originále vztah nevyskytl (např. afiliativní a sebeshazující
+humor), je tak možné, že má verze překladu mohla trochu přiblížit významy jednotlivých škál.
+50
+Pomocí konfirmační faktorové analýzy se podařilo ověřit předpokládanou 4 faktorovou
+strukturu, která poměrně dobře odpovídala nasbíraným datům. V rámci české verze dotazníku
+se také objevily stejné rozdíly mezi pohlavími (muži skórující výše u agresivního a
+sebeshazujícího humoru), což přidává podporu k tomu, že se české verzi daří zachycovat stejné
+konstrukty jako originálu, a že se čeští studenti zřejmě příliš neliší od těch zahraničních, co se
+týče užívání 4 stylů humoru.
+Pouhý překlad a ověření základních charakteristik škály je však jen počátečním krokem,
+který by bylo potřeba následovat ověřováním validity dotazníku. Mimoto je také třeba zmínit,
+že ne všechny položky v dotazníku vykazovaly ideální vlastnosti, několik položek mělo slabší
+vztah se svými škálami a nemělo téměř vliv na jejich konzistenci, v další práci s dotazníkem by
+proto bylo nutné zevrubněji prověřit přínos těchto položek.
+Druhým cílem této práce bylo zjistit, zda se preferovaný styl humoru bude odrážet i
+v oceňování humorných podnětů, konkrétně internetových memů. Tato hypotéza ovšem nebyla
+potvrzena. Slabý vztah byl nalezen pouze u sebeshazujících a afiliativních škál, vzhledem
+k tomu, že se však memy použité v těchto škálách ukázaly ve faktorové analýze být spíše
+syceny jedním společným faktorem ještě se sebepovzbuzujícími memy, nelze tento výsledek
+považovat za příliš důvěryhodný.
+Důvodů pro nepotvrzení hypotézy může být více. Dotazník z memů jsem vytvářela sama pro
+účely této práce, jeho vlastnosti tak nebyly předtím ověřovány a následně se neukázaly být
+vhodné. Jednotlivé škály memů se sice nejprve zdály mít dobrou vnitřní konzistenci, to bylo
+však evidentně způsobeno vzájemnou souvislostí memů bez ohledu na škálu. Některé memy
+zhoršovaly vnitřní konzistenci původních škál a spíše souvisely s memy použitými v jiných
+škálách, což svědčí o tom, že se mi je nepodařilo vhodně zařadit do předpokládaných druhů
+humoru. V rámci následné faktorové analýzy se nicméně ukázala jako vhodnější 2-faktorová
+struktura oproti předpokládané 4-faktorové, memy použité ve škálách afiliativního,
+sebepovzbuzujícího a sebeshazujícího humoru byly syceny jedním faktorem a memy
+agresivního humoru druhým. Agresivní memy se tak zřejmě nějakým způsobem vymykaly. Je
+možné, že byl agresivní styl jako jediný v memech dostatečně rozpoznatelný a tudíž se podařilo
+vytvořit z nich funkční škálu. V rámci ostatních škál byl zřejmě styl humoru méně jednoznačný
+a zaměnitelný. Vzhledem k tomu, že jsem se snažila předejít příliš specifickým položkám a
+zachovat podobný ráz memů napříč škálami, abych předešla intervenování jiných proměnných,
+je možné, že pak škály působily monotónně a nedokázaly rozlišovat. Mimoto je však také
+možné, že používaný styl humoru nemusí souviset s oceňováním humorných podnětů, několika
+výzkumům, které se vztahem obojího zabývaly, se nepodařilo nalézt souvislost (např. Babad,
+51
+1974, Kohler a Ruch, 1996). Místo pouhého pasivního hodnocení tak mohlo být vhodnější
+pokusit se o simulaci aktivního využití memu, např. se respondentů zeptat, s jakou
+pravděpodobností by daný mem použili k popisu svého studia kamarádovi. Nejasný vztah mezi
+různými aspekty smyslu pro humor odrážející se i v tomto výsledku je jen dokladem
+komplexnosti a nedostatečného prozkoumání tohoto fenoménu.
+Samotný překlad HSQ se nicméně zdá mít vhodné vlastnosti pro možné využití
+v českém kontextu, ačkoliv by bylo třeba dále ověřit jeho validitu. V zahraničních výzkumech
+se HSQ ukázal být užitečný při diferencování druhů humoru ve vztahu k psychickému zdraví a
+duševní pohodě, a to výrazně lépe oproti předchozím využívaným dotazníkům. Vědomí
+možného vlivu stylů humoru na psychické zdraví má potenciální využití v terapii, kde mohou
+být maladaptivní typy humoru adresovány v rámci podpory duševní pohody klienta, a
+povzbuzovány potenciálně přínosné styly humoru, obzvláště sebepovzbuzující humor, jako
+způsob zvládání stresu a nepohody. Případná budoucí oficiální adaptace dotazníku HSQ by tak
+měla možný prostor pro využití jak ve výzkumu, tak v psychologické praxi.
+Výsledky této práce je nicméně třeba vnímat v kontextu jejích limitů. Jako zásadní limit
+vnímám sběr dat pomocí internetového dotazníku, což mohlo potenciálně zkreslit výsledky.
+Nejen, že se takto do výzkumu dostali lidé, kteří byli ochotní vyplnit online dotazník, ale
+vzhledem k tomu, že byl dotazník otevřeně prezentován jako výzkum humoru, který navíc
+obsahuje memy, mohlo dojít k dalšímu zkreslení vzorku na osoby, které spíše vyhledávají
+humor a humorné podněty. Dalším limitem této práce pak je fakt, že ač jsem se snažila
+rozhodnutí ohledně překladu i zařazení jednotlivých memů konzultovat s jinými lidmi, finální
+rozhodnutí vždy spočívalo na mně jako na autorovi práce. Tím pádem mohlo dojít ke zkreslení
+vlivem mého úsudku, což se i zřejmě stalo v rámci dotazníku s memy, kde se některé memy
+ukázaly spíše spadat do jiné škály.
+52
+Zdroje:
+Babad, E. Y. (1974). A multi‐method approach to the assessment of humor: A critical look at
+humor tests. Journal of Personality, 42(4), 618-631.
+Berlyne, D. E. (1972). Humor and Its Kin. In J. H. Goldstein (Eds.), The Psychology of
+Humor: Theoretical Perspectives and Empirical Issues (s. 43-60). New York: Academic
+Press.
+Bryant, J. (1977). Degree of Hostility in Squelches as a Factor in Humour. In A. J. Chapman a
+H. C. Foot (Eds.), It’s a Funny Thing, Humour. Proceedings of The International Conference
+on Humour and Laughter 1976 (s. 321-328) Oxford: Pergamon Press.
+Byrne, D. (1956). The Relationship between Humor and The Expression of Hostility. The
+Journal of Abnormal and Social Psychology, 53(1), 84.
+Cann, A., & Calhoun, L. G. (2001). Perceived Personality Associations with Differences in
+Sense of Humor: Stereotypes of Hypothetical Others with High or Low Senses of
+Humor. Humor–International Journal of Humor Research, 14(2), 117-130.
+Cantor, J. R., Bryant, J., & Zillmann, D. (1974). Enhancement of Humor Appreciation by
+Transferred Excitation. Journal of Personality and Social Psychology, 30(6), 812-821.
+Chen, G. H., & Martin, R. A. (2007). A Comparison of Humor Styles, Coping Humor, and
+Mental Health between Chinese and Canadian University Students. Humor, 20(3), 215-234.
+Darwin, C. (1872). The expression of the emotions in man and animals. London: John
+Murray.
+Deaner, S. L., & McConatha, J. T. (1993). The Relation of Humor to Depression and
+Personality. Psychological Reports, 72(3), 755-763.
+Deckers, L., & Ruch, W. (1992). Sensation seeking and the situational humour response
+questionnaire (SHRQ): its relationship in American and German samples. Personality and
+Individual Differences, 13(9), 1051–1054.
+Epstein, S., & Smith, R. (1956). Repression and Insight as Related to Reaction to Cartoons. In
+J. Levine (Eds.), Motivation in Humor. New York: Routledge.
+Eysenck, H. J. (1942). The Appreciation of Humour: An Experimental and Theoretical Study.
+British Journal of Psychology, 32(4), 295-309.
+Freud, S. (1991). Totem a tabu: vtip a jeho vztah k nevědomí. Praha: Práh.
+Gervais, M., & Wilson, D. S. (2005). The Evolution and Functions of Laughter and Humor:
+A Synthetic Approach. The Quarterly review of biology, 80(4), 395-430.
+Godkewitsch, M. (1976). Thematic and collative properties of written jokes and their
+contribution to funniness. Canadian Journal of Behavioural Science/Revue canadienne des
+sciences du comportement, 8(1), 88.
+53
+Goldstein, J. H., Suls, J. M., & Anthony, S. (1972). Enjoyment of Specific Types of Humor
+Content: Motivation or salience. In J. H. Goldstein (Eds.), The Psychology of Humor:
+Theoretical Perspectives and Empirical Issues (s.159-171). New York: Academic Press.
+Götestam, K. G., Svebak, S., & Jensen, E.N. (2008). The role of personality, mood, subjective
+health, and stress in depressive symptoms among high school students. The European Journal
+of Psychiatry, 22(3), 121-129.
+Hehl, F. J., & Ruch, W. (1985). The Location of Sense of Humor within Comprehensive
+Personality Spaces: An Exploratory Study. Personality and Individual Differences, 6(6), 703-
+715.
+Kambouropoulou, P. (1926). Individual Differences in the Sense of Humor. The American
+Journal of Psychology, 37(2), 268-278.
+Keith-Spiegel, P. (1972). Early Conceptions of Humor: Varieties and Issues. In J. H.
+Goldstein (Eds.). The Psychology of Humor: Theoretical Perspectives and Empirical Issues
+(s. 4-39). New York: Academic Press.
+Koestler, A. (1964). The act of creation. London: Hutchinson.
+Kohler, G., & Ruch, W. (1996). Sources of variance in current sense of humor inventories:
+How much substance, how much method variance? HUMOR: International Journal of Humor
+Research, 9(3-4), 363- 397.
+Kruger, A. (1996). The Nature of Humor in Human Nature: Cross-Cultural
+Commonalities. Counselling Psychology Quarterly, 9(3), 235-241.
+Kuiper, N. A., Martin, R. A., & Dance, K. A. (1992). Sense of humour and enhanced quality
+of life. Personality and Individual Differences, 13(12), 1273–1283.
+Kuiper, N. A., & Martin, R. A. (1993). Humor and self-concept. Humor-International Journal
+of Humor Research, 6(3), 251-270.
+LaFave, L. (1972). Humor Judgments as a Function of Reference Groups and Identification
+Classes. In J. H. Goldstein (Eds.), The Psychology of Humor: Theoretical Perspectives and
+Empirical Issues (s. 195-210). New York: Academic Press
+La Fave, L., Haddad, J., & Maesen, W. A. (1976). Superiority, Enhanced Self-Esteem, and
+Perceived Incongruity Humour Theory. In A. J. Chapman a H. C. Foot (Eds.), Humor and
+Laughter: Theory, Research, and Application (s. 63-91). New York: Routledge.
+Langevin, R., & Day, H. I. (1972). Physiological Correlates of Humor. In J. H. Goldstein
+(Eds.), The Psychology of Humor: Theoretical Perspectives and Empirical Issues (s. 129-
+142). New York: Academic Press
+Lau, C., Chiesi, F., Hofmann, J., Ruch, W., & Saklofske, D. H. (2019). The Italian Version of
+the State-Trait Cheerfulness Inventory Trait Form: Psychometric Validation and Evaluation of
+Measurement Invariance. Journal of Psychoeducational Assessment, 1-14.
+Lau, C., Chiesi, F., & Saklofske, D. H. (2019). The combinative role of traits cheerfulness and
+seriousness relating to resiliency and well-being: A moderated mediation model. Personality
+and Individual Differences, 151.
+54
+Lefcourt, H. M., & Martin, R. A. (1986). Humor and life stress: Antidote to adversity. New
+York: Springer-Verlag.
+Levi, L. (1965). The Urinary Output of Adrenalin and Noradrenalin during Pleasant and
+Unpleasant Emotional States: A Preliminary Report. Psychosomatic Medicine, 27(1), 80-85.
+Martin, R. A. (1998). Approaches to the Sense of Humor: A Historical Review. In W. Ruch
+(Ed.). The Sense of Humor: Exploration of Personality Characteristics, 3 (s. 15-62). Berlin:
+Mouton de Gruyter.
+Martin, R. A. (2001). Humor, laughter, and physical health: methodological issues and
+research findings. Psychological bulletin, 127(4), 504.
+Martin, R. A. (2007). The Psychology of Humor: An Integrative Approach. London: Elsevier
+Academic Press.
+Martin, R. A. (2008). Humor and health. In V. Raskin (Eds.), The Primer of Humor Research
+(s. 479-522). Berlin: Mouton de Gruyter.
+Martin, R. A., & Lefcourt, H. M. (1983). Sense of Humor as a Moderator of the Relation
+between Stressors and Moods. Journal of personality and social psychology, 45(6), 1313-
+1324.
+Martin, R. A., & Lefcourt, H. M. (1984). Situational Humor Response Questionnaire:
+Quantitative measure of sense of humor. Journal of Personality and Social Psychology, 47(1),
+145-155.
+Martin, R. A., & Kuiper, N. A. (1999). Daily Occurrence of Laughter: Relationships with
+Age, Gender, and Type A Personality. Humor, 12(4), 355-384.
+Martin, R. A., Puhlik-Doris, P., Larsen, G., Gray, J., & Weir, K. (2003). Individual
+differences in uses of humor and their relation to psychological well-being: Development of
+the Humor Styles Questionnaire. Journal of research in personality, 37(1), 48-75.
+McCauley, C., Woods, K., Coolidge, C., & Kulick, W. (1983). More Aggressive Cartoons are
+Funnier. Journal of Personality and Social Psychology, 44(4), 817.
+Morreall, J. (2008a). Applications of humor: Health, the workplace, and education. In V.
+Raskin (Eds.), The Primer of Humor Research (s. 449-478). Berlin: Mouton de Gruyter.
+Morreall, J. (2008b). Philosophy and Religion. In V. Raskin (Eds.), The Primer of Humour
+Research (s. 211-242). Berlin: Mouton de Gruyter.
+Morreall, J. (2009). Comic Relief: A Comprehensive Philosophy of Humor. Chichester:
+Wiley-Blackwell.
+Morreall, J. (2012). Philosophy of Humor. The Stanford Encyclopedia of Philosophy.
+Metaphysics Research Lab, Stanford University.
+Retrieved from https://plato.stanford.edu/archives/win2016/entries/humor/
+Mosak, H. H. (2014). Ha, Ha and Aha: The Role of Humour in Psychotherapy. Chicago:
+Accelerated Development.
+55
+Nerhardt, G. (1970). Humor and inclination to laugh: Emotional reactions to stimuli of
+different divergence from a range of expectancy. Scandinavian Journal of Psychology, 11(1),
+185-195.
+Nerhardt, G. (1977). Operationalization of Incongruity in Humour Research: A Critique and
+Suggestions. In A. J. Chapman a H. C. Foot (Eds.), It’s a Funny Thing, Humour. Proceedings
+of The International Conference on Humour and Laughter 1976 (s.47-53). Oxford: Pergamon
+Press.
+Peterson, C., & Seligman, M. E. (2004). Character Strengths and Virtues: A Handbook and
+Classification. Oxford University Press.
+Pollio, H. R., & Mers, R. W. (1974). Predictability and the Appreciation of Comedy. Bulletin
+of the Psychonomic Society, 4(4), 229-232.
+Provine, R. R., & Yong, Y. L. (1991). Laughter: A Stereotyped Human
+Vocalization. Ethology, 89(2), 115-124.
+Raskin, V. (2012). Semantic mechanisms of humor. Dordrecht: D. Reidel Publishing
+Company.
+Roeckelein, J. E. (2002). The Psychology of Humor: A Reference Guide
+and Annotated Bibliography. Westport: Greenwood Publishing Group.
+Rosenwald, G. C. (1964). The relation of drive discharge to the enjoyment of humor1.
+Journal of Personality, 32(4), 682–698.
+Ruch, W. (1992). Assessment of Appreciation of Humor: Studies with The 3 WD Humor
+Test. In C. D. Spielberger & J. N. Butcher (Eds.), Advances in Personality Assessment, 9 (s.
+27-75). Hillsdale: Lawrence Erlbaum Associates.
+Ruch, W. (1998). Sense of Humor: A New Look at an Old Concept. In W. Ruch (Ed.). The
+Sense of Humor: Exploration of Personality Characteristics, 3 (s. 3-14). Berlin: Mouton de
+Gruyter.
+Ruch, W. (1998b). Humor Measurement Tools. In W. Ruch (Ed.). The Sense of Humor:
+Exploration of Personality Characteristics, 3 (s. 405-412). Berlin: Mouton de Gruyter.
+Ruch, W. (2008). Psychology of Humor. In V. Raskin, The Primer of Humor Research, (s.
+17-101). Berlin: Mouton de Gruyter.
+Ruch, W., & Deckers, L. (1993). Do extraverts ‚like to laugh’?: An analysis of the Situational
+Humor Response Questionnaire (SHRQ). European Journal of Personality, 7(4), 211–220.
+Ruch, W., & Hehl, F. J. (1988). Attitudes to Sex, Sexual Behaviour and Enjoyment of
+Humour. Personality and Individual Differences, 9(6), 983-994.
+Ruch, W., Köhler, G., & Van Thriel, C. (1996). Assessing the „humorous temperament “:
+Construction of the facet and standard trait forms of the State-Trait-Cheerfulness-Inventory—
+STCI. Humor-International Journal of Humor Research, 9(3-4), 303-340.
+Ruch, W., Köhler, G., & Van Thriel, C. (1997). To be in good or bad humour: Construction of
+the state form of the State-Trait-Cheerfulness-Inventory—STCI. Personality and Individual
+Differences, 22(4), 477-491.
+56
+Schachter, S., & Wheeler, L. (1962). Epinephrine, Chlorpromazine, and Amusement. The
+Journal of Abnormal and Social Psychology, 65(2), 121-128.
+Shultz, T. R. (1972). The Role of Incongruity and Resolution in Children's Appreciation of
+Cartoon Humor. Journal of Experimental Child Psychology, 13(3), 456-477.
+Schultz, T. R. (1976). A Cognitive-Developmental Analysis of Humor. In A. J. Chapman a H.
+C. Foot (Eds.), Humor and Laughter: Theory, Research, and Application (s. 11-36). New
+York: Routledge.
+Schultz, T. R., & Horibe, F. (1974). Development of the appreciation of verbal
+jokes. Developmental Psychology, 10(1), 13-20.
+Srofe, L. A., & Waters, E. (1976). The Ontogenesis of Smiling and Laughter: A Perspective
+on the Organization of Development in Infancy. Psychological review, 83(3), 173-189.
+Stieger, S., & Formann, A. K. (2014). Are Aggressive Cartoons Really Funnier? A
+Replication. Sage Open, 4(4).
+Suls, J. M. (1983). Cognitive Processes in Humor Appreciation. In P. E. McGhee a J. H.
+Goldstein, Handbook of Humor Research (s. 39-57). New York: Springer-Verlag.
+Suls, J. M. (1972). A Two-Stage Model for the Appreciation of Jokes and Cartoons: An
+Information-Processing Analysis. In J. H. Goldstein (Eds.). The Psychology of Humor:
+Theoretical Perspectives and Empirical Issues (s. 81-100). New York: Academic Press.
+Svebak, S. (1974). Revised Questionnaire on the Sense of Humor. Scandinavian Journal of
+Psychology, 15(1), 328-331.
+Svebak, S. (1974b). A Theory of Sense of Humor. Scandinavian Journal of
+Psychology, 15(1), 99-107.
+Svebak, S. (1996). The development of the Sense of Humor Questionnaire: From SHQ to
+SHQ-6. Humor: The International Journal of Humor Research, 9(3-4), 341-361.
+Van Hooff, J. A., & Preuschoft, S. (2003). Laughter and Smiling: The Intertwining of Nature
+and Culture. In F. B. M. de Waal & P. L. Tyack (Eds), Animal Social Complexity:
+Intelligence, Culture, and Individualized Societies (s. 260–287). Cambridge MA: Harvard
+University Press
+Wickberg, D. (1998). The Senses of Humor: Self and Laughter in Modern America. Cornell
+University Press.
+Wicker, F. W., Thorelli, I. M., Barron III, W. L., & Ponder, M. R. (1981). Relationships
+among Affective and Cognitive Factors in Humor. Journal of Research in Personality, 15(3),
+359-370.
+Wolff, H. A., Smith, C. E., & Murray, H. A. (1934). The psychology of humor. The Journal
+of Abnormal and Social Psychology, 28(4), 341.
+Yue, X., Jiang, F., Lu, S., & Hiranandani, N. (2016). To Be or Not To Be Humorous? Cross
+Cultural Perspectives on Humor. Frontiers in Psychology, 7, 1495.
+57
+Zillmann, D. (1983). Disparagement Humor. In P. E. McGhee a J. H. Goldstein, Handbook of
+Humor Research (s. 85-107). New York: Springer-Verlag.
+Zillmann, D., & Cantor, J. R. (1976). A Disposition Theory of Humor and Mirth. In A. J.
+Chapman a H. C. Foot (Eds.), Humor and Laughter: Theory, Research, and Application (s.
+93-115). New York: Routledge.
+Zillmann, D., Bryant, J., & Cantor, J. R. (1974). Brutality of Assault in Political Cartoons
+Affecting Humor Appreciation. Journal of Research in Personality, 7(4), 334-345.
+Přílohy
+Příloha 1: Znění překladu a originálu HSQ
+Afiliativní humor:
+AF1* Obvykle se s druhými lidmi příliš nesměji a nevtipkuj.
+I usually don’t laugh or joke around much with other people.
+AF2 Nemusím se příliš snažit, abych druhé rozesmál/a, jsem zřejmě od přírody vtipný
+člověk.
+I don’t have to work very hard at making other people laugh—I seem to be a
+naturally humorous person.
+AF3* Zřídkakdy druhé lidi rozesměji vykládáním vtipných historek o sobě.
+I rarely make other people laugh by telling funny stories about myself.
+AF4* Hodně se směji a vtipkuji se svými nejbližšími přáteli.
+I laugh and joke a lot with my closest friends.
+AF5* Obvykle nerad/a vyprávím vtipy a bavím druhé lidi.
+I usually don’t like to tell jokes or amuse people.
+AF6* Baví mě rozesmávat druhé lidi.
+I enjoy making people laugh.
+AF7* Se svými přáteli příliš často nevtipkuji.
+I don’t often joke around with my friends.
+AF8* Obvykle mě nenapadají vtipné věci, co bych mohl/a říct, když jsem s druhými
+lidmi.
+I usually can’t think of witty things to say when I’m with other people.
+Sebepovzbuzující humor:
+SP1 Když se cítím sklesle, obvykle se dokáži rozveselit humorem.
+If I am feeling depressed, I can usually cheer myself up with humor.
+SP2 I když jsem sám/sama, často mě pobaví absurdity života.
+Even when I’m by myself, I’m often amused by the absurdities of life.
+SP3 Když jsem rozrušený/á nebo nešťastný/á, obvykle se snažím najít na své situaci
+něco vtipného, abych se cítil/a lépe.
+If I am feeling upset or unhappy I usually try to think of something funny about
+the situation to make myself feel better.
+SP4 Můj humorný náhled na život mi brání v tom, aby mě věci přespříliš rozrušily
+nebo zarmoutily.
+My humorous outlook on life keeps me from getting overly upset or depressed
+about things.
+SP5 Když jsem sám/sama a cítím se nešťastný/á, snažím se myslet na něco vtipného,
+abych se rozveselil/a.
+If I’m by myself and I’m feeling unhappy, I make an effort to think of something
+funny to cheer myself up.
+SP6* Když jsem smutný/á nebo rozrušený/á, obvykle ztrácím svůj smysl pro humor.
+If I am feeling sad or upset, I usually lose my sense of humor.
+SP7 Mám takovou zkušenost, že přemýšlení o nějakém zábavném aspektu situace je
+často velmi efektivní způsob, jak zvládat problémy.
+It is my experience that thinking about some amusing aspect of a situation is
+often a very effective way of coping with problems.
+SP8 Nepotřebuji být s ostatními lidmi, abych se bavil/a, obvykle si dokáži najít něco
+k smíchu, i když jsem sám/sama.
+I don’t need to be with other people to feel amused – I can usually find things to
+laugh about even when I’m by myself.
+Agresivní humor:
+AG1 Když někdo udělá chybu, často ho kvůli tomu popichuji.
+If someone makes a mistake, I will often tease them about it.
+AG2* Druzí lidé nejsou nikdy dotčeni nebo zraněni mým smyslem pro humor.
+People are never offended or hurt by my sense of humor.
+AG3 Když vyprávím vtipy nebo žertuji, obvykle se příliš nestarám o to, jak to druzí
+lidé vezmou.
+When telling jokes or saying funny things, I am usually not very concerned
+about how other people are taking it.
+AG4* Nemám rád/a, když lidé používají humor k tomu, aby někoho kritizovali nebo
+shodili.
+I do not like it when people use humor as a way of criticizing or putting
+someone down.
+AG5 Někdy mě napadne něco tak vtipného, že se nedokážu zastavit a řeknu to, i když
+to není vhodné pro danou situaci.
+Sometimes I think of something that is so funny that I can’t stop myself from
+saying it, even if it is not appropriate for the situation.
+AG6* Nikdy se druhým nesměji, i když to dělají všichni mí přátelé.
+I never participate in laughing at others even if all my friends are doing it.
+AG7 Když někoho nemám rád/a, často používám humor nebo popichování, abych ho
+shodil/a.
+If I don’t like someone, I often use humor or teasing to put them down.
+AG* I když mi něco přijde velmi vtipné, nebudu se tomu smát a dělat si z toho
+legraci, pokud by se to někoho dotklo.
+Even if something is really funny to me, I will not laugh or joke about it if
+someone will be offended.
+Sebeshazující humor:
+SS1 Nechávám lidi, aby se mi smáli a dělali si legraci na můj účet víc než bych
+měl/a.
+I let people laugh at me or make fun at my expense more than I should.
+SS2 Často se nechám unést shazováním sebe sama, pokud to rozesmává mou rodinu
+či přátele.
+I will often get carried away in putting myself down if it makes my family or
+friends laugh.
+SS3 Často se snažím, aby mě druzí měli raději nebo mě více akceptovali tím, že
+vtipkuji o svých slabostech, přešlapech a chybách.
+I often try to make people like or accept me more by saying something funny
+about my own weaknesses, blunders, or faults.
+SS4* Neříkám často vtipné věci, kterými bych se shazoval/a.
+I don’t often say funny things to put myself down.
+SS5 Často to přeženu se shazováním sebe sama, když vtipkuji a snažím se být
+zábavný/á.
+I often go overboard in putting myself down when I am making jokes or trying
+to be funny.
+SS6 Když jsem s přáteli nebo s rodinou, často se zdám být tím, z koho si ostatní
+dělají legraci a na jehož účet vtipkují.
+When I am with friends or family, I often seem to be the one that other people
+make fun of or joke about.
+SS7 Když mám problémy nebo jsem nešťastný/á, často to zakrývám vtipkováním,
+takže ani mí nejbližší přátelé nevědí, jak se skutečně cítím.
+If I am having problems or feeling unhappy, I often cover it up by joking around,
+so that even my closest friends don’t know how I really feel.
+SS8 Nechat druhé, aby se mi smáli, je můj způsob, jak udržet přátele a rodinu v
+dobré náladě.
+etting others laugh at me is my way of keeping my friends and family in good
+spirits.
+Příloha 2: Použité memy
+Afiliativní škála:
+Sebepovzbuzující škála:
+SPM 1 SPM 2
+SPM3 SPM 4
+SPM 5 SPM 6
+SPM 7 SPM 8
+SPM 9
+Agresivní škála:
+AGM1 AGM 2
+AGM 3 AGM 4
+AGM 5 AGM 6
+AGM 7 AGM 8
+AGM 9 AGM 10
+AGM11
+Sebeshazující škála:
+SSM 1 SSM 2
+SSM 3 SSM 4
+SSM 5 SSM 6
+SSM 7 SSM 8
+SSM 9 SSM 10
+SSM 11

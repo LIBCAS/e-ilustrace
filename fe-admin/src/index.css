@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  html,
+  body {
+    background-color: #f8f7f7;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .container {
+    @apply mx-auto h-full px-2 lg:px-6 xl:!max-w-[1240px] 2xl:!max-w-[1240px];
+  }
+
+  h1 {
+    @apply font-bold text-[1.5rem] 2xs:text-[1.75rem] sm:text-[2rem];
+  }
+  h2 {
+    @apply font-bold max-2xs:text-[1.4rem] 2xs:text-[1.6rem] sm:text-[1.7rem];
+  }
+
+  a,
+  button {
+    @apply transition-all duration-100;
+  }
+
+  /*a:is(:hover) {*/
+  /*  @apply text-red;*/
+  /*}*/
+
+  header .active {
+    @apply bg-superlightgray rounded-full;
+  }
+
+  header a:hover {
+    @apply bg-superlightgray rounded-full;
+  }
+}
+
+@layer components {
+
+}

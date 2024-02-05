@@ -1,0 +1,22 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+# custom local docker congifuration
+docker-compose.override.yml
+data/KNAV-full/data/
+data/KNAV-full/image/
+data/KNAV-full/tmp/
+
+eil-api/src/main/resources/application.yml
+
+git-eil.sh

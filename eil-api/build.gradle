@@ -1,0 +1,174 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "com.github.kad-leeuwg1.xjc" version "1.5"
+    id 'java'
+    id 'cz.habarta.typescript-generator' version '2.34.976'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/snapshot/'
+    }
+}
+
+xjc {
+    xsdFiles.setFrom(project.files())   //prevent any xsd files from being autopicked up by default xjc task
+    options.add("-nv")
+    options.add("-extension")
+    options.add("-quiet")
+    outputJavaDir.set(project.file("$buildDir/generated/"))
+    xsdDir.set(project.file("$projectDir/src/main/resources/schema"))
+    xsdFiles.setFrom(project.files(
+            "src/main/resources/schema/MARC21slim.xsd"
+    ))
+}
+
+build.dependsOn(xjc)
+
+jar {
+    // disabled generating *-plain.jar version during build
+    // https://stackoverflow.com/questions/67663728/spring-boot-2-5-0-generates-plain-jar-file-can-i-remove-it
+    enabled = false
+}
+
+bootJar {
+    archiveFileName.set("eil-api.jar")
+    layered {
+        enabled = true
+    }
+    manifest {
+        attributes 'Implementation-Title': 'EIL',
+                'Implementation-Version': archiveVersion
+    }
+}
+
+dependencies {
+    implementation 'cz.inqool.eas:common:0.0.1'
+
+    annotationProcessor 'cz.inqool:entity-views-processor:0.7.0'
+    testAnnotationProcessor 'cz.inqool:entity-views-processor:0.7.0'
+
+    compileOnly "org.projectlombok:lombok"
+    testCompileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    testAnnotationProcessor "org.projectlombok:lombok"
+
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    testAnnotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    annotationProcessor "com.querydsl:querydsl-apt::jpa"
+    testAnnotationProcessor "com.querydsl:querydsl-apt::jpa"
+
+    implementation 'org.liquibase:liquibase-core'
+
+    implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.6.9'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    implementation 'org.springframework.retry:spring-retry'
+
+    implementation 'org.passay:passay:1.6.1'
+
+    implementation 'com.opencsv:opencsv:5.5.2'
+
+    implementation 'org.graalvm.js:js:22.0.0'
+    implementation 'org.graalvm.js:js-scriptengine:22.0.0'
+    implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.23.0'
+
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-jsonSchema'
+
+    implementation 'no.api.freemarker:freemarker-java8:2.0.0' // Freemarker Java 8 date/time API
+
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.44.1.0'
+
+    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
+    xjc 'org.glassfish.jaxb:jaxb-runtime:2.3.3'
+    xjc 'org.glassfish.jaxb:jaxb-xjc:2.3.3'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.testcontainers:testcontainers:1.16.3'
+    testImplementation 'org.testcontainers:junit-jupiter:1.16.3'
+    testImplementation 'org.testcontainers:postgresql:1.16.3'
+    testImplementation 'org.testcontainers:elasticsearch:1.16.3'
+
+    testImplementation 'org.liquibase:liquibase-core'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'org.postgresql:postgresql:42.2.23'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+test.enabled = project.hasProperty('testEnabled') ? project.property('testEnabled') == 'true' : false
+
+generateTypeScript {
+    jsonLibrary = 'jackson2'
+    customTypeNaming = [
+            'cz.inqool.eas.common.intl.Language:eas.Language'
+    ]
+    classes = [
+            'cz.inqool.eas.common.intl.Language'
+    ]
+    classPatterns = [
+            'cz.inqool.eas.eil.**'
+    ]
+    excludeClassPatterns = [
+            'cz.inqool.eas.eil.**$Fields',
+            'cz.inqool.eas.eil.**Q**',
+            'cz.inqool.eas.eil.**Api',
+            'cz.inqool.eas.eil.**Service',
+            'cz.inqool.eas.eil.**Object',
+            'cz.inqool.eas.eil.**Repository',
+            'cz.inqool.eas.eil.**Manager',
+            'cz.inqool.eas.eil.**Store',
+            'cz.inqool.eas.eil.**Index**',
+            'cz.inqool.eas.eil.config.**',
+            'cz.inqool.eas.eil.**Configuration',
+            'cz.inqool.eas.eil.EilApplication',
+            'cz.inqool.eas.common.security.form.**',
+            'cz.inqool.eas.common.alog.event.**',
+            'org.springframework.security.**'
+    ]
+    outputFile = 'build/endpoints.d.ts'
+    outputKind = 'module'
+    namespace = 'Backend'
+}
+
+task copyTypescriptTypes(type: Copy) {
+    from file('build/endpoints.d.ts')
+    into file('..')
+}
+
+task buildAndCopy() {
+    dependsOn generateTypeScript
+    dependsOn copyTypescriptTypes
+    tasks.findByName('copyTypescriptTypes').mustRunAfter 'generateTypeScript'
+}

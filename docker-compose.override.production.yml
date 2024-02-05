@@ -1,0 +1,231 @@
+version: '3.7'
+services:
+  database:
+    image: postgres:11-alpine
+    restart: always
+    networks:
+      - backend
+    ports:
+      - "7000:5432"
+    deploy:
+      resources:
+        limits:
+          memory: 300m
+    environment:
+      POSTGRES_PASSWORD: changeit
+      POSTGRES_USER: eas
+      POSTGRES_DB: eas
+      PGDATA: /var/lib/postgresql/data/db-files/
+    tty: true
+    labels:
+      app.gitlab.com/app: "${CI_PROJECT_PATH_SLUG}"
+      app.gitlab.com/env: "${CI_ENVIRONMENT_SLUG}"
+    volumes:
+      - database_volume:/var/lib/postgresql/data/
+  databasefe:
+    image: dpage/pgadmin4
+    restart: always
+    user: root
+    networks:
+      - backend
+    ports:
+      - "9082:80"
+    deploy:
+      resources:
+        limits:
+          memory: 150m
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@inqool.cz
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+      SERVER_CONFIG: |
+        {
+          "Servers": {
+            "1": {
+              "Name": "Docker",
+              "Group": "Servers",
+              "Port": 5432,
+              "Username": "eas",
+              "Host": "database",
+              "SSLMode": "prefer",
+              "MaintenanceDB": "eas",
+              "PassFile": "/pgpassfile"
+            }
+          }
+        }
+      SERVER_PASSWORD_FILE: |
+        database:5432:eas:eas:changeit
+    labels:
+      kompose.service.expose: "${CI_DATABASE_HOSTNAME}"
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
+      nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+      nginx.ingress.kubernetes.io/websocket-services: databasefe
+      nginx.org/websocket-services: databasefe
+      app.gitlab.com/app: "${CI_PROJECT_PATH_SLUG}"
+      app.gitlab.com/env: "${CI_ENVIRONMENT_SLUG}"
+    entrypoint: /bin/sh -c "echo $$SERVER_CONFIG > /pgadmin4/servers.json; echo $$SERVER_PASSWORD_FILE > /pgpassfile; chmod 600 /pgpassfile; /entrypoint.sh"
+  index:
+    build: ./index
+    image: eu.gcr.io/inqool-1301/elasticsearch:${INDEX_TAG}
+    restart: always
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          memory: 1000m
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - index_volume:/usr/share/elasticsearch/data
+  indexfe:
+    image: blacktop/kibana:7.6.2
+    restart: always
+    networks:
+      - backend
+    environment:
+      - server.port=8080
+      - server.basePath=/index
+      - server.rewriteBasePath=true
+      - elasticsearch.hosts=http://index:9200
+      - logging.json=false
+    ports:
+      - "9083:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 200m
+  swagger:
+    image: pesio/swagger-ui-proxy
+    restart: always
+    networks:
+      - backend
+    environment:
+      BASE_URL: "/swagger"
+      URLS: "[{ name: \"EIL\", url: \"/api/eil/api-docs\"}]"
+      PROXY_URL: "/api/" # has to be a subdirectory
+      PROXY_TARGET: "http://eilbe" # something in the form <host>/<PROXY_URL>
+    ports:
+      - "9090:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 10m
+  eilbe:
+    image: eu.gcr.io/inqool-1301/eil-api:latest
+    build:
+      context: .
+      dockerfile: eil-api/docker/prod.Dockerfile
+    restart: always
+    networks:
+      - backend
+    tty: true
+    ports:
+      - "6008:5008"
+      - "9081:80"
+    expose:
+      - 80
+    deploy:
+      resources:
+        limits:
+          memory: 800m
+    environment:
+      SERVER_PORT: "80"
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008 -Xverify:none"
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: "info"
+      LOGGING_LEVEL_CZ_INQOOL: "debug"
+      ESF_FILE_DIRECTORY: "/files"
+      TZ: "Europe/Prague"
+    volumes:
+      - fs_volume:/app/data
+      - import_volume:/app/import
+      - eil_data:/app/images
+  redis:
+    image: redis:6.0-alpine
+    command: [ "redis-server", "--protected-mode", "no", "--bind", "0.0.0.0" ]
+    restart: always
+    networks:
+      - backend
+    expose:
+      - "6379"
+    deploy:
+      resources:
+        limits:
+          memory: 10m
+    labels:
+      app.gitlab.com/app: "${CI_PROJECT_PATH_SLUG}"
+      app.gitlab.com/env: "${CI_ENVIRONMENT_SLUG}"
+  vise:
+    image: eu.gcr.io/inqool-1301/eil-vise:latest
+    networks:
+      - backend
+    build:
+      context: ./vise/
+      dockerfile: docker/prod.Dockerfile
+    restart: always
+    environment:
+      WEB_NAMESPACE: /vise/
+    volumes:
+      - eil_data:/root/.vise/project
+  cantaloupe:
+    image: eu.gcr.io/inqool-1301/eil-cantaloupe:latest
+    networks:
+      - backend
+    build:
+      context: ./cantaloupe/
+      dockerfile: docker/prod.Dockerfile
+    restart: always
+    environment:
+      image_source: /images/Cantaloupe/image_src/
+    volumes:
+      - eil_data:/images
+  mirador:
+    build:
+      context: ./mirador/
+      dockerfile: docker/prod.Dockerfile
+    restart: always
+    image: eu.gcr.io/inqool-1301/eil-mirador:latest
+    networks:
+      - backend
+  fe:
+    build:
+      context: ./
+      dockerfile: ./fe/docker/prod.Dockerfile
+    restart: always
+    image: eu.gcr.io/inqool-1301/eil-web:latest
+    networks:
+      - backend
+  fe-admin:
+    build:
+      context: ./
+      dockerfile: ./fe-admin/docker/prod.Dockerfile
+    restart: always
+    image: eu.gcr.io/inqool-1301/eil-web-admin:latest
+    networks:
+      - backend
+  proxy:
+    build:
+      context: ./proxy/
+    image: eu.gcr.io/inqool-1301/eil-proxy:latest
+    restart: always
+    networks:
+      - backend
+    ports:
+      - "8080:80"
+networks:
+  backend:
+volumes:
+  eil_data:
+  database_volume:
+  index_volume:
+  fs_volume:
+  import_volume:
+    external: true

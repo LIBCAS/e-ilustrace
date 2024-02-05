@@ -1,0 +1,67 @@
+{
+  "index": {
+    "mapping": {
+      "total_fields": {
+        "limit": 2000
+      }
+    },
+    "analysis": {
+      "analyzer": {
+        "text_short_keyword": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter":  ["max_token_length_trunc"]
+        },
+        "text_long_keyword": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter":  ["200_char_trunc"]
+        },
+        "folding": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "char_filter": ["icu_normalizer"],
+          "filter":  ["icu_folding", "max_token_length_trunc"]
+        },
+        "folding_and_tokenizing": {
+          "type": "custom",
+          "tokenizer": "icu_tokenizer",
+          "char_filter": ["icu_normalizer"],
+          "filter": ["icu_folding", "max_token_length_trunc"]
+        },
+        "folding_and_tokenizing_stop": {
+          "type": "custom",
+          "tokenizer": "icu_tokenizer",
+          "char_filter": ["icu_normalizer"],
+          "filter": ["cs_stop_filter", "icu_folding"]
+        },
+        "sorting": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": ["200_char_trunc", "cz_icu_collation"]
+        }
+      },
+      "filter": {
+        "cs_stop_filter": {
+          "type": "stop",
+          "stopwords": ["_czech_"]
+        },
+        "cz_icu_collation": {
+          "type": "icu_collation",
+          "language": "cs",
+          "country": "CZ",
+          "caseLevel": true,
+          "caseFirst": "upper"
+        },
+        "200_char_trunc": {
+          "type": "truncate",
+          "length": 200
+        },
+        "max_token_length_trunc": {
+          "type": "truncate",
+          "length": 28000
+        }
+      }
+    }
+  }
+}

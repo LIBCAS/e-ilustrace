@@ -1,0 +1,132 @@
+plugins {
+    id 'java-library'
+    id 'org.springframework.boot' version '2.7.3' apply false
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "java-test-fixtures"
+}
+
+group = 'cz.inqool.eas'
+version = '0.0.1'
+apply plugin: 'java'
+compileJava {
+    options.encoding = "UTF-8"
+}
+compileTestJava {
+    options.encoding = "UTF-8"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/snapshot/'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    api 'cz.inqool:entity-views-api:0.7.0'
+    annotationProcessor 'cz.inqool:entity-views-processor:0.7.0'
+    testAnnotationProcessor 'cz.inqool:entity-views-processor:0.7.0'
+
+    /* lombok needs to be downgraded from 1.18.22 to 1.18.20 or it causes build to fail during entity-view generation */
+    compileOnly "org.projectlombok:lombok:1.18.20"
+    testCompileOnly "org.projectlombok:lombok:1.18.20"
+    annotationProcessor "org.projectlombok:lombok:1.18.20"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.20"
+
+    api 'jakarta.persistence:jakarta.persistence-api'
+    api 'jakarta.validation:jakarta.validation-api'
+    api 'jakarta.servlet:jakarta.servlet-api'
+    api 'jakarta.annotation:jakarta.annotation-api'
+
+    api 'org.hibernate:hibernate-core'
+
+    api 'org.springframework.session:spring-session-data-redis'
+    api 'io.lettuce:lettuce-core'
+
+
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+    testAnnotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    api "com.querydsl:querydsl-jpa"
+    annotationProcessor "com.querydsl:querydsl-apt::jpa"
+    testAnnotationProcessor "com.querydsl:querydsl-apt::jpa"
+
+    api "org.springframework:spring-aop"
+    api "org.springframework:spring-beans"
+    api "org.springframework:spring-web"
+    api "org.springframework:spring-webmvc"
+    api "org.springframework:spring-context-support"
+    api "org.springframework.boot:spring-boot"
+    api "org.springframework.boot:spring-boot-autoconfigure"
+    api 'org.springframework.retry:spring-retry'
+
+    /* WebSocket dependencies */
+    api "org.springframework.boot:spring-boot-starter-websocket"
+    api 'org.springframework.security:spring-security-messaging'
+
+    api 'org.springframework.data:spring-data-elasticsearch'
+    api "org.springframework.security:spring-security-core"
+    api "org.springframework.security:spring-security-config"
+    api "org.springframework.security:spring-security-web"
+    api "org.springframework.security:spring-security-ldap"
+    // api "org.springframework.security.extensions:spring-security-saml2-core:1.0.10.RELEASE"
+    api "org.springframework.security:spring-security-saml2-service-provider"
+
+    api 'org.springframework.ldap:spring-ldap-core'
+
+    api 'org.springframework.ws:spring-ws-core'
+    api 'com.sun.mail:javax.mail:1.6.2'
+
+    api 'org.freemarker:freemarker'
+
+    implementation 'xyz.capybara:clamav-client:2.0.2'
+
+    implementation 'org.elasticsearch.client:transport'
+
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "com.fasterxml.jackson.module:jackson-module-jsonSchema"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+
+    implementation 'org.reflections:reflections:0.10.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testFixturesImplementation 'org.testcontainers:testcontainers:1.16.2'
+    testFixturesImplementation 'org.testcontainers:junit-jupiter:1.16.2'
+    testFixturesImplementation 'org.testcontainers:postgresql:1.16.2'
+    testFixturesImplementation 'org.testcontainers:elasticsearch:1.16.2'
+
+    testImplementation 'org.liquibase:liquibase-core'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'org.postgresql:postgresql:42.3.1'
+
+    api 'commons-io:commons-io:2.11.0'
+    api 'org.apache.commons:commons-lang3:3.12.0'
+    api 'io.swagger.core.v3:swagger-annotations:2.1.12'
+
+    implementation 'com.github.javadev:underscore:1.72'
+
+    api 'net.jodah:typetools:0.6.3'
+
+    api 'com.cloudbees:syslog-java-client:1.1.7'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        mavenBom 'org.springframework.session:spring-session-bom:Corn-SR2'
+    }
+}
