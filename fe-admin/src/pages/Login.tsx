@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
 import Button from '../components/reusableComponents/Button'
-import useLoginMutation from '../api/query/useLoginMutation'
+import { useLoginMutation } from '../api/user'
 import useMeQueryWrapper from '../hooks/useMeQueryWrapper'
 import Loader from '../components/reusableComponents/Loader'
 

@@ -53,7 +53,7 @@ public class UserNotificationTemplateModel extends EmailModel {
         private String email;
 
         @JsonProperty(defaultValue = "c1c4c64f-ccca-4bf7-9ddd-3bc003deee98")
-        @JsonPropertyDescription("Potvrzovací kód")
+        @JsonPropertyDescription("Token pro potvrzení")
         protected String token;
 
         public static UserModel of(User user) {

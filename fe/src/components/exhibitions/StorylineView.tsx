@@ -1,6 +1,5 @@
 import { FC, Fragment } from 'react'
 import { PhotoIcon } from '@heroicons/react/24/outline'
-// import ImageMock from '../../assets/images/1.jpg'
 import DOMPurify from 'dompurify'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -65,7 +64,7 @@ const StorylineView: FC<Props> = ({ items }) => {
               {/*  alt={i.illustration.title} */}
               {/* /> */}
             </Link>
-            <div className="relative  bg-lightgray">
+            <div className="relative bg-lightgray">
               <div className="absolute left-1/2 h-3 w-3 -translate-x-1/2 rounded-[50%] bg-red" />
             </div>
             <div className="ml-20 flex flex-col py-8">

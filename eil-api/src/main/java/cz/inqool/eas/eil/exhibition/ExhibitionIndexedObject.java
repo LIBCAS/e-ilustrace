@@ -1,7 +1,6 @@
 package cz.inqool.eas.eil.exhibition;
 
 import cz.inqool.eas.common.dated.index.DatedIndexedObject;
-import cz.inqool.eas.common.domain.index.reference.LabeledReference;
 import cz.inqool.eas.eil.domain.EnumReference;
 import cz.inqool.eas.eil.user.UserIndexedObject;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import static cz.inqool.eas.common.domain.index.field.ES.Suffix.*;
 @Getter
 @Document(indexName = "exhibition")
 @FieldNameConstants(innerTypeName = "IxFields")
-public class ExhibitionIndexedObject extends DatedIndexedObject<Exhibition, Exhibition> {
+public class ExhibitionIndexedObject extends DatedIndexedObject<Exhibition, ExhibitionIndexed> {
 
     @MultiField(
             mainField = @Field(type = FieldType.Text, analyzer = TEXT_LONG_KEYWORD),
@@ -49,7 +48,7 @@ public class ExhibitionIndexedObject extends DatedIndexedObject<Exhibition, Exhi
     protected EnumReference<Radio> radio;
 
     @Override
-    public void toIndexedObject(Exhibition obj) {
+    public void toIndexedObject(ExhibitionIndexed obj) {
         super.toIndexedObject(obj);
 
         this.name = obj.getName();
@@ -59,7 +58,7 @@ public class ExhibitionIndexedObject extends DatedIndexedObject<Exhibition, Exhi
         this.radio = EnumReference.of(obj.getRadio());
     }
 
-    public static ExhibitionIndexedObject of(Exhibition obj) {
+    public static ExhibitionIndexedObject of(ExhibitionIndexed obj) {
         if (obj == null) {
             return null;
         }
@@ -67,4 +66,9 @@ public class ExhibitionIndexedObject extends DatedIndexedObject<Exhibition, Exhi
         indexed.toIndexedObject(obj);
         return indexed;
     }
+
+    public static ExhibitionIndexedObject of(Exhibition obj) {
+        return of(ExhibitionIndexed.toView(obj));
+    }
+
 }

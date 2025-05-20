@@ -59,6 +59,9 @@ public class User extends DatedObject<User> {
     @ViewableProperty(views = {DETAIL, LIST})
     boolean validated;
 
+    @ViewableProperty()
+    String emailConfirmationKey;
+
     @ViewableProperty(views = {DETAIL, LIST, ESSENTIAL})
     public String getFullName() {
         return Stream.of(firstName, lastName).filter(Objects::nonNull).collect(Collectors.joining(" "));

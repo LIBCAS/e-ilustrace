@@ -4,6 +4,7 @@ import cz.inqool.eas.common.dated.DatedApi;
 import cz.inqool.eas.common.exception.dto.RestException;
 import cz.inqool.eas.eil.user.dto.ChangePasswordDto;
 import cz.inqool.eas.eil.user.dto.ChangeRoleDto;
+import cz.inqool.eas.eil.user.dto.PasswordResetDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -48,7 +49,7 @@ public class UserApi extends DatedApi<
     @ApiResponse(responseCode = "400", description = "Wrong input was specified", content = @Content(schema = @Schema(implementation = RestException.class)))
     @PutMapping("change-pw")
     public UserDetail changePassword(@Valid @RequestBody ChangePasswordDto dto) {
-        return service.changePassword(dto.getPassword());
+        return service.changePassword(dto);
     }
 
     @Operation(summary = "Change user role")
@@ -56,7 +57,25 @@ public class UserApi extends DatedApi<
     @ApiResponse(responseCode = "403", description = "Forbidden action", content = @Content(schema = @Schema(implementation = RestException.class)))
     @ApiResponse(responseCode = "404", description = "Object not found", content = @Content(schema = @Schema(implementation = RestException.class)))
     @PutMapping("change-role")
-    public boolean changePassword(@Valid @RequestBody ChangeRoleDto dto) {
+    public boolean changeRole(@Valid @RequestBody ChangeRoleDto dto) {
         return service.changeRole(dto);
+    }
+
+    @Operation(summary = "Request password reset")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "403", description = "Forbidden action", content = @Content(schema = @Schema(implementation = RestException.class)))
+    @ApiResponse(responseCode = "404", description = "Object not found", content = @Content(schema = @Schema(implementation = RestException.class)))
+    @PostMapping(value = "/request-password-reset/{email}")
+    public void requestPasswordResetEmail(@PathVariable("email") String email) {
+        service.requestPasswordResetEmail(email);
+    }
+
+    @Operation(summary = "Reset password")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "403", description = "Forbidden action", content = @Content(schema = @Schema(implementation = RestException.class)))
+    @ApiResponse(responseCode = "404", description = "Object not found", content = @Content(schema = @Schema(implementation = RestException.class)))
+    @PostMapping(value = "/reset-password")
+    public void resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
+        service.resetPassword(passwordResetDto);
     }
 }

@@ -7,7 +7,7 @@ import i18next from '../../lang'
 import LoginButton from '../reusableComponents/LoginButton'
 import Checkbox from '../reusableComponents/inputs/Checkbox'
 import TextInput from '../reusableComponents/inputs/TextInput'
-import useRegistrationMutation from '../../api/mutation/useRegistrationMutation'
+import { useRegistrationMutation } from '../../api/user'
 
 const registrationSchema = z
   .object({
@@ -125,7 +125,7 @@ const Registration: FC = () => {
           }))
         }}
         className={`w-full outline-superlightgray transition ${
-          values.firstName ? 'bg-white ' : 'bg-opacity-30 caret-white'
+          values.firstName ? 'bg-white' : 'bg-opacity-30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'firstName') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -142,7 +142,7 @@ const Registration: FC = () => {
           }))
         }}
         className={`w-full outline-superlightgray transition ${
-          values.lastName ? 'bg-white ' : 'bg-opacity-30 caret-white'
+          values.lastName ? 'bg-white' : 'bg-opacity-30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'lastName') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -159,7 +159,7 @@ const Registration: FC = () => {
           }))
         }}
         className={`w-full outline-superlightgray transition ${
-          values.email ? 'bg-white ' : 'bg-opacity-30 caret-white'
+          values.email ? 'bg-white' : 'bg-opacity-30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'email') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -177,7 +177,7 @@ const Registration: FC = () => {
           }))
         }}
         className={`w-full outline-superlightgray transition ${
-          values.password ? 'bg-white ' : 'bg-opacity-30 caret-white'
+          values.password ? 'bg-white' : 'bg-opacity-30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'password') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -195,7 +195,7 @@ const Registration: FC = () => {
           }))
         }}
         className={`w-full outline-superlightgray transition ${
-          values.repeatedPassword ? 'bg-white ' : 'bg-opacity-30 caret-white'
+          values.repeatedPassword ? 'bg-white' : 'bg-opacity-30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'repeatedPassword')
             ? 'mb-0.5'
@@ -341,8 +341,9 @@ const Registration: FC = () => {
             terms: value,
           }))
         }}
-        link="/terms"
+        link={t('accept_terms_link')}
         linkName={t('accept_terms_link_name')}
+        externalLink
         showName
       />
       {/* <Field */}

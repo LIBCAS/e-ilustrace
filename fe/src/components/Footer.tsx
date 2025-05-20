@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="bottom-0 left-0 flex h-20 w-full items-center justify-between bg-footergray px-5 text-sm text-black">
       <div className="wrapper flex justify-between">
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <span className="flex items-center font-normal text-gray">
             &copy; 2021
           </span>

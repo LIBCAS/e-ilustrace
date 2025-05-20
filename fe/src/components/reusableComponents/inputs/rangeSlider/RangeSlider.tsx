@@ -1,14 +1,10 @@
 import { CSSProperties, FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider'
 import { SliderRail, Handle, Track } from './components'
-import NumberInput from '../NumberInput'
 
 type TProps = {
   fromValue: number
   toValue: number
-  fromValueChange: (value: number) => void
-  toValueChange: (value: number) => void
   bothValuesChange: (values: readonly number[]) => void
   bottomLimit: number
   topLimit: number
@@ -17,28 +13,15 @@ type TProps = {
 const RangeSlider: FC<TProps> = ({
   fromValue,
   toValue,
-  fromValueChange,
-  toValueChange,
   bothValuesChange,
   bottomLimit,
   topLimit,
 }) => {
-  const { t } = useTranslation()
   const [values, setValues] = useState({ from: fromValue, to: toValue })
 
   useEffect(() => {
     setValues({ from: fromValue, to: toValue })
   }, [fromValue, toValue])
-
-  const handleFromValueChange = (number: string) => {
-    setValues((prevState) => ({ from: Number(number), to: prevState.to }))
-    fromValueChange(Number(number))
-  }
-
-  const handleToValueChange = (number: string) => {
-    setValues((prevState) => ({ from: prevState.from, to: Number(number) }))
-    toValueChange(Number(number))
-  }
 
   const handleChange = (nextState: readonly number[]) => {
     bothValuesChange(nextState)
@@ -103,26 +86,9 @@ const RangeSlider: FC<TProps> = ({
           </Tracks>
         </Slider>
       </div>
-      <div className="flex items-center gap-4">
-        <NumberInput
-          id="year-from"
-          className="border-2 border-[#E9ECEF] bg-white"
-          onChange={(newValue) => handleFromValueChange(newValue)}
-          value={values.from}
-          min={bottomLimit}
-          max={topLimit}
-          placeholder={t('search:from')}
-        />
-        -
-        <NumberInput
-          id="year-tp"
-          className="border-2 border-[#E9ECEF] bg-white"
-          onChange={(newValue) => handleToValueChange(newValue)}
-          value={values.to}
-          min={bottomLimit}
-          max={topLimit}
-          placeholder={t('search:to')}
-        />
+      <div className="flex items-center justify-between gap-4 text-gray">
+        <span>{values.from}</span>
+        <span>{values.to}</span>
       </div>
     </div>
   )

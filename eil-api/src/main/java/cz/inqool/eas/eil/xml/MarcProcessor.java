@@ -1,6 +1,5 @@
 package cz.inqool.eas.eil.xml;
 
-import cz.inqool.eas.common.exception.v2.InvalidAttribute;
 import cz.inqool.eas.eil.author.record.RecordAuthorRepository;
 import cz.inqool.eas.eil.genre.GenreRepository;
 import cz.inqool.eas.eil.keyword.KeywordRepository;
@@ -24,12 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static cz.inqool.eas.common.exception.v2.ExceptionCode.ATTRIBUTE_VALUE_IS_NULL;
 import static cz.inqool.eas.eil.xml.mapper.Constants.*;
 
 /**
@@ -72,11 +71,11 @@ public abstract class MarcProcessor {
         Map<String, List<DataFieldType>> dataFieldsMap = xmlRecord.getDatafield().stream()
                 .collect(Collectors.groupingBy(DataFieldType::getTag));
 
-        String identifier = getControlFieldValue(TAG_001, controlFieldsMap);
-        if (identifier.contains(" ")) {
-            log.warn("Record identifier '{}' contains whitespaces. Parsing of record aborted", identifier);
+        String identifier = checkIdentifier(getControlFieldValue(TAG_001, controlFieldsMap));
+        if (identifier == null) {
             return null;
         }
+
         Record record = getRecord(identifier);
         if (record instanceof Illustration && ((Illustration) record).getBook() == null) {
             setBookToIllustration((Illustration) record);
@@ -112,20 +111,24 @@ public abstract class MarcProcessor {
     private String getControlFieldValue(String tag, Map<String, ControlFieldType> controlFieldsMap) {
         ControlFieldType field = controlFieldsMap.get(tag);
         if (field == null || field.getValue().isBlank()) {
-            throw new InvalidAttribute(ATTRIBUTE_VALUE_IS_NULL, "Control field " + tag + " in imported XML file " +
-                    "is missing although required. Import aborted.");
+            log.error("Control field {} in imported XML file " +
+                    "is missing although required. Import aborted.", tag);
+            return null;
         }
         return field.getValue();
     }
 
     private void parseTimeRangeFromControlField(Record record, String fixedLengthField) {
+        if (fixedLengthField == null || fixedLengthField.length() < 15) {
+            return;
+        }
         String stringYearFrom = fixedLengthField.substring(7, 11);
         String stringYearTo = fixedLengthField.substring(11, 15);
 
         try {
-            int yearFrom = stringYearFrom.trim().length() > 0 ? Integer.parseInt(stringYearFrom) : 0;
+            int yearFrom = !stringYearFrom.trim().isEmpty() ? Integer.parseInt(stringYearFrom) : 0;
             record.setYearFrom(yearFrom);
-            int yearTo = stringYearTo.trim().length() > 0 ? Integer.parseInt(stringYearTo) : 0;
+            int yearTo = !stringYearTo.trim().isEmpty() ? Integer.parseInt(stringYearTo) : 0;
             record.setYearTo(yearTo);
         } catch (NumberFormatException ex) {
             log.warn("Error parsing publication years from fixed length field '" + fixedLengthField + "'");
@@ -154,10 +157,13 @@ public abstract class MarcProcessor {
     }
 
     private List<DataFieldType> selectFieldsByIndicator(String indicator, List<DataFieldType> fields) {
-        if (indicator.equals(IND_3)) {
-            return fields.stream().filter(f -> f.getInd2().equals(IND_3)).collect(Collectors.toList());
+        if (fields != null) {
+            if (indicator.equals(IND_3)) {
+                return fields.stream().filter(f -> f.getInd2().equals(IND_3)).collect(Collectors.toList());
+            }
+            return fields.stream().filter(f -> !f.getInd2().equals(IND_3)).collect(Collectors.toList());
         }
-        return fields.stream().filter(f -> !f.getInd2().equals(IND_3)).collect(Collectors.toList());
+        return null;
     }
 
     private List<DataFieldMapper> selectAppropriateFieldMappers(Record record) {
@@ -165,6 +171,56 @@ public abstract class MarcProcessor {
             return fieldMappers.stream().filter(DataFieldMapper::isIllustrationMapper).collect(Collectors.toList());
         }
         return fieldMappers.stream().filter(DataFieldMapper::isBookMapper).collect(Collectors.toList());
+    }
+
+    public String checkIdentifier(String identifier) {
+        if (identifier == null) {
+            return null;
+        }
+        if (Arrays.stream(RecordIdentifierPrefix.values())
+                .map(RecordIdentifierPrefix::getLabel)
+                .noneMatch(identifier::startsWith)) {
+            log.warn("Record identifier '{}' wrong prefix. Parsing of record aborted", identifier);
+            return null;
+        }
+
+        if (identifier.startsWith(RecordIdentifierPrefix.K.getLabel()) && !Character.isDigit(identifier.charAt(1))) {
+            log.warn("Record identifier '{}' wrong prefix. Parsing of record aborted", identifier);
+            return null;
+        }
+
+        if (identifier.contains(" ")) {
+            log.warn("Record identifier '{}' contains whitespaces. Parsing of record aborted", identifier);
+            return null;
+        }
+
+        if (identifier.contains("IL") && !identifier.contains("_")) {
+            log.warn("Record identifier '{}' does not contain '_' but contains 'IL'. Parsing of record aborted", identifier);
+            return null;
+        }
+
+        if (identifier.contains("_")) {
+            if (!identifier.contains("_IL")) {
+                log.warn("Record identifier '{}' does not contain '_IL' but contains '_'. Parsing of record aborted", identifier);
+                return null;
+            }
+
+            String[] split = identifier.split("_IL");
+
+            if (split[1].length() != 3) {
+                log.warn("Record identifier '{}' does not contain right amount of digits after '_IL'. Parsing of record aborted", identifier);
+                return null;
+            }
+
+            for (char ch : split[1].toCharArray()) {
+                if (!Character.isDigit(ch)) {
+                    log.warn("Record identifier '{}' contains wrong characters after '_IL'. Parsing of record aborted", identifier);
+                    return null;
+                }
+            }
+        }
+
+        return identifier;
     }
 
     @Autowired

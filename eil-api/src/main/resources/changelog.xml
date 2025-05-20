@@ -876,4 +876,182 @@
             <column name="from_illustration" type="boolean" value="false"/>
         </addColumn>
     </changeSet>
+    <changeSet id="eil:28" author="mach">
+        <createIndex tableName="eil_record_author"
+                     indexName="eil_record_author_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_author"
+                     indexName="eil_record_author_a_FK_idx">
+            <column name="author_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_institution"
+                     indexName="eil_record_institution_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_institution"
+                     indexName="eil_record_institution_i_FK_idx">
+            <column name="institution_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_variant_title"
+                     indexName="eil_variant_title_record_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_note"
+                     indexName="eil_note_record_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_content_note"
+                     indexName="eil_content_note_record_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_reference"
+                     indexName="eil_reference_record_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_person"
+                     indexName="eil_record_subject_person_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_person"
+                     indexName="eil_record_subject_person_sp_FK_idx">
+            <column name="subject_person_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_institution"
+                     indexName="eil_record_subject_institution_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_institution"
+                     indexName="eil_record_subject_institution_i_FK_idx">
+            <column name="subject_institution_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_entry"
+                     indexName="eil_record_subject_entry_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_entry"
+                     indexName="eil_record_subject_entry_e_FK_idx">
+            <column name="subject_entry_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_place"
+                     indexName="eil_record_subject_place_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_subject_place"
+                     indexName="eil_record_subject_place_sp_FK_idx">
+            <column name="subject_place_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_keyword"
+                     indexName="eil_record_keyword_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_keyword"
+                     indexName="eil_record_keyword_k_FK_idx">
+            <column name="keyword_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_genre"
+                     indexName="eil_record_genre_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_genre"
+                     indexName="eil_record_genre_g_FK_idx">
+            <column name="genre_id"/>
+        </createIndex>
+        <createIndex tableName="eil_link"
+                     indexName="eil_link_record_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_owner"
+                     indexName="eil_owner_record_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_publishing_place"
+                     indexName="eil_record_publishing_place_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_publishing_place"
+                     indexName="eil_record_publishing_place_pp_FK_idx">
+            <column name="publishing_place_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_iconclass_category"
+                     indexName="eil_record_iconclass_category_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_iconclass_category"
+                     indexName="eil_record_iconclass_category_ic_FK_idx">
+            <column name="iconclass_cat_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_theme"
+                     indexName="eil_record_theme_r_FK_idx">
+            <column name="record_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record_theme"
+                     indexName="eil_record_theme_t_FK_idx">
+            <column name="theme_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_record_file_fps_FK_idx">
+            <column name="front_page_scan_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_publishing_publication_entry_FK_idx">
+            <column name="publishing_entry_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_illustration_book_FK_idx">
+            <column name="book_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_print_publication_entry_FK_idx">
+            <column name="print_entry_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_printing_plate_publication_entry_FK_idx">
+            <column name="printing_plate_entry_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_record_file_il_FK_idx">
+            <column name="illustration_scan_id"/>
+        </createIndex>
+        <createIndex tableName="eil_record"
+                     indexName="eil_record_file_il_page_FK_idx">
+            <column name="illustration_page_scan_id"/>
+        </createIndex>
+        <createIndex tableName="eil_publication_entry_place"
+                     indexName="eil_place_of_publication_publication_entry_FK_idx">
+            <column name="publication_entry_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="eil:29" author="mach">
+        <createIndex tableName="eil_exhibition_item"
+                     indexName="eil_exhibition_item_exhibition_FK_idx">
+            <column name="exhibition_id"/>
+        </createIndex>
+        <createIndex tableName="eil_exhibition_item"
+                     indexName="eil_exhibition_item_illustration_FK_idx">
+            <column name="illustration_id"/>
+        </createIndex>
+        <createIndex tableName="eil_selection_item"
+                     indexName="eil_selection_item_selection_FK_idx">
+            <column name="selection_id"/>
+        </createIndex>
+        <createIndex tableName="eil_selection_item"
+                     indexName="eil_selection_item_illustration_FK_idx">
+            <column name="illustration_id"/>
+        </createIndex>
+        <createIndex tableName="eil_selection_item"
+                     indexName="eil_selection_item_book_FK_idx">
+            <column name="book_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="eil:30" author="mach">
+        <addColumn tableName="eil_exhibition_item">
+            <column name="list_order" type="int"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="eil:31" author="mach">
+        <addColumn tableName="eil_user">
+            <column name="email_confirmation_key" type="varchar(256)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -2,7 +2,10 @@ import { FC, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { toast } from 'react-toastify'
-import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowLeftOnRectangleIcon,
+  ArrowPathRoundedSquareIcon,
+} from '@heroicons/react/24/outline'
 import CloseIcon from '../../assets/icons/close.svg?react'
 import RightArrow from '../../assets/icons/right_arrow.svg?react'
 
@@ -14,8 +17,9 @@ import Recovered from './Recovered'
 import SidebarItem from './SidebarItem'
 import useMeQueryWrapper from '../../hooks/useMeQueryWrapper'
 import Loader from '../reusableComponents/Loader'
-import useLogoutMutation from '../../api/mutation/useLogoutMutation'
+import { useLogoutMutation } from '../../api/user'
 import { useSidebarStore } from '../../store/useSidebarStore'
+import PasswordChange from './PasswordChange'
 
 type Props = {
   isDesktop: boolean
@@ -65,10 +69,9 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
       />
 
       <div
-        className={`fixed top-0 z-50 h-full min-h-full w-screen overflow-auto bg-red text-black md:w-[400px]
-    ${
-      sidebarOpen ? 'left-0 flex sm:w-full' : '-left-[calc(100%+8px)]'
-    } flex-col items-start duration-300 ease-in-out`}
+        className={`fixed top-0 z-50 h-full min-h-full w-screen overflow-auto bg-red text-black md:w-[400px] ${
+          sidebarOpen ? 'left-0 flex sm:w-full' : '-left-[calc(100%+8px)]'
+        } flex-col items-start duration-300 ease-in-out`}
       >
         <div className="flex min-w-full flex-col">
           <Button
@@ -101,9 +104,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
                   </a>
                 </li>
                 <li className="sidebar-item">
-                  <a href="fe/src/components/sidebar#">
-                    {t('navigation:help')}
-                  </a>
+                  <a href={t('navigation:help_link')}>{t('navigation:help')}</a>
                 </li>
               </ul>
             ) : (
@@ -146,7 +147,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
                     </a>
                   </li>
                   <li className="sidebar-item">
-                    <a href="fe/src/components/sidebar#">
+                    <a href={t('navigation:help_link')}>
                       {t('navigation:help')}
                     </a>
                   </li>
@@ -155,11 +156,11 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
             ))}
         </div>
         {(loginPhase === 'LOGIN' || loginPhase === 'REGISTRATION') && (
-          <div className="flex  w-full flex-col items-start justify-between">
-            <div className="flex  h-12 w-full flex-row justify-evenly border-b border-white border-opacity-50 text-lg font-bold uppercase text-white">
+          <div className="flex w-full flex-col items-start justify-between">
+            <div className="flex h-12 w-full flex-row justify-evenly border-b border-white border-opacity-50 text-lg font-bold uppercase text-white">
               <button
                 type="button"
-                className={`px-4 uppercase  ${
+                className={`px-4 uppercase ${
                   loginPhase === 'LOGIN' ? 'border-b-4 pb-3' : 'pb-4'
                 }`}
                 onClick={() => setLoginPhase('LOGIN')}
@@ -168,7 +169,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
               </button>
               <button
                 type="button"
-                className={`px-4 uppercase  ${
+                className={`px-4 uppercase ${
                   loginPhase === 'REGISTRATION' ? 'border-b-4 pb-3' : 'pb-4'
                 }`}
                 onClick={() => setLoginPhase('REGISTRATION')}
@@ -189,16 +190,27 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
             {t('common:me_loading_error')}
           </div>
         ) : null}
-        {me ? (
-          <div className="flex h-full w-full items-start justify-start pl-12 text-lg text-white">
-            <div className="flex items-center justify-start">
-              <ArrowLeftOnRectangleIcon
-                className="mr-3 w-[28px] cursor-pointer"
-                onClick={() => handleLogout()}
-              />
-              {me.name}
+        {me && loginPhase !== 'PASSWORD_CHANGE' ? (
+          <>
+            <hr className="mb-6 ml-12 w-4/6 text-white" />
+            <div className="flex h-full w-full flex-col items-start justify-start gap-6 pl-12 text-lg text-white">
+              <div className="flex items-center justify-start">
+                <ArrowLeftOnRectangleIcon
+                  className="mr-3 w-[28px] cursor-pointer"
+                  onClick={() => handleLogout()}
+                />
+                {me.name}
+              </div>
+              <button
+                type="button"
+                className="flex items-center justify-start"
+                onClick={() => setLoginPhase('PASSWORD_CHANGE')}
+              >
+                <ArrowPathRoundedSquareIcon className="mr-3 w-[28px] cursor-pointer" />
+                {t('navigation:password_change')}
+              </button>
             </div>
-          </div>
+          </>
         ) : null}
         {!me && !meLoading && !meError ? (
           <>
@@ -224,6 +236,11 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
               </Button>
             )}
           </>
+        ) : null}
+        {loginPhase === 'PASSWORD_CHANGE' ? (
+          <div className="h-full w-full">
+            <PasswordChange setLoginPhase={setLoginPhase} />
+          </div>
         ) : null}
       </div>
     </>

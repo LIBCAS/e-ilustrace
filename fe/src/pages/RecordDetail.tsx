@@ -4,21 +4,19 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import LeftArrow from '../assets/icons/navigate_back.svg?react'
-// import RightArrow from '../assets/icons/navigate_back.svg?react'
 import BookMarkOutlined from '../assets/icons/bookmark_outlined.svg?react'
 import BookMark from '../assets/icons/bookmark.svg?react'
 
 import Button from '../components/reusableComponents/Button'
 import useMobile from '../hooks/useMobile'
-import useRecordQuery from '../api/query/useRecordQuery'
+import { useRecordQuery } from '../api/record'
 import Loader from '../components/reusableComponents/Loader'
 import BookSection from '../components/recordDetail/BookSection'
 import IllustrationSection from '../components/recordDetail/IllustrationSection'
 import ShowError from '../components/reusableComponents/ShowError'
-// import { useSearchStore } from '../store/useSearchStore'
 import useAddToMySelectionMutationWrapper from '../hooks/useAddToMySelectionMutationWrapper'
 import useRemoveFromMySelectionMutationWrapper from '../hooks/useRemoveFromMySelectionMutationWrapper'
-import useMySelectionQuery from '../api/query/useMySelectionQuery'
+import { useMySelectionQuery } from '../api/my-selection'
 import useMeQueryWrapper from '../hooks/useMeQueryWrapper'
 import useFastSwitchingRecords from '../hooks/useFastSwitchingRecords'
 import constructRecordDetailUrl from '../utils/constructRecordDetailUrl'
@@ -145,7 +143,7 @@ const RecordDetail: FC = () => {
               </Button>
             </div>
           </div>
-          <div className="mx-auto mt-2 flex max-w-7xl  items-center justify-between">
+          <div className="mx-auto mt-2 flex max-w-7xl items-center justify-between">
             {position && !recordsLoading && !recordsError ? (
               <>
                 {position !== 'first' ? (

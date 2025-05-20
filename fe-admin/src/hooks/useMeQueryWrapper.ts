@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
-import useMeQuery from '../api/query/useMeQuery'
+import { useMeQuery } from '../api/user'
 
 const useMeQueryWrapper = () => {
   const { t } = useTranslation()

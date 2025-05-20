@@ -37,6 +37,8 @@ const cz: typeof en = {
   oldest: 'Nejstarší',
   newest: 'Nejnovější',
   person: 'vyobrazeno',
+  keyword: 'vedlejší motiv',
+  theme: 'hlavní motiv',
 }
 
 export default cz

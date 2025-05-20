@@ -8,6 +8,7 @@ type Props = {
   showName?: boolean
   link?: string
   linkName?: string
+  externalLink?: boolean
   // error?: boolean
   className?: string
   wrapperClassName?: string
@@ -21,6 +22,7 @@ const Checkbox = ({
   showName = false,
   linkName = '',
   link = '',
+  externalLink = false,
   // error = false,
   wrapperClassName = '',
   className = '',
@@ -52,7 +54,11 @@ const Checkbox = ({
       {linkName !== '' && link !== '' ? (
         <>
           {'\u00A0'}
-          <Link to={link} className="cursor-pointer font-bold underline">
+          <Link
+            to={link}
+            target={externalLink ? '_blank' : '_self'}
+            className="cursor-pointer font-bold underline"
+          >
             {linkName}
           </Link>
         </>

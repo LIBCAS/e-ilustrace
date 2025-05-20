@@ -2,7 +2,6 @@ package cz.inqool.eas.eil.subject;
 
 import cz.inqool.eas.eil.record.Record;
 import cz.inqool.eas.eil.record.RecordRepository;
-import cz.inqool.eas.eil.record.RecordSources;
 import cz.inqool.eas.eil.record.book.BookIndexed;
 import cz.inqool.eas.eil.record.illustration.IllustrationIndexed;
 import cz.inqool.eas.eil.subject.entry.SubjectEntry;
@@ -32,15 +31,6 @@ public class SubjectService {
         checkSourcesEntry(record);
         checkSourcesPerson(record);
         checkSourcesPlace(record);
-    }
-
-    /**
-     * Only used once, delete after used
-     */
-    public void checkSourcesOneTime(RecordSources record, boolean isFromBook) {
-        checkSourcesEntryOneTime(record, isFromBook);
-        checkSourcesPersonOneTime(record, isFromBook);
-        checkSourcesPlaceOneTime(record, isFromBook);
     }
 
     public void checkSourcesEntry(Record record) {
@@ -118,68 +108,6 @@ public class SubjectService {
         }
     }
 
-    /**
-     * Only used once, delete after used
-     */
-    public void checkSourcesEntryOneTime(RecordSources record, boolean isFromBook) {
-        for (SubjectEntry entry : record.getSubjectEntries()) {
-            boolean update = false;
-            if (isFromBook) {
-                if (!entry.isFromBook()) {
-                    entry.setFromBook(true);
-                    update = true;
-                }
-            } else {
-                if (!entry.isFromIllustration()) {
-                    entry.setFromIllustration(true);
-                    update = true;
-                }
-            }
-            if (update) transactionTemplate.executeWithoutResult(status -> subjectEntryRepository.update(entry));
-        }
-    }
-
-    /**
-     * Only used once, delete after used
-     */
-    public void checkSourcesPersonOneTime(RecordSources record, boolean isFromBook) {
-        for (SubjectPerson person : record.getSubjectPersons()) {
-            boolean update = false;
-            if (isFromBook) {
-                if (!person.isFromBook()) {
-                    person.setFromBook(true);
-                    update = true;
-                }
-            } else {
-                if (!person.isFromIllustration()) {
-                    person.setFromIllustration(true);
-                    update = true;
-                }
-            }
-            if (update) transactionTemplate.executeWithoutResult(status -> subjectPersonRepository.update(person));
-        }
-    }
-
-    /**
-     * Only used once, delete after used
-     */
-    public void checkSourcesPlaceOneTime(RecordSources record, boolean isFromBook) {
-        for (SubjectPlace place : record.getSubjectPlaces()) {
-            boolean update = false;
-            if (isFromBook) {
-                if (!place.isFromBook()) {
-                    place.setFromBook(true);
-                    update = true;
-                }
-            } else {
-                if (!place.isFromIllustration()) {
-                    place.setFromIllustration(true);
-                    update = true;
-                }
-            }
-            if (update) transactionTemplate.executeWithoutResult(status -> subjectPlaceRepository.update(place));
-        }
-    }
     @Autowired
     public void setSubjectEntryRepository(SubjectEntryRepository subjectEntryRepository) {
         this.subjectEntryRepository = subjectEntryRepository;

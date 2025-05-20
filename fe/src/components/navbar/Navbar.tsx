@@ -28,7 +28,7 @@ const Navbar = ({ isDesktop }: Props) => {
 
   return (
     <nav
-      className={`fixed left-0 top-0 z-20 flex h-20 w-full flex-wrap items-center bg-white px-5  text-sm font-bold text-black ${
+      className={`fixed left-0 top-0 z-20 flex h-20 w-full flex-wrap items-center bg-white px-5 text-sm font-bold text-black ${
         scrolled ? 'border-b-0 shadow-md' : ''
       }`}
     >

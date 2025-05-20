@@ -21,7 +21,7 @@ import static cz.inqool.eas.eil.record.illustration.Illustration.*;
 import static cz.inqool.eas.eil.record.illustration.Illustration.INDEXED;
 
 @Viewable
-@ViewableClass(views = {DETAIL, LIST, CREATE, UPDATE, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE}, generateRef = true)
+@ViewableClass(views = {DETAIL, LIST, CREATE, UPDATE, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET}, generateRef = true)
 @ViewableMapping(views = DETAIL, mappedTo = DETAIL)
 @ViewableMapping(views = LIST, mappedTo = LIST)
 @ViewableMapping(views = CREATE, mappedTo = CREATE)
@@ -35,7 +35,8 @@ import static cz.inqool.eas.eil.record.illustration.Illustration.INDEXED;
 @ViewableMapping(views = INDEXED, mappedTo = INDEXED)
 @ViewableMapping(views = SOURCES, mappedTo = SOURCES)
 @ViewableMapping(views = VISE, mappedTo = VISE)
-@ViewableAnnotation(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE}, value = {Entity.class, BatchSize.class, Table.class, DiscriminatorValue.class})
+@ViewableMapping(views = FACET, mappedTo = FACET)
+@ViewableAnnotation(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET}, value = {Entity.class, BatchSize.class, Table.class, DiscriminatorValue.class})
 @Getter
 @Setter
 @Entity
@@ -54,7 +55,8 @@ public class Illustration extends Record {
     @ViewableMapping(views = {DETAIL}, mappedTo = IDENTIFIED)
     @ViewableMapping(views = {EXHIBITION}, mappedTo = EXHIBITION)
     @ViewableMapping(views = {IDENTIFIED, ESSENTIAL}, useRef = true)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @ManyToOne
     Book book;
 
     /**
@@ -81,11 +83,12 @@ public class Illustration extends Record {
     @ViewableProperty(views = DETAIL)
     String defect;
 
-    @ViewableProperty(views = {DETAIL, LIST, ESSENTIAL, MARC, EXHIBITION})
-    @ViewableMapping(views = {DETAIL, ESSENTIAL}, mappedTo = DETAIL)
+    @ViewableProperty(views = {DETAIL, LIST, ESSENTIAL, MARC, EXHIBITION, VISE})
+    @ViewableMapping(views = {DETAIL, ESSENTIAL, VISE}, mappedTo = DETAIL)
     @ViewableMapping(views = {LIST, EXHIBITION}, useRef = true)
     @Fetch(FetchMode.SELECT)
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "illustration_scan_id")
     @Where(clause = "deleted is null")
     File illustrationScan;
 
@@ -124,7 +127,7 @@ public class Illustration extends Record {
     @ViewableProperty(views = {ESSENTIAL, MARC})
     protected Instant cantaloupePageScanCopied;
 
-    @ViewableProperty(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE})
+    @ViewableProperty(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET})
     @Override
     public String getType() {
         return ILLUSTRATION;

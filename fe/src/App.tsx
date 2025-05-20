@@ -10,9 +10,9 @@ import Vise from './pages/Vise'
 import RecordDetail from './pages/RecordDetail'
 import IconClass from './pages/IconClass'
 import Search from './pages/Search'
-import Terms from './pages/Terms'
 import Upload from './pages/Upload'
 import RegistrationConfirmation from './pages/RegistrationConfirmation'
+import PasswordReset from './pages/PasswordReset'
 
 const App: FC = () => {
   return (
@@ -29,12 +29,12 @@ const App: FC = () => {
         <Route path="/exhibitions/:id" element={<ExhibitionDetail />} />
         <Route path="/record-detail/:id" element={<RecordDetail />} />
         <Route path="/record-detail/:id/:switch" element={<RecordDetail />} />
-        <Route path="/terms" element={<Terms />} />
         <Route path="/upload" element={<Upload />} />
         <Route
           path="/confirm-registration/"
           element={<RegistrationConfirmation />}
         />
+        <Route path="/password-reset/:token" element={<PasswordReset />} />
         <Route
           path="*"
           element={

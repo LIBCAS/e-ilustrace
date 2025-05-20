@@ -6,7 +6,7 @@ import Button from '../reusableComponents/Button'
 import { TBookDetail } from '../../../../fe-shared/@types/book'
 import DownArrow from '../../assets/icons/down.svg?react'
 import UpArrow from '../../assets/icons/up.svg?react'
-// import Loader from '../reusableComponents/Loader's
+// import Loader from '../reusableComponents/Loader'
 import ClipBoardCopy from '../reusableComponents/ClipBoardCopy'
 import IIIFImage from '../../assets/images/iiif.png'
 import generateSearchSearchParams from '../../utils/generateSearchSearchParams'
@@ -232,16 +232,30 @@ const BookSection: FC<TBookSectionProps> = ({
                 </span>
               </div>
             ) : null}
+            {record.variantTitles.length ? (
+              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+                <span className="basis-1/3 font-bold">
+                  {t('variant_titles')}
+                </span>
+                <span className="basis-2/3">
+                  {record.variantTitles.map((n) => (
+                    <span key={n} className="mb-3 block last:mb-0">
+                      {n}
+                    </span>
+                  ))}
+                </span>
+              </div>
+            ) : null}
             {/* {record.notes.length > 0 ? ( */}
             {/*  <div className="flex border-b-[1.5px] border-superlightgray py-2"> */}
             {/*    <span className="basis-1/3 font-bold">{t('notes')}</span> */}
             {/*    <span className="basis-2/3"> */}
-            {/*      {record.notes.map((n) => ( */}
+            {/*       {record.notes.map((n) => ( */}
             {/*        <span key={n.id} className="mb-3 block last:mb-0"> */}
             {/*          {n.title ? `${n.title}: ` : null} */}
             {/*          {n.text} */}
             {/*        </span> */}
-            {/*      ))} */}
+            {/*       ))} */}
             {/*    </span> */}
             {/*  </div> */}
             {/* ) : null} */}

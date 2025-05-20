@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import useMeQueryWrapper from './useMeQueryWrapper'
-import useRemoveFromMySelectionMutation from '../api/mutation/useRemoveFromMySelectionMutation'
+import { useRemoveFromMySelectionMutation } from '../api/my-selection'
 
 const useRemoveFromMySelectionMutationWrapper = () => {
   const { mutateAsync, status } = useRemoveFromMySelectionMutation()

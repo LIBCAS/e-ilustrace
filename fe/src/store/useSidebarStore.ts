@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { LoginPhase } from '../@types/types'
+import { LoginPhase } from '../../../fe-shared/@types/common'
 
 export interface TVariablesState {
   sidebarOpen: boolean

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import Button from '../reusableComponents/Button'
 
 import Link from '../../assets/icons/link.svg?react'
-import useChangeExhibitionVisibilityMutation from '../../api/mutation/useChangeExhibitionVisibilityMutation'
+import { useChangeExhibitionVisibilityMutation } from '../../api/exhibition'
 import { TExhibitionDetail } from '../../../../fe-shared/@types/exhibition'
 
 type Props = {
@@ -79,7 +79,7 @@ const ShareButtons: FC<Props> = ({ exhibition, canEditShare }) => {
           {copyOpen && !copied && (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
             <div
-              className="absolute top-12 z-20 flex -translate-x-1/2 items-center  gap-4 rounded-sm border-black bg-white px-4 py-2 shadow-xl"
+              className="absolute top-12 z-20 flex -translate-x-1/2 items-center gap-4 rounded-sm border-black bg-white px-4 py-2 shadow-xl"
               onClick={async () => {
                 // Copy current URL to clipboard and close copy modal
                 await navigator.clipboard.writeText(window.location.href)
@@ -98,7 +98,7 @@ const ShareButtons: FC<Props> = ({ exhibition, canEditShare }) => {
           {copyOpen && copied && (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
             <div
-              className="absolute top-12 z-20 flex -translate-x-1/2 items-center  gap-4 border-[1.px] border-black bg-white px-4 py-2 shadow-[0_0_7px_-2px_black]"
+              className="absolute top-12 z-20 flex -translate-x-1/2 items-center gap-4 border-[1.px] border-black bg-white px-4 py-2 shadow-[0_0_7px_-2px_black]"
               onClick={() => {
                 // Copy current URL to clipboard
                 navigator.clipboard.writeText(window.location.href)

@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { init as SentryInit, BrowserTracing } from '@sentry/react'
+import { init as SentryInit, browserTracingIntegration } from '@sentry/react'
 import { queryClient } from './api'
 import ScrollToTop from './components/ScrollToTop'
 import App from './App'
@@ -20,7 +20,7 @@ const { MODE, VITE_SENTRY_DNS } = import.meta.env
 SentryInit({
   dsn: VITE_SENTRY_DNS,
   tracePropagationTargets: ['localhost', 'e-ilustrace.cz', /^\//],
-  integrations: [new BrowserTracing()],
+  integrations: [browserTracingIntegration()],
   environment: MODE,
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control

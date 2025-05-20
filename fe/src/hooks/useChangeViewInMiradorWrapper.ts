@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import useChangeViewInMirador from '../api/mutation/useChangeViewInMirador'
+import { useChangeViewInMiradorMutation } from '../api/my-selection'
 import useMeQueryWrapper from './useMeQueryWrapper'
 import { TSelectionItemDetail } from '../../../fe-shared/@types/selection'
 
 const useChangeViewInMiradorWrapper = () => {
-  const { mutateAsync, status } = useChangeViewInMirador()
+  const { mutateAsync, status } = useChangeViewInMiradorMutation()
   const { me } = useMeQueryWrapper()
   const { t } = useTranslation()
 

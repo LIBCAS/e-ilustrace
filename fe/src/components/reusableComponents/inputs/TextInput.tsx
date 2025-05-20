@@ -70,7 +70,7 @@ const TextInput: FC<Props> = ({
             },
             { 'bg-white': color === 'red' && value.length > 0 },
             {
-              ' bg-opacity-30 caret-white':
+              'bg-opacity-30 caret-white':
                 color === 'red' && value.length === 0,
             },
             // { 'bg-superlightgray': color === 'white' },

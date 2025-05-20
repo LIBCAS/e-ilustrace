@@ -4,12 +4,10 @@ import { FC } from 'react'
 import Loader from '../reusableComponents/Loader'
 import ShowError from '../reusableComponents/ShowError'
 import ListOfSelectableIllustrations from './ListOfSelectableIllustrations'
-import useMySelectionQuery from '../../api/query/useMySelectionQuery'
+import { useMySelectionQuery } from '../../api/my-selection'
 import Button from '../reusableComponents/Button'
 import CloseIcon from '../../assets/icons/close.svg?react'
 import { TIllustrationEssential } from '../../../../fe-shared/@types/selection'
-
-// import ActionButtons from './ActionButtons'
 
 type TProps = {
   close: () => void
@@ -23,7 +21,6 @@ const FromMySelection: FC<TProps> = ({ close }) => {
     <div className="mt-12 flex w-full flex-col border-t border-t-superlightgray py-8">
       <div className="flex items-center justify-between">
         <h2 className="my-4 text-xl font-bold">{t('add_from_selection')}</h2>
-        {/* <ActionButtons /> */}
         <Button
           iconButton
           variant="text"

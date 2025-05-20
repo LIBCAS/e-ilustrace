@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 import { toast } from 'react-toastify'
-import useUploadMutation from '../api/mutation/useUploadMutation'
+import { useUploadMutation } from '../api/upload'
 
 const Upload: FC = () => {
   const [file, setFile] = useState<File | undefined>(undefined)

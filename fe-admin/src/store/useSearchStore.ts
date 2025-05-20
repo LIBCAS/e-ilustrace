@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import i18next from '../lang/index'
+import { TSortTypes } from '../../../fe-shared/@types/common'
 
 type TDropdown = {
   value: string
@@ -11,7 +12,7 @@ export type TFilterParam = TDropdown[]
 
 interface TVariablesState {
   sort: {
-    value: 'ASC' | 'DESC'
+    value: TSortTypes
     label: string
   } | null
   year: {
@@ -23,7 +24,7 @@ interface TVariablesState {
   category: TDropdown
   filterAuthor: TDropdown[]
   filterObject: TDropdown[]
-  filterPlace: TDropdown[]
+  filterPublishingPlace: TDropdown[]
   filterICCStates: TDropdown[]
   filterThemeStates: TDropdown[]
   currentPage: number
@@ -32,14 +33,14 @@ interface TVariablesState {
 }
 
 interface TState extends TVariablesState {
-  setSort: (newValue: { value: 'ASC' | 'DESC'; label: string }) => void
+  setSort: (newValue: { value: TSortTypes; label: string }) => void
   setYear: (newValues: { from: number; to: number }) => void
   setItemsPerPage: (newValue: TDropdown) => void
   setCategoryActive: (newValue: boolean) => void
   setCategory: (newValue: TParam) => void
   setFilterAuthor: (newValue: TFilterParam) => void
   setFilterObject: (newValue: TFilterParam) => void
-  setFilterPlace: (newValue: TFilterParam) => void
+  setFilterPublishingPlace: (newValue: TFilterParam) => void
   setFilterICCStates: (newValue: TFilterParam) => void
   setFilterThemeStates: (newValue: TFilterParam) => void
   setCurrentPage: (newValue: number) => void
@@ -55,7 +56,7 @@ export const useSearchStore = create<TState>()((set) => ({
   category: { value: 'identifier', label: i18next.t('search.record_id') },
   filterAuthor: [],
   filterObject: [],
-  filterPlace: [],
+  filterPublishingPlace: [],
   filterICCStates: [],
   filterThemeStates: [],
   currentPage: 0,
@@ -71,8 +72,8 @@ export const useSearchStore = create<TState>()((set) => ({
     set(() => ({ filterAuthor: newValue, currentPage: 0 })),
   setFilterObject: (newValue) =>
     set(() => ({ filterObject: newValue, currentPage: 0 })),
-  setFilterPlace: (newValue) =>
-    set(() => ({ filterPlace: newValue, currentPage: 0 })),
+  setFilterPublishingPlace: (newValue) =>
+    set(() => ({ filterPublishingPlace: newValue, currentPage: 0 })),
   setFilterICCStates: (newValue) =>
     set(() => ({ filterICCStates: newValue, currentPage: 0 })),
   setFilterThemeStates: (newValue) =>

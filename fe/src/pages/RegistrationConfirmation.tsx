@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import useRegistrationMutation from '../api/mutation/useRegistrationConfirmationMutation'
+import { useRegistrationConfirmationMutation } from '../api/user'
 import Loader from '../components/reusableComponents/Loader'
 import ShowError from '../components/reusableComponents/ShowError'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
@@ -9,7 +9,7 @@ import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
 const RegistrationConfirmation = () => {
   const { t } = useTranslation()
   const [searchParams] = useSearchParams()
-  const { mutateAsync } = useRegistrationMutation()
+  const { mutateAsync } = useRegistrationConfirmationMutation()
   const [status, setStatus] = useState<'pending' | 'done' | 'error'>('pending')
 
   useEffect(() => {

@@ -155,7 +155,9 @@ generateTypeScript {
             'cz.inqool.eas.eil.EilApplication',
             'cz.inqool.eas.common.security.form.**',
             'cz.inqool.eas.common.alog.event.**',
-            'org.springframework.security.**'
+            'org.springframework.security.**',
+            'com.querydsl.core.**',
+            'javax.persistence.metamodel.**'
     ]
     outputFile = 'build/endpoints.d.ts'
     outputKind = 'module'
@@ -164,7 +166,7 @@ generateTypeScript {
 
 task copyTypescriptTypes(type: Copy) {
     from file('build/endpoints.d.ts')
-    into file('..')
+    into file('endpoints.d.ts')
 }
 
 task buildAndCopy() {

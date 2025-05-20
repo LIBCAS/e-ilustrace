@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { PhotoIcon } from '@heroicons/react/24/outline'
-// import ImageMock from '../../assets/images/1.jpg'
 import DOMPurify from 'dompurify'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'

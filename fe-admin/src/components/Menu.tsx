@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from './reusableComponents/Button'
-import useLogoutMutation from '../api/query/useLogoutMutation'
+import { useLogoutMutation } from '../api/user'
 
 const Menu = () => {
   const { t } = useTranslation()
@@ -33,6 +33,9 @@ const Menu = () => {
         <div className="flex gap-4 uppercase">
           <NavLink to={t('urls.users')} className="px-5 py-2">
             {t('menu.users')}
+          </NavLink>
+          <NavLink to={t('urls.exhibitions')} className="px-5 py-2">
+            {t('menu.exhibitions')}
           </NavLink>
           <NavLink to={t('urls.records')} className="px-5 py-2">
             {t('menu.records')}

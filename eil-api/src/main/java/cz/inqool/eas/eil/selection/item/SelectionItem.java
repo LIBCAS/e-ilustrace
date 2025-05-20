@@ -34,13 +34,15 @@ public class SelectionItem extends DomainObject<SelectionItem> {
     @ViewableProperty(views = {DETAIL, EXTERNAL_UPDATE})
     @ViewableMapping(views = {DETAIL}, mappedTo = Illustration.ESSENTIAL)
     @ViewableMapping(views = {EXTERNAL_UPDATE}, useRef = true)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @ManyToOne
     protected Illustration illustration;
 
     @ViewableProperty(views = {DETAIL, EXTERNAL_UPDATE})
     @ViewableMapping(views = {DETAIL}, mappedTo = Book.ESSENTIAL)
     @ViewableMapping(views = {EXTERNAL_UPDATE}, useRef = true)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @ManyToOne
     protected Book book;
 
     @ViewableProperty(views = {DETAIL, EXTERNAL_UPDATE})

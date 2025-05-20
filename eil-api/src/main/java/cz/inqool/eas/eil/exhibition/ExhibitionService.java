@@ -7,7 +7,6 @@ import cz.inqool.eas.common.domain.index.dto.Result;
 import cz.inqool.eas.common.domain.index.dto.filter.EqFilter;
 import cz.inqool.eas.common.domain.index.dto.filter.NullFilter;
 import cz.inqool.eas.common.domain.index.dto.params.Params;
-import cz.inqool.eas.common.exception.v2.ForbiddenObject;
 import cz.inqool.eas.common.exception.v2.ForbiddenOperation;
 import cz.inqool.eas.common.utils.AssertionUtils;
 import cz.inqool.eas.eil.exhibition.item.*;
@@ -23,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -49,17 +47,8 @@ public class ExhibitionService extends DatedService<
         UserChecker.checkUserHasAnyPermission(Permission.USER);
         User user = userRepository.find(UserChecker.getUserId());
         view.setUser(UserRef.toRef(user));
-        ExhibitionDetail exhibition = super.create(view);
-        ExhibitionRef exhibitionRef = ExhibitionRef.toRef(ExhibitionDetail.toEntity(exhibition));
-        Set<ExhibitionItem> exhibitionItems = view.getItems().stream().map(item -> {
-            item.setExhibition(exhibitionRef);
-            AssertionUtils.notNull(item.getIllustration(), () -> new ForbiddenOperation(
-                    ARGUMENT_VALUE_IS_NULL,
-                    "Illustration in item " + item + " is null"));
-            return ExhibitionItemCreate.toEntity(item);
-        }).collect(Collectors.toSet());
-        exhibitionItemRepository.create(exhibitionItems);
-        return repository.find(ExhibitionDetail.class, exhibition.getId());
+        sortCreateItems(view.getItems());
+        return super.create(view);
     }
 
     @Transactional
@@ -73,27 +62,9 @@ public class ExhibitionService extends DatedService<
 
         AssertionUtils.eq(exhibition.getUser().id, UserChecker.getUserId(), () -> new ForbiddenOperation(OBJECT_ACCESS_DENIED)
                 .details(details -> details.clazz(Exhibition.class)));
-        ExhibitionRef exhibitionRef = ExhibitionRef.toRef(ExhibitionDetail.toEntity(super.update(id, view)));
-        Set<ExhibitionItem> createBatch = new HashSet<>();
-        Set<ExhibitionItem> updateBatch = new HashSet<>();
-        view.getItems().forEach(item -> {
-            AssertionUtils.notNull(item.getIllustration(), () -> new ForbiddenOperation(
-                    ARGUMENT_VALUE_IS_NULL,
-                    "Illustration in item " + item + " is null"));
-            item.setExhibition(exhibitionRef);
-            if (item.getId() != null) {
-                AssertionUtils.isTrue(item.getExhibition() == null || item.getExhibition().id.equals(id),
-                        () -> new ForbiddenObject(
-                                OBJECT_ACCESS_DENIED,
-                        "Item " + item + " is already assigned to different Exhibition"));
-                updateBatch.add(ExhibitionItemExternalUpdate.toEntity(item));
-            } else {
-                createBatch.add(ExhibitionItemExternalUpdate.toEntity(item));
-            }
-        });
-        exhibitionItemRepository.create(createBatch);
-        exhibitionItemRepository.update(updateBatch);
-        return repository.find(ExhibitionDetail.class, id);
+
+        sortUpdateItems(view.getItems());
+        return super.update(id, view);
     }
 
     @Transactional
@@ -105,7 +76,13 @@ public class ExhibitionService extends DatedService<
                 "Exhibition with id '" + id + "' does not exist"));
         AssertionUtils.eq(exhibition.getUser().id, UserChecker.getUserId(), () -> new ForbiddenOperation(OBJECT_ACCESS_DENIED)
                 .details(details -> details.clazz(Exhibition.class)));
-        items.forEach(item -> exhibitionItemRepository.delete(item.id));
+        Set<String> ids = items.stream().map(item -> item.id).collect(Collectors.toSet());
+        List<ExhibitionItemExternalUpdate> keep = exhibition.getItems().stream()
+                .filter(i -> !ids.contains(i.getId())).collect(Collectors.toList());
+        exhibition.getItems().clear();
+        exhibition.getItems().addAll(keep);
+        sortUpdateItems(exhibition.getItems());
+        repository.update(exhibition);
         return repository.find(ExhibitionDetail.class, id);
     }
 
@@ -115,10 +92,11 @@ public class ExhibitionService extends DatedService<
         User user = userRepository.find(UserChecker.getUserId());
         Exhibition exhibition = repository.find(id);
         AssertionUtils.notNull(exhibition, () -> new ForbiddenOperation(
-                ENTITY_NOT_EXIST,
-                "Exhibition with id '" + id + "' does not exist"));
-        AssertionUtils.eq(exhibition.getUser(), user, () -> new ForbiddenOperation(OBJECT_ACCESS_DENIED)
-                .details(details -> details.clazz(Exhibition.class)));
+                ENTITY_NOT_EXIST, "Exhibition with id '" + id + "' does not exist"));
+        if (!UserChecker.userHasAnyPermission(Permission.ADMIN)) {
+            AssertionUtils.eq(exhibition.getUser().id, user.getId(), () -> new ForbiddenOperation(OBJECT_ACCESS_DENIED)
+                    .details(details -> details.clazz(Exhibition.class)));
+        }
         exhibition.setPublished(exhibition.getPublished() != null ? null : Instant.now());
         repository.update(exhibition);
         return repository.find(ExhibitionDetail.class, id);
@@ -144,6 +122,22 @@ public class ExhibitionService extends DatedService<
         return repository.listByParams(ExhibitionList.class, params);
     }
 
+    public void sortCreateItems(List<ExhibitionItemCreate> items) {
+        int order = 0;
+        for (ExhibitionItemCreate item : items) {
+            item.setOrder(order);
+            order++;
+        }
+    }
+
+    public void sortUpdateItems(List<ExhibitionItemExternalUpdate> items) {
+        int order = 0;
+        for (ExhibitionItemExternalUpdate item : items) {
+            item.setOrder(order);
+            order++;
+        }
+    }
+
     @Override
     protected void preCreateHook(Exhibition object) {
         super.preCreateHook(object);
@@ -163,8 +157,10 @@ public class ExhibitionService extends DatedService<
         AssertionUtils.notNull(exhibition, () -> new ForbiddenOperation(
                 ENTITY_NOT_EXIST,
                 "Exhibition with id '" + id + "' does not exist"));
-        AssertionUtils.eq(exhibition.getUser().id, UserChecker.getUserId(), () -> new ForbiddenOperation(OBJECT_ACCESS_DENIED)
-                .details(details -> details.clazz(Exhibition.class)));
+        if (!UserChecker.userHasAnyPermission(Permission.SUPER_ADMIN)) {
+            AssertionUtils.eq(exhibition.getUser().id, UserChecker.getUserId(), () -> new ForbiddenOperation(OBJECT_ACCESS_DENIED)
+                    .details(details -> details.clazz(Exhibition.class)));
+        }
         exhibition.getItems().forEach(item -> exhibitionItemRepository.delete(item.getId()));
     }
 

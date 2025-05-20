@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.io.ByteArrayInputStream;
@@ -41,7 +40,7 @@ public class DownloadManager {
     private FileManager fileManager;
 
     private RecordRepository recordRepository;
-    @Autowired
+
     private TransactionTemplate transactionTemplate;
     @Value("${eil.download.image.batch-size}")
     private int imageBatchSize;
@@ -58,7 +57,6 @@ public class DownloadManager {
     }
 
     @Scheduled(fixedDelay = 1000 * 30)
-    @Transactional
     public void runDownloads() {
         long count = downloadReferenceStore.countRemainingDownloads(imageBatchSize);
         for (int i = 0; i < count; i++){
@@ -68,13 +66,11 @@ public class DownloadManager {
     }
 
     @Scheduled(cron = "${eil.cron.download.failed}")
-    @Transactional
     public void runFailedDownloads() {
         List<DownloadReference> failed = downloadReferenceStore.fetchFailedDownloads();
         failed.forEach(this::downloadAndSetToEntity);
     }
 
-    @Transactional
     private void downloadAndSetToEntity(DownloadReference downloadReference) {
         File file = downloadFile(downloadReference);
         try {
@@ -89,17 +85,18 @@ public class DownloadManager {
                         break;
                     case FRONT_PAGE:
                         ((Book) record).setFrontPageScan(file);
+                        break;
                 }
-                recordRepository.update(record);
+                transactionTemplate.executeWithoutResult(status -> recordRepository.update(record));
                 downloadReference.setDownloaded(true);
-                downloadReferenceStore.update(downloadReference);
+                transactionTemplate.executeWithoutResult(status -> downloadReferenceStore.update(downloadReference));
                 log.info("Image " + file.getName() + " set to record " + record.getIdentifier() + " successfully.");
             }
         } catch (ClassCastException ex) {
-            fileManager.remove(file.id);
+            transactionTemplate.executeWithoutResult(status -> fileManager.remove(file.id));
             removeFileReference(downloadReference, file.getId());
             downloadReference.setFailed(true);
-            downloadReferenceStore.update(downloadReference);
+            transactionTemplate.executeWithoutResult(status -> downloadReferenceStore.update(downloadReference));
             Record record = downloadReference.getRecord();
             log.error("Image download error: Problem with class casting record " + record.getType().toLowerCase() + " " + record.id);
         }
@@ -136,7 +133,7 @@ public class DownloadManager {
             } else {
                 log.warn("Failed to download image for record " + downloadReference.getRecord().getIdentifier() + " from url" + downloadReference.getUrl());
                 downloadReference.setFailed(true);
-                downloadReferenceStore.update(downloadReference);
+                transactionTemplate.executeWithoutResult(status -> downloadReferenceStore.update(downloadReference));
             }
         }
         return null;
@@ -148,32 +145,30 @@ public class DownloadManager {
                 downloadReference.getReferencedAttribute().name().toLowerCase()) + ".jpg";
     }
 
-    @Transactional
     public void removeFileReference(DownloadReference downloadReference, String fileId) {
         Record record = downloadReference.getRecord();
         File file;
-        switch (downloadReference.getReferencedAttribute()) {
-            case ILLUSTRATION:
+
+        if (record != null) {
+            if (record instanceof Illustration) {
                 file = ((Illustration) record).getIllustrationScan();
                 if (file != null && file.getId().equals(fileId)) {
                     ((Illustration) record).setIllustrationScan(null);
-                    recordRepository.update(record);
+                    transactionTemplate.executeWithoutResult(status -> recordRepository.update(record));
                 }
-                break;
-            case ILLUSTRATION_PAGE:
+
                 file = ((Illustration) record).getPageScan();
                 if (file != null && file.getId().equals(fileId)) {
                     ((Illustration) record).setPageScan(null);
-                    recordRepository.update(record);
+                    transactionTemplate.executeWithoutResult(status -> recordRepository.update(record));
                 }
-                break;
-            case FRONT_PAGE:
+            } else {
                 file = ((Book) record).getFrontPageScan();
                 if (file != null && file.getId().equals(fileId)) {
                     ((Book) record).setFrontPageScan(null);
-                    recordRepository.update(record);
+                    transactionTemplate.executeWithoutResult(status -> recordRepository.update(record));
                 }
-                break;
+            }
         }
     }
 
@@ -190,5 +185,10 @@ public class DownloadManager {
     @Autowired
     public void setRecordRepository(RecordRepository recordRepository) {
         this.recordRepository = recordRepository;
+    }
+
+    @Autowired
+    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+        this.transactionTemplate = transactionTemplate;
     }
 }

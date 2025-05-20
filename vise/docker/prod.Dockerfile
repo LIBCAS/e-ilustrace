@@ -14,7 +14,7 @@ RUN mkdir -p /root/vise/code && mkdir -p /root/vise/dep && mkdir "/root/vise/dep
 RUN cd /root/vise/dep/_tmp_libsrc && wget https://github.com/Kitware/CMake/releases/download/v3.20.5/cmake-3.20.5.tar.gz && tar -zxvf cmake-3.20.5.tar.gz && cd cmake-3.20.5 && ./configure --prefix=/root/vise/dep && make -j 2 && make install
 
 # boost
-RUN cd /root/vise/dep/_tmp_libsrc && wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.gz && tar -zxvf boost_1_73_0.tar.gz && cd boost_1_73_0 && ./bootstrap.sh --prefix=/root/vise/dep --with-toolset=gcc --with-libraries=filesystem,system,thread && ./b2 --with-filesystem --with-system --with-thread variant=release threading=multi toolset=gcc install
+RUN cd /root/vise/dep/_tmp_libsrc && wget https://archives.boost.io/release/1.73.0/source/boost_1_73_0.tar.gz && tar -zxvf boost_1_73_0.tar.gz && cd boost_1_73_0 && ./bootstrap.sh --prefix=/root/vise/dep --with-toolset=gcc --with-libraries=filesystem,system,thread && ./b2 --with-filesystem --with-system --with-thread variant=release threading=multi toolset=gcc install
 
 # imagemagick
 # RUN cd /root/vise/dep/_tmp_libsrc && wget -O ImageMagick6-6.9.12-16.tar.gz https://github.com/ImageMagick/ImageMagick6/archive/6.9.12-16.tar.gz && tar -zxvf ImageMagick6-6.9.12-16.tar.gz && cd ImageMagick6-6.9.12-16 && ./configure --prefix=/root/vise/dep -enable-hdri=no --with-quantum-depth=8 --disable-dependency-tracking --with-x=no --without-perl && make -j 2 && make install

@@ -1,23 +1,24 @@
 package cz.inqool.eas.eil.record;
 
 import cz.inqool.eas.common.dated.DatedService;
+import cz.inqool.eas.common.domain.index.dto.filter.EqFilter;
+import cz.inqool.eas.common.domain.index.dto.filter.GteFilter;
+import cz.inqool.eas.common.domain.index.dto.filter.LteFilter;
+import cz.inqool.eas.common.domain.index.dto.params.Params;
 import cz.inqool.eas.common.exception.v2.InvalidArgument;
 import cz.inqool.eas.common.exception.v2.MissingObject;
 import cz.inqool.eas.common.storage.file.File;
 import cz.inqool.eas.common.storage.file.FileManager;
 import cz.inqool.eas.common.utils.AssertionUtils;
-import cz.inqool.eas.eil.author.record.RecordAuthor;
-import cz.inqool.eas.eil.author.record.RecordAuthorRepository;
 import cz.inqool.eas.eil.download.DownloadReference;
 import cz.inqool.eas.eil.download.DownloadReferenceStore;
+import cz.inqool.eas.eil.download.ImageForDownload;
 import cz.inqool.eas.eil.mirador.MiradorService;
 import cz.inqool.eas.eil.mirador.dto.Manifest;
-import cz.inqool.eas.eil.publishingplace.PublishingPlace;
-import cz.inqool.eas.eil.publishingplace.PublishingPlaceRepository;
 import cz.inqool.eas.eil.publishingplace.PublishingPlaceService;
 import cz.inqool.eas.eil.record.book.BookMarc;
 import cz.inqool.eas.eil.record.book.Book;
-import cz.inqool.eas.eil.record.book.BookSources;
+import cz.inqool.eas.eil.record.dto.RecordFacetsDto;
 import cz.inqool.eas.eil.record.dto.RecordYearsDto;
 import cz.inqool.eas.eil.record.illustration.*;
 import cz.inqool.eas.eil.security.Permission;
@@ -27,12 +28,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.*;
 
 import static cz.inqool.eas.common.exception.v2.ExceptionCode.ENTITY_NOT_EXIST;
+import static cz.inqool.eas.common.utils.AssertionUtils.coalesce;
+import static cz.inqool.eas.common.utils.AssertionUtils.notNull;
 import static cz.inqool.eas.eil.exception.EilExceptionCode.WRONG_ARGUMENT_VALUE;
 
 @Service
@@ -50,16 +54,14 @@ public class RecordService extends DatedService<
     private MiradorService miradorService;
     private DownloadReferenceStore downloadReferenceStore;
     private SubjectService subjectService;
-    private PublishingPlaceRepository publishingPlaceRepository;
-    private RecordAuthorRepository recordAuthorRepository;
-    private TransactionTemplate transactionTemplate;
     private PublishingPlaceService publishingPlaceService;
+    private RecordCache recordCache;
 
     @Transactional
     public IllustrationDetail setIconclassState(String id, IconclassThemeState state) {
         UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         Record record = repository.find(id);
-        AssertionUtils.notNull(record, () -> new MissingObject(ENTITY_NOT_EXIST));
+        notNull(record, () -> new MissingObject(ENTITY_NOT_EXIST));
         if (record instanceof Illustration) {
             Illustration ill = (Illustration) record;
             ill.setIconclassState(state);
@@ -72,7 +74,7 @@ public class RecordService extends DatedService<
     public IllustrationDetail setThemeState(String id, IconclassThemeState state) {
         UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         Record record = repository.find(id);
-        AssertionUtils.notNull(record, () -> new MissingObject(ENTITY_NOT_EXIST));
+        notNull(record, () -> new MissingObject(ENTITY_NOT_EXIST));
         if (record instanceof Illustration) {
             Illustration ill = (Illustration) record;
             ill.setThemeState(state);
@@ -146,57 +148,74 @@ public class RecordService extends DatedService<
         return record;
     }
 
-    /**
-     * Only used once, delete after used
-     */
-    public void updateSource() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
-        List<RecordSources> records = repository.listNonDeleted();
-        int count = 0;
-        int total = records.size();
-        log.debug("Start updating sources of {} records", total);
-        for (RecordSources record : records) {
-            boolean isFromBook = record instanceof BookSources;
+    public RecordFacetsDto listFacets(@Nullable Params params, String type) {
+        params = coalesce(params, Params::new);
+        boolean isFromBook = type.equalsIgnoreCase("book");
 
-            List<RecordAuthor> updateBatchRecordAuthor = new ArrayList<>();
-            record.getAuthors().forEach(author -> {
+        if (params.getFilters().stream().allMatch(f ->
+                (f instanceof GteFilter) || (f instanceof LteFilter))) {
+            RecordYearsDto yearsDto = getYearsRange(type);
+            boolean min = params.getFilters().stream().filter(f -> f instanceof GteFilter)
+                    .map(filter -> (GteFilter) filter)
+                    .anyMatch(f -> Integer.parseInt(f.getValue()) == yearsDto.getYearFrom());
+            boolean max = params.getFilters().stream().filter(f -> f instanceof LteFilter)
+                    .map(filter -> (LteFilter) filter)
+                    .anyMatch(f -> Integer.parseInt(f.getValue()) == yearsDto.getYearTo());
+            //Default years range -> use cache and reload if necessary
+            if (min && max) {
                 if (isFromBook) {
-                    if (!author.isFromBook()) {
-                        author.setFromBook(true);
-                        updateBatchRecordAuthor.add(author);
-                    }
+                    params.addFilter(new EqFilter("type", "book"));
+                    recordCache.reloadBooks(Instant.now(), params);
+                    return recordCache.getBookCache();
                 } else {
-                    if (!author.isFromIllustration()) {
-                        author.setFromIllustration(true);
-                        updateBatchRecordAuthor.add(author);
-                    }
+                    params.addFilter(new EqFilter("type", "illustration"));
+                    recordCache.reloadIlls(Instant.now(), params);
+                    return recordCache.getIllCache();
                 }
-            });
-            transactionTemplate.executeWithoutResult(status -> recordAuthorRepository.update(updateBatchRecordAuthor));
-
-            List<PublishingPlace> updateBatchPublishingPlace = new ArrayList<>();
-            record.getPublishingPlaces().forEach(place -> {
-                if (isFromBook) {
-                    if (!place.isFromBook()) {
-                        place.setFromBook(true);
-                        updateBatchPublishingPlace.add(place);
-                    }
-                } else {
-                    if (!place.isFromIllustration()) {
-                        place.setFromIllustration(true);
-                        updateBatchPublishingPlace.add(place);
-                    }
-                }
-            });
-            transactionTemplate.executeWithoutResult(status -> publishingPlaceRepository.update(updateBatchPublishingPlace));
-
-            subjectService.checkSourcesOneTime(record, isFromBook);
-            count += 1;
-            if (count % 100 == 0) {
-                log.debug("Updated {}/{} records", count, total);
             }
         }
-        log.debug("Finished updating sources");
+
+        //Custom filters, therefore no cache and fetch needed
+        if (isFromBook) {
+            params.addFilter(new EqFilter("type", "book"));
+            return recordCache.getBooks(params);
+        } else {
+            params.addFilter(new EqFilter("type", "illustration"));
+            return recordCache.getIlls(params);
+        }
+    }
+
+    @Transactional
+    public void deleteImage(String id, ImageForDownload imageType) {
+        UserChecker.userHasAnyPermission(Permission.ADMIN);
+        Record record = repository.find(id);
+        notNull(record, () -> new MissingObject(ENTITY_NOT_EXIST).details(details -> details.clazz(Record.class)));
+        String fileId;
+        File file;
+        switch (imageType) {
+            case ILLUSTRATION:
+                file = ((Illustration) record).getIllustrationScan();
+                notNull(file, () -> new MissingObject(ENTITY_NOT_EXIST).details(details -> details.clazz(File.class)));
+                fileId = file.getId();
+                ((Illustration) record).setIllustrationScan(null);
+                break;
+            case ILLUSTRATION_PAGE:
+                file = ((Illustration) record).getPageScan();
+                notNull(file, () -> new MissingObject(ENTITY_NOT_EXIST).details(details -> details.clazz(File.class)));
+                fileId = file.getId();
+                ((Illustration) record).setPageScan(null);
+                break;
+            case FRONT_PAGE:
+                file = ((Book) record).getFrontPageScan();
+                notNull(file, () -> new MissingObject(ENTITY_NOT_EXIST).details(details -> details.clazz(File.class)));
+                fileId = file.getId();
+                ((Book) record).setFrontPageScan(null);
+                break;
+            default:
+                return;
+        }
+        repository.update(record);
+        fileManager.remove(fileId);
     }
 
     @Override
@@ -245,22 +264,12 @@ public class RecordService extends DatedService<
     }
 
     @Autowired
-    public void setPublishingPlaceRepository(PublishingPlaceRepository publishingPlaceRepository) {
-        this.publishingPlaceRepository = publishingPlaceRepository;
-    }
-
-    @Autowired
-    public void setRecordAuthorRepository(RecordAuthorRepository recordAuthorRepository) {
-        this.recordAuthorRepository = recordAuthorRepository;
-    }
-
-    @Autowired
-    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-        this.transactionTemplate = transactionTemplate;
-    }
-
-    @Autowired
     public void setPublishingPlaceService(PublishingPlaceService publishingPlaceService) {
         this.publishingPlaceService = publishingPlaceService;
+    }
+
+    @Autowired
+    public void setRecordCache(RecordCache recordCache) {
+        this.recordCache = recordCache;
     }
 }

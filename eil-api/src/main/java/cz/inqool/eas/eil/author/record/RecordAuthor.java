@@ -16,28 +16,30 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static cz.inqool.eas.common.domain.DomainViews.*;
+import static cz.inqool.eas.eil.author.record.RecordAuthor.FACET;
 
 @Viewable
 @DomainViews
-@ViewableClass(views = {INDEXED}, generateRef = true)
-@ViewableMapping(views = {INDEXED}, mappedTo = DEFAULT)
-@ViewableAnnotation(value = {Entity.class, BatchSize.class, Table.class}, views = {INDEXED})
+@ViewableClass(views = {INDEXED, FACET}, generateRef = true)
+@ViewableMapping(views = {INDEXED, FACET}, mappedTo = DEFAULT)
+@ViewableAnnotation(value = {Entity.class, BatchSize.class, Table.class}, views = {INDEXED, FACET})
 @Getter
 @Setter
 @Entity
 @Table(name = "eil_record_author")
 public class RecordAuthor extends DomainObject<RecordAuthor> {
 
-    public static final String INDEXED = "indexed";
+    public static final String FACET = "FACET";
 
-    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED, FACET})
     @ViewableMapping(views = {DETAIL, INDEXED}, mappedTo = DETAIL)
     @ViewableMapping(views = LIST, mappedTo = LIST)
+    @ViewableMapping(views = FACET, mappedTo = FACET)
     @Fetch(FetchMode.SELECT)
     @ManyToOne
     Author author;
 
-    @ViewableProperty(views = {DETAIL, INDEXED, LIST})
+    @ViewableProperty(views = {DETAIL, INDEXED, LIST, FACET})
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = MarcRole.class)
@@ -49,9 +51,9 @@ public class RecordAuthor extends DomainObject<RecordAuthor> {
     @ViewableProperty(views = {DETAIL, LIST, INDEXED})
     boolean isMainAuthor;
 
-    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED, FACET})
     boolean fromBook;
 
-    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED, FACET})
     boolean fromIllustration;
 }

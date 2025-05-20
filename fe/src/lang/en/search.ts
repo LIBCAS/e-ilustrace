@@ -35,5 +35,7 @@ export default {
   add: 'Add next',
   oldest: 'Oldest',
   newest: 'Newest',
-  person: 'vyobrazeno',
+  person: 'depicted',
+  keyword: 'secondary motive',
+  theme: 'main motive',
 }

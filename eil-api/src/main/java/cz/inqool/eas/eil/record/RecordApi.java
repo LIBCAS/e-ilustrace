@@ -1,13 +1,18 @@
 package cz.inqool.eas.eil.record;
 
 import cz.inqool.eas.common.dated.DatedApi;
+import cz.inqool.eas.common.domain.index.dto.params.Params;
+import cz.inqool.eas.eil.download.ImageForDownload;
 import cz.inqool.eas.eil.mirador.MiradorService;
 import cz.inqool.eas.eil.mirador.dto.Manifest;
+import cz.inqool.eas.eil.record.dto.RecordFacetsDto;
 import cz.inqool.eas.eil.record.dto.RecordTypeDto;
 import cz.inqool.eas.eil.record.dto.RecordYearsDto;
 import cz.inqool.eas.eil.record.illustration.IconclassThemeState;
 import cz.inqool.eas.eil.record.illustration.IllustrationDetail;
 import cz.inqool.eas.eil.record.illustration.xlsx.XlsxReader;
+import cz.inqool.eas.eil.security.Permission;
+import cz.inqool.eas.eil.security.UserChecker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -59,6 +64,7 @@ public class RecordApi extends DatedApi<
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/cantaloupe-copy")
     public void moveFilesToCantaloupe() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         miradorService.moveIllsImagesToCantaloupe();
     }
 
@@ -66,6 +72,7 @@ public class RecordApi extends DatedApi<
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/cantaloupe-delete")
     public void deleteFilesFromCantaloupe() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         miradorService.deleteFromCantaloupe();
     }
 
@@ -73,6 +80,7 @@ public class RecordApi extends DatedApi<
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/cantaloupe-set")
     public void setCantaloupeIds() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         miradorService.setCantaloupeIds();
     }
 
@@ -80,11 +88,13 @@ public class RecordApi extends DatedApi<
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/cantaloupe-reset")
     public void resetMiradorImages() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         miradorService.resetMiradorImages();
     }
 
     @Operation(summary = "Get Mirador manifest")
     @ApiResponse(responseCode = OK, description = "OK")
+    @CrossOrigin
     @GetMapping("/{id}/manifest.json")
     public Manifest getManifest(@NotNull @PathVariable String id) {
         return service.getManifest(id);
@@ -97,14 +107,20 @@ public class RecordApi extends DatedApi<
         return service.getYearsRange(dto.getType());
     }
 
-    /**
-     * Only used once, delete after used
-     */
-    @Operation(summary = "Set fromBook and fromIllustration flags")
+    @Operation(summary = "Filter facets")
     @ApiResponse(responseCode = OK, description = "OK")
-    @GetMapping("/update-sources")
-    public void updateSources() {
-        service.updateSource();
+    @PostMapping("/list-facets/{type}")
+    public RecordFacetsDto listFacets(@NotNull @PathVariable String type,
+                                      @Valid @RequestBody(required = false) Params params) {
+        return service.listFacets(params, type);
+    }
+
+    @Operation(summary = "Delete Record image")
+    @ApiResponse(responseCode = OK, description = "OK")
+    @PutMapping("/{id}/delete-image")
+    public void deleteImage(@NotNull @PathVariable String id,
+                            @Valid @RequestBody ImageForDownload imageType) {
+        service.deleteImage(id, imageType);
     }
 
     @Autowired

@@ -2,10 +2,10 @@ import { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { toast } from 'react-toastify'
-import { LoginPhase } from '../../@types/types'
+import { LoginPhase } from '../../../../fe-shared/@types/common'
 import TextInput from '../reusableComponents/inputs/TextInput'
 import Button from '../reusableComponents/Button'
-import useLoginMutation from '../../api/mutation/useLoginMutation'
+import { useLoginMutation } from '../../api/user'
 
 type Props = {
   setLoginPhase: (loginPhase: LoginPhase) => void

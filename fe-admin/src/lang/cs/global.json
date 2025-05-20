@@ -5,14 +5,16 @@
     "records": "Záznamy",
     "import": "Import",
     "login": "Přihlásit se",
-    "logout": "Odhlásit se"
+    "logout": "Odhlásit se",
+    "exhibitions": "Výstavy"
   },
   "urls": {
     "users": "uzivatele",
     "enrichment": "obohaceni",
     "records": "zaznamy",
     "import": "import",
-    "login": "prihlaseni"
+    "login": "prihlaseni",
+    "exhibitions": "vystavy"
   },
   "not_found": {
     "text": "Stránka nenalezena"
@@ -52,7 +54,10 @@
     "to": "Do",
     "icc_state": "ICONCLASS stav",
     "theme_state": "Stav témat",
-    "state_search": "Vyhledat stav"
+    "state_search": "Vyhledat stav",
+    "person": "vyobrazeno",
+    "keyword": "vedlejší motiv",
+    "theme": "hlavní motiv"
   },
   "filters": {
     "filter_author": "Autor",
@@ -102,6 +107,24 @@
   },
   "users": {
     "role_changed": "Změna role proběhla úspěšně",
-    "role_error": "Nastala chyba při změně role"
+    "role_error": "Nastala chyba při změně role",
+    "search": "Vyhledat uživatele",
+    "delete_user": "Smazat uživatele",
+    "user_deleted": "Uživatel byl úspěšně smazán",
+    "user_deletion_error": "Nepodařilo se smazat uživatele"
+  },
+  "exhibitions": {
+    "search": "Vyhledat výstavu",
+    "exhibition_not_found": "Výstava nebyla nalezena",
+    "exhibition_deleted": "Výstava byla smazána",
+    "deletion_in_progress": "Probíhá mazání výstavy",
+    "deletion_error": "Nastala chyba při mazání výstavy",
+    "publicity_changing": "Probíhá změna publicity",
+    "publicity_changed": "Změna publikace proběhla úspěšně",
+    "publicity_change_error": "Nastala chyba při změně publikace",
+    "published": "Publikováno",
+    "private": "Soukromé",
+    "delete_exhibition": "Odstranit výstavu",
+    "enter_uuid": "Zadejte id výstavy pro její zobrazení"
   }
 }

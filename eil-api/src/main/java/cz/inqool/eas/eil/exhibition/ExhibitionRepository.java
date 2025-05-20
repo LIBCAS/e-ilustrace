@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ExhibitionRepository extends DatedRepository<
         Exhibition,
-        Exhibition,
+        ExhibitionIndexed,
         ExhibitionIndexedObject,
         DatedStore<Exhibition, Exhibition, QExhibition>,
-        DatedIndex<Exhibition, Exhibition, ExhibitionIndexedObject>> {
+        DatedIndex<Exhibition, ExhibitionIndexed, ExhibitionIndexedObject>> {
 
     public ExhibitionEssential findEssential(String id) {
         QExhibitionEssential model = QExhibitionEssential.exhibitionEssential;

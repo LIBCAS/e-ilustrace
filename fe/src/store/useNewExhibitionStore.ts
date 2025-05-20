@@ -14,7 +14,6 @@ interface TVariablesState {
   description: string
   radio: 'ALBUM' | 'STORYLINE' | 'SLIDER'
   items: TIllustration[]
-  illustrationForDeletion: string[]
 }
 
 interface TState extends TVariablesState {
@@ -23,7 +22,6 @@ interface TState extends TVariablesState {
   setRadio: (radio: 'ALBUM' | 'STORYLINE' | 'SLIDER') => void
   setItems: (illustrations: TIllustration[]) => void
   setInitialState: () => void
-  setIllustrationForDeletion: (illustrationForDeletion: string[]) => void
 }
 
 export const useNewExhibitionStore = create<TState>()((set) => ({
@@ -31,7 +29,6 @@ export const useNewExhibitionStore = create<TState>()((set) => ({
   description: '',
   radio: 'ALBUM',
   items: [],
-  illustrationForDeletion: [],
   setName: (name) => set(() => ({ name })),
   setDescription: (description) => set(() => ({ description })),
   setRadio: (radio) => set(() => ({ radio })),
@@ -42,8 +39,5 @@ export const useNewExhibitionStore = create<TState>()((set) => ({
       description: '',
       radio: 'ALBUM',
       items: [],
-      illustrationForDeletion: [],
     })),
-  setIllustrationForDeletion: (illustrationForDeletion) =>
-    set(() => ({ illustrationForDeletion })),
 }))

@@ -75,14 +75,14 @@ const ListView: FC<Props> = ({
               <BlankImage classNames="shrink-0 w-[60px] md:w-[90px] lg:w-[120px] mr-4 md:mr-10" />
             ) : null}
 
-            <div className="flex flex-col items-start transition-all duration-300 ">
+            <div className="flex flex-col items-start transition-all duration-300">
               <span className="line-clamp-2 text-left font-bold">
                 {i.title}
               </span>
-              <span className="text-sm text-gray ">
+              <span className="text-sm text-gray">
                 identifikátor: {i.identifier}
               </span>
-              <span className="text-sm text-gray ">uuid: {i.id}</span>
+              <span className="text-sm text-gray">uuid: {i.id}</span>
             </div>
           </Link>
         ))}

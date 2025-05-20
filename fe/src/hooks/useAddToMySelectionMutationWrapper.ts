@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import useAddToMySelectionMutation from '../api/mutation/useAddToMySelectionMutation'
+import { useAddToMySelectionMutation } from '../api/my-selection'
 import useMeQueryWrapper from './useMeQueryWrapper'
 
 const useAddToMySelectionMutationWrapper = () => {

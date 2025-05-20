@@ -25,6 +25,7 @@ import java.util.List;
 @Slf4j
 public class NotificationTemplateInitializer extends DatedInitializer<NotificationTemplate, NotificationTemplateRepository> {
     public static final String REGISTRATION_CONFIRMATION_NOTIFICATION_TEMPLATE_ID = "f96bc09c-eabd-4ac3-b9b1-4c0883aefa74";
+    public static final String PASSWORD_RESET_NOTIFICATION_TEMPLATE_ID = "f878b0eb-e25b-4979-8245-3c2181dd4317";
 
     @Getter
     private NotificationTemplateRepository repository;
@@ -40,6 +41,15 @@ public class NotificationTemplateInitializer extends DatedInitializer<Notificati
                         "Potvrzení registrace",
                         "Confirm registration",
                         loadTemplate("confirm_registration.ftl"),
+                        true,
+                        true
+                ),
+                newInstance(
+                        PASSWORD_RESET_NOTIFICATION_TEMPLATE_ID,
+                        NotificationEvent.PASSWORD_RESET,
+                        "Žádost o reset hesla",
+                        "Password reset request",
+                        loadTemplate("password_reset.ftl"),
                         true,
                         true
                 )

@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import Button from '../components/reusableComponents/Button'
-import useImportMutation from '../api/query/useImportMutation'
+import { useImportMutation } from '../api/import'
 
 const Import = () => {
   const { t } = useTranslation()

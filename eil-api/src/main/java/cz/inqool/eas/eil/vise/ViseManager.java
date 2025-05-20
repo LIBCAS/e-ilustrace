@@ -4,12 +4,11 @@ import cz.inqool.eas.common.storage.file.FileDetail;
 import cz.inqool.eas.common.storage.file.FileManager;
 import cz.inqool.eas.common.storage.file.OpenedFile;
 import cz.inqool.eas.eil.author.record.RecordAuthorDetail;
+import cz.inqool.eas.eil.record.RecordEssential;
 import cz.inqool.eas.eil.record.RecordRepository;
 import cz.inqool.eas.eil.record.illustration.IllustrationEssential;
 import cz.inqool.eas.eil.record.illustration.IllustrationVise;
 import cz.inqool.eas.eil.role.MarcRole;
-import cz.inqool.eas.eil.security.Permission;
-import cz.inqool.eas.eil.security.UserChecker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class ViseManager {
+    public static final String ILLUSTRATIONS = "Illustrations";
 
     private String database;
     private RecordRepository recordRepository;
@@ -43,11 +43,17 @@ public class ViseManager {
     private FileManager fileManager;
     private String viseImagesDir;
     private String viseFilelist;
+    @Value("${eil.baseUrl}")
+    private String baseUrl;
 
     public void populateAndAlternateDb() {
         alterTable();
         List<IllustrationVise> ills = recordRepository.findIllustrationsWithViseId();
+        ills.sort(Comparator.comparingInt(i -> Integer.parseInt(i.getViseFileId())));
+        insertBasicData(ills);
         insertIllustrationData(ills);
+//        insertMetadataVtable(ills);
+        insertMetadataVtableContent(ills);
     }
 
     public void alterTable() {
@@ -110,6 +116,117 @@ public class ViseManager {
         log.debug("Finished setting VISE metadata");
     }
 
+    private void insertBasicData(List<IllustrationVise> illustrations) {
+        String sql = "INSERT INTO file_metadata(file_id, filename) VALUES(?, ?)";
+
+        log.debug("Start setting VISE BASIC metadata");
+        int size = illustrations.size();
+        int count = 0;
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (IllustrationVise illustration : illustrations) {
+                pstmt.setString(1, illustration.getViseFileId());
+                pstmt.setString(2, String.valueOf(illustration.getIllustrationScan().getName()));
+                pstmt.executeUpdate();
+                count += 1;
+                if (count % 100 == 0) {
+                    log.info("Setting VISE BASIC metadata to {}/{} illustrations", count, size);
+                }
+            }
+        } catch (SQLException e) {
+            log.debug("Error during inserting data into SQLite database for vise BASIC metadata");
+        }
+        log.debug("Finished setting VISE BASIC metadata");
+    }
+
+    private void insertMetadataVtable(List<IllustrationVise> illustrations) {
+        String sql = "INSERT INTO metadata_vtable(rowid, concatenated_metadata) VALUES(?, ?)";
+
+        log.debug("Start setting VISE vtable metadata");
+        int size = illustrations.size();
+        int count = 0;
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (IllustrationVise illustration : illustrations) {
+                String concatenatedMetadata = concatMetadata(illustration);
+
+                pstmt.setString(1, illustration.getViseFileId());
+                pstmt.setString(2, concatenatedMetadata);
+
+                pstmt.executeUpdate();
+                count += 1;
+                if (count % 100 == 0) {
+                    log.info("Setting VISE vtable metadata to {}/{} illustrations", count, size);
+                }
+            }
+        } catch (SQLException e) {
+            log.debug("Error during inserting data into SQLite database for vise vtable metadata");
+        }
+        log.debug("Finished setting VISE vtable metadata");
+    }
+
+    private void insertMetadataVtableContent(List<IllustrationVise> illustrations) {
+        String sql = "INSERT INTO metadata_vtable_content(docid, c0rowid, c1concatenated_metadata) VALUES(?, ?, ?)";
+
+        log.debug("Start setting VISE vtable content metadata");
+        int size = illustrations.size();
+        int count = 0;
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (IllustrationVise illustration : illustrations) {
+                String concatenatedMetadata = concatMetadata(illustration);
+
+                pstmt.setString(1, String.valueOf(Integer.parseInt(illustration.getViseFileId()) + 1));
+                pstmt.setString(2, illustration.getViseFileId());
+                pstmt.setString(3, concatenatedMetadata);
+
+                pstmt.executeUpdate();
+                count += 1;
+                if (count % 100 == 0) {
+                    log.info("Setting VISE vtable metadata content to {}/{} illustrations", count, size);
+                }
+            }
+        } catch (SQLException e) {
+            log.debug("Error during inserting data into SQLite database for vise vtable content metadata");
+        }
+        log.debug("Finished setting VISE vtable content metadata");
+    }
+
+    private String concatMetadata(IllustrationVise illustration) {
+        String concatenatedMetadata = "";
+        concatenatedMetadata = concatenatedMetadata.concat(illustration.getIllustrationScan().getName());
+
+        concatenatedMetadata = concatenatedMetadata.concat(" ");
+        Optional<RecordAuthorDetail> recordAuthor = illustration.getCoauthors().stream().filter(ca -> ca.getRoles().contains(MarcRole.PRINTER)).findFirst();
+        if (recordAuthor.isPresent()) {
+            concatenatedMetadata = concatenatedMetadata.concat(recordAuthor.get().getAuthor().getFullName());
+        } else {
+            concatenatedMetadata = concatenatedMetadata.concat(" ");
+        }
+
+        concatenatedMetadata = concatenatedMetadata.concat(" ");
+        concatenatedMetadata = concatenatedMetadata.concat(String.valueOf(illustration.getYearFrom()));
+
+        concatenatedMetadata = concatenatedMetadata.concat(" ");
+        concatenatedMetadata = concatenatedMetadata.concat(String.valueOf(illustration.getYearTo()));
+
+        concatenatedMetadata = concatenatedMetadata.concat(" ");
+        if (illustration.getMainAuthor() != null) {
+            concatenatedMetadata = concatenatedMetadata.concat(illustration.getMainAuthor().getAuthor().getFullName());
+        } else {
+            concatenatedMetadata = concatenatedMetadata.concat(" ");
+        }
+
+        concatenatedMetadata = concatenatedMetadata.concat(" ");
+        if (!illustration.getPublishingPlaces().isEmpty()) {
+            concatenatedMetadata = concatenatedMetadata.concat(illustration.getPublishingPlaces().stream().findFirst().get().getName());
+        } else {
+            concatenatedMetadata = concatenatedMetadata.concat(" ");
+        }
+
+        return concatenatedMetadata;
+    }
+
     public Connection connect() {
         // SQLite connection string
         String path = new File(database).getAbsolutePath();
@@ -123,16 +240,15 @@ public class ViseManager {
         return conn;
     }
 
-    public void deleteFromVise() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
+    public void deleteViseIds() {
         log.debug("STARTED deleting VISE IDs and flags from Illustrations");
-        List<IllustrationEssential> ills = recordRepository.findAllEssential();
-        List<IllustrationEssential> updateBatch = new ArrayList<>();
+        List<RecordEssential> ills = recordRepository.findAllEssential();
+        List<RecordEssential> updateBatch = new ArrayList<>();
         int count = 0;
         int size = ills.size();
-        for (IllustrationEssential ill : ills) {
-            ill.setViseFileId(null);
-            ill.setViseIllScanCopied(null);
+        for (RecordEssential ill : ills) {
+            ((IllustrationEssential) ill).setViseFileId(null);
+            ((IllustrationEssential) ill).setViseIllScanCopied(null);
             updateBatch.add(ill);
             if (updateBatch.size() >= 100) {
                 transactionTemplate.executeWithoutResult(status -> recordRepository.update(updateBatch));
@@ -147,23 +263,22 @@ public class ViseManager {
     }
 
     public void moveFilesToVise() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         log.debug("Moving Illustration images to VISE dir STARTED");
-        List<IllustrationEssential> ills = recordRepository.findIllustrationScansVise();
-        List<IllustrationEssential> updateBatch = new ArrayList<>();
+        List<RecordEssential> ills = recordRepository.findIllustrationScansVise();
+        List<RecordEssential> updateBatch = new ArrayList<>();
         Instant now = Instant.now();
         int count = 0;
         int size = ills.size();
-        for (IllustrationEssential ill : ills) {
-            OpenedFile openedFile = fileManager.open(ill.getIllustrationScan().getId());
+        for (RecordEssential ill : ills) {
+            OpenedFile openedFile = fileManager.open(((IllustrationEssential) ill).getIllustrationScan().getId());
             cz.inqool.eas.common.storage.file.File file = openedFile.getDescriptor();
             InputStream stream = openedFile.getStream();
             String name = file.getName().replace(",", "").replace("\"", "").replace("'", "");
 
-            java.io.File targetFile = new java.io.File(String.join(java.io.File.separator, viseImagesDir, name));
+            File targetFile = new File(String.join(File.separator, viseImagesDir, name));
             try {
                 FileUtils.copyInputStreamToFile(stream, targetFile);
-                ill.setViseIllScanCopied(now);
+                ((IllustrationEssential) ill).setViseIllScanCopied(now);
                 updateBatch.add(ill);
             } catch (IOException ioe) {
                 log.error("Error moving file '{}' to VISE directory", name);
@@ -181,17 +296,16 @@ public class ViseManager {
     }
 
     public void setViseFileIds() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         log.debug("Setting VISE file ids to Illustrations started");
-        List<IllustrationEssential> illustrations = recordRepository.findNullViseFileIdWithIllustrationScan();
+        List<RecordEssential> illustrations = recordRepository.findNullViseFileIdWithIllustrationScan();
 
-        Map<IllustrationEssential, String> fileNames = new HashMap<>();
+        Map<RecordEssential, String> fileNames = new HashMap<>();
         illustrations.forEach(ill -> {
-            FileDetail file = ill.getIllustrationScan();
+            FileDetail file = ((IllustrationEssential) ill).getIllustrationScan();
             String name = file.getName().replace(",", "").replace("\"", "").replace("'", "");
             fileNames.put(ill, name);
         });
-        List<IllustrationEssential> updateBatch = new ArrayList<>();
+        List<RecordEssential> updateBatch = new ArrayList<>();
         AtomicInteger count = new AtomicInteger();
         int size = illustrations.size();
         try {
@@ -205,7 +319,7 @@ public class ViseManager {
             fileNames.forEach((illustration, value) -> {
                 int index = lines.indexOf(value);
                 if (index > -1) {
-                    illustration.setViseFileId(Integer.toString(index));
+                    ((IllustrationEssential) illustration).setViseFileId(Integer.toString(index));
                     updateBatch.add(illustration);
                 } else {
                     log.info("Setting VISE file id FAILED to Illustration '{}' with value '{}'", illustration.getId(), value);
@@ -223,6 +337,23 @@ public class ViseManager {
         transactionTemplate.executeWithoutResult(status -> recordRepository.update(updateBatch));
         updateBatch.clear();
         log.debug("Setting VISE file ids to Illustrations finished");
+    }
+
+    public void resetViseImages() {
+        ViseUtils viseUtils = new ViseUtils(baseUrl);
+        //delete vise project
+        viseUtils.deleteViseProject(ILLUSTRATIONS);
+        //remove ids and flags
+        deleteViseIds();
+        //create vise project again
+        viseUtils.createViseProject(ILLUSTRATIONS);
+        //copy files
+        moveFilesToVise();
+        //run index
+        viseUtils.startIndexingVise(ILLUSTRATIONS);
+        if (viseUtils.fetchIndexStatusLoop(ILLUSTRATIONS)) {
+            setViseFileIds();
+        }
     }
 
     @Autowired
@@ -244,6 +375,7 @@ public class ViseManager {
     public void setManager(FileManager fileManager) {
         this.fileManager = fileManager;
     }
+
     @Autowired
     public void setViseImages(@Value("${eil.file-storage-vise.directory}") String viseImagesDir) {
         this.viseImagesDir = viseImagesDir;

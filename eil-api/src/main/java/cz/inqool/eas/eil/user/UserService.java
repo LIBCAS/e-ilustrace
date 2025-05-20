@@ -2,16 +2,18 @@ package cz.inqool.eas.eil.user;
 
 import cz.inqool.eas.common.dated.DatedService;
 import cz.inqool.eas.common.exception.v2.ForbiddenObject;
-import cz.inqool.eas.common.exception.v2.ForbiddenOperation;
 import cz.inqool.eas.common.exception.v2.InvalidAttribute;
 import cz.inqool.eas.common.exception.v2.MissingObject;
 import cz.inqool.eas.eil.notification.NotificationSender;
+import cz.inqool.eas.eil.notification.event.NotificationEvent;
 import cz.inqool.eas.eil.notification.template.model.TokenNotificationTemplateModel;
 import cz.inqool.eas.eil.security.Permission;
 import cz.inqool.eas.eil.security.UserChecker;
 import cz.inqool.eas.eil.security.token.Token;
 import cz.inqool.eas.eil.security.token.TokenService;
+import cz.inqool.eas.eil.user.dto.ChangePasswordDto;
 import cz.inqool.eas.eil.user.dto.ChangeRoleDto;
+import cz.inqool.eas.eil.user.dto.PasswordResetDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,12 +23,13 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 import static cz.inqool.eas.common.exception.v2.ExceptionCode.ENTITY_NOT_EXIST;
 import static cz.inqool.eas.common.utils.AssertionUtils.*;
 import static cz.inqool.eas.eil.config.exception.EilExceptionCode.ENTITY_ALREADY_EXISTS;
 import static cz.inqool.eas.eil.config.exception.EilExceptionCode.TOKEN_EXPIRED;
-import static cz.inqool.eas.eil.exception.EilExceptionCode.MISSING_PERMISSION_FOR_OPERATION;
-import static cz.inqool.eas.eil.notification.event.NotificationEvent.CONFIRM_REGISTRATION;
+import static cz.inqool.eas.eil.exception.EilExceptionCode.*;
 
 @Service
 @Slf4j
@@ -85,9 +88,13 @@ public class UserService extends DatedService<
     }
 
     @Transactional
-    public UserDetail changePassword(String password) {
+    public UserDetail changePassword(ChangePasswordDto dto) {
         User user = repository.find(UserChecker.getUserId());
-        user.setPassword(passwordEncoder.encode(password));
+        if (!passwordEncoder.matches(dto.getOldPassword(), user.getPassword())) {
+            throw new ForbiddenObject(WRONG_PASSWORD);
+        }
+        user.setPassword(passwordEncoder.encode(dto.getNewPassword()));
+
         repository.update(user);
         return repository.find(UserDetail.class, user.getId());
     }
@@ -96,7 +103,7 @@ public class UserService extends DatedService<
         if (mail != null) {
             log.debug("Sending notification to requester with email '{}'.", mail);
             notificationSender.sendEmailNotification(
-                    CONFIRM_REGISTRATION,
+                    NotificationEvent.CONFIRM_REGISTRATION,
                     new TokenNotificationTemplateModel(token.getUser(), token.getId()),
                     mail
             );
@@ -109,10 +116,6 @@ public class UserService extends DatedService<
     @Transactional
     public boolean changeRole(ChangeRoleDto dto) {
         UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
-        User admin = repository.find(UserChecker.getUserId());
-        isTrue(admin.getRole() == EilRole.ADMIN || admin.getRole() == EilRole.SUPER_ADMIN,
-                () -> new ForbiddenOperation(MISSING_PERMISSION_FOR_OPERATION,
-                        "User with id '" + UserChecker.getUserId() + "' and role '" + admin.getRole() + "' does not have permission for this operation."));
         User user = repository.find(dto.getUserId());
         notNull(user, () -> new MissingObject(
                 ENTITY_NOT_EXIST,
@@ -121,6 +124,49 @@ public class UserService extends DatedService<
         repository.update(user);
         return true;
     }
+
+    @Transactional
+    public void requestPasswordResetEmail(String email) {
+        User user = repository.findByEmail(email);
+        if (user == null) {
+            throw new MissingObject(ENTITY_NOT_EXIST);
+        }
+        if (!user.isValidated()) {
+            throw new ForbiddenObject(OBJECT_NOT_IN_STATE_FOR_THIS_OPERATION);
+        }
+        user.setEmailConfirmationKey(UUID.randomUUID().toString());
+        repository.update(user);
+        sendPasswordResetEmail(user);
+    }
+
+    private void sendPasswordResetEmail(User user) {
+        if (user.getEmail() != null) {
+            log.debug("Sending notification to user with email '{}'.", user.getEmail());
+            notificationSender.sendEmailNotification(
+                    NotificationEvent.PASSWORD_RESET,
+                    new TokenNotificationTemplateModel(user, user.getEmailConfirmationKey()),
+                    user.getEmail()
+            );
+            log.info("Code for password reset set, emailConfirmationKey " + user.getEmailConfirmationKey());
+        } else {
+            log.debug("User '{}' does not have email. No notification will be sent.", user);
+        }
+    }
+
+    @Transactional
+    public void resetPassword(PasswordResetDto passwordResetDto) {
+        User user = repository.findByEmailConfirmationKey(passwordResetDto.getKey());
+        if (user == null) {
+            throw new MissingObject(ENTITY_NOT_EXIST);
+        }
+        if (!user.isValidated()) {
+            throw new ForbiddenObject(OBJECT_NOT_IN_STATE_FOR_THIS_OPERATION);
+        }
+        user.setPassword(passwordEncoder.encode(passwordResetDto.getNewPassword()));
+        user.setEmailConfirmationKey(null);
+        repository.update(user);
+    }
+
 
     @Override
     protected void preUpdateHook(User object) {
@@ -131,7 +177,14 @@ public class UserService extends DatedService<
     @Override
     public void preDeleteHook(@NotNull String id) {
         super.preDeleteHook(id);
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
+        User user = repository.find(id);
+        if (user != null) {
+            if (user.getRole() == EilRole.USER) {
+                UserChecker.checkUserHasAnyPermission(Permission.SUPER_ADMIN, Permission.ADMIN);
+            } else {
+                UserChecker.checkUserHasAnyPermission(Permission.SUPER_ADMIN);
+            }
+        }
     }
 
     @Autowired

@@ -11,6 +11,7 @@ import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 
 import static cz.inqool.eas.common.domain.DomainViews.*;
+import static cz.inqool.eas.eil.subject.place.SubjectPlace.FACET;
 
 /**
  * Místo - předmět díla (geografická autorita)
@@ -18,9 +19,9 @@ import static cz.inqool.eas.common.domain.DomainViews.*;
 @Viewable
 @DomainViews
 @ViewableImplement(value = Authority.class, views = {DETAIL})
-@ViewableClass(views = {INDEXED}, generateRef = true)
-@ViewableMapping(views = {INDEXED}, mappedTo = DEFAULT)
-@ViewableAnnotation(value = {Entity.class, BatchSize.class, Table.class}, views = {INDEXED})
+@ViewableClass(views = {INDEXED, FACET}, generateRef = true)
+@ViewableMapping(views = {INDEXED, FACET}, mappedTo = DEFAULT)
+@ViewableAnnotation(value = {Entity.class, BatchSize.class, Table.class}, views = {INDEXED, FACET})
 @Getter
 @Setter
 @Entity
@@ -28,16 +29,17 @@ import static cz.inqool.eas.common.domain.DomainViews.*;
 public class SubjectPlace extends DatedObject<SubjectPlace> implements Authority {
 
     public static final String INDEXED = "indexed";
+    public static final String FACET = "FACET";
 
-    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED, FACET})
     String name;
 
     @ViewableProperty(views = {DETAIL, INDEXED})
     String authorityCode;
 
-    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED, FACET})
     boolean fromBook;
 
-    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED, FACET})
     boolean fromIllustration;
 }

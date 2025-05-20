@@ -16,18 +16,20 @@ import ShareButtons from '../components/exhibitions/ShareButtons'
 import AlbumView from '../components/exhibitions/AlbumView'
 import StorylineView from '../components/exhibitions/StorylineView'
 import SliderView from '../components/exhibitions/SliderView'
-import { ExhibitionView } from '../@types/types'
-import useExhibitionDetailQuery from '../api/query/useExhibitionDetailQuery'
+import { ExhibitionView } from '../../../fe-shared/@types/common'
+import {
+  useExhibitionDetailQuery,
+  useDeleteExhibitionMutation,
+} from '../api/exhibition'
 import Loader from '../components/reusableComponents/Loader'
 import ShowError from '../components/reusableComponents/ShowError'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
 import useMeQueryWrapper from '../hooks/useMeQueryWrapper'
-import useDeleteExhibitionMutation from '../api/mutation/useDeleteExhibitionMutation'
 import generateSearchSearchParams from '../utils/generateSearchSearchParams'
 import constructSearchUrl from '../utils/constructSearchUrl'
 
 const ExhibitionDetail: FC = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const params = useParams()
   const [exhibitionView, setExhibitionView] =
     useState<ExhibitionView>('STORYLINE')
@@ -110,10 +112,19 @@ const ExhibitionDetail: FC = () => {
         exhibitionCanBeSeen ? (
           <>
             {exhibition.user.id === me?.id ? (
-              <div className="flex w-full flex-row items-center justify-between border-b  border-b-superlightgray py-8">
-                <p className="font-bold text-black underline">
+              <div className="flex w-full flex-row items-center justify-between border-b border-b-superlightgray py-8">
+                <a
+                  href={
+                    i18n.resolvedLanguage === 'cs'
+                      ? 'https://e-ilustrace.cz/napoveda/'
+                      : 'https://e-ilustrace.cz/en/help/'
+                  }
+                  target="_blank"
+                  className="font-bold text-black underline"
+                  rel="noreferrer"
+                >
                   {t('exhibitions:how_to_use_exhibitions')}
-                </p>
+                </a>
                 <div className="flex gap-3">
                   <Button
                     variant="text"
@@ -259,14 +270,14 @@ const ExhibitionDetail: FC = () => {
       {exhibitionView === 'SLIDER' && exhibitionCanBeSeen && (
         <SliderView exhibition={exhibition} />
       )}
-      <div className="mx-auto mt-5 flex max-w-7xl flex-col px-8">
-        {exhibition ? (
-          <ShareButtons
-            exhibition={exhibition}
-            canEditShare={exhibition.user.id === me?.id}
-          />
-        ) : null}
-      </div>
+      {/* <div className="mx-auto mt-5 flex max-w-7xl flex-col px-8"> */}
+      {/*  {exhibition ? ( */}
+      {/*    <ShareButtons */}
+      {/*      exhibition={exhibition} */}
+      {/*      canEditShare={exhibition.user.id === me?.id} */}
+      {/*    /> */}
+      {/*  ) : null} */}
+      {/* </div> */}
 
       {/* {exhibitionCanBeSeen ? ( */}
       {/*  <div className="mx-auto max-w-7xl"> */}

@@ -6,7 +6,7 @@ import BookMark from '../../assets/icons/bookmark.svg?react'
 import { TIllustrationList } from '../../../../fe-shared/@types/illustration'
 import Loader from './Loader'
 import ShowError from './ShowError'
-import useMySelectionQuery from '../../api/query/useMySelectionQuery'
+import { useMySelectionQuery } from '../../api/my-selection'
 import useAddToMySelectionMutationWrapper from '../../hooks/useAddToMySelectionMutationWrapper'
 import useRemoveFromMySelectionMutationWrapper from '../../hooks/useRemoveFromMySelectionMutationWrapper'
 import useMeQueryWrapper from '../../hooks/useMeQueryWrapper'
@@ -102,9 +102,9 @@ const Gallery: FC<Props> = ({ items, loading, error, backPath }) => {
                 <span className="line-clamp-2 text-center font-bold text-black">
                   {item.title}
                 </span>
-                {(item.printEntry.placesOfPublication.length ||
-                  item.printEntry.originators.length) &&
-                item.printEntry.date ? (
+                {(item.printEntry?.placesOfPublication.length ||
+                  item.printEntry?.originators.length) &&
+                item.printEntry?.date ? (
                   <span className="text-center text-xs text-gray">
                     {item.printEntry.placesOfPublication.join(' ')}{' '}
                     {item.printEntry.originators.join(' ')}{' '}

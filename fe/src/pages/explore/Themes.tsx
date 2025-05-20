@@ -5,22 +5,15 @@ import KeyIcon from '../../assets/icons/key.svg?react'
 
 import Button from '../../components/reusableComponents/Button'
 import useMobile from '../../hooks/useMobile'
-import useThemeListQuery from '../../api/query/useThemeListQuery'
+import { useThemeListQuery } from '../../api/theme'
 import Loader from '../../components/reusableComponents/Loader'
 import ShowError from '../../components/reusableComponents/ShowError'
 
-import Architecture from '../../assets/images/architecture.jpg'
-import Bible from '../../assets/images/bible.jpg'
-import Erby from '../../assets/images/heraldry.jpg'
-import People from '../../assets/images/characters.jpg'
-import Places from '../../assets/images/locations.jpg'
-import Objects from '../../assets/images/objects.jpg'
-import Plants from '../../assets/images/plants.jpg'
-import Military from '../../assets/images/military.jpg'
-import Animals from '../../assets/images/animals.jpg'
 import { useExploreStore } from '../../store/useExploreStore'
 import LinkLikeButton from '../../components/reusableComponents/LinkLikeButton'
 import PaletteIcon from '../../assets/icons/palette.svg?react'
+import getThemeTranslation from '../../utils/getThemeTranslation'
+import getThemeImage from '../../utils/getThemeImage'
 
 type ThemeProps = {
   name: string
@@ -30,47 +23,9 @@ type ThemesProps = {
   setFilterOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const getImage = (name: string) => {
-  let image
-
-  switch (name) {
-    case 'Architektura':
-      image = Architecture
-      break
-    case 'Bible':
-      image = Bible
-      break
-    case 'Erby':
-      image = Erby
-      break
-    case 'Lidé a postavy':
-      image = People
-      break
-    case 'Místa':
-      image = Places
-      break
-    case 'Předměty':
-      image = Objects
-      break
-    case 'Rostliny':
-      image = Plants
-      break
-    case 'Vojenství':
-      image = Military
-      break
-    case 'Zvířata':
-      image = Animals
-      break
-    default:
-    // image = PhotoIcon
-  }
-
-  return image
-}
-
 const Theme = ({ name }: ThemeProps) => {
-  const { t } = useTranslation()
   const { setThemes } = useExploreStore()
+  const { i18n } = useTranslation()
 
   return (
     <button
@@ -79,11 +34,13 @@ const Theme = ({ name }: ThemeProps) => {
       className="flex-1/3 mx-auto flex cursor-pointer flex-col items-center md:mx-0"
     >
       <img
-        className="h-60 w-60  rounded-lg transition-all hover:scale-105"
-        src={getImage(name)}
-        alt={name}
+        className="h-60 w-60 rounded-lg transition-all hover:scale-105"
+        src={getThemeImage(name)}
+        alt={i18n.resolvedLanguage === 'cs' ? name : getThemeTranslation(name)}
       />
-      <h2 className="mt-2 font-bold uppercase">{t(name)}</h2>
+      <h2 className="mt-2 font-bold uppercase">
+        {i18n.resolvedLanguage === 'cs' ? name : getThemeTranslation(name)}
+      </h2>
     </button>
   )
 }
@@ -97,7 +54,7 @@ const Themes: FC<ThemesProps> = ({ setFilterOpen }) => {
   return (
     <section>
       <div className="mr-auto flex w-full items-center justify-between border-b-[1.5px] border-superlightgray pb-6 md:w-auto md:border-none md:pb-0">
-        <h1 className="text-xl font-bold uppercase tracking-wider">
+        <h1 className="text-lg font-bold uppercase tracking-wider">
           {t('themes')}
         </h1>
         <div className="flex flex-wrap justify-end gap-4">

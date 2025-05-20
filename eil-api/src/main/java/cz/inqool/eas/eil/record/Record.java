@@ -47,11 +47,11 @@ import static cz.inqool.eas.eil.record.illustration.Illustration.ILLUSTRATION;
 import static javax.persistence.CascadeType.*;
 
 @Viewable
-@ViewableClass(views = {DETAIL, LIST, CREATE, UPDATE, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE})
-@ViewableMapping(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE}, mappedTo = DEFAULT)
+@ViewableClass(views = {DETAIL, LIST, CREATE, UPDATE, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET})
+@ViewableMapping(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET}, mappedTo = DEFAULT)
 @ViewableMapping(views = CREATE, mappedTo = CREATE)
 @ViewableMapping(views = UPDATE, mappedTo = UPDATE)
-@ViewableAnnotation(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE}, value = {Entity.class, BatchSize.class, Table.class})
+@ViewableAnnotation(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET}, value = {Entity.class, BatchSize.class, Table.class})
 @ViewableLeaf(subClasses = {
         Illustration.class,
         Book.class
@@ -81,6 +81,7 @@ public abstract class Record extends DatedObject<Record> {
     public static final String INDEXED = "INDEXED";
     public static final String SOURCES = "SOURCES";
     public static final String VISE = "VISE";
+    public static final String FACET = "FACET";
 
     @ViewableProperty(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, VISE})
     String identifier;
@@ -95,9 +96,10 @@ public abstract class Record extends DatedObject<Record> {
     String fixedLengthField;
 
     @JsonIgnore
-    @ViewableProperty(views = {DETAIL, LIST, EXHIBITION, INDEXED, SOURCES, VISE})
+    @ViewableProperty(views = {DETAIL, LIST, EXHIBITION, INDEXED, SOURCES, VISE, FACET})
     @ViewableMapping(views = {DETAIL, LIST, EXHIBITION, VISE}, mappedTo = DETAIL)
     @ViewableMapping(views = {INDEXED}, mappedTo = INDEXED)
+    @ViewableMapping(views = {FACET}, mappedTo = FACET)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -157,9 +159,10 @@ public abstract class Record extends DatedObject<Record> {
     @JoinColumn(name = "record_id")
     Set<Reference> references = new LinkedHashSet<>();
 
-    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES})
+    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES, FACET})
     @ViewableMapping(views = {DETAIL}, mappedTo = DETAIL)
     @ViewableMapping(views = {INDEXED}, mappedTo = INDEXED)
+    @ViewableMapping(views = {FACET}, mappedTo = FACET)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @ManyToMany(fetch = FetchType.EAGER, cascade = {PERSIST, MERGE, REFRESH, DETACH})
@@ -178,9 +181,10 @@ public abstract class Record extends DatedObject<Record> {
             inverseJoinColumns = @JoinColumn(name = "subject_institution_id"))
     Set<SubjectInstitution> subjectInstitutions = new LinkedHashSet<>();
 
-    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES})
+    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES, FACET})
     @ViewableMapping(views = {DETAIL}, mappedTo = DETAIL)
     @ViewableMapping(views = {INDEXED}, mappedTo = INDEXED)
+    @ViewableMapping(views = {FACET}, mappedTo = FACET)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @ManyToMany(fetch = FetchType.EAGER, cascade = {PERSIST, MERGE, REFRESH, DETACH})
@@ -189,9 +193,10 @@ public abstract class Record extends DatedObject<Record> {
             inverseJoinColumns = @JoinColumn(name = "subject_entry_id"))
     Set<SubjectEntry> subjectEntries = new LinkedHashSet<>();
 
-    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES})
+    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES, FACET})
     @ViewableMapping(views = {DETAIL}, mappedTo = DETAIL)
     @ViewableMapping(views = {INDEXED}, mappedTo = INDEXED)
+    @ViewableMapping(views = {FACET}, mappedTo = FACET)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @ManyToMany(fetch = FetchType.EAGER, cascade = {PERSIST, MERGE, REFRESH, DETACH})
@@ -200,7 +205,7 @@ public abstract class Record extends DatedObject<Record> {
             inverseJoinColumns = @JoinColumn(name = "subject_place_id"))
     Set<SubjectPlace> subjectPlaces = new LinkedHashSet<>();
 
-    @ViewableProperty(views = {DETAIL, MARC, INDEXED})
+    @ViewableProperty(views = {DETAIL, MARC, INDEXED, FACET})
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @ManyToMany(fetch = FetchType.EAGER, cascade = {PERSIST, MERGE, REFRESH, DETACH})
@@ -209,7 +214,7 @@ public abstract class Record extends DatedObject<Record> {
             inverseJoinColumns = @JoinColumn(name = "keyword_id"))
     Set<Keyword> keywords = new LinkedHashSet<>();
 
-    @ViewableProperty(views = {DETAIL, INDEXED})
+    @ViewableProperty(views = {DETAIL, INDEXED, FACET})
     @ViewableMapping(views = {DETAIL}, mappedTo = DETAIL)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
@@ -235,9 +240,10 @@ public abstract class Record extends DatedObject<Record> {
     @JoinColumn(name = "record_id")
     Set<Owner> owners = new LinkedHashSet<>();
 
-    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES, VISE})
+    @ViewableProperty(views = {DETAIL, INDEXED, SOURCES, VISE, FACET})
     @ViewableMapping(views = {DETAIL, VISE}, mappedTo = DETAIL)
     @ViewableMapping(views = {INDEXED}, mappedTo = INDEXED)
+    @ViewableMapping(views = {FACET}, mappedTo = FACET)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
     @ManyToMany(fetch = FetchType.EAGER, cascade = {PERSIST, MERGE, REFRESH, DETACH})
@@ -297,6 +303,6 @@ public abstract class Record extends DatedObject<Record> {
         return institutions.stream().filter(i -> !i.isMainWorkshop()).collect(Collectors.toSet());
     }
 
-    @ViewableProperty(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE})
+    @ViewableProperty(views = {DETAIL, LIST, IDENTIFIED, XLSX, ESSENTIAL, MARC, IDENTIFIER, EXHIBITION, INDEXED, SOURCES, VISE, FACET})
     public abstract String getType();
 }

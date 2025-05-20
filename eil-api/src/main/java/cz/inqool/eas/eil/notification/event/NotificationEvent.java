@@ -18,7 +18,8 @@ import static cz.inqool.eas.eil.notification.NotificationType.EMAIL;
 @Getter
 public enum NotificationEvent implements LabeledEnum<NotificationEvent> {
 
-    CONFIRM_REGISTRATION("Potvrzení e-mailu při registraci", null, TokenNotificationTemplateModel.class, Set.of(EMAIL));
+    CONFIRM_REGISTRATION("Potvrzení e-mailu při registraci", null, TokenNotificationTemplateModel.class, Set.of(EMAIL)),
+    PASSWORD_RESET("Žádost o reset hesla", null, TokenNotificationTemplateModel.class, Set.of(EMAIL));
 
     private final String label;
 

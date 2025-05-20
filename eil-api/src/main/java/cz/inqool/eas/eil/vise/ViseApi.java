@@ -1,5 +1,7 @@
 package cz.inqool.eas.eil.vise;
 
+import cz.inqool.eas.eil.security.Permission;
+import cz.inqool.eas.eil.security.UserChecker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,13 +30,15 @@ public class ViseApi {
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/delete")
     public void deleteFilesFromVise() {
-        viseManager.deleteFromVise();
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
+        viseManager.deleteViseIds();
     }
 
     @Operation(summary = "Move Illustration photos to VISE directory")
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/copy")
     public void moveFilesToVise() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         viseManager.moveFilesToVise();
     }
 
@@ -42,7 +46,16 @@ public class ViseApi {
     @ApiResponse(responseCode = OK, description = "OK")
     @GetMapping("/set")
     public void setViseFileIds() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         viseManager.setViseFileIds();
+    }
+
+    @Operation(summary = "Reset Vise project")
+    @ApiResponse(responseCode = OK, description = "OK")
+    @GetMapping("/reset")
+    public void resetVise() {
+        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
+        viseManager.resetViseImages();
     }
 
     @Autowired

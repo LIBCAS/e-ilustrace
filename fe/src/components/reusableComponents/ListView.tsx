@@ -9,7 +9,7 @@ import { TBookList } from '../../../../fe-shared/@types/book'
 import { TIllustrationList } from '../../../../fe-shared/@types/illustration'
 import Paginator from './Paginator'
 import ShowError from './ShowError'
-import useMySelectionQuery from '../../api/query/useMySelectionQuery'
+import { useMySelectionQuery } from '../../api/my-selection'
 import useAddToMySelectionMutationWrapper from '../../hooks/useAddToMySelectionMutationWrapper'
 import useRemoveFromMySelectionMutationWrapper from '../../hooks/useRemoveFromMySelectionMutationWrapper'
 import useMeQueryWrapper from '../../hooks/useMeQueryWrapper'
@@ -167,7 +167,7 @@ const ListView: FC<Props> = ({
                       </span>
                     )}
                   {'printEntry' in i && i.printEntry?.placesOfPublication && (
-                    <span className="text-sm text-gray ">
+                    <span className="text-sm text-gray">
                       {i.printEntry.placesOfPublication.join(' ')}{' '}
                       {i.printEntry.originators.join(' ')} {i.printEntry.date}
                     </span>
@@ -251,7 +251,7 @@ const ListView: FC<Props> = ({
                       </span>
                     )}
                   {'printEntry' in i && i.printEntry?.placesOfPublication && (
-                    <span className="text-sm text-gray ">
+                    <span className="text-sm text-gray">
                       {i.printEntry.placesOfPublication.join(' ')}{' '}
                       {i.printEntry.originators.join(' ')} {i.printEntry.date}
                     </span>

@@ -5,12 +5,12 @@ import cz.inqool.eas.common.storage.file.FileDetail;
 import cz.inqool.eas.common.storage.file.FileManager;
 import cz.inqool.eas.common.storage.file.OpenedFile;
 import cz.inqool.eas.eil.mirador.dto.*;
+import cz.inqool.eas.eil.record.RecordEssential;
 import cz.inqool.eas.eil.record.RecordRepository;
 import cz.inqool.eas.eil.record.book.Book;
 import cz.inqool.eas.eil.record.illustration.Illustration;
 import cz.inqool.eas.eil.record.illustration.IllustrationEssential;
-import cz.inqool.eas.eil.security.Permission;
-import cz.inqool.eas.eil.security.UserChecker;
+import cz.inqool.eas.eil.vise.ViseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class MiradorService {
-    public static final String  RECORD_PATH = "api/eil/record/";
-    public static final String VISE_PATH_DELETE = "vise/_project_delete";
-    public static final String VISE_PATH_CREATE = "vise/_project_create";
+    public static final String RECORD_PATH = "api/eil/record/";
     public static final String CANTALOUPE = "Cantaloupe";
 
     private RecordRepository recordRepository;
@@ -137,32 +135,33 @@ public class MiradorService {
     }
 
     public void resetMiradorImages() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
-        //delete images from cantaloupe first.
-        //POST https://test.e-ilustrace.cz/vise/_project_delete PAYLOAD x-www-form-urlencoded Form Data Cantaloupe: 1 (Cantaloupe=1)
+        ViseUtils viseUtils = new ViseUtils(baseUrl);
+        //delete vise project
+        viseUtils.deleteViseProject(CANTALOUPE);
         //remove ids and flags
         deleteFromCantaloupe();
-        //create cantaloupe dir again
-        //POST https://test.e-ilustrace.cz/vise/_project_create PAYLOAD x-www-form-urlencoded Form Data pname: Cantaloupe (pname=Cantaloupe)
-        //copyfiles
+        //create vise project again
+        viseUtils.createViseProject(CANTALOUPE);
+        //copy files
         moveIllsImagesToCantaloupe();
         //run index
-        //set fileIds;
-        setCantaloupeIds();
+        viseUtils.startIndexingVise(CANTALOUPE);
+        if (viseUtils.fetchIndexStatusLoop(CANTALOUPE)) {
+            setCantaloupeIds();
+        }
     }
 
     public void deleteFromCantaloupe() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         log.debug("STARTED deleting Cantaloupe IDs and flags from Illustrations");
-        List<IllustrationEssential> ills = recordRepository.findAllEssential();
-        List<IllustrationEssential> updateBatch = new ArrayList<>();
+        List<RecordEssential> ills = recordRepository.findAllEssential();
+        List<RecordEssential> updateBatch = new ArrayList<>();
         int count = 0;
         int size = ills.size();
-        for (IllustrationEssential ill : ills) {
-            ill.setCantaloupePageScanCopied(null);
-            ill.setCantaloupeIllScanId(null);
-            ill.setCantaloupeIllScanCopied(null);
-            ill.setCantaloupePageScanId(null);
+        for (RecordEssential ill : ills) {
+            ((IllustrationEssential) ill).setCantaloupePageScanCopied(null);
+            ((IllustrationEssential) ill).setCantaloupeIllScanId(null);
+            ((IllustrationEssential) ill).setCantaloupeIllScanCopied(null);
+            ((IllustrationEssential) ill).setCantaloupePageScanId(null);
             updateBatch.add(ill);
             if (updateBatch.size() >= 100) {
                 transactionTemplate.executeWithoutResult(status -> recordRepository.update(updateBatch));
@@ -176,8 +175,8 @@ public class MiradorService {
         log.debug("FINISHED deleting Cantaloupe IDs and flags from Illustrations");
     }
 
-    public void setCantaloupeFlags(IllustrationEssential ill, boolean isPage, Instant now) {
-        String fileId = isPage ? ill.getPageScan().getId() : ill.getIllustrationScan().getId();
+    public void setCantaloupeFlags(RecordEssential ill, boolean isPage, Instant now) {
+        String fileId = isPage ? ((IllustrationEssential) ill).getPageScan().getId() : ((IllustrationEssential) ill).getIllustrationScan().getId();
         OpenedFile openedFile = fileManager.open(fileId);
         File file = openedFile.getDescriptor();
         InputStream stream = openedFile.getStream();
@@ -187,9 +186,9 @@ public class MiradorService {
         try {
             FileUtils.copyInputStreamToFile(stream, targetFile);
             if (isPage) {
-                ill.setCantaloupePageScanCopied(now);
+                ((IllustrationEssential) ill).setCantaloupePageScanCopied(now);
             } else {
-                ill.setCantaloupeIllScanCopied(now);
+                ((IllustrationEssential) ill).setCantaloupeIllScanCopied(now);
             }
         } catch (IOException ioe) {
             log.error("Error moving file '{}' to Cantaloupe directory", name);
@@ -197,18 +196,19 @@ public class MiradorService {
     }
 
     public void moveIllsImagesToCantaloupe() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         log.debug("STARTED moving Illustration images to Cantaloupe dir");
-        List<IllustrationEssential> ills = recordRepository.findIllustrationScans();
-        Set<IllustrationEssential> updateBatch = new HashSet<>();
+        List<RecordEssential> ills = recordRepository.findIllustrationScans();
+        Set<RecordEssential> updateBatch = new HashSet<>();
         Instant now = Instant.now();
         int count = 0;
         int size = ills.size();
-        for (IllustrationEssential ill : ills) {
-            if (ill.getCantaloupeIllScanCopied() == null && ill.getIllustrationScan() != null) {
+        for (RecordEssential ill : ills) {
+            if (((IllustrationEssential) ill).getCantaloupeIllScanCopied() == null
+                    && ((IllustrationEssential) ill).getIllustrationScan() != null) {
                 setCantaloupeFlags(ill,false, now);
             }
-            if (ill.getCantaloupePageScanCopied() == null && ill.getPageScan() != null) {
+            if (((IllustrationEssential) ill).getCantaloupePageScanCopied() == null
+                    && ((IllustrationEssential) ill).getPageScan() != null) {
                 setCantaloupeFlags(ill, true, now);
             }
             updateBatch.add(ill);
@@ -225,10 +225,9 @@ public class MiradorService {
     }
 
     public void setCantaloupeIds() {
-        UserChecker.checkUserHasAnyPermission(Permission.ADMIN);
         log.debug("STARTED setting Illustration Cantaloupe IDs");
-        List<IllustrationEssential> illustrations = recordRepository.findNullCantaloupeFileIds();
-        Set<IllustrationEssential> updateBatch = new HashSet<>();
+        List<RecordEssential> illustrations = recordRepository.findNullCantaloupeFileIds();
+        Set<RecordEssential> updateBatch = new HashSet<>();
         List<String> lines;
         int count = 0;
         int size = illustrations.size();
@@ -244,11 +243,13 @@ public class MiradorService {
             log.error("Error reading Cantaloupe filelist.txt");
             return;
         }
-        for (IllustrationEssential illustration : illustrations) {
-            if (illustration.getCantaloupeIllScanId() == null && illustration.getIllustrationScan() != null) {
+        for (RecordEssential illustration : illustrations) {
+            if (((IllustrationEssential) illustration).getCantaloupeIllScanId() == null
+                    && ((IllustrationEssential) illustration).getIllustrationScan() != null) {
                 setCantaloupeIds(lines, illustration, false);
             }
-            if (illustration.getCantaloupePageScanId() == null && illustration.getPageScan() != null) {
+            if (((IllustrationEssential) illustration).getCantaloupePageScanId() == null
+                    && ((IllustrationEssential) illustration).getPageScan() != null) {
                 setCantaloupeIds(lines, illustration, true);
             }
             updateBatch.add(illustration);
@@ -264,15 +265,16 @@ public class MiradorService {
         log.debug("FINISHED setting Illustration Cantaloupe IDs");
     }
 
-    public void setCantaloupeIds(List<String> lines, IllustrationEssential illustration, boolean isPage) {
-        FileDetail file = isPage ? illustration.getPageScan() : illustration.getIllustrationScan();
+    public void setCantaloupeIds(List<String> lines, RecordEssential illustration, boolean isPage) {
+        FileDetail file = isPage ?
+                ((IllustrationEssential) illustration).getPageScan() : ((IllustrationEssential) illustration).getIllustrationScan();
         String fileName = file.getName().replace(",", "").replace("\"", "").replace("'", "");
         int index = lines.indexOf(fileName);
         if (index > -1) {
             if (isPage) {
-                illustration.setCantaloupePageScanId(Integer.toString(index));
+                ((IllustrationEssential) illustration).setCantaloupePageScanId(Integer.toString(index));
             } else {
-                illustration.setCantaloupeIllScanId(Integer.toString(index));
+                ((IllustrationEssential) illustration).setCantaloupeIllScanId(Integer.toString(index));
             }
         } else {
             log.info("Setting Cantaloupe Illustration file id FAILED to Illustration '{}' with value '{}'", illustration.getId(), fileName);

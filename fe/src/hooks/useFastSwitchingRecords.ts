@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useSearchStore } from '../store/useSearchStore'
-import useRecordListQuery from '../api/query/useRecordListQuery'
+import { useRecordListQuery } from '../api/record'
 import { TBookList } from '../../../fe-shared/@types/book'
 import { TIllustrationList } from '../../../fe-shared/@types/illustration'
 import constructRecordDetailUrl from '../utils/constructRecordDetailUrl'

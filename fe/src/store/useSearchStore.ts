@@ -1,17 +1,13 @@
 import { create } from 'zustand'
 import { v4 as uuidv4 } from 'uuid'
-import { RecordType, View } from '../@types/types'
-import i18next from '../lang/index'
 import {
+  RecordType,
+  View,
   TDropdown,
   TDropdownWithOperator,
+  TSortTypes,
 } from '../../../fe-shared/@types/common'
-
-export type TSortTypes =
-  | 'title_ASC'
-  | 'title_DESC'
-  | 'yearFrom_ASC'
-  | 'yearFrom_DESC'
+import i18next from '../lang/index'
 
 export const SortTypes: TSortTypes[] = [
   'title_ASC',
@@ -33,6 +29,7 @@ export interface TSearchVariablesState {
     from: number
     to: number
   }
+  yearRangeSet: { illustrations: boolean; books: boolean }
   itemsPerPage: TDropdown
   view: View
   type: RecordType
@@ -52,6 +49,10 @@ export interface TSearchVariablesState {
 interface TState extends TSearchVariablesState {
   setSort: (newValue: { value: TSortTypes; label: string }) => void
   setYear: (newValues: { from: number; to: number }) => void
+  setYearRangeSet: (newValues: {
+    illustrations: boolean
+    books: boolean
+  }) => void
   setYearRange: (newValues: { from: number; to: number }) => void
   setItemsPerPage: (newValue: TDropdown) => void
   setView: (newValue: View) => void
@@ -75,9 +76,10 @@ interface TState extends TSearchVariablesState {
 export const useSearchStore = create<TState>()((set) => ({
   sort: null,
   year: { from: 0, to: 1990 },
-  itemsPerPage: { value: '10', label: '10' },
+  yearRangeSet: { illustrations: false, books: false },
+  itemsPerPage: { value: '25', label: '25' },
   view: 'LIST',
-  type: 'BOOK',
+  type: 'ILLUSTRATION',
   filterAuthor: [],
   filterObject: [],
   filterPublishingPlace: [],
@@ -119,4 +121,5 @@ export const useSearchStore = create<TState>()((set) => ({
     set(() => ({ searchWithCategory: newValue, currentPage: 0 })),
   setIIIFFormat: (newValue) =>
     set(() => ({ IIIFFormat: newValue, currentPage: 0 })),
+  setYearRangeSet: (newValue) => set(() => ({ yearRangeSet: newValue })),
 }))

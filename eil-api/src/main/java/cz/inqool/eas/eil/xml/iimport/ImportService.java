@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class ImportService {
+    public static final String FULL = "full";
 
     private MarcCreateProcessor marcCreateProcessor;
 
@@ -68,61 +69,79 @@ public class ImportService {
     public List<File> extractArchivesInto(String outputDir) {
         List<File> archives = new ArrayList<>(FileUtils.listFiles(new File(importDir), ArrayUtils.toArray(extension), false));
         archives.forEach(archive -> {
-            // output directory is created once every day (only if new archives are added)
-            new File(String.join(File.separator, importDir, outputDir)).mkdirs();
-            try {
-                if (archive.getName().startsWith(illPrefix)) {
-                    extract(archive, outputDir, illSubdir);
-                } else if (archive.getName().startsWith(bookPrefix)) {
-                    extract(archive, outputDir, bookSubdir);
+            String archiveName = String.join(File.separator, importDir, outputDir);
+            // unzip only archives that are not meant as full reindex.
+            //todo Rework after further information from Hejzl
+            if (!archiveName.toLowerCase().contains(FULL)) {
+                // output directory is created once every day (only if new archives are added)
+                new File(String.join(File.separator, importDir, outputDir)).mkdirs();
+                try {
+                    if (archive.getName().startsWith(illPrefix)) {
+                        extract(archive, outputDir, illSubdir);
+                    } else if (archive.getName().startsWith(bookPrefix)) {
+                        extract(archive, outputDir, bookSubdir);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         });
         return archives;
     }
 
     public void importIllustrations(String outputDir) {
+        Iterator<File> it = null;
         try {
-            Iterator<File> it = FileUtils.iterateFiles(
+            it = FileUtils.iterateFiles(
                     new File(String.join(File.separator, importDir, outputDir, illSubdir)), ArrayUtils.toArray("xml"), false);
-
-            while (it.hasNext()) {
-                File file = it.next();
-                String fileName = file.getName();
-                if (recordRepository.findIdByIdentifier(fileName.substring(0, fileName.lastIndexOf("."))) == null) {
-                    unmarshallAndParseRecord(file, marcCreateProcessor);
-                } else {
-                    unmarshallAndParseRecord(file, marcUpdateProcessor);
-                }
-            }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Importing illustrations failed from {}", outputDir);
         }
-    }
 
-    public void importBooks(String outputDir) {
-        try {
-            Iterator<File> it = FileUtils.iterateFiles(
-                    new File(String.join(File.separator, importDir, outputDir, bookSubdir)), ArrayUtils.toArray("xml"), false);
-
+        if (it != null) {
             while (it.hasNext()) {
                 File file = it.next();
                 String fileName = file.getName();
-                String identifier = fileName.substring(0, fileName.lastIndexOf("."));
-                if (recordRepository.findIllByBookIdentifier(identifier) != null) {
-                    if (recordRepository.findIdByIdentifier(identifier) == null) {
+                try {
+                    if (recordRepository.findIdByIdentifier(fileName.substring(0, fileName.lastIndexOf("."))) == null) {
                         unmarshallAndParseRecord(file, marcCreateProcessor);
                     } else {
                         unmarshallAndParseRecord(file, marcUpdateProcessor);
                     }
+                } catch (Exception e) {
+                    log.error("Error while importing Illustration '{}'", fileName);
                 }
             }
         }
-        catch (Exception e) {
-            log.error("Importing books failed from {}", outputDir, e);
+    }
+
+    public void importBooks(String outputDir) {
+        Iterator<File> it = null;
+        try {
+            it = FileUtils.iterateFiles(
+                    new File(String.join(File.separator, importDir, outputDir, bookSubdir)), ArrayUtils.toArray("xml"), false);
+        } catch (Exception e) {
+            log.error("Importing books failed from {}", outputDir);
+        }
+
+        if (it != null) {
+            while (it.hasNext()) {
+                File file = it.next();
+                String fileName = file.getName();
+                String identifier = fileName.substring(0, fileName.lastIndexOf("."));
+                String identifierUnderscore = identifier + "_";
+                if (recordRepository.findIllByBookIdentifier(identifierUnderscore) != null) {
+                    try {
+                        if (recordRepository.findIdByIdentifier(identifier) == null) {
+                            unmarshallAndParseRecord(file, marcCreateProcessor);
+                        } else {
+                            unmarshallAndParseRecord(file, marcUpdateProcessor);
+                        }
+                    } catch (Exception e) {
+                        log.error("Error while importing Book '{}'", fileName);
+                    }
+                }
+            }
         }
     }
 

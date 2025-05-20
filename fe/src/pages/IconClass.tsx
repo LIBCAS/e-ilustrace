@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import ThemesFilter from '../components/iconclass/ThemesFilter'
+import IconClassFilter from '../components/iconclass/IconClassFilter'
 import IconClassSearch from '../components/iconclass/IconClassSearch'
 import useMobile from '../hooks/useMobile'
 
@@ -15,7 +15,7 @@ const IconClass = () => {
           isMobile ? 'fixed left-0 top-0 z-50 h-screen bg-white' : ''
         } border-collapse border-x-[1.5px] border-superlightgray md:h-[calc(100vh-126px)]`}
       >
-        <ThemesFilter
+        <IconClassFilter
           isMobile={isMobile}
           filterOpen={filterOpen}
           setFilterOpen={setFilterOpen}

@@ -1,0 +1,9 @@
+[submodule "index"]
+	path = index
+	url = ../../../eas/index.git
+[submodule "entity-views"]
+	path = entity-views
+	url = ../../../backslash/entity-views.git
+[submodule "common"]
+	path = common
+	url = ../../../eas/common.git

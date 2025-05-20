@@ -73,11 +73,11 @@ public class RecordRepository extends DatedRepository<
         return record;
     }
 
-    public List<IllustrationEssential> findAllEssential() {
+    public List<RecordEssential> findAllEssential() {
         QIllustrationEssential model = QIllustrationEssential.illustrationEssential;
 
-        List<IllustrationEssential> ills = query()
-                .select(model)
+        List<RecordEssential> ills = query()
+                .select(model._super)
                 .from(model)
                 .where(model.deleted.isNull())
                 .fetch();
@@ -86,11 +86,11 @@ public class RecordRepository extends DatedRepository<
         return ills;
     }
 
-    public List<IllustrationEssential> findIllustrationScansVise() {
+    public List<RecordEssential> findIllustrationScansVise() {
         QIllustrationEssential model = QIllustrationEssential.illustrationEssential;
 
-        List<IllustrationEssential> ills = query()
-                .select(model)
+        List<RecordEssential> ills = query()
+                .select(model._super)
                 .from(model)
                 .where(model.deleted.isNull())
                 .where(model.illustrationScan.isNotNull())
@@ -102,11 +102,11 @@ public class RecordRepository extends DatedRepository<
         return ills;
     }
 
-    public List<IllustrationEssential> findNullViseFileIdWithIllustrationScan() {
+    public List<RecordEssential> findNullViseFileIdWithIllustrationScan() {
         QIllustrationEssential model = QIllustrationEssential.illustrationEssential;
 
-        List<IllustrationEssential> ills = query()
-                .select(model)
+        List<RecordEssential> ills = query()
+                .select(model._super)
                 .from(model)
                 .where(model.deleted.isNull())
                 .where(model.illustrationScan.isNotNull())
@@ -132,11 +132,11 @@ public class RecordRepository extends DatedRepository<
         return ills;
     }
 
-    public List<IllustrationEssential> findIllustrationScans() {
+    public List<RecordEssential> findIllustrationScans() {
         QIllustrationEssential model = QIllustrationEssential.illustrationEssential;
 
-        List<IllustrationEssential> ills = query()
-                .select(model)
+        List<RecordEssential> ills = query()
+                .select(model._super)
                 .from(model)
                 .where(model.deleted.isNull())
                 .where((model.illustrationScan.isNotNull().and(model.cantaloupeIllScanCopied.isNull()))
@@ -147,11 +147,11 @@ public class RecordRepository extends DatedRepository<
         return ills;
     }
 
-    public List<IllustrationEssential> findNullCantaloupeFileIds() {
+    public List<RecordEssential> findNullCantaloupeFileIds() {
         QIllustrationEssential model = QIllustrationEssential.illustrationEssential;
 
-        List<IllustrationEssential> ills = query()
-                .select(model)
+        List<RecordEssential> ills = query()
+                .select(model._super)
                 .from(model)
                 .where(model.deleted.isNull())
                 .where((model.pageScan.isNotNull().and(model.cantaloupePageScanId.isNull()).and(model.cantaloupePageScanCopied.isNotNull())).
@@ -368,7 +368,7 @@ public class RecordRepository extends DatedRepository<
                 .select(model)
                 .from(model)
                 .where(model.deleted.isNull())
-                .where(model.identifier.contains(identifier))
+                .where(model.identifier.startsWith(identifier))
                 .fetchFirst();
 
         detachAll();

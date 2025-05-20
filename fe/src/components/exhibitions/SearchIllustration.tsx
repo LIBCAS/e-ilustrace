@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { FC, useDeferredValue, useState } from 'react'
 import Search from '../../assets/icons/search.svg?react'
 
-// import ActionButtons from './ActionButtons'
-import useRecordListQuery from '../../api/query/useRecordListQuery'
+import { useRecordListQuery } from '../../api/record'
 import TextInput from '../reusableComponents/inputs/TextInput'
 import Loader from '../reusableComponents/Loader'
 import ShowError from '../reusableComponents/ShowError'
@@ -31,7 +30,7 @@ const SearchIllustration: FC<TProps> = ({ close }) => {
       {
         search: useDeferredValue(search),
         category: 'title',
-        operation: 'FTX',
+        operation: 'FTXF',
       },
       {
         search: useDeferredValue(search),

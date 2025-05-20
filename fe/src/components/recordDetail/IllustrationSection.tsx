@@ -143,9 +143,9 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             </span>
           </div>
         ) : null}
-        {(record.printEntry.placesOfPublication.length ||
-          record.printEntry.originators.length) &&
-        record.printEntry.date ? (
+        {(record.printEntry?.placesOfPublication.length ||
+          record.printEntry?.originators.length) &&
+        record.printEntry?.date ? (
           <div className="flex border-b-[1.5px] border-superlightgray py-2">
             <span className="basis-1/3 font-bold">
               {t('publisher_details')}
@@ -243,6 +243,20 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                   {record.printingPlateEntry.placesOfPublication.join(' ')}{' '}
                   {record.printingPlateEntry.originators.join(' ')}{' '}
                   {record.printingPlateEntry.date}
+                </span>
+              </div>
+            ) : null}
+            {record.variantTitles.length ? (
+              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+                <span className="basis-1/3 font-bold">
+                  {t('variant_titles')}
+                </span>
+                <span className="basis-2/3">
+                  {record.variantTitles.map((n) => (
+                    <span key={n} className="mb-3 block last:mb-0">
+                      {n}
+                    </span>
+                  ))}
                 </span>
               </div>
             ) : null}

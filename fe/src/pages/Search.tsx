@@ -20,11 +20,9 @@ import SelectionDialog from '../components/reusableComponents/SelectionDialog'
 import ActiveFilters from '../components/search/ActiveFilters'
 
 import useMobile from '../hooks/useMobile'
-import useRecordListQuery from '../api/query/useRecordListQuery'
 import {
   recordTypes,
   SortTypes,
-  TSortTypes,
   useSearchStore,
   viewTypes,
 } from '../store/useSearchStore'
@@ -34,11 +32,18 @@ import i18next from '../lang'
 import {
   TDropdownWithOperator,
   TFilterOperator,
+  RecordType,
+  View,
+  TSortTypes,
 } from '../../../fe-shared/@types/common'
 import SelectionDialogButton from '../components/reusableComponents/SelectionDialogButton'
-import { RecordType, View } from '../@types/types'
+
 import useSearchTranslations from '../hooks/useSearchTranslations'
 import generateSearchSearchParams from '../utils/generateSearchSearchParams'
+import {
+  useRecordsWithFacetsQueryList,
+  useSearchYearsRangeQuery,
+} from '../api/record'
 
 type SearchInputProps = {
   search: { search: string; category: TDropdownWithOperator; uuid: string }
@@ -400,11 +405,9 @@ const Search: FC = () => {
     year,
   ])
 
-  const {
-    data: records,
-    isLoading: recordsLoading,
-    isError: recordsError,
-  } = useRecordListQuery({
+  const { data: yearsDataReady } = useSearchYearsRangeQuery(type)
+
+  const { records } = useRecordsWithFacetsQueryList({
     type,
     size: Number(itemsPerPage.value),
     year,
@@ -425,7 +428,9 @@ const Search: FC = () => {
       category: s.category.value,
       operation: s.category.operation,
     })),
+    searchWithCategoryOperation: 'AND',
     isIIIF: IIIFFormat,
+    recordsEnabled: !!yearsDataReady /* dont call query twice on init */,
   })
 
   const paginate = (pageNumber: number) => {
@@ -502,7 +507,7 @@ const Search: FC = () => {
                       type="button"
                       className={`rounded-l-xl p-2 px-3 ${
                         type === 'BOOK' ? 'font-bold text-red' : 'text-gray'
-                      }  border-collapse border-2 border-superlightgray hover:bg-superlightgray`}
+                      } border-collapse border-2 border-superlightgray hover:bg-superlightgray`}
                       onClick={() => setType('BOOK')}
                     >
                       {t('books')}
@@ -546,12 +551,14 @@ const Search: FC = () => {
             {view === 'TILES' && (
               <TilesView
                 allowFastSwitch
-                error={recordsError}
-                loading={recordsLoading}
+                error={records.isError}
+                loading={records.isLoading}
                 currentPage={currentPage}
-                illustrations={(records?.items as TIllustrationList[]) || []}
+                illustrations={
+                  (records.data?.items as TIllustrationList[]) || []
+                }
                 illustrationsPerPage={Number(itemsPerPage.value)}
-                totalIllustrations={records?.count || 0}
+                totalIllustrations={records.data?.count || 0}
                 paginate={paginate}
                 backPath="search"
               />
@@ -559,12 +566,12 @@ const Search: FC = () => {
             {view === 'LIST' && (
               <ListView
                 allowFastSwitch
-                error={recordsError}
-                loading={recordsLoading}
+                error={records.isError}
+                loading={records.isLoading}
                 currentPage={currentPage}
-                illustrations={records?.items || []}
+                illustrations={records.data?.items || []}
                 illustrationsPerPage={Number(itemsPerPage.value)}
-                totalIllustrations={records?.count || 0}
+                totalIllustrations={records.data?.count || 0}
                 paginate={paginate}
                 backPath="search"
               />

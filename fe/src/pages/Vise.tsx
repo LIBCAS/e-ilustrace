@@ -7,14 +7,13 @@ import VisualGroup from '../assets/icons/visual_group.svg?react'
 
 import Button from '../components/reusableComponents/Button'
 import ViewButtons from '../components/reusableComponents/ViewButtons'
-import { View } from '../@types/types'
+import { View, TDropdownWithOperator } from '../../../fe-shared/@types/common'
 import TilesView from '../components/reusableComponents/TilesView'
 import ListView from '../components/reusableComponents/ListView'
 import { TIllustrationList } from '../../../fe-shared/@types/illustration'
-import useRecordListQuery from '../api/query/useRecordListQuery'
+import { useRecordListQuery } from '../api/record'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
 import Dropdown from '../components/reusableComponents/inputs/Dropdown'
-import { TDropdownWithOperator } from '../../../fe-shared/@types/common'
 
 const Vise: FC = () => {
   const { t } = useTranslation()

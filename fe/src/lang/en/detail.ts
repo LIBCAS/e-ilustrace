@@ -44,4 +44,5 @@ export default {
   mirador_link: 'IIIF manifest',
   manifest: 'manifest',
   keywords: 'Keywords',
+  variant_titles: 'Variant titles',
 }

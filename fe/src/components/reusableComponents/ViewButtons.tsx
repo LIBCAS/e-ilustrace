@@ -2,7 +2,7 @@ import { FC } from 'react'
 import clsx from 'clsx'
 import ListIcon from '../../assets/icons/list.svg?react'
 import Tiles from '../../assets/icons/tiles.svg?react'
-import { RecordType, View } from '../../@types/types'
+import { RecordType, View } from '../../../../fe-shared/@types/common'
 
 type Props = {
   view: View

@@ -9,19 +9,23 @@ const ActiveFilters: FC = () => {
   const { t } = useTranslation()
   const {
     year,
-    filterPlace,
+    filterPublishingPlace,
     filterObject,
     filterAuthor,
     setYear,
-    setFilterPlace,
+    setFilterPublishingPlace,
     setFilterObject,
     setFilterAuthor,
   } = useSearchStore()
 
-  const allFilters = [...filterPlace, ...filterObject, ...filterAuthor]
+  const allFilters = [
+    ...filterPublishingPlace,
+    ...filterObject,
+    ...filterAuthor,
+  ]
 
   return (
-    <div className="flex flex-wrap gap-2 ">
+    <div className="flex flex-wrap gap-2">
       <div className="flex flex-wrap gap-2 border-r border-superlightgray pr-2">
         {allFilters.map((filter, index) => (
           <div
@@ -33,10 +37,14 @@ const ActiveFilters: FC = () => {
               key={`close-${filter.label}`}
               className="ml-2 h-4 w-4 cursor-pointer"
               onClick={() => {
-                if (filterPlace.find((place) => place.label === filter.label)) {
-                  const places = clone(filterPlace)
+                if (
+                  filterPublishingPlace.find(
+                    (place) => place.label === filter.label
+                  )
+                ) {
+                  const places = clone(filterPublishingPlace)
                   places.splice(index, 1)
-                  setFilterPlace(places)
+                  setFilterPublishingPlace(places)
                 } else if (
                   filterObject.find((object) => object.label === filter.label)
                 ) {
@@ -74,7 +82,7 @@ const ActiveFilters: FC = () => {
             // Clear all filters from SearchFilter
             setFilterAuthor([])
             setFilterObject([])
-            setFilterPlace([])
+            setFilterPublishingPlace([])
             setYear({ from: 0, to: 1990 })
           }}
         >

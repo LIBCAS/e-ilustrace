@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import clone from 'lodash/clone'
 import Close from '../../assets/icons/close.svg?react'
 import { useSearchStore } from '../../store/useSearchStore'
-import useSearchYearsRangeQuery from '../../api/query/useSearchYearsRangeQuery'
+import { useSearchYearsRangeQuery } from '../../api/record'
 
 const ActiveFilters: FC = () => {
   const { t } = useTranslation('filters')

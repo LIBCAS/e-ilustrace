@@ -6,6 +6,8 @@ import cz.inqool.entityviews.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +35,7 @@ public class Link extends DomainObject<Link> {
 
     @ViewableProperty(views = {DEFAULT})
     @ViewableMapping(views = {DEFAULT}, mappedTo = IDENTIFIED)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    @ManyToOne
     Record record;
 }

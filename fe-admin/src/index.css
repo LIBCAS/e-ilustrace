@@ -3,11 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-
   html,
   body {
     background-color: #f8f7f7;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 
   .container {
@@ -15,7 +14,7 @@
   }
 
   h1 {
-    @apply font-bold text-[1.5rem] 2xs:text-[1.75rem] sm:text-[2rem];
+    @apply text-[1.5rem] font-bold 2xs:text-[1.75rem] sm:text-[2rem];
   }
   h2 {
     @apply font-bold max-2xs:text-[1.4rem] 2xs:text-[1.6rem] sm:text-[1.7rem];
@@ -31,14 +30,13 @@
   /*}*/
 
   header .active {
-    @apply bg-superlightgray rounded-full;
+    @apply rounded-full bg-superlightgray;
   }
 
   header a:hover {
-    @apply bg-superlightgray rounded-full;
+    @apply rounded-full bg-superlightgray;
   }
 }
 
 @layer components {
-
 }

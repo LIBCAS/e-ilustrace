@@ -22,7 +22,8 @@ const Explore: FC = () => {
       </aside>
       <div className="max-h-full w-full border-collapse overflow-y-scroll border-t-[1.5px] border-superlightgray p-6">
         {searchParams.get('themes')?.length ||
-        searchParams.get('search')?.length ? (
+        searchParams.get('objects')?.length ||
+        searchParams.get('authors')?.length ? (
           <ExploreDetail setFilterOpen={setFilterOpen} />
         ) : (
           <Themes setFilterOpen={setFilterOpen} />

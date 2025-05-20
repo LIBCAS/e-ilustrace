@@ -11,6 +11,7 @@ import ShowError from './components/reusableComponents/ShowError'
 import ShowInfoMessage from './components/reusableComponents/ShowInfoMessage'
 import Login from './pages/Login'
 import useMeQueryWrapper from './hooks/useMeQueryWrapper'
+import Exhibitions from './pages/Exhibitions'
 
 const App: FC = () => {
   const { t } = useTranslation()
@@ -59,6 +60,7 @@ const App: FC = () => {
             element={<Enrichment />}
           />
           <Route path={t('urls.users')} element={<Users />} />
+          <Route path={t('urls.exhibitions')} element={<Exhibitions />} />
           <Route path={t('urls.import')} element={<Import />} />
           <Route path={t('urls.login')} element={<Login />} />
           <Route

@@ -9,6 +9,13 @@ import { TIllustrationList } from '../../../../fe-shared/@types/illustration'
 import Paginator from './Paginator'
 import ShowError from './ShowError'
 import constructRecordDetailUrl from '../../utils/constructRecordDetailUrl'
+import BookMark from '../../assets/icons/bookmark.svg?react'
+import useMeQueryWrapper from '../../hooks/useMeQueryWrapper'
+import { useMySelectionQuery } from '../../api/my-selection'
+import useAddToMySelectionMutationWrapper from '../../hooks/useAddToMySelectionMutationWrapper'
+import useRemoveFromMySelectionMutationWrapper from '../../hooks/useRemoveFromMySelectionMutationWrapper'
+import { TBookList } from '../../../../fe-shared/@types/book'
+import { TSelectionItemDetail } from '../../../../fe-shared/@types/selection'
 
 type Props = {
   clickType?: 'normal' | 'vise'
@@ -40,6 +47,22 @@ const TilesView: FC<Props> = ({
   backPath,
 }) => {
   const { t } = useTranslation('search')
+  const { me } = useMeQueryWrapper()
+  const { data: selection } = useMySelectionQuery(!!me)
+  const { doAdd } = useAddToMySelectionMutationWrapper()
+  const { doRemove } = useRemoveFromMySelectionMutationWrapper()
+
+  const handleAddition = (record: TBookList | TIllustrationList) => {
+    if (record.type === 'BOOK') {
+      doAdd({ illustrations: [], books: [record.id] })
+    } else {
+      doAdd({ illustrations: [record.id], books: [] })
+    }
+  }
+
+  const handleDeletion = (record: TSelectionItemDetail) => {
+    doRemove({ items: [record.id] })
+  }
 
   if (loading) {
     return (
@@ -103,10 +126,38 @@ const TilesView: FC<Props> = ({
                 )}
               >
                 <span className={clsx('text-center text-sm')}>
-                  {i.printEntry.placesOfPublication.join(' ')}{' '}
-                  {i.printEntry.originators.join(' ')} {i.printEntry.date}
+                  {i.printEntry?.placesOfPublication.join(' ')}{' '}
+                  {i.printEntry?.originators.join(' ')} {i.printEntry?.date}
                 </span>
               </div>
+              <button
+                aria-label="Bookmark"
+                disabled={!me}
+                type="button"
+                className={`absolute right-0 top-5 z-10 sm:right-5 ${
+                  me ? 'hover:text-red' : ''
+                } ${
+                  selection?.items?.find(
+                    (item) =>
+                      item.book?.id === i.id || item.illustration?.id === i.id
+                  )
+                    ? 'text-red'
+                    : 'text-lightgray'
+                }`}
+                onClick={(event) => {
+                  event.preventDefault()
+                  const item = selection?.items?.find(
+                    (it) => it.book?.id === i.id || it.illustration?.id === i.id
+                  )
+                  if (item) {
+                    handleDeletion(item)
+                  } else {
+                    handleAddition(i)
+                  }
+                }}
+              >
+                <BookMark className="text-inherit transition-all duration-300" />
+              </button>
             </Link>
           ) : (
             <div
@@ -147,10 +198,38 @@ const TilesView: FC<Props> = ({
                   to={constructRecordDetailUrl(i.id, backPath)}
                   className={clsx('text-center')}
                 >
-                  {i.printEntry.placesOfPublication.join(' ')}{' '}
-                  {i.printEntry.originators.join(' ')} {i.printEntry.date}
+                  {i.printEntry?.placesOfPublication.join(' ')}{' '}
+                  {i.printEntry?.originators.join(' ')} {i.printEntry?.date}
                 </Link>
               </div>
+              <button
+                aria-label="Bookmark"
+                disabled={!me}
+                type="button"
+                className={`absolute right-0 top-5 z-10 sm:right-5 ${
+                  me ? 'hover:text-red' : ''
+                } ${
+                  selection?.items?.find(
+                    (item) =>
+                      item.book?.id === i.id || item.illustration?.id === i.id
+                  )
+                    ? 'text-red'
+                    : 'text-lightgray'
+                }`}
+                onClick={(event) => {
+                  event.preventDefault()
+                  const item = selection?.items?.find(
+                    (it) => it.book?.id === i.id || it.illustration?.id === i.id
+                  )
+                  if (item) {
+                    handleDeletion(item)
+                  } else {
+                    handleAddition(i)
+                  }
+                }}
+              >
+                <BookMark className="text-inherit transition-all duration-300" />
+              </button>
             </div>
           )
         )}

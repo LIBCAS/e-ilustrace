@@ -10,12 +10,11 @@ import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static cz.inqool.eas.common.domain.DomainViews.*;
@@ -23,9 +22,9 @@ import static cz.inqool.eas.eil.exhibition.item.ExhibitionItem.EXTERNAL_UPDATE;
 
 @Viewable
 @DomainViews
-@ViewableClass(views = {DEFAULT, Exhibition.ESSENTIAL}, generateRef = true)
-@ViewableMapping(views = {DEFAULT, Exhibition.ESSENTIAL}, mappedTo = DEFAULT)
-@ViewableAnnotation(value = {Entity.class, BatchSize.class, Table.class}, views = {DEFAULT, Exhibition.ESSENTIAL})
+@ViewableClass(views = {DEFAULT, Exhibition.ESSENTIAL, INDEXED}, generateRef = true)
+@ViewableMapping(views = {DEFAULT, Exhibition.ESSENTIAL, INDEXED}, mappedTo = DEFAULT)
+@ViewableAnnotation(value = {Entity.class, BatchSize.class, Table.class}, views = {DEFAULT, Exhibition.ESSENTIAL, INDEXED})
 @Entity
 @Getter
 @Setter
@@ -37,7 +36,7 @@ public class Exhibition extends DatedObject<Exhibition> {
 
     protected String description;
 
-    @ViewableProperty(views = {DETAIL, LIST})
+    @ViewableProperty(views = {DETAIL, LIST, INDEXED})
     protected Instant published;
 
     @ViewableProperty(views = {DETAIL, CREATE, UPDATE, LIST, ESSENTIAL})
@@ -47,11 +46,12 @@ public class Exhibition extends DatedObject<Exhibition> {
     @ViewableMapping(views = {ESSENTIAL}, mappedTo = EXTERNAL_UPDATE)
     @BatchSize(size = 100)
     @Fetch(FetchMode.SELECT)
-    @OneToMany(mappedBy = "exhibition", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Where(clause = "deleted is null")
-    protected List<ExhibitionItem> items = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "exhibition_id")
+    @OrderBy("list_order")
+    protected List<ExhibitionItem> items = new LinkedList<>();
 
-    @ViewableProperty(views = {DETAIL, LIST, CREATE, ESSENTIAL})
+    @ViewableProperty(views = {DETAIL, LIST, CREATE, ESSENTIAL, INDEXED})
     @ViewableMapping(views = {DETAIL, CREATE, ESSENTIAL}, useRef = true)
     @ViewableMapping(views = {DETAIL, LIST}, mappedTo = ESSENTIAL)
     @Fetch(FetchMode.SELECT)

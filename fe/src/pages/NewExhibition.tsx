@@ -5,12 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { useIdleTimer } from 'react-idle-timer'
 import { Dialog } from '@headlessui/react'
-// import Switch from 'react-switch'
 import CloseIcon from '../assets/icons/close.svg?react'
 import LeftArrow from '../assets/icons/navigate_back.svg?react'
 import Search from '../assets/icons/search.svg?react'
 import BookMark from '../assets/icons/bookmark.svg?react'
-// import TitleIcon from '../assets/icons/title.svg?react'
 
 import Button from '../components/reusableComponents/Button'
 import SearchIllustration from '../components/exhibitions/SearchIllustration'
@@ -20,25 +18,24 @@ import WYSIWYGEditor from '../components/reusableComponents/inputs/WYSIWYGEditor
 
 import { useNewExhibitionStore } from '../store/useNewExhibitionStore'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
-import useSaveMyExhibitionMutation from '../api/mutation/useSaveMyExhibitionMutation'
-import useExhibitionDetailQuery from '../api/query/useExhibitionDetailQuery'
+import {
+  useSaveMyExhibitionMutation,
+  useExhibitionDetailQuery,
+} from '../api/exhibition'
 import Loader from '../components/reusableComponents/Loader'
 import ShowError from '../components/reusableComponents/ShowError'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
-import useDeleteExhibitionIllustrationMutation from '../api/mutation/useDeleteExhibitionIllustrationMutation'
 
 const NewExhibition: FC = () => {
   const [showSearch, setShowSearch] = useState(true)
   const [showSelection, setShowSelection] = useState(false)
   const [activityCheckModalOpen, setActivityCheckModalOpen] = useState(false)
-  const { t } = useTranslation('exhibitions')
+  const { t, i18n } = useTranslation('exhibitions')
   const navigate = useNavigate()
   const { id } = useParams()
   const isEditing = !!id
 
   const { mutateAsync, status: savingStatus } = useSaveMyExhibitionMutation()
-  const { mutateAsync: doDeleteOfIllustration, status: deletingStatus } =
-    useDeleteExhibitionIllustrationMutation()
   const {
     data: editedExhibition,
     isLoading: editedExhibitionLoading,
@@ -55,16 +52,13 @@ const NewExhibition: FC = () => {
     items,
     setItems,
     setInitialState,
-    illustrationForDeletion,
-    setIllustrationForDeletion,
   } = useNewExhibitionStore()
 
   const discardChanges = useCallback(() => {
     setInitialState()
     setShowSearch(true)
     setShowSelection(false)
-    setIllustrationForDeletion([])
-  }, [setIllustrationForDeletion, setInitialState])
+  }, [setInitialState])
 
   const setLoadedData = useCallback(() => {
     if (isEditing && editedExhibition) {
@@ -98,24 +92,19 @@ const NewExhibition: FC = () => {
     if (items.some((i) => i.preface)) {
       toast
         .promise(
-          Promise.all([
-            mutateAsync({
-              id: editedExhibition?.id,
-            }),
-            ...illustrationForDeletion.map((i) =>
-              doDeleteOfIllustration({ id: i })
-            ),
-          ]),
+          mutateAsync({
+            id: editedExhibition?.id,
+          }),
           {
             pending: t('exhibitions:saving_exhibition'),
             success: t('exhibitions:exhibition_saved_successfully'),
             error: t('exhibitions:error_when_saving_exhibition'),
           }
         )
-        .then((data) => {
+        .then((exhibition) => {
           discardChanges()
           if (show) {
-            navigate(`/exhibitions/${data[0].id}`)
+            navigate(`/exhibitions/${exhibition.id}`)
           }
         })
     } else {
@@ -207,41 +196,40 @@ const NewExhibition: FC = () => {
           editedExhibition) ||
         !isEditing ? (
           <>
-            <div className="flex w-full flex-row items-center justify-between border-b  border-b-superlightgray py-8">
-              <p className="font-bold text-black underline">
+            <div className="flex w-full flex-row items-center justify-between border-b border-b-superlightgray py-8">
+              <a
+                href={
+                  i18n.resolvedLanguage === 'cs'
+                    ? 'https://e-ilustrace.cz/napoveda/'
+                    : 'https://e-ilustrace.cz/en/help/'
+                }
+                target="_blank"
+                className="font-bold text-black underline"
+                rel="noreferrer"
+              >
                 {t('how_to_use_exhibitions')}
-              </p>
+              </a>
               <div className="flex gap-3">
                 <Button
                   variant="secondary"
                   onClick={() =>
                     isEditing ? setLoadedData() : discardChanges()
                   }
-                  disabled={
-                    savingStatus === 'pending' || deletingStatus === 'pending'
-                  }
+                  disabled={savingStatus === 'pending'}
                 >
                   {t('discard_changes')}
                 </Button>
                 <Button
                   variant="secondary"
                   onClick={() => handleSave(true)}
-                  disabled={
-                    !items.length ||
-                    savingStatus === 'pending' ||
-                    deletingStatus === 'pending'
-                  }
+                  disabled={!items.length || savingStatus === 'pending'}
                 >
                   {t('save_and_display')}
                 </Button>
                 <Button
                   variant="submit"
                   onClick={() => handleSave()}
-                  disabled={
-                    !items.length ||
-                    savingStatus === 'pending' ||
-                    deletingStatus === 'pending'
-                  }
+                  disabled={!items.length || savingStatus === 'pending'}
                 >
                   {t('save_exhibtion')}
                 </Button>
@@ -358,31 +346,21 @@ const NewExhibition: FC = () => {
               <Button
                 variant="secondary"
                 onClick={() => (isEditing ? setLoadedData() : discardChanges())}
-                disabled={
-                  savingStatus === 'pending' || deletingStatus === 'pending'
-                }
+                disabled={savingStatus === 'pending'}
               >
                 {t('discard_changes')}
               </Button>
               <Button
                 variant="secondary"
                 onClick={() => handleSave(true)}
-                disabled={
-                  !items.length ||
-                  savingStatus === 'pending' ||
-                  deletingStatus === 'pending'
-                }
+                disabled={!items.length || savingStatus === 'pending'}
               >
                 {t('save_and_display')}
               </Button>
               <Button
                 variant="submit"
                 onClick={() => handleSave()}
-                disabled={
-                  !items.length ||
-                  savingStatus === 'pending' ||
-                  deletingStatus === 'pending'
-                }
+                disabled={!items.length || savingStatus === 'pending'}
               >
                 {t('save_exhibtion')}
               </Button>

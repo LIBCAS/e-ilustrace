@@ -26,4 +26,18 @@ public class UserRepository extends DatedRepository<
         detachAll();
         return user;
     }
+
+    public User findByEmailConfirmationKey(String emailConfirmationKey) {
+        QUser model = QUser.user;
+
+        User user = query().
+                select(model).
+                from(model).
+                where(model.deleted.isNull()).
+                where(model.emailConfirmationKey.eq(emailConfirmationKey)).
+                fetchFirst();
+
+        detachAll();
+        return user;
+    }
 }

@@ -8,9 +8,9 @@ import CloseIcon from '../../assets/icons/close.svg?react'
 import Delete from '../../assets/icons/delete.svg?react'
 
 import Button from './Button'
-import { RecordType } from '../../@types/types'
+import { RecordType } from '../../../../fe-shared/@types/common'
 import useMobile from '../../hooks/useMobile'
-import useMySelectionQuery from '../../api/query/useMySelectionQuery'
+import { useMySelectionQuery } from '../../api/my-selection'
 import useRemoveFromMySelectionMutationWrapper from '../../hooks/useRemoveFromMySelectionMutationWrapper'
 import Loader from './Loader'
 import ShowError from './ShowError'
@@ -107,7 +107,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                         selectionType === 'BOOK'
                           ? 'font-bold text-red'
                           : 'text-gray'
-                      }  border-collapse border-2 border-superlightgray hover:bg-superlightgray`}
+                      } border-collapse border-2 border-superlightgray hover:bg-superlightgray`}
                       onClick={() => setSelectionType('BOOK')}
                     >
                       {t('books')}
@@ -245,7 +245,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                   </div>
                 ) : null}
               </div>
-              <div className="flex flex-row flex-wrap justify-center gap-2 ">
+              <div className="flex flex-row flex-wrap justify-center gap-2">
                 {isMobile && (
                   <Button
                     className="flex-grow text-red"

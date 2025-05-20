@@ -1,6 +1,6 @@
 import { useRef, useDeferredValue } from 'react'
 import { useTranslation } from 'react-i18next'
-import useIllustrationListQuery from '../api/query/useIllustrationListQuery'
+import { useRecordsWithFacetsQueryList } from '../api/record'
 import SearchIcon from '../assets/icons/search.svg?react'
 // import BookMark from '../assets/icons/bookmark.svg?react'
 // import FilterIcon from '../assets/icons/filter.svg?react'
@@ -22,7 +22,7 @@ const Records = () => {
     currentPage,
     filterObject,
     filterAuthor,
-    filterPlace,
+    filterPublishingPlace,
     filterICCStates,
     filterThemeStates,
     setCurrentPage,
@@ -35,22 +35,28 @@ const Records = () => {
   } = useSearchStore()
   const viewRef = useRef<HTMLDivElement>(null)
 
-  const {
-    data: records,
-    isLoading: recordsLoading,
-    isError: recordsError,
-  } = useIllustrationListQuery({
+  const { records } = useRecordsWithFacetsQueryList({
+    type: 'ILLUSTRATION',
     size: Number(itemsPerPage.value),
-    sort: sort?.value || 'ASC',
+    sort: sort?.value || 'title_ASC',
     page: currentPage,
     year: useDeferredValue(year),
-    authors: filterAuthor.map((a) => a.value),
-    objects: filterObject.map((o) => o.value),
-    places: filterPlace.map((p) => p.value),
+    authors: { authors: filterAuthor.map((a) => a.value), operation: 'OR' },
+    objects: { objects: filterObject.map((o) => o.value), operation: 'OR' },
+    publishingPlaces: {
+      publishingPlaces: filterPublishingPlace.map((p) => p.value),
+      operation: 'OR',
+    },
     iccStates: filterICCStates.map((s) => s.value),
     themeStates: filterThemeStates.map((s) => s.value),
-    category: category.value,
-    search: useDeferredValue(currentSearch),
+    searchWithCategory: [
+      {
+        search: currentSearch,
+        category: category.value,
+        operation: 'CONTAINS',
+      },
+    ],
+    facetsEnabled: false,
   })
 
   const paginate = (pageNumber: number) => {
@@ -112,8 +118,8 @@ const Records = () => {
                 value={sort}
                 onChange={setSort}
                 options={[
-                  { value: 'ASC', label: 'A - Z' },
-                  { value: 'DESC', label: 'Z - A' },
+                  { value: 'title_ASC', label: 'A - Z' },
+                  { value: 'title_DESC', label: 'Z - A' },
                 ]}
               />
             </div>
@@ -124,12 +130,12 @@ const Records = () => {
             className="wrapper pb-28 pt-4 md:overflow-auto md:px-8 md:pt-8"
           >
             <ListView
-              error={recordsError}
-              loading={recordsLoading}
+              error={records.isError}
+              loading={records.isLoading}
               currentPage={currentPage}
-              illustrations={records?.items || []}
+              illustrations={records.data?.items || []}
               illustrationsPerPage={Number(itemsPerPage.value)}
-              totalIllustrations={records?.count || 0}
+              totalIllustrations={records?.data?.count || 0}
               paginate={paginate}
             />
           </div>

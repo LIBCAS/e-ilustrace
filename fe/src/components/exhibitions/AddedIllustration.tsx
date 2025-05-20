@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { PhotoIcon } from '@heroicons/react/24/outline'
 import clone from 'lodash/clone'
 import Switch from 'react-switch'
+import { Link } from 'react-router-dom'
 import InfoIcon from '../../assets/icons/info.svg?react'
 import Delete from '../../assets/icons/delete.svg?react'
 import DownArrow from '../../assets/icons/down.svg?react'
@@ -13,11 +14,12 @@ import {
   TIllustration,
   useNewExhibitionStore,
 } from '../../store/useNewExhibitionStore'
-import useRecordQuery from '../../api/query/useRecordQuery'
+import { useRecordQuery } from '../../api/record'
 import Loader from '../reusableComponents/Loader'
 import ShowError from '../reusableComponents/ShowError'
 import ShowInfoMessage from '../reusableComponents/ShowInfoMessage'
 import TextInput from '../reusableComponents/inputs/TextInput'
+import constructRecordDetailUrl from '../../utils/constructRecordDetailUrl'
 
 const BlankImage = ({ classNames }: { classNames: string }) => {
   return <PhotoIcon className={`text-lightgray ${classNames}`} />
@@ -36,13 +38,7 @@ const AddedIllustration: FC<TProps> = ({ addedIllustration, index }) => {
     isError,
   } = useRecordQuery({ id: addedIllustration.id })
 
-  const {
-    name,
-    items,
-    setItems,
-    illustrationForDeletion,
-    setIllustrationForDeletion,
-  } = useNewExhibitionStore()
+  const { name, items, setItems } = useNewExhibitionStore()
 
   const handleNameChange = (newName: string) => {
     const illClone = clone(items)
@@ -65,14 +61,8 @@ const AddedIllustration: FC<TProps> = ({ addedIllustration, index }) => {
 
   const handleDeletion = () => {
     const illClone = clone(items)
-    const deletedIll = illClone.splice(index, 1)
+    illClone.splice(index, 1)
     setItems(illClone)
-    if (deletedIll[0].itemId) {
-      setIllustrationForDeletion([
-        ...illustrationForDeletion,
-        deletedIll[0].itemId,
-      ])
-    }
   }
 
   const handleMoveUp = () => {
@@ -184,9 +174,13 @@ const AddedIllustration: FC<TProps> = ({ addedIllustration, index }) => {
             <BlankImage classNames="justify-self-start rounded-xl transition-all duration-300" />
           ) : null}
           <p className="mt-2">
-            <span className="font-bold text-black">
+            <Link
+              target="_blank"
+              to={constructRecordDetailUrl(illustrationFromBE.id)}
+              className="font-bold text-black hover:text-red"
+            >
               {illustrationFromBE.title}
-            </span>
+            </Link>
             <span className="text-gray">
               {' | '}
               {illustrationFromBE.yearFrom} - {illustrationFromBE.yearTo}

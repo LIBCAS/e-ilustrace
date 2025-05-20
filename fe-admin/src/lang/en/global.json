@@ -5,14 +5,16 @@
     "records": "Records",
     "import": "Import",
     "login": "Login in",
-    "logout": "Logout"
+    "logout": "Logout",
+    "exhibitions": "Exhibitions"
   },
   "urls": {
     "users": "users",
     "enrichment": "enrichment",
     "records": "records",
     "import": "import",
-    "login": "login"
+    "login": "login",
+    "exhibitions": "exhibitions"
   },
   "not_found": {
     "text": "Page not found"
@@ -52,7 +54,10 @@
     "to": "To",
     "icc_state": "ICONCLASS state",
     "theme_state": "Themes state",
-    "state_search": "Search state"
+    "state_search": "Search state",
+    "person": "depicted",
+    "keyword": "secondary motive",
+    "theme": "main motive"
   },
   "filters": {
     "filter_author": "Author",
@@ -102,6 +107,24 @@
   },
   "users": {
     "role_changed": "Role changed successfully",
-    "role_error": "Error occurred when changing role"
+    "role_error": "Error occurred when changing role",
+    "search": "Find user",
+    "delete_user": "Delete user",
+    "user_deleted": "User has been successfully deleted",
+    "user_deletion_error": "Failed to delete user"
+  },
+  "exhibitions": {
+    "search": "Find exhibition",
+    "exhibition_not_found": "Exhibition not found",
+    "exhibition_deleted": "Exhibition was deleted",
+    "deletion_in_progress": "Deletion in progress",
+    "deletion_error": "Error occurred when deleting exhibition",
+    "publicity_changing": "Publicity change in progress",
+    "publicity_changed": "Publicity was changed successfully",
+    "publicity_change_error": "Error occurred when changing publicity",
+    "published": "Published",
+    "private": "Private",
+    "delete_exhibition": "Delete exhibition",
+    "enter_uuid": "Enter the id of the exhibition to display it"
   }
 }

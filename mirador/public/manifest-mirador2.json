@@ -403,21 +403,15 @@
       "views": [
         {
           "key": "single",
-          "behaviors": [
-            "individuals"
-          ]
+          "behaviors": ["individuals"]
         },
         {
           "key": "book",
-          "behaviors": [
-            "paged"
-          ]
+          "behaviors": ["paged"]
         },
         {
           "key": "scroll",
-          "behaviors": [
-            "continuous"
-          ]
+          "behaviors": ["continuous"]
         },
         {
           "key": "gallery"
@@ -439,12 +433,7 @@
       }
     ],
     "thumbnails": {
-      "preferredFormats": [
-        "jpg",
-        "png",
-        "webp",
-        "tif"
-      ]
+      "preferredFormats": ["jpg", "png", "webp", "tif"]
     },
     "thumbnailNavigation": {
       "defaultPosition": "off",

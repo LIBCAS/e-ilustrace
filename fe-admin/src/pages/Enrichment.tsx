@@ -2,21 +2,27 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import useIllustrationDetailQuery from '../api/query/useIllustrationDetailQuery'
+import {
+  useIllustrationDetailQuery,
+  useSaveIllustrationMutation,
+} from '../api/record'
 import Loader from '../components/reusableComponents/Loader'
 import ShowError from '../components/reusableComponents/ShowError'
-import useIconClassListQuery from '../api/query/useIconClassListQuery'
+import {
+  useIconClassListQuery,
+  useAddNewICCMutation,
+  useUpdateIconClassStateMutation,
+} from '../api/iconclass'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
 import Dropdown from '../components/reusableComponents/inputs/Dropdown'
 import Button from '../components/reusableComponents/Button'
-import useSaveIllustrationICCMutation from '../api/query/useSaveIllustrationICCMutation'
-import useThemeListQuery from '../api/query/useThemeListQuery'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
-import useAddNewThemeMutation from '../api/query/useAddNewThemeMutation'
-import useAddNewICCMutation from '../api/query/useAddNewICCMutation'
+import {
+  useAddNewThemeMutation,
+  useUpdateThemeStateMutation,
+  useThemeListQuery,
+} from '../api/theme'
 import { useEnrichmentStates } from '../utils/helperHooks'
-import useUpdateIconClassStateMutation from '../api/query/useUpdateIconClassStateMutation'
-import useUpdateThemeStateMutation from '../api/query/useUpdateThemeStateMutation'
 import { TEnrichmentStates } from '../../../fe-shared/@types/illustration'
 
 type TEnrichmentFields = {
@@ -50,7 +56,7 @@ const Enrichment = () => {
     isError: themesError,
   } = useThemeListQuery()
   const { mutateAsync: saveICC, status: saveICCStatus } =
-    useSaveIllustrationICCMutation()
+    useSaveIllustrationMutation()
   const { mutateAsync: addNewICC, status: addNewICCStatus } =
     useAddNewICCMutation()
   const { mutateAsync: addNewTheme, status: addNewThemeStatus } =

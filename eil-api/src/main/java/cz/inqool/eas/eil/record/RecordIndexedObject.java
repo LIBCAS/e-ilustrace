@@ -7,7 +7,6 @@ import cz.inqool.eas.eil.genre.GenreIndexedObject;
 import cz.inqool.eas.eil.iconclass.IconclassCategoryIndexedObject;
 import cz.inqool.eas.eil.publishingplace.PublishingPlaceIndexedObject;
 import cz.inqool.eas.eil.record.illustration.IconclassThemeState;
-import cz.inqool.eas.eil.record.illustration.Illustration;
 import cz.inqool.eas.eil.record.illustration.IllustrationIndexed;
 import cz.inqool.eas.eil.subject.entry.SubjectEntryIndexedObject;
 import cz.inqool.eas.eil.subject.institution.SubjectInstitutionIndexedObject;
@@ -38,7 +37,14 @@ public class RecordIndexedObject extends DatedIndexedObject<Record, RecordIndexe
     @Field(type = FieldType.Keyword)
     private String type;
 
-    @Field(type = FieldType.Keyword)
+    @MultiField(
+            mainField = @Field(type = FieldType.Text, analyzer = TEXT_SHORT_KEYWORD),
+            otherFields = {
+                    @InnerField(suffix = FOLD, type = FieldType.Text, analyzer = FOLDING),
+                    @InnerField(suffix = SEARCH, type = FieldType.Text, analyzer = FOLDING_AND_TOKENIZING),
+                    @InnerField(suffix = SORT, type = FieldType.Text, analyzer = SORTING, fielddata = true)
+            }
+    )
     private String identifier;
 
     @Field(type = FieldType.Integer)
@@ -126,7 +132,7 @@ public class RecordIndexedObject extends DatedIndexedObject<Record, RecordIndexe
                 .map(SubjectPlaceIndexedObject::of)
                 .collect(Collectors.toSet());
         this.keywords = obj.getKeywords().stream()
-                .map(Keyword::getLabel)
+                .map(Keyword::getId)
                 .collect(Collectors.toSet());
         this.genres = obj.getGenres().stream()
                 .map(GenreIndexedObject::of)
