@@ -1,0 +1,76 @@
+{
+  "@context": "http://iiif.io/api/presentation/2/context.json",
+  "@type": "sc:Manifest",
+  "@id": "https://test.e-ilustrace.cz/api/eil/record/a5b7fbfe-a048-4cd3-92b9-c7569c9107ad/manifest.json",
+  "label": "Abakuk stojící před králem, po stranách dvořané, vlevo vzadu město",
+  "description": "list Hhh2a :",
+  "sequences": [
+    {
+      "@context": "http://iiif.io/api/presentation/2/context.json",
+      "@id": "",
+      "@type": "sc:Sequence",
+      "canvases": [
+        {
+          "@context": "http://iiif.io/api/presentation/2/context.json",
+          "@id": "https://test.e-ilustrace.cz/api/eil/record/a5b7fbfe-a048-4cd3-92b9-c7569c9107ad/canvas/1",
+          "@type": "sc:Canvas",
+          "label": "-",
+          "images": [
+            {
+              "@context": "http://iiif.io/api/image/2/context.json",
+              "@id": "https://test.e-ilustrace.cz/iiif/2/REC_K01101_IL091_illustration.jpg",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@context": "http://iiif.io/api/image/2/context.json",
+                "@id": "https://test.e-ilustrace.cz/iiif/2/REC_K01101_IL091_illustration.jpg/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "service": [
+                  {
+                    "@context": "http://iiif.io/api/image/2/context.json",
+                    "@id": "https://test.e-ilustrace.cz/iiif/2/REC_K01101_IL091_illustration.jpg",
+                    "profile": [
+                      {
+                        "formats": ["jpg", "png"],
+                        "qualities": ["default", "color", "gray", "bitonal"],
+                        "@id": "http://iiif.io/api/image/2/level2.json",
+                        "supports": [
+                          "regionByPx",
+                          "regionByPct",
+                          "sizeByW",
+                          "sizeByH",
+                          "sizeByPct",
+                          "sizeByConfinedWh",
+                          "sizeByDistortedWh",
+                          "sizeByWh",
+                          "rotationBy90s",
+                          "baseUriRedirect",
+                          "cors",
+                          "jsonldMediaType"
+                        ]
+                      }
+                    ],
+                    "protocol": "http://iiif.io/api/image"
+                  }
+                ],
+                "format": {
+                  "primaryType": "image",
+                  "subType": "jpeg",
+                  "extensions": ["jpg", "jpeg", "jpe"],
+                  "typeName": "image/jpeg"
+                },
+                "width": 2343
+              },
+              "on": {
+                "@id": "https://test.e-ilustrace.cz/api/eil/record/a5b7fbfe-a048-4cd3-92b9-c7569c9107ad/canvas/1",
+                "@type": "sc:Canvas"
+              }
+            }
+          ],
+          "width": 2343,
+          "height": 1732
+        }
+      ]
+    }
+  ]
+}

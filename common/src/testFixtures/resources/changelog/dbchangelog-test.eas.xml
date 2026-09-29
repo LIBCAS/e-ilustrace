@@ -1,0 +1,154 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="mail_table_name" value="eas_mail"/>
+
+    <include file="/changelog/storage.xml"/>
+    <include file="/changelog/intl.xml"/>
+    <include file="/changelog/mail.xml"/>
+    <include file="/changelog/reindex.xml"/>
+    <include file="/changelog/sequence.xml"/>
+    <include file="/changelog/personal_event.xml"/>
+    <include file="/changelog/user_settings.xml"/>
+    <include file="/changelog/app_settings.xml"/>
+    <include file="/changelog/antivirus.xml"/>
+    <include file="/changelog/alog.xml"/>
+    <include file="/changelog/index_reference_update.xml"/>
+    <include file="/changelog/schedule.xml"/>
+    <include file="/changelog/soap_logger.xml"/>
+    <include file="/changelog/history.xml"/>
+    <include file="/changelog/named_settings.xml"/>
+    <include file="/changelog/signing.xml"/>
+    <include file="/changelog/action.xml"/>
+    <include file="/changelog/export.xml"/>
+    <include file="/changelog/reporting.xml"/>
+    <include file="/changelog/certificate.xml"/>
+    <include file="/changelog/app_state.xml"/>
+    <include file="/changelog/key_value.xml"/>
+
+
+    <changeSet id="eas-test:1" author="konecny">
+        <createTable tableName="simple_key_value_entity">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="simple_key_value_entity_PK"/>
+            </column>
+
+            <column name="key" type="varchar(511)"/>
+            <column name="value" type="varchar(511)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="eas-test:2" author="konecny">
+        <createTable tableName="multiple_fields_entity">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="multiple_fields_entity_PK"/>
+            </column>
+            <column name="uuid_id" type="uuid"/>
+
+            <column name="short_string" type="nvarchar(511)"/>
+            <column name="long_string" type="nvarchar(4095)"/>
+            <column name="blob_text" type="clob"/>
+
+            <column name="boolean_object" type="boolean"/>
+            <column name="boolean_primitive" type="boolean"/>
+
+            <column name="char_object" type="char"/>
+            <column name="char_primitive" type="char"/>
+            <column name="char_array" type="varchar(511)"/>
+
+            <column name="byte_object" type="tinyint"/>
+            <column name="byte_primitive" type="tinyint"/>
+            <column name="byte_array" type="bytea"/>
+
+            <column name="integer_object" type="int"/>
+            <column name="integer_primitive" type="int"/>
+
+            <column name="long_object" type="bigint"/>
+            <column name="long_primitive" type="bigint"/>
+
+            <column name="short_object" type="smallint"/>
+            <column name="short_primitive" type="smallint"/>
+
+            <column name="double_object" type="double"/>
+            <column name="double_primitive" type="double"/>
+
+            <column name="float_object" type="float(4)"/>
+            <column name="float_primitive" type="float(4)"/>
+
+            <column name="big_integer" type="numeric"/>
+            <column name="big_decimal" type="decimal"/>
+
+            <column name="instant" type="timestamp"/>
+            <column name="date_old" type="timestamp"/>
+            <column name="local_date" type="date"/>
+            <column name="local_date_time" type="datetime"/>
+
+            <column name="tst_enum_string" type="varchar(255)"/>
+            <column name="tst_enum_ordinal" type="int"/>
+
+            <column name="embedded_value" type="nvarchar(511)"/>
+
+            <column name="lat" type="decimal"/>
+            <column name="lon" type="decimal"/>
+            <column name="to_one_relationship_id" type="varchar(255)">
+                <constraints referencedTableName="simple_key_value_entity" referencedColumnNames="id" foreignKeyName="multiple_fields_entity_to_one_relationship_FK"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="multiple_fields_entity_simple_key_value_entities">
+            <column name="multiple_fields_entity_id" type="varchar(255)">
+                <constraints referencedTableName="multiple_fields_entity" referencedColumnNames="id" foreignKeyName="multiple_fields_entity_simple_key_value_entities_multiple_fields_entity_FK"/>
+            </column>
+            <column name="simple_key_value_id" type="nvarchar(511)">
+                <constraints referencedTableName="simple_key_value_entity" referencedColumnNames="id" foreignKeyName="multiple_fields_entity_simple_key_value_entities_simple_key_value_FK"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="multiple_fields_entity_element_collection">
+            <column name="multiple_fields_entity_id" type="varchar(255)">
+                <constraints referencedTableName="multiple_fields_entity" referencedColumnNames="id" foreignKeyName="multiple_fields_entity_element_collection_multiple_fields_entity_FK"/>
+            </column>
+            <column name="element" type="nvarchar(511)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="eas-test:3" author="konecny">
+        <createTable tableName="simple_dictionary_entity">
+            <!-- DomainObject-->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="simple_dictionary_entity_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- DictionaryObject -->
+            <column name="name" type="nvarchar(511)"/>
+            <column name="multi_name" type="nclob"/>
+            <column name="code" type="varchar(255)"/>
+            <column name="active" type="boolean"/>
+            <column name="valid_from" type="timestamp"/>
+            <column name="valid_to" type="timestamp"/>
+            <column name="list_order" type="int"/>
+
+            <!-- SimpleDictionaryEntity -->
+            <column name="other_useless_value" type="nvarchar(511)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

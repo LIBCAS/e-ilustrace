@@ -1,0 +1,95 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="schedule:1" author="zamborsky">
+        <createTable tableName="eas_schedule_job">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_schedule_job_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- DictionaryObject -->
+            <column name="name" type="nvarchar(1024)"/>
+            <column name="multi_name" type="nclob"/>
+            <column name="active" type="boolean"/>
+            <column name="valid_from" type="timestamp"/>
+            <column name="valid_to" type="timestamp"/>
+            <column name="list_order" type="int"/>
+            <column name="code" type="varchar(255)"/>
+
+            <!-- Own properties -->
+            <column name="script" type="nclob"/>
+            <column name="timer" type="varchar(2048)"/>
+            <column name="script_type" type="varchar(255)"/>
+        </createTable>
+        <createTable tableName="eas_schedule_run">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_schedule_run_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- Own properties -->
+            <column name="console" type="nclob"/>
+            <column name="result" type="nclob"/>
+            <column name="success" type="boolean"/>
+            <column name="start_time" type="timestamp"/>
+            <column name="end_time" type="timestamp"/>
+            <column name="state" type="varchar(255)"/>
+
+            <column name="job_id" type="varchar(255)">
+                <constraints referencedTableName="eas_schedule_job" referencedColumnNames="id"
+                             foreignKeyName="eas_schedule_run_job_FK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="schedule:2" author="zamborsky">
+        <addColumn tableName="eas_schedule_job">
+            <column name="use_transaction" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="schedule:3" author="zamborsky">
+        <addColumn tableName="eas_schedule_job">
+            <column name="description" type="nclob"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="schedule:4" author="zamborsky">
+        <addColumn tableName="eas_schedule_job">
+            <column name="log_action" type="varchar(255)"/>
+        </addColumn>
+        <update tableName="eas_schedule_job">
+            <column name="log_action" value="ALWAYS"/>
+        </update>
+    </changeSet>
+
+    <changeSet id="schedule:5" author="camak">
+        <createIndex tableName="eas_schedule_job" indexName="eas_schedule_job_created_idx">
+            <column name="created"/>
+        </createIndex>
+        <createIndex tableName="eas_schedule_run" indexName="eas_schedule_run_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

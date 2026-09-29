@@ -1,0 +1,5 @@
+rootProject.name = 'eil'
+
+includeBuild './entity-views'
+includeBuild './common'
+includeBuild './eil-api'

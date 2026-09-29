@@ -1,0 +1,8 @@
+group = 'cz.inqool.eas'
+version = '0.0.1'
+
+tasks.register("build") {
+    group = 'build'
+    description = 'Build'
+    dependsOn gradle.includedBuild('eil-api').task(':build')
+}

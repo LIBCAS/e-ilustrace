@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="reindex:1" author="camak">
+        <createTable tableName="${reindex_queue_table_name}">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="${reindex_queue_table_name}_PK"/>
+            </column>
+
+            <!-- ReindexQueue -->
+            <column name="repository_class" type="varchar(1024)"/>
+            <column name="created" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

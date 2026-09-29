@@ -1,0 +1,19 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="index_reference_update:1" author="camak">
+        <createTable tableName="eas_index_reference_update">
+            <!-- DomainObject -->
+            <column name="id" type="varchar(256)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_index_reference_update_PK"/>
+            </column>
+
+            <!-- IndexReferenceUpdate -->
+            <column name="created" type="timestamp"/>
+            <column name="indexed_type" type="varchar(512)"/>
+            <column name="elastic_search_path" type="varchar(256)"/>
+            <column name="updated_entity_id" type="varchar(256)"/>
+        </createTable>
+        <createIndex tableName="eas_index_reference_update" indexName="eas_index_reference_update_indexed_type_index">
+            <column name="indexed_type"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

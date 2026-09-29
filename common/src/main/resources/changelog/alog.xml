@@ -1,0 +1,69 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="alog:1" author="zamborsky">
+        <createTable tableName="eas_alog_event">
+            <!-- BaseObject -->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="eas_alog_event_PK"/>
+            </column>
+
+            <!-- DatedObject -->
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="deleted" type="timestamp"/>
+
+            <!-- AuthoredObject -->
+            <column name="created_by_id" type="varchar(255)"/>
+            <column name="created_by_name" type="nvarchar(1024)"/>
+            <column name="updated_by_id" type="varchar(255)"/>
+            <column name="updated_by_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_id" type="varchar(255)"/>
+            <column name="deleted_by_name" type="nvarchar(1024)"/>
+            <column name="created_by_tenant_id" type="varchar(255)"/>
+            <column name="created_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="updated_by_tenant_id" type="varchar(255)"/>
+            <column name="updated_by_tenant_name" type="nvarchar(1024)"/>
+            <column name="deleted_by_tenant_id" type="varchar(255)"/>
+            <column name="deleted_by_tenant_name" type="nvarchar(1024)"/>
+
+            <!-- Own properties -->
+            <column name="severity" type="varchar(255)"/>
+            <column name="source" type="nvarchar(255)"/>
+            <column name="ip_address" type="varchar(255)"/>
+            <column name="message" type="nvarchar(2048)"/>
+            <column name="detail" type="nclob"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="alog:2" author="zamborsky">
+        <addColumn tableName="eas_alog_event">
+            <column name="user_id" type="varchar(255)"/>
+            <column name="user_name" type="nvarchar(1024)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="alog:3" author="zamborsky">
+        <addColumn tableName="eas_alog_event">
+            <column name="source_type" type="varchar(255)"/>
+            <column name="module" type="nvarchar(1024)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="alog:4" author="zamborsky">
+        <addColumn tableName="eas_alog_event">
+            <column name="syslog" type="boolean" defaultValueBoolean="true"/>
+        </addColumn>
+        <update tableName="eas_alog_event">
+            <column name="syslog" valueBoolean="true"/>
+        </update>
+    </changeSet>
+    <changeSet id="alog:5" author="zamborsky">
+        <dropColumn tableName="eas_alog_event" columnName="module"/>
+        <addColumn tableName="eas_alog_event">
+            <column name="module_id" type="varchar(255)"/>
+            <column name="module_name" type="nvarchar(1024)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="alog:6" author="camak">
+        <createIndex tableName="eas_alog_event" indexName="eas_alog_event_created_idx">
+            <column name="created"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
