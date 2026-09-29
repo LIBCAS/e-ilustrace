@@ -46,13 +46,11 @@ const ShareButtons: FC<Props> = ({ exhibition, canEditShare }) => {
   }, [copyRef])
 
   const delay = (ms: number) =>
-    // eslint-disable-next-line no-promise-executor-return
     new Promise((resolve) => setTimeout(resolve, ms))
 
   return (
     <div className="ml-auto flex items-center gap-1 pr-4">
       {canEditShare ? (
-        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className="mr-2 flex items-center">
           <Switch
             className="mr-2"
@@ -73,11 +71,9 @@ const ShareButtons: FC<Props> = ({ exhibition, canEditShare }) => {
             variant="secondary"
             onClick={() => setCopyOpen(!copyOpen)}
           >
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <Link />
           </Button>
           {copyOpen && !copied && (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
             <div
               className="absolute top-12 z-20 flex -translate-x-1/2 items-center gap-4 rounded-sm border-black bg-white px-4 py-2 shadow-xl"
               onClick={async () => {
@@ -96,9 +92,8 @@ const ShareButtons: FC<Props> = ({ exhibition, canEditShare }) => {
             </div>
           )}
           {copyOpen && copied && (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
             <div
-              className="absolute top-12 z-20 flex -translate-x-1/2 items-center gap-4 border-[1.px] border-black bg-white px-4 py-2 shadow-[0_0_7px_-2px_black]"
+              className="absolute top-12 z-20 flex -translate-x-1/2 items-center gap-4 border border-black bg-white px-4 py-2 shadow-[0_0_7px_-2px_black]"
               onClick={() => {
                 // Copy current URL to clipboard
                 navigator.clipboard.writeText(window.location.href)

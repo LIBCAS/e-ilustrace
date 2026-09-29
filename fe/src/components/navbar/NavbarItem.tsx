@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link, useMatch, useResolvedPath } from 'react-router-dom'
+import { Link, useMatch, useResolvedPath } from 'react-router'
 
 type NavbarItemProps = {
   to: string

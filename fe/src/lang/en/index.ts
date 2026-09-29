@@ -7,6 +7,7 @@ import search from './search'
 import filters from './filters'
 import dialog from './dialog'
 import detail from './detail'
+import editor from './editor'
 
 const translationEn = {
   common,
@@ -18,6 +19,7 @@ const translationEn = {
   filters,
   dialog,
   detail,
+  editor,
 }
 
 export default translationEn

@@ -14,4 +14,10 @@ Návrh a celkové řešení nového badatelského prostředí zajišťuje techno
 2. create docker volume `docker volume create --driver local -o o=bind -o type=none -o device=$PWD/data eil_data`
 3. run images `docker-compose up -d`
 
+## VISE commit
+- https://gitlab.com/vgg/vise 12efcec301a5b2ca3258257ee2721286e5116d45 
 
+## VISE custom code edits
+1. Metadata grouping: ```vise/code/src/www/project_filelist.js``` uncomment ```search_form.appendChild(groupby_select);``` and ```search_form.appendChild(clear_link);```
+2. User external search "black boxes": ```vise/code/src/www/project_external_search.js``` add ```selected_image_dim = [e.target.naturalWidth, e.target.naturalHeight];``` on line 195
+3. Modified ```vise/code/src/vise/project_manager.cc``` and ```vise/code/src/vise/project_manager_test.cc``` for random filelist ordering

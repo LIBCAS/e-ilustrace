@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import clone from 'lodash/clone'
 import { v4 as uuidv4 } from 'uuid'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router'
 import PlusIcon from '../assets/icons/plus.svg?react'
 import DeleteIcon from '../assets/icons/delete.svg?react'
 import SearchIcon from '../assets/icons/search.svg?react'
@@ -94,7 +94,7 @@ const SearchInput: FC<SearchInputProps> = ({
         startIcon={<SearchIcon />}
         placeholder={t('search_expression')}
         value={search.search}
-        className="outline-black"
+        className="focus:border-black"
         parentClassName="!w-auto md:!w-full"
         onChange={(newValue) => onUpdateSearch(search.uuid, newValue)}
       />
@@ -182,7 +182,7 @@ const Search: FC = () => {
   const viewRef = useRef<HTMLDivElement>(null)
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const [searchParamsInitialized, setSearchParamsInitialized] = useState(false)
+  const searchParamsInitializedRef = useRef(false)
   const [showDialog, setShowDialog] = useState(false)
   const { isMobile, isTablet } = useMobile()
   const [filterOpen, setFilterOpen] = useState(!isTablet)
@@ -190,7 +190,7 @@ const Search: FC = () => {
     useSearchTranslations()
 
   useEffect(() => {
-    if (!searchParamsInitialized) {
+    if (!searchParamsInitializedRef.current) {
       const paramsSort = searchParams.get('sort')
       const paramsYear = searchParams.get('year')
       const paramsItemsPerPage = searchParams.get('itemsPerPage')
@@ -351,12 +351,11 @@ const Search: FC = () => {
         setCurrentPage(Number(paramsCurrentPage))
       }
 
-      setSearchParamsInitialized(true)
+      searchParamsInitializedRef.current = true
     }
   }, [
     searchCategories,
     searchParams,
-    searchParamsInitialized,
     setCurrentPage,
     setFilterAuthor,
     setFilterObject,

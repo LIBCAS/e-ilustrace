@@ -55,8 +55,7 @@ const MultiRangeSlider: FC<Props> = ({
   // Get min and max values when their store changes
   useEffect(() => {
     if (!dragging) onChange({ min: minVal, max: maxVal })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dragging, minVal, maxVal])
+  }, [dragging, minVal, maxVal, onChange])
 
   return (
     <div className="relative mb-8 w-full">

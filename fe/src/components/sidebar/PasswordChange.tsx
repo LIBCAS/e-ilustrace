@@ -44,8 +44,8 @@ const PasswordChange: FC<Props> = ({ setLoginPhase }) => {
         type="password"
         id="old_password"
         placeholder={t('navigation:old_password')}
-        className={`w-full outline-superlightgray ${
-          passwords.oldPassword ? 'bg-white' : 'bg-opacity-30'
+        className={`w-full ${
+          passwords.oldPassword ? 'bg-white' : 'bg-superlightgray/30'
         } font-bold placeholder-white`}
         value={passwords.oldPassword}
         onChange={(newValue) =>
@@ -56,8 +56,8 @@ const PasswordChange: FC<Props> = ({ setLoginPhase }) => {
         type="password"
         id="new_password"
         placeholder={t('navigation:new_password')}
-        className={`w-full outline-superlightgray ${
-          passwords.newPassword ? 'bg-white' : 'bg-opacity-30'
+        className={`w-full ${
+          passwords.newPassword ? 'bg-white' : 'bg-superlightgray/30'
         } font-bold placeholder-white`}
         value={passwords.newPassword}
         onChange={(newValue) =>

@@ -73,7 +73,6 @@ const Exhibitions = () => {
             <Loader />
           </div>
         ) : null}
-        {/* eslint-disable-next-line no-nested-ternary */}
         {exhibitionError || meError ? (
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -85,7 +84,6 @@ const Exhibitions = () => {
             <ShowError />
           )
         ) : null}
-        {/* eslint-disable-next-line no-nested-ternary */}
         {validateUUID(search) ? (
           exhibition ? (
             <div className="flex flex-col gap-4">

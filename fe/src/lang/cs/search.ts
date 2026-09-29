@@ -39,6 +39,7 @@ const cz: typeof en = {
   person: 'vyobrazeno',
   keyword: 'vedlejší motiv',
   theme: 'hlavní motiv',
+  login_required_for_selection: 'Pro použití Mého výběru se přihlaste',
 }
 
 export default cz

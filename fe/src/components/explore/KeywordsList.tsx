@@ -1,8 +1,8 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import clone from 'lodash/clone'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router'
 import sortBy from 'lodash/sortBy'
 import { deburr } from 'lodash'
 import clsx from 'clsx'
@@ -75,7 +75,7 @@ const KeywordsList: FC<KeywordsListProps> = ({ filterOpen, setFilterOpen }) => {
     setFilterObject,
   } = useExploreStore()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [searchParamsInitialized, setSearchParamsInitialized] = useState(false)
+  const searchParamsInitializedRef = useRef(false)
   const { t } = useTranslation()
   const { data: themesData } = useThemeListQuery()
 
@@ -94,7 +94,7 @@ const KeywordsList: FC<KeywordsListProps> = ({ filterOpen, setFilterOpen }) => {
   })
 
   useEffect(() => {
-    if (!searchParamsInitialized) {
+    if (!searchParamsInitializedRef.current) {
       const paramsThemes = searchParams.get('themes')
       const paramsObjects = searchParams.get('objects')
       const paramsAuthors = searchParams.get('authors')
@@ -139,12 +139,11 @@ const KeywordsList: FC<KeywordsListProps> = ({ filterOpen, setFilterOpen }) => {
         } else {
           setPage(0)
         }
-        setSearchParamsInitialized(true)
+        searchParamsInitializedRef.current = true
       }
     }
   }, [
     searchParams,
-    searchParamsInitialized,
     setFilterObject,
     setFilterAuthor,
     setPage,
@@ -166,7 +165,7 @@ const KeywordsList: FC<KeywordsListProps> = ({ filterOpen, setFilterOpen }) => {
         filterOpen ? 'w-full min-w-[370px]' : 'w-0 md:w-16'
       }`}
     >
-      <div className="flex items-center justify-between bg-superlightgray bg-opacity-30 p-4 font-bold">
+      <div className="flex items-center justify-between bg-superlightgray/30 p-4 font-bold">
         {filterOpen && <p className="font-bold">{t('explore:keywords')}</p>}
         {filterOpen ? (
           <MenuClose

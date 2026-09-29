@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
 import Button from '../components/reusableComponents/Button'
 import { useLoginMutation } from '../api/user'

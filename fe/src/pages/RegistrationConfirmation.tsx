@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRegistrationConfirmationMutation } from '../api/user'

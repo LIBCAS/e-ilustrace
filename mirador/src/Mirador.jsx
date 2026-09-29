@@ -1,18 +1,16 @@
-/* eslint-disable react/prop-types */
 import mirador from 'mirador'
-import { useEffect, useState } from 'react'
-// eslint-disable-next-line import/extensions
-import miradorImageToolsPlugin from 'mirador-image-tools/es/plugins/miradorImageToolsPlugin.js'
+import { useEffect, useRef } from 'react'
+import { miradorImageToolsPlugin } from 'mirador-image-tools'
 
 const Mirador = ({ config, plugins }) => {
-  const [initialized, setInitialized] = useState(false)
+  const initialized = useRef(false)
 
   useEffect(() => {
-    if (!initialized) {
+    if (!initialized.current) {
       mirador.viewer(config, [...plugins, ...miradorImageToolsPlugin])
-      setInitialized(true)
+      initialized.current = true
     }
-  }, [config, initialized, plugins])
+  }, [config, plugins])
 
   return <div id={config.id} />
 }

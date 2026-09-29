@@ -7,8 +7,6 @@ export default {
   me_loading_error: 'Nastala chyba při načítání vašeho účtu',
   me_loading: 'Načítání informací o vašem účtu',
   logged_out_successfully: 'Odhlášení proběhlo úspěšně',
-  login_required:
-    'Pro zobrazení Vašeho obsahu se musíte <button>přihlásit</button>',
   added_to_my_selection_successfully: 'Úspěšně přidáno do Vašeho výběru',
   removed_from_my_selection_successfully: 'Úspěšně smazáno z Vašeho výběru',
   pending_adding_to_my_selection: 'Probíhá přidávání do Vašeho výběru',

@@ -1,0 +1,72 @@
+.simple-editor-wrapper {
+  --tt-toolbar-height: 44px;
+  --tt-theme-text: var(--tt-gray-light-900);
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-height: 32rem;
+  overflow: auto;
+  color: var(--tt-theme-text);
+  background-color: var(--tt-bg-color);
+  border: 1px solid var(--tt-border-color);
+  border-radius: 0.5rem;
+}
+
+.simple-editor-wrapper .tiptap-toolbar[data-variant='fixed'] {
+  z-index: 1;
+}
+
+.simple-editor-search-and-replace {
+  position: absolute;
+  top: calc(var(--tt-toolbar-height) + 0.5rem);
+  right: 0.5rem;
+  z-index: 51;
+  max-height: calc(32rem - var(--tt-toolbar-height) - 1rem);
+}
+
+.simple-editor-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-height: 14rem;
+}
+
+.simple-editor-content .tiptap.ProseMirror.simple-editor {
+  flex: 1;
+  min-height: 14rem;
+  padding: 1.5rem;
+}
+
+.simple-editor-character-count {
+  display: block;
+  margin-top: 0.25rem;
+  color: #6c757d;
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+@media screen and (max-width: 480px) {
+  .simple-editor-search-and-replace {
+    top: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+    width: auto;
+    max-height: calc(32rem - 1rem);
+  }
+
+  .simple-editor-content .tiptap.ProseMirror.simple-editor {
+    padding: 1rem;
+  }
+
+  .simple-editor-wrapper .tiptap-toolbar[data-variant='fixed'] {
+    position: sticky;
+    top: 0;
+    bottom: auto !important;
+    height: var(--tt-toolbar-height);
+    padding-bottom: 0;
+    border-top: 0;
+    border-bottom: 1px solid var(--tt-toolbar-border-color);
+  }
+}

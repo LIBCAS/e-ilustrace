@@ -1,16 +1,14 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import React, { FC, Fragment, useState } from 'react'
+import React, { FC, Fragment, useRef, useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 import 'swiper/css'
-import 'swiper/css/navigation'
 
-import { Navigation } from 'swiper/modules'
+import { Swiper as SwiperType } from 'swiper/types'
 
 import { PhotoIcon } from '@heroicons/react/24/outline'
-import DOMPurify from 'dompurify'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import DownArrow from '../../assets/icons/down.svg?react'
 import UpArrow from '../../assets/icons/up.svg?react'
 import FullScreenIcon from '../../assets/icons/fullscreen.svg?react'
@@ -19,6 +17,7 @@ import { TExhibitionDetail } from '../../../../fe-shared/@types/exhibition'
 import constructRecordDetailUrl from '../../utils/constructRecordDetailUrl'
 import constructSearchUrl from '../../utils/constructSearchUrl'
 import generateSearchSearchParams from '../../utils/generateSearchSearchParams'
+import sanitizeWysiwygHtml from '../../utils/sanitizeWysiwygHtml'
 
 const BlankImage = ({ classNames }: { classNames: string }) => {
   return <PhotoIcon className={`text-lightgray ${classNames}`} />
@@ -30,8 +29,13 @@ type Props = {
 
 const SliderView: FC<Props> = ({ exhibition }) => {
   const [currentNumber, setCurrentNumber] = useState(1)
+  const swiperRef = useRef<SwiperType | null>(null)
   const handle = useFullScreenHandle()
   const { t } = useTranslation()
+  const totalSlides = exhibition.items.length + 1
+  const imageMaxHeightClass = handle.active
+    ? 'max-h-[calc(100vh-12rem)]'
+    : 'max-h-[540px]'
 
   const prefaceImage: { image: string; iilId: string } = {
     image: '',
@@ -80,24 +84,21 @@ const SliderView: FC<Props> = ({ exhibition }) => {
         // }}
       >
         <Swiper
-          // navigation={true}
-          modules={[Navigation]}
-          navigation={{
-            prevEl: '.prev',
-            nextEl: '.next',
-          }}
           // spaceBetween={handle.active ? 10 : 1080}
           slidesPerView={1}
           direction="vertical"
           onSlideChange={(swiper) => setCurrentNumber(swiper.realIndex + 1)}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper
+          }}
           // onSwiper={(swiper) => console.log(swiper)}
           className={`w-full ${
             handle.active ? 'h-screen' : 'h-[700px]'
           } max-w-7xl`}
         >
           <SwiperSlide>
-            <div className="flex gap-20 p-28">
-              <div className="flex basis-1/2 flex-col py-8">
+            <div className="flex h-full gap-8 p-8 md:gap-12 md:p-12 lg:gap-20 lg:p-20">
+              <div className="flex basis-1/2 flex-col overflow-y-auto py-4">
                 <h2 className="mb-2 mt-2 text-xl font-bold text-white">
                   {exhibition.name}
                 </h2>
@@ -134,11 +135,9 @@ const SliderView: FC<Props> = ({ exhibition }) => {
                           >
                             {i.illustration.mainAuthor?.author.fullName}
                           </Link>
-                          {/* eslint-disable-next-line no-nested-ternary */}
                           {i.illustration.mainAuthor?.author.fullName.lastIndexOf(
                             ','
                           ) ===
-                          // eslint-disable-next-line no-unsafe-optional-chaining
                           i.illustration.mainAuthor?.author.fullName.length - 1
                             ? ' '
                             : index !== length - 1
@@ -171,28 +170,31 @@ const SliderView: FC<Props> = ({ exhibition }) => {
                       )
                     })}
                 </span>
-                <p
-                  className="mt-2 text-white"
+                <div
+                  className="wysiwyg-editor-content mt-2 text-white [&_a]:text-red"
                   dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(exhibition.description),
+                    __html: sanitizeWysiwygHtml(exhibition.description),
                   }}
                 />
               </div>
 
-              <div className="basis-1/2">
+              <div className="flex basis-1/2 items-center justify-center">
                 {prefaceImage.image.length && prefaceImage.iilId.length ? (
                   <Link
                     to={constructRecordDetailUrl(prefaceImage.iilId)}
                     target="_blank"
+                    className="flex items-center justify-center"
                   >
                     <img
-                      className="justify-self-start rounded-xl transition-all duration-300"
+                      className={`max-w-full rounded-xl object-contain transition-all duration-300 ${imageMaxHeightClass}`}
                       src={`/api/eil/files/${prefaceImage.image}`}
                       alt="prefaceImage"
                     />
                   </Link>
                 ) : (
-                  <BlankImage classNames="justify-self-start rounded-xl transition-all duration-300" />
+                  <BlankImage
+                    classNames={`max-w-full rounded-xl object-contain transition-all duration-300 ${imageMaxHeightClass}`}
+                  />
                 )}
               </div>
             </div>
@@ -211,8 +213,8 @@ const SliderView: FC<Props> = ({ exhibition }) => {
 
             return (
               <SwiperSlide key={`slider-view-3-${i.illustration.id}`}>
-                <div className="flex gap-20 p-28">
-                  <div className="flex basis-1/2 flex-col py-8">
+                <div className="flex h-full gap-8 p-8 md:gap-12 md:p-12 lg:gap-20 lg:p-20">
+                  <div className="flex basis-1/2 flex-col overflow-y-auto py-4">
                     <h2 className="mb-2 mt-2 text-xl font-bold text-white">
                       <Link
                         target="_blank"
@@ -247,22 +249,23 @@ const SliderView: FC<Props> = ({ exhibition }) => {
                         </Link>
                       </span>
                     ) : null}
-                    <p
-                      className="mt-2 text-white"
+                    <div
+                      className="wysiwyg-editor-content mt-2 text-white [&_a]:text-red"
                       dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(i.description),
+                        __html: sanitizeWysiwygHtml(i.description),
                       }}
                     />
                   </div>
 
-                  <div className="basis-1/2">
+                  <div className="flex basis-1/2 items-center justify-center">
                     <Link
                       to={constructRecordDetailUrl(i.illustration.id)}
                       target="_blank"
+                      className="flex items-center justify-center"
                     >
                       {i.illustration.illustrationScan ? (
                         <img
-                          className="justify-self-start rounded-xl transition-all duration-300"
+                          className={`max-w-full rounded-xl object-contain transition-all duration-300 ${imageMaxHeightClass}`}
                           src={`/api/eil/files/${i.illustration.illustrationScan.id}`}
                           alt={i.illustration.title}
                         />
@@ -270,14 +273,16 @@ const SliderView: FC<Props> = ({ exhibition }) => {
                       {i.illustration.pageScan &&
                       !i.illustration.illustrationScan ? (
                         <img
-                          className="justify-self-start rounded-xl transition-all duration-300"
+                          className={`max-w-full rounded-xl object-contain transition-all duration-300 ${imageMaxHeightClass}`}
                           src={`/api/eil/files/${i.illustration.pageScan.id}`}
                           alt={i.illustration.title}
                         />
                       ) : null}
                       {!i.illustration.illustrationScan &&
                       !i.illustration.pageScan ? (
-                        <BlankImage classNames="justify-self-start rounded-xl transition-all duration-300" />
+                        <BlankImage
+                          classNames={`max-w-full rounded-xl object-contain transition-all duration-300 ${imageMaxHeightClass}`}
+                        />
                       ) : null}
                     </Link>
                   </div>
@@ -286,33 +291,59 @@ const SliderView: FC<Props> = ({ exhibition }) => {
             )
           })}
         </Swiper>
-        <div className="absolute right-11 top-1/2 flex h-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
+        <div className="absolute right-11 top-1/2 z-20 flex h-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
           {handle.active ? (
-            <Close
+            <button
+              type="button"
               onClick={() => handle.exit()}
-              className="absolute top-28 h-10 w-10 cursor-pointer justify-self-start text-white"
-            />
+              className="absolute top-28 z-20 text-white"
+              aria-label="Close fullscreen"
+            >
+              <Close className="h-10 w-10 cursor-pointer justify-self-start" />
+            </button>
           ) : (
-            <FullScreenIcon
+            <button
+              type="button"
               onClick={() => handle.enter()}
-              className="absolute top-28 h-10 w-10 cursor-pointer justify-self-start text-white"
-            />
+              className="absolute top-28 z-20 text-white"
+              aria-label="Open fullscreen"
+            >
+              <FullScreenIcon className="h-10 w-10 cursor-pointer justify-self-start" />
+            </button>
           )}
-          <UpArrow
-            className={`prev h-12 w-12 cursor-pointer ${
-              currentNumber === 1 ? 'text-gray' : 'text-white'
-            } `}
-          />
+          <button
+            type="button"
+            className="z-20"
+            onClick={() => {
+              if (currentNumber > 1) {
+                swiperRef.current?.slidePrev()
+              }
+            }}
+            aria-label="Previous slide"
+          >
+            <UpArrow
+              className={`h-12 w-12 cursor-pointer ${
+                currentNumber === 1 ? 'text-gray' : 'text-white'
+              } `}
+            />
+          </button>
           <p className="text-white">{currentNumber}</p>
           <span className="text-superlightgray"> - </span>
-          <p className="text-white">{exhibition.items.length}</p>
-          <DownArrow
-            className={`next h-12 w-12 cursor-pointer ${
-              currentNumber === exhibition.items.length
-                ? 'text-gray'
-                : 'text-white'
-            }`}
-          />
+          <p className="text-white">{totalSlides}</p>
+          <button
+            type="button"
+            className="z-20"
+            onClick={() => {
+              if (currentNumber < totalSlides) {
+                swiperRef.current?.slideNext()
+              }
+            }}
+            aria-label="Next slide"
+          >
+            <DownArrow
+              className={`h-12 w-12 cursor-pointer ${currentNumber === totalSlides ? 'text-gray' : 'text-white'}`}
+            />
+          </button>
         </div>
       </div>
     </FullScreen>

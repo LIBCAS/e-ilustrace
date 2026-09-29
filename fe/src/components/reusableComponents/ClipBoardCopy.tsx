@@ -39,7 +39,7 @@ const ClipBoardCopy: FC<TProps> = ({ text, copyType }) => {
       </button>
       <span
         className={clsx(
-          'absolute left-0 top-full z-10 rounded-md border-[1.px] border-black bg-white px-2 py-1 text-red shadow-[0_0_7px_-2px_black] shadow-black',
+          'absolute left-0 top-full z-10 rounded-md border border-black bg-white px-2 py-1 text-red shadow-[0_0_7px_-2px_black] shadow-black',
           {
             block: copied,
             hidden: !copied,

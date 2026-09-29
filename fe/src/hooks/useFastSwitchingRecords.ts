@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router'
 import { useSearchStore } from '../store/useSearchStore'
 import { useRecordListQuery } from '../api/record'
 import { TBookList } from '../../../fe-shared/@types/book'

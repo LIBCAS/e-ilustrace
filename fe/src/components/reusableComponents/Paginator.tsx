@@ -2,6 +2,11 @@ import { FC } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import ReactPaginate from 'react-paginate'
 
+// workaround for https://github.com/AdeleD/react-paginate/issues/530
+const ReactPaginateComponent =
+  (ReactPaginate as unknown as { default?: typeof ReactPaginate }).default ||
+  ReactPaginate
+
 type TPaginatorProps = {
   classNames?: string
   itemsPerPage: number
@@ -21,7 +26,7 @@ const Paginator: FC<TPaginatorProps> = ({
   onChange,
 }) => {
   return (
-    <ReactPaginate
+    <ReactPaginateComponent
       breakLabel="..."
       onPageChange={(event) => onChange(event.selected)}
       pageCount={Math.ceil(contentLength / itemsPerPage)}

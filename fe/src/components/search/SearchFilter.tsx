@@ -1,5 +1,6 @@
 import { Dispatch, FC, SetStateAction, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router'
 
 import sortBy from 'lodash/sortBy'
 import { deburr } from 'lodash'
@@ -29,6 +30,7 @@ type SearchFilterProps = {
 
 const SearchFilter: FC<SearchFilterProps> = ({ filterOpen, setFilterOpen }) => {
   const { t, i18n } = useTranslation()
+  const [searchParams] = useSearchParams()
   const { isMobile } = useMobile()
   const { sortValuesForDropdown, itemsPerPageForDropdown } =
     useSearchTranslations()
@@ -91,25 +93,41 @@ const SearchFilter: FC<SearchFilterProps> = ({ filterOpen, setFilterOpen }) => {
 
   useEffect(() => {
     if (yearsRange) {
+      const hasYearSearchParam = searchParams.has('year')
+
       if (type === 'ILLUSTRATION' && !yearRangeSet.illustrations) {
-        setYearRange({ from: yearsRange.yearFrom, to: yearsRange.yearTo })
+        if (!hasYearSearchParam) {
+          setYearRange({ from: yearsRange.yearFrom, to: yearsRange.yearTo })
+        }
         setYearRangeSet({ ...yearRangeSet, illustrations: true })
       }
       if (type === 'BOOK' && !yearRangeSet.books) {
-        setYearRange({ from: yearsRange.yearFrom, to: yearsRange.yearTo })
+        if (!hasYearSearchParam) {
+          setYearRange({ from: yearsRange.yearFrom, to: yearsRange.yearTo })
+        }
         setYearRangeSet({ ...yearRangeSet, books: true })
       }
     }
-  }, [setYearRange, setYearRangeSet, type, yearRangeSet, yearsRange])
+  }, [
+    searchParams,
+    setYearRange,
+    setYearRangeSet,
+    type,
+    yearRangeSet,
+    yearsRange,
+  ])
 
   useEffect(() => {
     if (type === 'BOOK') {
-      setFilterAuthor(
-        filterAuthor.filter((a) => !a.label.includes(t('search:person')))
+      const filteredFilterAuthor = filterAuthor.filter(
+        (a) => !a.label.includes(t('search:person'))
       )
+
+      if (filteredFilterAuthor.length !== filterAuthor.length) {
+        setFilterAuthor(filteredFilterAuthor)
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, t, setFilterAuthor])
+  }, [type, t, setFilterAuthor, filterAuthor])
 
   return (
     <div
@@ -117,7 +135,7 @@ const SearchFilter: FC<SearchFilterProps> = ({ filterOpen, setFilterOpen }) => {
         filterOpen ? 'md:w-[370px]' : 'w-0 md:w-16'
       }`}
     >
-      <div className="flex items-center justify-between px-6 pt-6 font-bold md:bg-superlightgray md:bg-opacity-30 md:p-4">
+      <div className="flex items-center justify-between px-6 pt-6 font-bold md:bg-superlightgray/30 md:p-4">
         <div className="flex w-full items-center justify-between border-b-[1.5px] border-superlightgray pb-2 md:border-none md:p-0">
           {filterOpen && (
             <h2 className="text-2xl font-bold md:text-base">

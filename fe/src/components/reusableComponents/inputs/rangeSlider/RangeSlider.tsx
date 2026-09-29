@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useEffect, useState } from 'react'
+import { CSSProperties, FC } from 'react'
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider'
 import { SliderRail, Handle, Track } from './components'
 
@@ -17,19 +17,8 @@ const RangeSlider: FC<TProps> = ({
   bottomLimit,
   topLimit,
 }) => {
-  const [values, setValues] = useState({ from: fromValue, to: toValue })
-
-  useEffect(() => {
-    setValues({ from: fromValue, to: toValue })
-  }, [fromValue, toValue])
-
   const handleChange = (nextState: readonly number[]) => {
     bothValuesChange(nextState)
-    setValues({ from: nextState[0], to: nextState[1] })
-  }
-
-  const handleUpdate = (nextState: readonly number[]) => {
-    setValues({ from: nextState[0], to: nextState[1] })
   }
 
   const sliderStyle = {
@@ -49,8 +38,7 @@ const RangeSlider: FC<TProps> = ({
           domain={[bottomLimit, topLimit]}
           rootStyle={sliderStyle}
           onChange={handleChange}
-          onUpdate={handleUpdate}
-          values={[values.from, values.to]}
+          values={[fromValue, toValue]}
         >
           <Rail>
             {({ getRailProps }) => <SliderRail getRailProps={getRailProps} />}
@@ -87,8 +75,8 @@ const RangeSlider: FC<TProps> = ({
         </Slider>
       </div>
       <div className="flex items-center justify-between gap-4 text-gray">
-        <span>{values.from}</span>
-        <span>{values.to}</span>
+        <span>{fromValue}</span>
+        <span>{toValue}</span>
       </div>
     </div>
   )

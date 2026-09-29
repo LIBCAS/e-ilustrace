@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { toast } from 'react-toastify'
@@ -31,6 +31,9 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
   const { mutateAsync } = useLogoutMutation()
   const { sidebarOpen, setSidebarOpen, loginPhase, setLoginPhase } =
     useSidebarStore()
+  const [isHeaderMenuDesktop, setIsHeaderMenuDesktop] = useState(
+    window.innerWidth >= 1200
+  )
 
   const handleLogout = async () => {
     const response = await mutateAsync()
@@ -55,11 +58,23 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
     }
   }, [sidebarOpen])
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsHeaderMenuDesktop(window.innerWidth >= 1200)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const showDesktopSidebarMenu = isDesktop && isHeaderMenuDesktop
+
   return (
     <>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
       <div
-        className={`fixed top-0 h-screen min-h-full w-screen min-w-full overflow-auto bg-black bg-opacity-40 ${
+        className={`fixed top-0 h-screen min-h-full w-screen min-w-full overflow-auto bg-black/40 ${
           sidebarOpen ? 'z-40' : 'hidden'
         }`}
         onClick={() => {
@@ -70,7 +85,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
 
       <div
         className={`fixed top-0 z-50 h-full min-h-full w-screen overflow-auto bg-red text-black md:w-[400px] ${
-          sidebarOpen ? 'left-0 flex sm:w-full' : '-left-[calc(100%+8px)]'
+          sidebarOpen ? 'right-0 flex sm:w-full' : '-right-[calc(100%+8px)]'
         } flex-col items-start duration-300 ease-in-out`}
       >
         <div className="flex min-w-full flex-col">
@@ -86,7 +101,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
             {t('navigation:close')}
           </Button>
           {loginPhase === 'MENU' &&
-            (isDesktop ? (
+            (showDesktopSidebarMenu ? (
               <ul className="flex min-w-full flex-col gap-8 py-10 pl-12 text-xl font-bold uppercase text-white">
                 <li className="sidebar-item">
                   <a href="https://e-ilustrace.cz#about">
@@ -157,7 +172,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
         </div>
         {(loginPhase === 'LOGIN' || loginPhase === 'REGISTRATION') && (
           <div className="flex w-full flex-col items-start justify-between">
-            <div className="flex h-12 w-full flex-row justify-evenly border-b border-white border-opacity-50 text-lg font-bold uppercase text-white">
+            <div className="flex h-12 w-full flex-row justify-evenly border-b border-white/50 text-lg font-bold uppercase text-white">
               <button
                 type="button"
                 className={`px-4 uppercase ${
@@ -228,7 +243,7 @@ const Sidebar: FC<Props> = ({ isDesktop }) => {
               <Button
                 animate
                 variant="submit"
-                className="text-md mx-8 mb-10 font-bold uppercase hover:shadow-none"
+                className="mx-8 mb-10 text-base font-bold uppercase hover:shadow-none"
                 endIcon={<RightArrow />}
                 onClick={() => setLoginPhase('LOGIN')}
               >

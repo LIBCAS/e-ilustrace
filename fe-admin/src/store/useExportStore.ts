@@ -58,7 +58,7 @@ interface TState extends TVariablesState {
   setExportRecords: (newValue: (TIllustrationList | TBookList)[]) => void
 }
 
-// eslint-disable-next-line import/prefer-default-export
+ 
 export const useExportStore = create<TState>()((set) => ({
   sort: null,
   year: { from: 0, to: 1990 },

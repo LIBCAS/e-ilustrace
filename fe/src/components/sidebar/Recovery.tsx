@@ -39,8 +39,8 @@ const Recovery: FC<Props> = ({ setLoginPhase }) => {
       <TextInput
         id="recovery_email"
         placeholder={t('navigation:recovery_email')}
-        className={`w-full outline-superlightgray ${
-          email ? 'bg-white' : 'bg-opacity-30'
+        className={`w-full ${
+          email ? 'bg-white' : 'bg-superlightgray/30'
         } font-bold placeholder-white`}
         value={email}
         onChange={(newValue) => setEmail(newValue)}
@@ -48,9 +48,7 @@ const Recovery: FC<Props> = ({ setLoginPhase }) => {
       <Button
         onClick={() => handleSubmit()}
         className="mx-auto w-full border-white bg-white text-center !text-black"
-        disabled={
-          status === 'pending' || !z.string().email().safeParse(email).success
-        }
+        disabled={status === 'pending' || !z.email().safeParse(email).success}
       >
         {t('navigation:recovery_link')}
       </Button>

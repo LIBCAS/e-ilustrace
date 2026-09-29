@@ -1,5 +1,5 @@
 import React, { FC, Suspense, useState } from 'react'
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router'
 
 import { useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
@@ -8,6 +8,7 @@ import BookMarkOutlined from '../assets/icons/bookmark_outlined.svg?react'
 import BookMark from '../assets/icons/bookmark.svg?react'
 
 import Button from '../components/reusableComponents/Button'
+import Tooltip from '../components/reusableComponents/Tooltip'
 import useMobile from '../hooks/useMobile'
 import { useRecordQuery } from '../api/record'
 import Loader from '../components/reusableComponents/Loader'
@@ -89,16 +90,16 @@ const RecordDetail: FC = () => {
 
   return (
     <section>
-      <div className="border-[1.5px] border-superlightgray py-4">
+      <div className="border-superlightgray border-[1.5px] py-4">
         <div className="lg:mr-8">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center md:flex-nowrap">
             <div
               className={`w-full ${
-                isMobile ? 'border-b-[1.5px] border-superlightgray pb-4' : ''
+                isMobile ? 'border-superlightgray border-b-[1.5px] pb-4' : ''
               } flex items-center`}
             >
               <LeftArrow
-                className="cursor-pointer text-red"
+                className="text-red cursor-pointer"
                 onClick={() => {
                   navigate(
                     searchParams.has('back')
@@ -114,33 +115,39 @@ const RecordDetail: FC = () => {
               </h1>
             </div>
             <div className="flex w-full px-4 md:px-0 lg:w-1/4">
-              <Button
-                disabled={!me}
-                className="mx-auto mt-4 flex-grow md:mx-0 md:ml-auto md:flex-grow-0"
-                variant={isMobile ? 'secondary' : 'text'}
-                startIcon={
-                  isInMySelection ? (
-                    <BookMark className="text-red" />
-                  ) : (
-                    <BookMarkOutlined />
-                  )
-                }
-                onClick={() => {
-                  if (isInMySelection) {
-                    handleDeletion()
-                  } else {
-                    handleAddition()
-                  }
-                }}
+              <Tooltip
+                className="relative mx-auto mt-4 grow md:mx-0 md:ml-auto md:grow-0"
+                content={t('search:login_required_for_selection')}
+                show={!me}
               >
-                {isInMySelection ? (
-                  <span className="text-red">
-                    {t('remove_from_my_selection')}
-                  </span>
-                ) : (
-                  t('add_into_my_selection')
-                )}
-              </Button>
+                <Button
+                  disabled={!me}
+                  className="w-full"
+                  variant={isMobile ? 'secondary' : 'text'}
+                  startIcon={
+                    isInMySelection ? (
+                      <BookMark className="text-red" />
+                    ) : (
+                      <BookMarkOutlined />
+                    )
+                  }
+                  onClick={() => {
+                    if (isInMySelection) {
+                      handleDeletion()
+                    } else {
+                      handleAddition()
+                    }
+                  }}
+                >
+                  {isInMySelection ? (
+                    <span className="text-red">
+                      {t('remove_from_my_selection')}
+                    </span>
+                  ) : (
+                    t('add_into_my_selection')
+                  )}
+                </Button>
+              </Tooltip>
             </div>
           </div>
           <div className="mx-auto mt-2 flex max-w-7xl items-center justify-between">
@@ -149,7 +156,7 @@ const RecordDetail: FC = () => {
                 {position !== 'first' ? (
                   <button type="button" onClick={() => moveDown()}>
                     <span className="flex cursor-pointer items-center">
-                      <LeftArrow className="cursor-pointer text-red" />
+                      <LeftArrow className="text-red cursor-pointer" />
                       {t('previous_record')}
                     </span>
                   </button>
@@ -160,7 +167,7 @@ const RecordDetail: FC = () => {
                   <button type="button" onClick={() => moveUp()}>
                     <span className="flex cursor-pointer items-center">
                       {t('next_record')}
-                      <LeftArrow className="rotate-180 cursor-pointer text-red" />
+                      <LeftArrow className="text-red rotate-180 cursor-pointer" />
                     </span>
                   </button>
                 ) : (
@@ -202,7 +209,38 @@ const RecordDetail: FC = () => {
             <Suspense fallback={<Loader className="" />}>
               <MiradorContainer
                 config={{
+                  galleryView: {
+                    height: 120,
+                    width: 120,
+                  },
                   id: 'mirador',
+                  theme: {
+                    components: {
+                      GalleryView: {
+                        styleOverrides: {
+                          thumbnail: {
+                            alignItems: 'center',
+                            boxSizing: 'border-box',
+                            display: 'inline-flex',
+                            flexDirection: 'column',
+                            maxHeight: 'none',
+                            minWidth: 136,
+                            width: 136,
+                            '& > div': {
+                              alignItems: 'center',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              width: '100%',
+                            },
+                            '& > div > span': {
+                              alignSelf: 'stretch',
+                              width: '100%',
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                   // window: {
                   // allowClose: false,
                   // },
@@ -211,7 +249,6 @@ const RecordDetail: FC = () => {
                       defaultView: 'gallery',
                       imageToolsEnabled: true,
                       imageToolsOpen: true,
-                      // loadedManifest: `/api/eil/record/${record.id}/manifest.json`,
                       loadedManifest: `/api/eil/record/${record.id}/manifest.json`,
                       // thumbnailNavigationPosition: 'far-bottom',
                     },
@@ -230,7 +267,7 @@ const RecordDetail: FC = () => {
                 <Link
                   to={constructRecordDetailUrl(l.id)}
                   key={l.id}
-                  className="block text-red hover:underline"
+                  className="text-red block hover:underline"
                 >
                   {`${l.identifier} (${l.title})`}
                 </Link>
@@ -251,7 +288,7 @@ const RecordDetail: FC = () => {
               <Link
                 to={constructRecordDetailUrl(i.id)}
                 key={i.id}
-                className="block text-red hover:underline"
+                className="text-red block hover:underline"
               >
                 {`${i.identifier} (${i.title})`}
               </Link>

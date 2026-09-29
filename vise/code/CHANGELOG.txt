@@ -1,0 +1,109 @@
+## [2.0.1] - July 12, 2022
+  * fixed multiple bugs that were causing server crash
+    - handle requests for empty image asset names (e.g. GET image or
+    GET image/)
+    - registration process of im1 and im2 transforms im2 to the im1
+      coordinate space, this transformation was wrongly using the size
+      of im2 as target size when it should be using size of im1 as the
+      target size, this crashed the server when crop bounding box fell
+      beyond image size
+    - show error message when uploaded image exceeds size limit;
+    removed debug messages
+    - show messages when external search returns no result
+    - thread queue now wais for all threads instead of waiting for
+    only N-1 threads
+
+  * improved documentation
+    - doc/HTTP-REST-API.md :
+      - POST _search_using_features requires image features to be sent
+      as request body
+      - added doc about performing external image search using HTTP
+      REST API (thank you RKD team for the question)
+    - doc/Users-of-VISE.md : lists research projects and commercial
+    products that use VISE
+    - doc/Visual-Vocabulary.md : added details about generic visual
+    vocabulary that ships with VISE
+    - doc/FAQ.md :
+      - use hamm64 generic visual vocabulary as hamm32 slows search on
+      large datasets; added link to generic visual vocabulary page
+      - added details about using VISE in Windows server.
+      - define the metadata fields that gets shown in the user interface
+    - doc/Testing-VISE.md : added doc for VISE tests
+    - doc/User-Guide.md : added User Guide
+
+  * improved build script
+    - install libjpeg and libpng libraries which are required by
+    ImageMagick (thank you @mchesterkadwell)
+  * user uploaded images are resized before performing "upload and
+  search"
+  * fixed "undefined" region for image search using full image
+  * rectified errors pointed by static analysis (cppcheck)
+    - close files before premature return
+    - typo in variable name
+  * removed leading space character in each line of conf.txt file
+  entries in User-Guide (thank you leander-de-graaf)
+  * fixed Windows CI/CD build by adding double quotation to msbuild
+  command parameter
+  * set visualization must show original image (not thumbnail) as
+  region dimensions are only correct in original image space
+  * turn on HTTP request logging only in debug builds
+  * added visual grouping feature (available only through vise-cli
+  command)
+  * fixed indexing time message to properly show hour field > 99
+  * fixed typo in project CSS display:flex (thank you
+  @mchesterkadwell)
+  * improved some user interface elements based on feedback from users
+
+## [2.0.0] - June 14, 2021
+  * removed dependency on Python:
+    - clustering of visual features done using vlfeat's kdtree implementation (added dependency on vlfeat)
+  * Simplified user interface which is now based solely on HTML/CSS/Javascript
+    - frontend is based solely on HTML/CSS/Javascript (previously, VISE used a python cherrypy based server for generating frontend)
+    - many work load transferred from backend server to user's web browser
+    - VISE server only generates basic HTML pages containing dynamic data stored as Javascript variable
+    - web browser renders the page based on dynamic data contained in Javascript variable
+    - VISE servers sends homography matrix and web browser uses Javascript and HTML canvas to generate registered images and required visualisations
+  * upgraded code to support compilation in Linux (gcc), Windows (Visual C++) and MacOS (Clang)
+  * setup CI/CD pipeline (build and test stages) for Windows 10
+    - automatically builds using Visual C++ compiler on Windows 10 platform
+    - integration test based on Oxford Buildings 100 images subset and its ground truth derived from the full Oxford Buildings 5k dataset
+    - uses NSIS to package Windows 10 64 bit installer
+  * images get resized based on user defined max. size (defined in project configuration file)
+  * indexing process log saved to a file for reporting
+  * a basic GUI application to launch VISE server in Windows 10
+  * faster indexing of projects using generic visual vocabulary
+    - VISE ships with a generic visual vocabulary computed using 53629 images
+    - this speeds up the process of indexing (at the loss of some search accuracy) of new projects
+  * rewrote VISE http server
+    - all functionality of VISE software is now exposed using a REST HTTP API
+    - multiple worker threads handle HTTP requests
+  * following software features that have been implemented but not yet fully tested have been queued for future release:
+    - visual grouping of images
+    - metadata import and search
+
+## [2.0.0-internal-releases] - 2018, 2019, 2020
+  * VISE code was adapted and extended to address the requirements of several internal and collaborative projects at VGG between 2018 and 2020.
+
+## [1.0.3] - September 28, 2017
+  * international characters (utf-8) are now allowed in image filenames (issue 15)
+  * uppercase image filename extensions (PNG, JPG) are now allowed (issue 17)
+
+## [1.0.2] - September 07, 2017
+  * docker container for Linux, MacOS and Windows
+
+## [1.0.1] - July 05, 2017
+  * fixed issues with load, start, stop and uninstall scripts
+  * debugging log saved to $HOME/vgg/vise/log/training.log
+  * user images are resized *only* if > 1024px
+  * added Refresh button to indexing page to deal with unresponsive pages (temporary fix)
+
+## [1.0.0] - June 15, 2017
+  * a web based user interface to index new images
+
+## [0.0.2] - March 16, 2017
+  * updated source code and cmake files to allow compilation in Mac OS
+  * mostly used by @Giles Bergel (Seebibyte project ambassador) to demonstrate potential users
+
+## [0.0.1] - September 25, 2014
+  * the original relja_retrival codebase was released internally within the Visual Geometry Group (VGG)
+  * developed by Relja Arandjelovic during his DPhil / Postdoc at the Visual Geometry Group, Department of Engineering Science, University of Oxford.

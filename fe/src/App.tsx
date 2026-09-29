@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router'
 
 import Layout from './components/Layout'
 import Explore from './pages/explore/Explore'

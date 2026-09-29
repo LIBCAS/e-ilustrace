@@ -1,16 +1,18 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-ignore
-// import Mirador from 'mirador/dist/es/src/index'
 import { FC, memo, ReactElement, useEffect, useRef, useState } from 'react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-// @ts-ignore
-// eslint-disable-next-line import/extensions
-// import { miradorImageToolsPlugin } from 'mirador-image-tools'
+import mirador from 'mirador'
+import { miradorImageToolsPlugin } from 'mirador-image-tools'
+
+type MiradorPlugin = ReactElement | object
 
 type TProps = {
   config: {
+    galleryView?: {
+      height?: number
+      width?: number
+    }
     id: string
+    theme?: object
     window?: {
       allowClose?: boolean
     }
@@ -23,7 +25,7 @@ type TProps = {
       thumbnailNavigationPosition?: 'far-bottom'
     }[]
   }
-  plugins?: ReactElement[]
+  plugins?: MiradorPlugin[]
 }
 
 const MiradorContainer: FC<TProps> = memo(function MiradorContainer({
@@ -39,10 +41,9 @@ const MiradorContainer: FC<TProps> = memo(function MiradorContainer({
   useEffect(() => {
     if (!initialized.current) {
       try {
-        // Mirador is imported in index.html (resolves build issues)
-        // @ts-ignore
-        Mirador?.viewer(config, plugins)
+        mirador.viewer(config, [...plugins, ...miradorImageToolsPlugin])
         initialized.current = true
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         console.error('Nepodařilo se inicializovat Mirador')
         setInitError(true)

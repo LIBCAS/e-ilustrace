@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { TEnrichmentStates } from '../../../fe-shared/@types/illustration'
 
-// eslint-disable-next-line import/prefer-default-export
+ 
 export const useEnrichmentStates = () => {
   const { t } = useTranslation()
 

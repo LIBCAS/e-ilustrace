@@ -79,7 +79,7 @@ const Records = () => {
               startIcon={<SearchIcon />}
               placeholder={t('search.search_expression')}
               value={currentSearch}
-              className="outline-black"
+              className="focus:border-black"
               onChange={(newValue) => setCurrentSearch(newValue)}
             />
             <div className="h-min max-h-min w-full md:w-1/2">

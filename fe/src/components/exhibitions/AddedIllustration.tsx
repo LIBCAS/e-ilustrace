@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { PhotoIcon } from '@heroicons/react/24/outline'
 import clone from 'lodash/clone'
 import Switch from 'react-switch'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import InfoIcon from '../../assets/icons/info.svg?react'
 import Delete from '../../assets/icons/delete.svg?react'
 import DownArrow from '../../assets/icons/down.svg?react'
@@ -199,7 +199,7 @@ const AddedIllustration: FC<TProps> = ({ addedIllustration, index }) => {
               <TextInput
                 id={`${name}.headline`}
                 value={addedIllustration.name}
-                className="bg-opacity-50 outline-black"
+                className="bg-superlightgray/50 focus:border-black"
                 label={t('exhibitions:headline')}
                 onChange={(newValue) => handleNameChange(newValue)}
               />
@@ -212,7 +212,7 @@ const AddedIllustration: FC<TProps> = ({ addedIllustration, index }) => {
               <TextInput
                 id={`${name}.year`}
                 value={addedIllustration.year}
-                className="bg-opacity-50 outline-black"
+                className="bg-superlightgray/50 focus:border-black"
                 label={t('exhibitions:year')}
                 onChange={(newValue) => handleYearChange(newValue)}
               />
@@ -223,7 +223,7 @@ const AddedIllustration: FC<TProps> = ({ addedIllustration, index }) => {
             </div>
           </div>
           <WYSIWYGEditor
-            label="Úvod (volitelné – maximálně 750 znaků)"
+            label={t('exhibitions:introduction')}
             value={addedIllustration.description}
             onChange={(newValue) => handleDescChange(newValue)}
           />

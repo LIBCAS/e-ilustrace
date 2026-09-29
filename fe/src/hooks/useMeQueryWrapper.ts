@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { useMeQuery } from '../api/user'
 
 const useMeQueryWrapper = () => {
   const { t } = useTranslation()
-  const [wasLoggedIn, setWasLoggedIn] = useState<boolean | undefined>(undefined)
+  const wasLoggedInRef = useRef<boolean | undefined>(undefined)
   const { data, isLoading, isError } = useMeQuery()
 
   useEffect(() => {
@@ -17,17 +17,17 @@ const useMeQueryWrapper = () => {
   }, [isError, t])
 
   useEffect(() => {
-    if (!data && wasLoggedIn) {
+    if (!data && wasLoggedInRef.current) {
       toast.info(t('common:you_were_logged_out'), {
         toastId: 'logged_out',
       })
-      setWasLoggedIn(false)
+      wasLoggedInRef.current = false
     }
-  }, [data, t, wasLoggedIn])
+  }, [data, t])
 
   useEffect(() => {
     if (!isLoading && !isError && data) {
-      setWasLoggedIn(true)
+      wasLoggedInRef.current = true
     }
   }, [data, isError, isLoading])
 

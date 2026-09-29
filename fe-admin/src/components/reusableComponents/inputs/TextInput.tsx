@@ -1,5 +1,6 @@
 import { FC, ReactNode, useState } from 'react'
 
+import { twMerge } from 'tailwind-merge'
 import VisibilityIcon from '../../../assets/icons/visibility.svg?react'
 
 type Props = {
@@ -39,12 +40,12 @@ const TextInput: FC<Props> = ({
       {label && (
         <label
           htmlFor={id}
-          className="text-md mb-2 block font-medium text-black"
+          className="mb-2 block text-base font-medium text-black"
         >
           {label}
         </label>
       )}
-      <div className="relative rounded-xl shadow-sm">
+      <div className="relative rounded-xl">
         {startIcon && (
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <div className="ml-1 text-black">{startIcon}</div>
@@ -55,9 +56,11 @@ const TextInput: FC<Props> = ({
           id={id}
           value={value}
           placeholder={placeholder}
-          className={`block w-full py-3 outline-1 ${
-            startIcon ? 'pl-12' : 'pl-3'
-          } border-gray-300 rounded-xl bg-superlightgray pr-6 sm:text-sm ${className}`}
+          className={twMerge(
+            `block w-full border-2 border-transparent py-3 focus:border-lightgray focus:outline-none ${
+              startIcon ? 'pl-12' : 'pl-3'
+            } rounded-xl bg-superlightgray pr-6 sm:text-sm ${className}`
+          )}
           onChange={(event) => onChange(event.target.value)}
         />
         {type === 'password' ? (

@@ -43,7 +43,6 @@ const IconClassFilterItem: FC<IconClassFilterItemProps> = ({ iccParent }) => {
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
     <li
       className={`flex flex-col ${
         isExpanded ? 'border-b-[1.5px] border-superlightgray' : ''
@@ -64,11 +63,9 @@ const IconClassFilterItem: FC<IconClassFilterItemProps> = ({ iccParent }) => {
             onChange={() => handleChange(iccParent.icc.code)}
           />
         </div>
-        {/* eslint-disable-next-line no-nested-ternary */}
         {isExpanded ? <Up /> : iccParent.children.length ? <Down /> : null}
       </div>
       {isExpanded && iccParent.children.length && (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
         <ul className="pb-3 pl-8" onClick={(e) => e.stopPropagation()}>
           {iccParent.children?.map((suboption) => (
             <li key={suboption.id} className="flex flex-col text-left">
@@ -144,12 +141,12 @@ const IconClassFilter: FC<IconClassFilterProps> = ({
           : 'w-0 max-md:hidden md:w-16'
       }`}
     >
-      <div className="flex items-center justify-between px-6 pt-6 font-bold md:bg-superlightgray md:bg-opacity-30 md:p-4">
+      <div className="flex items-center justify-between px-6 pt-6 font-bold md:bg-superlightgray/30 md:p-4">
         <div className="flex w-full items-center justify-between border-b-[1.5px] border-superlightgray pb-2 md:border-none md:p-0">
           {filterOpen && (
             <h2 className="text-2xl md:text-base">{t('themes')}</h2>
           )}
-          {/* eslint-disable-next-line no-nested-ternary */}
+
           {filterOpen ? (
             !isMobile ? (
               <MenuClose

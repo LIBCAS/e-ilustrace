@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import Button from './reusableComponents/Button'
 import { useLogoutMutation } from '../api/user'

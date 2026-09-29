@@ -35,10 +35,10 @@ export const api = () =>
   ky.extend({
     timeout: 180_000,
     retry: 0,
-    prefixUrl: '/api/eil',
+    prefix: '/api/eil',
     hooks: {
       afterResponse: [
-        async (_request, _options, response) => {
+        async ({ response }) => {
           if (response.ok) return
 
           const error = await response.json()

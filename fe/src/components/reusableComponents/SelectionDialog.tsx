@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { PhotoIcon } from '@heroicons/react/24/outline'
 import Switch from 'react-switch'
-import { Dialog } from '@headlessui/react'
+import { Dialog, DialogPanel } from '@headlessui/react'
 import CloseIcon from '../../assets/icons/close.svg?react'
 import Delete from '../../assets/icons/delete.svg?react'
 
@@ -25,9 +25,18 @@ const BlankImage = ({ classNames }: { classNames: string }) => {
 type Props = {
   showDialog: boolean
   setShowDialog: Dispatch<SetStateAction<boolean>>
+  mode?: 'default' | 'exhibition'
+  selectedIllustrationIds?: string[]
+  onIllustrationToggle?: (illustrationId: string, checked: boolean) => void
 }
 
-const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
+const SelectionDialog: FC<Props> = ({
+  showDialog,
+  setShowDialog,
+  mode = 'default',
+  selectedIllustrationIds = [],
+  onIllustrationToggle = () => undefined,
+}) => {
   const { t } = useTranslation('dialog')
   const [selectionType, setSelectionType] = useState<RecordType>('BOOK')
   const { me } = useMeQueryWrapper()
@@ -35,6 +44,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
   const { isMobile } = useMobile()
   const { doRemove, removingStatus } = useRemoveFromMySelectionMutationWrapper()
   const { doViewChange, viewChangeStatus } = useChangeViewInMiradorWrapper()
+  const isExhibitionMode = mode === 'exhibition'
 
   const handleDeletion = (record: TSelectionItemDetail) => {
     doRemove({ items: [record.id] })
@@ -58,10 +68,15 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
     }
   }, [showDialog])
 
-  const selection =
-    selectionType === 'BOOK'
-      ? selectionData?.items?.filter((i) => i.book?.id)
-      : selectionData?.items?.filter((i) => i.illustration?.id)
+  const activeSelectionType: RecordType = isExhibitionMode
+    ? 'ILLUSTRATION'
+    : selectionType
+
+  let selection = selectionData?.items?.filter((i) => i.illustration?.id)
+
+  if (!isExhibitionMode && activeSelectionType === 'BOOK') {
+    selection = selectionData?.items?.filter((i) => i.book?.id)
+  }
 
   const illustrationsForMirador =
     selection
@@ -81,7 +96,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       <div className="fixed inset-0 w-screen overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4">
-          <Dialog.Panel>
+          <DialogPanel>
             <div className="fixed bottom-1/2 left-1/2 z-10 flex h-full w-full -translate-x-1/2 translate-y-1/2 flex-col bg-white p-6 shadow-xl md:h-[600px] md:w-[700px] md:rounded-2xl">
               <div className="flex items-center justify-between border-b-[1.5px] border-superlightgray pb-2 md:border-none">
                 <span className="ml-2 text-2xl font-bold md:text-xl">
@@ -99,12 +114,12 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                 </Button>
               </div>
               <div className="mt-4 flex gap-2 border-b-[1.5px] border-superlightgray pb-4">
-                {isMobile ? (
+                {!isExhibitionMode && isMobile ? (
                   <div className="flex max-h-11 w-full">
                     <button
                       type="button"
                       className={`w-full rounded-l-xl p-2 px-3 ${
-                        selectionType === 'BOOK'
+                        activeSelectionType === 'BOOK'
                           ? 'font-bold text-red'
                           : 'text-gray'
                       } border-collapse border-2 border-superlightgray hover:bg-superlightgray`}
@@ -115,7 +130,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                     <button
                       type="button"
                       className={`w-full rounded-r-xl p-2 px-3 ${
-                        selectionType === 'ILLUSTRATION'
+                        activeSelectionType === 'ILLUSTRATION'
                           ? 'font-bold text-red'
                           : 'text-gray'
                       } border-collapse border-y-2 border-r-2 border-superlightgray hover:bg-superlightgray`}
@@ -124,11 +139,14 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                       {t('illustrations')}
                     </button>
                   </div>
-                ) : (
+                ) : null}
+                {!isExhibitionMode && !isMobile ? (
                   <>
                     <Button
                       dense
-                      variant={selectionType === 'BOOK' ? 'submit' : 'outlined'}
+                      variant={
+                        activeSelectionType === 'BOOK' ? 'submit' : 'outlined'
+                      }
                       onClick={() => setSelectionType('BOOK')}
                     >
                       {t('books')}
@@ -136,7 +154,9 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                     <Button
                       dense
                       variant={
-                        selectionType === 'ILLUSTRATION' ? 'submit' : 'outlined'
+                        activeSelectionType === 'ILLUSTRATION'
+                          ? 'submit'
+                          : 'outlined'
                       }
                       onClick={() => setSelectionType('ILLUSTRATION')}
                     >
@@ -154,7 +174,34 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                       {t('delete_all')}
                     </Button>
                   </>
-                )}
+                ) : null}
+                {isExhibitionMode && isMobile ? (
+                  <div className="flex max-h-11 w-full">
+                    <button
+                      type="button"
+                      disabled
+                      className="w-full cursor-not-allowed rounded-l-xl border-2 border-superlightgray p-2 px-3 text-gray"
+                    >
+                      {t('books')}
+                    </button>
+                    <button
+                      type="button"
+                      className="w-full rounded-r-xl border-y-2 border-r-2 border-superlightgray p-2 px-3 font-bold text-red hover:bg-superlightgray"
+                    >
+                      {t('illustrations')}
+                    </button>
+                  </div>
+                ) : null}
+                {isExhibitionMode && !isMobile ? (
+                  <>
+                    <Button dense variant="outlined" disabled>
+                      {t('books')}
+                    </Button>
+                    <Button dense variant="submit">
+                      {t('illustrations')}
+                    </Button>
+                  </>
+                ) : null}
               </div>
 
               <div className="mb-4 mt-2 flex h-full w-full flex-col overflow-y-scroll pr-2">
@@ -202,21 +249,38 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                             {i.book?.yearFrom || i.illustration?.yearFrom}
                           </span>
                         </p>
-                        <Switch
-                          height={22}
-                          width={51}
-                          checked={i.mirador}
-                          onChange={() => handleMiradorSwitch(i)}
-                          disabled={viewChangeStatus.status === 'pending'}
-                        />
-                        <Button
-                          iconButton
-                          variant="text"
-                          className="ml-auto border-none bg-white text-black hover:text-black hover:shadow-none"
-                          onClick={() => handleDeletion(i)}
-                        >
-                          <Delete />
-                        </Button>
+                        {isExhibitionMode && i.illustration?.id ? (
+                          <div className="ml-auto mr-2 flex items-center gap-2">
+                            <Switch
+                              height={22}
+                              width={51}
+                              checked={selectedIllustrationIds.includes(
+                                i.illustration.id
+                              )}
+                              onChange={(checked) =>
+                                onIllustrationToggle(i.illustration.id, checked)
+                              }
+                            />
+                          </div>
+                        ) : (
+                          <>
+                            <Switch
+                              height={22}
+                              width={51}
+                              checked={i.mirador}
+                              onChange={() => handleMiradorSwitch(i)}
+                              disabled={viewChangeStatus.status === 'pending'}
+                            />
+                            <Button
+                              iconButton
+                              variant="text"
+                              className="ml-auto border-none bg-white text-black hover:text-black hover:shadow-none"
+                              onClick={() => handleDeletion(i)}
+                            >
+                              <Delete />
+                            </Button>
+                          </>
+                        )}
                       </div>
                     ))
                   : null}
@@ -230,23 +294,23 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                   <div className="m-auto flex flex-col items-center">
                     <h2 className="mt-2 text-2xl font-bold">
                       {t(
-                        selectionType === 'BOOK'
-                          ? 'no_books'
-                          : 'no_illustrations'
+                         activeSelectionType === 'BOOK'
+                           ? 'no_books'
+                           : 'no_illustrations'
                       )}
                     </h2>
                     <p>
                       {t(
-                        selectionType === 'BOOK'
-                          ? 'no_books_text'
-                          : 'no_illustrations_text'
+                         activeSelectionType === 'BOOK'
+                           ? 'no_books_text'
+                           : 'no_illustrations_text'
                       )}
                     </p>
                   </div>
                 ) : null}
               </div>
               <div className="flex flex-row flex-wrap justify-center gap-2">
-                {isMobile && (
+                {isMobile && !isExhibitionMode && (
                   <Button
                     className="flex-grow text-red"
                     variant="outlined"
@@ -258,7 +322,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                     {t('delete_all')}
                   </Button>
                 )}
-                {selectionType === 'BOOK' && (
+                {!isExhibitionMode && activeSelectionType === 'BOOK' && (
                   <Button
                     disabled={!booksForMirador.length}
                     className={isMobile ? 'flex-grow' : ''}
@@ -268,7 +332,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                     {t('open_in_mirador')}
                   </Button>
                 )}
-                {selectionType === 'ILLUSTRATION' && (
+                {!isExhibitionMode && activeSelectionType === 'ILLUSTRATION' && (
                   <>
                     {/* <Button className={isMobile ? 'flex-grow' : ''}> */}
                     {/*  Otevřít v on-line výstavy */}
@@ -296,7 +360,7 @@ const SelectionDialog: FC<Props> = ({ showDialog, setShowDialog }) => {
                 )}
               </div>
             </div>
-          </Dialog.Panel>
+          </DialogPanel>
         </div>
       </div>
     </Dialog>

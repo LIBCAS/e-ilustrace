@@ -1,9 +1,8 @@
-import React, { FC, Fragment, useEffect, useState } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import React, { FC, Fragment, useState } from 'react'
+import { useParams, useNavigate, Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { toast } from 'react-toastify'
-import DOMPurify from 'dompurify'
 import dayjs from 'dayjs'
 import LeftArrow from '../assets/icons/navigate_back.svg?react'
 import Delete from '../assets/icons/delete.svg?react'
@@ -25,14 +24,17 @@ import Loader from '../components/reusableComponents/Loader'
 import ShowError from '../components/reusableComponents/ShowError'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
 import useMeQueryWrapper from '../hooks/useMeQueryWrapper'
+import useMobile from '../hooks/useMobile'
 import generateSearchSearchParams from '../utils/generateSearchSearchParams'
 import constructSearchUrl from '../utils/constructSearchUrl'
+import sanitizeWysiwygHtml from '../utils/sanitizeWysiwygHtml'
 
 const ExhibitionDetail: FC = () => {
   const { t, i18n } = useTranslation()
   const params = useParams()
-  const [exhibitionView, setExhibitionView] =
-    useState<ExhibitionView>('STORYLINE')
+  const [selectedExhibitionView, setSelectedExhibitionView] =
+    useState<ExhibitionView | null>(null)
+  const { isTablet } = useMobile()
   const navigate = useNavigate()
 
   const { me, meLoading, meError } = useMeQueryWrapper()
@@ -43,11 +45,9 @@ const ExhibitionDetail: FC = () => {
   } = useExhibitionDetailQuery(params.id as string)
   const { mutateAsync: doDelete } = useDeleteExhibitionMutation()
 
-  useEffect(() => {
-    if (exhibition) {
-      setExhibitionView(exhibition.radio)
-    }
-  }, [exhibition])
+  const exhibitionView: ExhibitionView = isTablet
+    ? 'ALBUM'
+    : selectedExhibitionView || exhibition?.radio || 'STORYLINE'
 
   const handleDeletion = (id: string) => {
     toast
@@ -152,9 +152,10 @@ const ExhibitionDetail: FC = () => {
                 {t('exhibitions:created')}{' '}
                 {dayjs(exhibition?.created).format('DD. MM. YYYY')}
               </span>
-              <p
+              <div
+                className="wysiwyg-editor-content exhibition-text"
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(exhibition.description),
+                  __html: sanitizeWysiwygHtml(exhibition.description),
                 }}
               />
               <p className="mt-2">
@@ -189,11 +190,9 @@ const ExhibitionDetail: FC = () => {
                           >
                             {i.illustration.mainAuthor?.author.fullName}
                           </Link>
-                          {/* eslint-disable-next-line no-nested-ternary */}
                           {i.illustration.mainAuthor?.author.fullName.lastIndexOf(
                             ','
                           ) ===
-                          // eslint-disable-next-line no-unsafe-optional-chaining
                           i.illustration.mainAuthor?.author.fullName.length - 1
                             ? ' '
                             : index !== length - 1
@@ -213,40 +212,56 @@ const ExhibitionDetail: FC = () => {
               } `}
             >
               <span>
-                {exhibition.items.length} {t('exhibitions:artworks')}
+                {`${t('exhibitions:artworks')}${exhibition.items.length}`}
               </span>
               <div className="ml-auto flex gap-2">
-                <Button
-                  startIcon={<StorylineIcon />}
-                  variant={
-                    exhibitionView === 'STORYLINE' ? 'primary' : 'secondary'
-                  }
-                  onClick={() => {
-                    setExhibitionView('STORYLINE')
-                  }}
-                >
-                  Storyline
-                </Button>
-                <Button
-                  startIcon={<AlbumIcon />}
-                  variant={exhibitionView === 'ALBUM' ? 'primary' : 'secondary'}
-                  onClick={() => {
-                    setExhibitionView('ALBUM')
-                  }}
-                >
-                  Album
-                </Button>
-                <Button
-                  startIcon={<SliderIcon />}
-                  variant={
-                    exhibitionView === 'SLIDER' ? 'primary' : 'secondary'
-                  }
-                  onClick={() => {
-                    setExhibitionView('SLIDER')
-                  }}
-                >
-                  Slider
-                </Button>
+                {!isTablet ? (
+                  <>
+                    <Button
+                      startIcon={<StorylineIcon />}
+                      variant={
+                        exhibitionView === 'STORYLINE' ? 'primary' : 'secondary'
+                      }
+                      onClick={() => {
+                        setSelectedExhibitionView('STORYLINE')
+                      }}
+                    >
+                      Storyline
+                    </Button>
+                    <Button
+                      startIcon={<AlbumIcon />}
+                      variant={
+                        exhibitionView === 'ALBUM' ? 'primary' : 'secondary'
+                      }
+                      onClick={() => {
+                        setSelectedExhibitionView('ALBUM')
+                      }}
+                    >
+                      Album
+                    </Button>
+                    <Button
+                      startIcon={<SliderIcon />}
+                      variant={
+                        exhibitionView === 'SLIDER' ? 'primary' : 'secondary'
+                      }
+                      onClick={() => {
+                        setSelectedExhibitionView('SLIDER')
+                      }}
+                    >
+                      Slider
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    startIcon={<AlbumIcon />}
+                    variant="primary"
+                    onClick={() => {
+                      setSelectedExhibitionView('ALBUM')
+                    }}
+                  >
+                    Album
+                  </Button>
+                )}
               </div>
             </div>
           </>
@@ -259,7 +274,7 @@ const ExhibitionDetail: FC = () => {
                 <StorylineView items={exhibition?.items || []} />
               </div>
             )}
-            {exhibitionView === 'ALBUM' && (
+            {(exhibitionView === 'ALBUM' || isTablet) && (
               <div className="border-b border-superlightgray py-8">
                 <AlbumView items={exhibition?.items || []} />
               </div>
@@ -267,7 +282,7 @@ const ExhibitionDetail: FC = () => {
           </>
         ) : null}
       </div>
-      {exhibitionView === 'SLIDER' && exhibitionCanBeSeen && (
+      {exhibitionView === 'SLIDER' && exhibitionCanBeSeen && !isTablet && (
         <SliderView exhibition={exhibition} />
       )}
       {/* <div className="mx-auto mt-5 flex max-w-7xl flex-col px-8"> */}

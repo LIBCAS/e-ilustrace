@@ -70,7 +70,7 @@ const SearchInput: FC<SearchInputProps> = ({
         startIcon={<SearchIcon />}
         placeholder={t('search.search_expression')}
         value={search.search}
-        className="outline-black"
+        className="focus:border-black"
         parentClassName="!w-auto md:!w-full"
         onChange={(newValue) => onUpdateSearch(search.uuid, newValue)}
       />

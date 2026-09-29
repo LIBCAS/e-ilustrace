@@ -6,10 +6,10 @@
 !vite.config.ts
 !postcss.config.cjs
 !package.json
-!yarn.lock
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
 !tsconfig.json
 !tsconfig.node.json
-!.eslintignore
-!.eslintrc.cjs
+!eslint.config.js
 !.prettierignore
 !.prettierrc.cjs

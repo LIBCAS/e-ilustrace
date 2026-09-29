@@ -41,6 +41,8 @@ public class MiradorService {
     private String cantaloupeFilelist;
     @Value("${eil.baseUrl}")
     private String baseUrl;
+    @Value("${eil.iiif.internalBaseUrl:http://cantaloupe:8182}")
+    private String iiifInternalBaseUrl;
     private TransactionTemplate transactionTemplate;
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -71,13 +73,14 @@ public class MiradorService {
 
     public Canvas createCanvas(String id, String filename, String order, String label) {
         InfoJsonDto infoJsonDto = getInfoJson(filename);
+        String publicIiifId = buildPublicIiifId(filename);
 
-        cz.inqool.eas.eil.mirador.dto.Service service = new cz.inqool.eas.eil.mirador.dto.Service(infoJsonDto.getId());
+        cz.inqool.eas.eil.mirador.dto.Service service = new cz.inqool.eas.eil.mirador.dto.Service(publicIiifId);
 
-        Resource resource = new Resource(infoJsonDto.getId(), infoJsonDto.getHeight(), infoJsonDto.getHeight(), service);
+        Resource resource = new Resource(publicIiifId, infoJsonDto.getHeight(), infoJsonDto.getWidth(), service);
 
         String on = baseUrl + RECORD_PATH + id + "/canvas/" + order;
-        Image image = new Image(infoJsonDto.getId(), on, resource);
+        Image image = new Image(publicIiifId, on, resource);
         List<Image> images = new ArrayList<>();
         images.add(image);
 
@@ -115,23 +118,32 @@ public class MiradorService {
     }
 
     public InfoJsonDto getInfoJson(String fileName) {
-        return restTemplate.getForObject(baseUrl + "/iiif/2/" + fileName + "/info.json", InfoJsonDto.class);
+        return restTemplate.getForObject(trimTrailingSlash(iiifInternalBaseUrl) + "/iiif/2/" + fileName + "/info.json", InfoJsonDto.class);
+    }
+
+    private String buildPublicIiifId(String fileName) {
+        return trimTrailingSlash(baseUrl) + "/iiif/2/" + fileName;
+    }
+
+    private String trimTrailingSlash(String value) {
+        if (value != null && value.endsWith("/")) {
+            return value.substring(0, value.length() - 1);
+        }
+        return value;
     }
 
     public String buildLabel(Illustration illustration) {
-        StringBuilder sb = new StringBuilder();
+        List<String> parts = new ArrayList<>();
         if (illustration.getTitle() != null) {
-            sb.append(illustration.getTitle());
-            sb.append(", ");
+            parts.add(illustration.getTitle());
         }
         if (illustration.getIdentifier() != null) {
-            sb.append(illustration.getIdentifier());
-            sb.append(", ");
+            parts.add(illustration.getIdentifier());
         }
         if (illustration.getMainAuthor() != null) {
-            sb.append(illustration.getMainAuthor().getAuthor().getFullName());
+            parts.add(illustration.getMainAuthor().getAuthor().getFullName());
         }
-        return sb.toString();
+        return String.join(", ", parts);
     }
 
     public void resetMiradorImages() {

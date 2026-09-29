@@ -76,8 +76,7 @@ interface TRecordsWithFacetsQueryInput {
   facetsEnabled?: boolean
 }
 
-interface TExtendedRecordsWithFacetsQueryInput
-  extends TRecordsWithFacetsQueryInput {
+interface TExtendedRecordsWithFacetsQueryInput extends TRecordsWithFacetsQueryInput {
   iccStates: string[]
   themeStates: string[]
 }

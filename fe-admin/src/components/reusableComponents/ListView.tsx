@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { PhotoIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
 import cloneDeep from 'lodash/cloneDeep'

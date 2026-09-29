@@ -1,8 +1,10 @@
 /// <reference types="vite/client" />
 import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import babel from '@rolldown/plugin-babel'
 import svgr from 'vite-plugin-svgr'
-import eslint from 'vite-plugin-eslint'
+import eslint from 'vite-plugin-eslint2'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 // https://vitejs.dev/config/
@@ -12,9 +14,12 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
+      babel({ presets: [reactCompilerPreset()] }),
+      tailwindcss(),
       svgr(),
       eslint(),
       sentryVitePlugin({
+        disable: mode === 'development',
         url: env.VITE_SENTRY_URL,
         authToken: env.VITE_SENTRY_AUTH_TOKEN,
         org: env.VITE_SENTRY_ORG,
@@ -43,6 +48,9 @@ export default defineConfig(({ mode }) => {
           secure: true,
         },
       },
+    },
+    optimizeDeps: {
+      needsInterop: ['react-paginate'],
     },
     base: mode === 'development' ? '/' : '/admin/',
     build: {

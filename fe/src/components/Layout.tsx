@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import Navbar from './navbar/Navbar'
 import Footer from './Footer'
 import Sidebar from './sidebar/Sidebar'

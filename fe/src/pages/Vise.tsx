@@ -58,7 +58,7 @@ const Vise: FC = () => {
               onChange={(newValue) => setSearch(newValue)}
               startIcon={<SearchIcon />}
               placeholder={t('search:search_expression')}
-              className="outline-black"
+              className="focus:border-black"
             />
             <div className="w-[200px] md:min-w-[250px]">
               <Dropdown

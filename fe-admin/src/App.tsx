@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import Menu from './components/Menu'
 import Records from './pages/records/Records'

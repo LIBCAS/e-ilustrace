@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import Check from '../../../assets/icons/check.svg?react'
 
 type Props = {
@@ -44,7 +44,7 @@ const Checkbox = ({
             className="mr-4 h-[18px] min-h-[18px] w-[18px] min-w-[18px] cursor-pointer appearance-none rounded-[5px] border-[1.5px] border-lightgray bg-white"
           />
           {checked && (
-            <Check className="text-md check-1 absolute left-[3px] top-[3px] h-[13px] w-[13px] fill-black text-opacity-0 transition" />
+            <Check className="check-1 absolute left-[3px] top-[3px] h-[13px] w-[13px] fill-black opacity-0 transition" />
           )}
         </span>
         <span className={`${className} font-bold`}>

@@ -45,4 +45,21 @@ export default {
     'Registration was successful, now please confirm your email',
   registration_activation_successful:
     'Your account has been successfully activated, you can now log in',
+  status_logged_in: 'Logged in',
+  status_logged_out: 'Logged out',
+  status_checking: 'Checking',
+  citations_info: 'Citation rules',
+  citations_title: 'Citation Rules',
+  citations_intro:
+    'By entering the e-ilustrace database, the user undertakes to reference its use in all outputs.',
+  citations_recommendation:
+    'When citing, we recommend using the source in the following form:',
+  citations_database_reference:
+    'e-ilustrace.cz [online database]. Prague: Library of the Czech Academy of Sciences, [cit. yyyy-mm-dd]. Available from: https://e-ilustrace.cz/.',
+  citations_specific_record_title: 'Specific record in the database:',
+  citations_specific_reference:
+    'e-ilustrace.cz [online database], INC035_IL010. [cit. yyyy-mm-dd]. Available from: https://app.e-ilustrace.cz/record-detail/2c44d885-1408-47e5-8cac-768e01b3720e/switch?back=search.',
+  citations_note:
+    'Note: If you cite a different record, replace the record number and URL with the corresponding values from that record.',
+  citations_accept: 'I agree',
 }

@@ -4,7 +4,7 @@ import { TIllustrationDetail } from '../../../fe-shared/@types/illustration'
 import { TBookDetail } from '../../../fe-shared/@types/book'
 
 type TUploadInput = { file: File }
-// eslint-disable-next-line import/prefer-default-export
+
 export const useUploadMutation = () =>
   useMutation({
     mutationFn: ({ file }: TUploadInput) => {

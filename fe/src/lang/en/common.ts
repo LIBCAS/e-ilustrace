@@ -6,7 +6,6 @@ export default {
   me_loading_error: 'Error occured when loading your account',
   me_loading: 'Loading your account data',
   logged_out_successfully: 'Logged out successfully',
-  login_required: '<button>Login in</button> required for showing your content',
   added_to_my_selection_successfully: 'Successfully added into your selection',
   removed_from_my_selection_successfully:
     'Successfully removed from your selection',

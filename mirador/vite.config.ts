@@ -1,12 +1,12 @@
 /// <reference types="vite/client" />
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import eslint from 'vite-plugin-eslint'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
-    plugins: [react(), eslint()],
+    plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
     build: {
       sourcemap: true,
     },

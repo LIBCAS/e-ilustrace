@@ -3,6 +3,7 @@ package cz.inqool.eas.eil.record;
 import cz.inqool.eas.common.dated.DatedRepository;
 import cz.inqool.eas.common.dated.index.DatedIndex;
 import cz.inqool.eas.common.dated.store.DatedStore;
+import cz.inqool.eas.eil.iconclass.QIconclassCategory;
 import cz.inqool.eas.eil.publishingplace.PublishingPlaceIndexed;
 import cz.inqool.eas.eil.record.book.BookIndexed;
 import cz.inqool.eas.eil.record.book.QBook;
@@ -11,6 +12,7 @@ import cz.inqool.eas.eil.record.illustration.*;
 import cz.inqool.eas.eil.subject.entry.SubjectEntryIndexed;
 import cz.inqool.eas.eil.subject.person.SubjectPersonIndexed;
 import cz.inqool.eas.eil.subject.place.SubjectPlaceIndexed;
+import cz.inqool.eas.eil.theme.QTheme;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
@@ -75,13 +77,15 @@ public class RecordRepository extends DatedRepository<
     }
 
     public String findAnyIconclassRecordId(String iconclassId) {
-        QRecordXlsx model = QRecordXlsx.recordXlsx;
+        QRecord record = QRecord.record;
+        QIconclassCategory iconclass = QIconclassCategory.iconclassCategory;
 
         String recordId = query()
-                .select(model.id)
-                .from(model)
-                .where(model.deleted.isNull())
-                .where(model.iconclass.any().id.eq(iconclassId))
+                .select(record.id)
+                .from(record)
+                .join(record.iconclass, iconclass)
+                .where(record.deleted.isNull())
+                .where(iconclass.id.eq(iconclassId))
                 .fetchFirst();
 
         detachAll();
@@ -89,13 +93,15 @@ public class RecordRepository extends DatedRepository<
     }
 
     public String findAnyThemeRecordId(String themeId) {
-        QRecordXlsx model = QRecordXlsx.recordXlsx;
+        QRecord record = QRecord.record;
+        QTheme theme = QTheme.theme;
 
         String recordId = query()
-                .select(model.id)
-                .from(model)
-                .where(model.deleted.isNull())
-                .where(model.themes.any().id.eq(themeId))
+                .select(record.id)
+                .from(record)
+                .join(record.themes, theme)
+                .where(record.deleted.isNull())
+                .where(theme.id.eq(themeId))
                 .fetchFirst();
 
         detachAll();

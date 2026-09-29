@@ -38,4 +38,5 @@ export default {
   person: 'depicted',
   keyword: 'secondary motive',
   theme: 'main motive',
+  login_required_for_selection: 'Log in to use My selection',
 }

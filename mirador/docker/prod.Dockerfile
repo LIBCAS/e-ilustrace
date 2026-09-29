@@ -1,15 +1,17 @@
 # syntax = docker/dockerfile:1
 
 ## BUILD image ##
-FROM node:20-alpine AS builder
+FROM node:26-alpine AS builder
 WORKDIR /build
 
-# Switch to yarn 2
-# RUN yarn set version berry
+# Install pnpm pinned by packageManager.
+RUN npm install -g corepack \
+    && corepack enable pnpm \
+    && corepack prepare pnpm@11.1.0 --activate
 
 # Install dependencies
-COPY ./package.json ./yarn.lock ./
-RUN yarn install
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 # Copy and build app
 COPY ./src ./src
@@ -19,11 +21,10 @@ COPY ./tsconfig.node.json ./
 COPY ./vite.config.ts ./
 COPY ./postcss.config.cjs ./
 COPY ./index.html ./
-COPY ./.eslintrc.cjs ./
-COPY ./.eslintignore ./
+COPY ./eslint.config.js ./
 COPY ./.prettierrc.cjs ./
 COPY ./.prettierignore ./
-RUN yarn build
+RUN pnpm build
 
 
 ## RUN Image ##

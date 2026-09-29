@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router'
 import LeftArrow from '../../assets/icons/left_arrow.svg?react'
 import KeyIcon from '../../assets/icons/key.svg?react'
 

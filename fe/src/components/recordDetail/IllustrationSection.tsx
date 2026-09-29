@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import LightGallery from 'lightgallery/react'
 import 'lightgallery/css/lightgallery.css'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
@@ -72,7 +72,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
         ) : null}
       </div>
       <div className="mt-4 md:mt-0 md:basis-7/12">
-        <div className="flex border-b-[1.5px] border-superlightgray py-2">
+        <div className="border-superlightgray flex border-b-[1.5px] py-2">
           <span className="basis-1/3 font-bold">{t('illustration_name')}</span>
           <span className="basis-2/3">
             {record.title.trim().endsWith('/')
@@ -80,7 +80,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
               : record.title.trim()}
           </span>
         </div>
-        <div className="flex border-b-[1.5px] border-superlightgray py-2">
+        <div className="border-superlightgray flex border-b-[1.5px] py-2">
           <span className="basis-1/3 font-bold">{t('source')}</span>
           <a
             href={`https://knihoveda.lib.cas.cz/Record/${record.identifier}`}
@@ -92,7 +92,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
           </a>
         </div>
         {record.mainAuthor ? (
-          <div className="flex border-b-[1.5px] border-superlightgray py-2">
+          <div className="border-superlightgray flex border-b-[1.5px] py-2">
             <span className="basis-1/3 font-bold">{t('artist')}</span>
             <a
               href={constructSearchUrl(
@@ -109,7 +109,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
           </div>
         ) : null}
         {record.physicalDescription || record.technique || record.dimensions ? (
-          <div className="flex border-b-[1.5px] border-superlightgray py-2">
+          <div className="border-superlightgray flex border-b-[1.5px] py-2">
             <span className="basis-1/3 font-bold">
               {t('place_and_dimensions')}
             </span>
@@ -120,7 +120,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
           </div>
         ) : null}
         {record.subjectEntries.find((se) => se.label === 'dřevořezy') ? (
-          <div className="flex border-b-[1.5px] border-superlightgray py-2">
+          <div className="border-superlightgray flex border-b-[1.5px] py-2">
             <span className="basis-1/3 font-bold">{t('graphic_arts')}</span>
             <span className="basis-2/3">
               {
@@ -131,7 +131,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
           </div>
         ) : null}
         {record.book?.id ? (
-          <div className="flex border-b-[1.5px] border-superlightgray py-2">
+          <div className="border-superlightgray flex border-b-[1.5px] py-2">
             <span className="basis-1/3 font-bold">{t('illustration_in')}</span>
             <span className="line-clamp-2 basis-2/3">
               <Link
@@ -146,7 +146,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
         {(record.printEntry?.placesOfPublication.length ||
           record.printEntry?.originators.length) &&
         record.printEntry?.date ? (
-          <div className="flex border-b-[1.5px] border-superlightgray py-2">
+          <div className="border-superlightgray flex border-b-[1.5px] py-2">
             <span className="basis-1/3 font-bold">
               {t('publisher_details')}
             </span>
@@ -157,7 +157,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
           </div>
         ) : null}
         {record.iconclass.length ? (
-          <div className="flex border-b-[1.5px] border-superlightgray py-2">
+          <div className="border-superlightgray flex border-b-[1.5px] py-2">
             <span className="basis-1/3 font-bold">ICONCLASS</span>
             <span className="basis-2/3">
               {record.iconclass.map((icc) => {
@@ -187,7 +187,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     <Link
                       target="_blank"
                       to={`/iconclass?search=${params.search}&category=${params.category}`}
-                      className="inline-flex text-red hover:underline"
+                      className="text-red inline-flex hover:underline"
                     >
                       {`${icc.code} - ${icc.name}`}
                     </Link>
@@ -207,13 +207,13 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             </span>
           </div>
         ) : null}
-        <div className="flex border-b-[1.5px] border-superlightgray py-2">
+        <div className="border-superlightgray flex border-b-[1.5px] py-2">
           <span className="basis-1/3 font-bold">{t('permanent_link')}</span>
           <span className="basis-2/3">
             <ClipBoardCopy text={record.id} copyType="href" />
           </span>
         </div>
-        <div className="flex border-b-[1.5px] border-superlightgray py-2">
+        <div className="border-superlightgray flex border-b-[1.5px] py-2">
           <div className="flex basis-1/3 items-center gap-2 font-bold">
             <img src={IIIFImage} className="h-[20px] max-w-full" alt="IIIF" />
             {t('manifest')}
@@ -224,7 +224,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
         </div>
         {!showMore && (
           <Button
-            className="mt-2 bg-footergray"
+            className="bg-footergray mt-2"
             variant="text"
             onClick={() => setShowMore(true)}
             startIcon={<DownArrow />}
@@ -235,7 +235,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
         {showMore && (
           <>
             {record.printingPlateEntry ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">
                   {t('data_about_the_plate')}
                 </span>
@@ -262,7 +262,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {/*  </div> */}
             {/* ) : null} */}
             {record.notes.length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('notes')}</span>
                 <span className="basis-2/3">
                   {record.notes.map((n) => (
@@ -275,7 +275,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
               </div>
             ) : null}
             {record.references.length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('literature')}</span>
                 <span className="basis-2/3">
                   {record.references.map((r) => (
@@ -298,7 +298,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {/* ) : null} */}
             {record.coauthors.filter((ca) => ca.roles.includes('PRINTER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('printer')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -316,7 +316,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                       return (
                         <a
                           key={ca.id}
-                          className="block text-red hover:underline"
+                          className="text-red block hover:underline"
                           href={constructSearchUrl(
                             `type=${basicParams.type}&view=${basicParams.view}&filterAuthor=${printerParams.filterAuthor}`
                           )}
@@ -333,7 +333,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('PUBLISHER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('publisher')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -348,7 +348,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
               </div>
             ) : null}
             {record.publishingPlaces.length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">
                   {t('publishing_place_or_origin')}
                 </span>
@@ -366,7 +366,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     return (
                       <a
                         key={pp.id}
-                        className="block text-red hover:underline"
+                        className="text-red block hover:underline"
                         href={constructSearchUrl(
                           `type=${basicParams.type}&view=${basicParams.view}&filterPublishingPlace=${publishingPlaceParams.filterPublishingPlace}`
                         )}
@@ -383,7 +383,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {record.coauthors.filter((ca) =>
               ca.roles.includes('BIBLIOGRAPHIC_ANTECEDENT')
             ).length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">
                   {t('bibliographic_antecedent')}
                 </span>
@@ -403,7 +403,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('AUTHOR'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('author')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -420,7 +420,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {record.coauthors.filter((ca) =>
               ca.roles.includes('PRESUMED_AUTHOR')
             ).length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">
                   {t('presumed_author')}
                 </span>
@@ -438,7 +438,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('CARTOGRAPHER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('cartographer')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -454,7 +454,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('ENGRAVER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('engraver')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -470,7 +470,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('ETCHER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('etcher')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -486,7 +486,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('ILLUSTRATOR'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('illustrator')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -503,7 +503,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {record.coauthors.filter((ca) =>
               ca.roles.includes('METAL_ENGRAVER')
             ).length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">
                   {t('metal_engraver')}
                 </span>
@@ -537,7 +537,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {/* ) : null} */}
             {record.coauthors.filter((ca) => ca.roles.includes('WOODCARVER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('woodcarver')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -553,7 +553,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             ) : null}
             {record.coauthors.filter((ca) => ca.roles.includes('OTHER'))
               .length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('other_role')}</span>
                 <span className="basis-2/3">
                   {record.coauthors
@@ -568,7 +568,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
               </div>
             ) : null}
             {record.subjectPersons.length || record.subjectEntries.length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('topic')}</span>
                 <span className="basis-2/3">
                   {record.subjectPersons.map((sp) => {
@@ -584,7 +584,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     return (
                       <a
                         key={sp.id}
-                        className="block text-red hover:underline"
+                        className="text-red block hover:underline"
                         href={constructSearchUrl(
                           `type=${basicParams.type}&view=${basicParams.view}&filterAuthor=${subjectPersonsParams.filterAuthor}`
                         )}
@@ -610,7 +610,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                       return (
                         <a
                           key={se.id}
-                          className="block text-red hover:underline"
+                          className="text-red block hover:underline"
                           href={constructSearchUrl(
                             `type=${basicParams.type}&view=${basicParams.view}&filterObject=${subjectEntryParams.filterObject}`
                           )}
@@ -634,7 +634,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     return (
                       <a
                         key={sp.id}
-                        className="block text-red hover:underline"
+                        className="text-red block hover:underline"
                         href={constructSearchUrl(
                           `type=${basicParams.type}&view=${basicParams.view}&filterObject=${subjectPlacesParams.filterObject}`
                         )}
@@ -659,7 +659,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     return (
                       <a
                         key={si.id}
-                        className="block text-red hover:underline"
+                        className="text-red block hover:underline"
                         href={constructSearchUrl(
                           `type=${basicParams.type}&view=${basicParams.view}&filterObject=${subjectInstitutionsParams.filterObject}`
                         )}
@@ -683,7 +683,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     return (
                       <a
                         key={g.id}
-                        className="block text-red hover:underline"
+                        className="text-red block hover:underline"
                         href={constructSearchUrl(
                           `type=${basicParams.type}&view=${basicParams.view}&filterObject=${genresParams.filterObject}`
                         )}
@@ -698,7 +698,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
               </div>
             ) : null}
             {record.keywords.length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('keywords')}</span>
                 <span className="basis-2/3">
                   {record.keywords.map((keyword) => {
@@ -714,7 +714,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     return (
                       <a
                         key={keyword.id}
-                        className="block text-red hover:underline"
+                        className="text-red block hover:underline"
                         href={constructSearchUrl(
                           `type=${basicParams.type}&view=${basicParams.view}&filterObject=${objectParams.filterObject}`
                         )}
@@ -747,7 +747,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
             {/*  </div> */}
             {/* ) : null} */}
             {record.owners.length ? (
-              <div className="flex border-b-[1.5px] border-superlightgray py-2">
+              <div className="border-superlightgray flex border-b-[1.5px] py-2">
                 <span className="basis-1/3 font-bold">{t('exemplars')}</span>
                 <span className="basis-2/3">
                   {record.owners
@@ -760,7 +760,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
         )}
         {showMore && (
           <Button
-            className="mt-2 bg-footergray"
+            className="bg-footergray mt-2"
             variant="text"
             onClick={() => setShowMore(false)}
             endIcon={<UpArrow />}
@@ -779,8 +779,7 @@ const IllustrationSection: FC<TIllustrationSectionProps> = ({
                     windows: [
                       {
                         imageToolsEnabled: true,
-                        // imageToolsOpen: true,
-                        // loadedManifest: `/api/eil/record/${record.id}/manifest.json`,
+                        imageToolsOpen: true,
                         loadedManifest: `/api/eil/record/${record.id}/manifest.json`,
                         thumbnailNavigationPosition: 'far-bottom',
                       },

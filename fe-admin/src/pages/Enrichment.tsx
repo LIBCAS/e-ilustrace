@@ -1,6 +1,6 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import {
   useIllustrationDetailQuery,
@@ -11,6 +11,7 @@ import ShowError from '../components/reusableComponents/ShowError'
 import {
   useIconClassListQuery,
   useAddNewICCMutation,
+  useDeleteIconClassMutation,
   useUpdateIconClassStateMutation,
 } from '../api/iconclass'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
@@ -19,6 +20,7 @@ import Button from '../components/reusableComponents/Button'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
 import {
   useAddNewThemeMutation,
+  useDeleteThemeMutation,
   useUpdateThemeStateMutation,
   useThemeListQuery,
 } from '../api/theme'
@@ -35,8 +37,18 @@ const Enrichment = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { states: enrichmentStates } = useEnrichmentStates()
-  const [selectedICC, setSelectedICC] = useState<TEnrichmentFields>([])
-  const [selectedThemes, setSelectedThemes] = useState<TEnrichmentFields>([])
+  const [selectedICC, setSelectedICC] = useState<TEnrichmentFields | null>(null)
+  const [selectedThemes, setSelectedThemes] = useState<TEnrichmentFields | null>(
+    null
+  )
+  const [iccToDelete, setIccToDelete] = useState<{
+    value: string
+    label: string
+  } | null>(null)
+  const [themeToDelete, setThemeToDelete] = useState<{
+    value: string
+    label: string
+  } | null>(null)
   const [newICCPassword, setNewICCPassword] = useState('')
   const [newTheme, setNewTheme] = useState('')
 
@@ -61,23 +73,14 @@ const Enrichment = () => {
     useAddNewICCMutation()
   const { mutateAsync: addNewTheme, status: addNewThemeStatus } =
     useAddNewThemeMutation()
+  const { mutateAsync: deleteICC, status: deleteICCStatus } =
+    useDeleteIconClassMutation()
+  const { mutateAsync: deleteTheme, status: deleteThemeStatus } =
+    useDeleteThemeMutation()
   const { mutateAsync: updateICCState, status: updateICCStateStatus } =
     useUpdateIconClassStateMutation()
   const { mutateAsync: updateThemeState, status: updateThemeStateStatus } =
     useUpdateThemeStateMutation()
-
-  useEffect(() => {
-    if (illustration?.iconclass.length) {
-      setSelectedICC(
-        illustration.iconclass.map((i) => ({ value: i.id, label: i.code }))
-      )
-    }
-    if (illustration?.themes.length) {
-      setSelectedThemes(
-        illustration.themes.map((i) => ({ value: i.id, label: i.name }))
-      )
-    }
-  }, [illustration])
 
   if (iLoading || iconCCLoading || themesLoading) {
     return (
@@ -95,11 +98,22 @@ const Enrichment = () => {
     return <ShowInfoMessage message={t('enrichment.not_found')} />
   }
 
+  const defaultSelectedICC = illustration.iconclass.map((i) => ({
+    value: i.id,
+    label: i.code,
+  }))
+  const defaultSelectedThemes = illustration.themes.map((i) => ({
+    value: i.id,
+    label: i.name,
+  }))
+  const selectedICCValues = selectedICC || defaultSelectedICC
+  const selectedThemesValues = selectedThemes || defaultSelectedThemes
+
   const handleSubmit = () => {
     saveICC({
       uuid: illustration.id,
-      ICC: selectedICC.map((icc) => ({ id: icc.value })),
-      themes: selectedThemes.map((theme) => ({ id: theme.value })),
+      ICC: selectedICCValues.map((icc) => ({ id: icc.value })),
+      themes: selectedThemesValues.map((theme) => ({ id: theme.value })),
     })
       .then(() => {
         toast.success(t('enrichment.save_successful'))
@@ -144,6 +158,46 @@ const Enrichment = () => {
         toast.success(t('enrichment.state_updated_successfully'))
       })
       .catch(() => {})
+  }
+
+  const handleDeleteICC = () => {
+    if (!iccToDelete) {
+      return
+    }
+
+    deleteICC({ id: iccToDelete.value })
+      .then(() => {
+        setSelectedICC((prev) =>
+          (prev || defaultSelectedICC).filter(
+            (item) => item.value !== iccToDelete.value
+          )
+        )
+        setIccToDelete(null)
+        toast.success(t('enrichment.delete_successful'))
+      })
+      .catch(() => {
+        toast.error(t('enrichment.delete_error'))
+      })
+  }
+
+  const handleDeleteTheme = () => {
+    if (!themeToDelete) {
+      return
+    }
+
+    deleteTheme({ id: themeToDelete.value })
+      .then(() => {
+        setSelectedThemes((prev) =>
+          (prev || defaultSelectedThemes).filter(
+            (item) => item.value !== themeToDelete.value
+          )
+        )
+        setThemeToDelete(null)
+        toast.success(t('enrichment.delete_successful'))
+      })
+      .catch(() => {
+        toast.error(t('enrichment.delete_error'))
+      })
   }
 
   return (
@@ -223,11 +277,11 @@ const Enrichment = () => {
           <ShowInfoMessage message={t('enrichment.icc_not_found')} />
         ) : (
           <Dropdown
-            options={iconCC.items.map((i) => ({
+            options={(iconCC?.items || []).map((i) => ({
               value: i.id,
               label: `${i.code}: ${i.name}`,
             }))}
-            value={selectedICC.map((i) => ({
+            value={selectedICCValues.map((i) => ({
               value: i.value,
               label: `${i.label}: ${
                 iconCC.items.find((ic) => ic.code === i.label)?.name || ''
@@ -265,11 +319,11 @@ const Enrichment = () => {
           <ShowInfoMessage message={t('enrichment.themes_not_found')} />
         ) : (
           <Dropdown
-            options={themes.items.map((i) => ({
+            options={(themes?.items || []).map((i) => ({
               value: i.id,
               label: i.name,
             }))}
-            value={selectedThemes}
+            value={selectedThemesValues}
             onChange={(values) => setSelectedThemes(values)}
             isMulti
             isSearchable
@@ -301,6 +355,48 @@ const Enrichment = () => {
             isLoading={addNewThemeStatus === 'pending'}
           >
             {t('enrichment.add')}
+          </Button>
+        </div>
+        <div className="mt-10 border-t border-lightgray">
+          <span className="mb-2 mt-10 block">
+            {t('enrichment.delete_theme')}
+          </span>
+          <Dropdown
+            options={(themes?.items || []).map((i) => ({
+              value: i.id,
+              label: i.name,
+            }))}
+            value={themeToDelete}
+            onChange={(value) => setThemeToDelete(value)}
+            isSearchable
+          />
+          <Button
+            className="mt-5"
+            onClick={() => handleDeleteTheme()}
+            disabled={!themeToDelete || deleteThemeStatus === 'pending'}
+            isLoading={deleteThemeStatus === 'pending'}
+            variant="submit"
+          >
+            {t('enrichment.delete')}
+          </Button>
+          <span className="mb-2 mt-10 block">{t('enrichment.delete_icc')}</span>
+          <Dropdown
+            options={(iconCC?.items || []).map((i) => ({
+              value: i.id,
+              label: `${i.code}: ${i.name}`,
+            }))}
+            value={iccToDelete}
+            onChange={(value) => setIccToDelete(value)}
+            isSearchable
+          />
+          <Button
+            className="mt-5"
+            onClick={() => handleDeleteICC()}
+            disabled={!iccToDelete || deleteICCStatus === 'pending'}
+            isLoading={deleteICCStatus === 'pending'}
+            variant="submit"
+          >
+            {t('enrichment.delete')}
           </Button>
         </div>
       </div>

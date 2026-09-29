@@ -10,6 +10,7 @@ import filters from './filters'
 import dialog from './dialog'
 import detail from './detail'
 import iconclass_codes from './iconclass_codes'
+import editor from './editor'
 
 const translationCs = {
   common,
@@ -22,6 +23,7 @@ const translationCs = {
   dialog,
   detail,
   iconclass_codes,
+  editor,
 }
 
 export default translationCs

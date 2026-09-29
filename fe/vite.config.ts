@@ -1,17 +1,27 @@
 /// <reference types="vite/client" />
 import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import babel from '@rolldown/plugin-babel'
 import svgr from 'vite-plugin-svgr'
-import eslint from 'vite-plugin-eslint'
+import eslint from 'vite-plugin-eslint2'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  const env = loadEnv(mode, process.cwd(), '')
 
   return {
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./@', import.meta.url)),
+      },
+    },
     plugins: [
       react(),
+      babel({ presets: [reactCompilerPreset()] }),
+      tailwindcss(),
       svgr(),
       eslint(),
       sentryVitePlugin({
@@ -21,9 +31,9 @@ export default defineConfig(({ mode }) => {
         org: env.VITE_SENTRY_ORG,
         project: env.VITE_SENTRY_PROJECT,
         release: {
-          create: !!env.VITE_SENTRY_DEPLOY_ENV,
+          create: !!env.SENTRY_DEPLOY_ENV,
           deploy: {
-            env: env.VITE_SENTRY_DEPLOY_ENV || 'Not specified',
+            env: env.SENTRY_DEPLOY_ENV || 'Not specified',
           },
           setCommits: {
             auto: true,

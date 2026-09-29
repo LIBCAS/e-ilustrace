@@ -26,6 +26,10 @@ type TUpdateThemeStateInput = {
   state: TEnrichmentStates
 }
 
+type TDeleteThemeInput = {
+  id: string
+}
+
 export const useUpdateThemeStateMutation = () =>
   useMutation({
     mutationFn: ({ uuid, state }: TUpdateThemeStateInput) =>
@@ -39,6 +43,15 @@ export const useUpdateThemeStateMutation = () =>
       queryClient.invalidateQueries({
         queryKey: ['illustration-detail', variables.uuid],
       })
+    },
+  })
+
+export const useDeleteThemeMutation = () =>
+  useMutation({
+    mutationFn: ({ id }: TDeleteThemeInput) => api().delete(`theme/${id}`),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['theme-list'] })
     },
   })
 

@@ -7,8 +7,11 @@ ENV WEB_NAMESPACE=
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 RUN apt install -y wget git libssl-dev build-essential libpng-dev zlib1g-dev libjpeg-dev unzip libmagick++-dev
 
-# clone vise code
-RUN mkdir -p /root/vise/code && mkdir -p /root/vise/dep && mkdir "/root/vise/dep/_tmp_libsrc" && cd /root/vise/code && git clone https://gitlab.com/vgg/vise
+# create dirs
+RUN mkdir -p /root/vise/code/vise && mkdir -p /root/vise/dep && mkdir "/root/vise/dep/_tmp_libsrc"
+
+# copy vise code
+COPY ../code ./root/vise/code/vise
 
 # cmake
 RUN cd /root/vise/dep/_tmp_libsrc && wget https://github.com/Kitware/CMake/releases/download/v3.20.5/cmake-3.20.5.tar.gz && tar -zxvf cmake-3.20.5.tar.gz && cd cmake-3.20.5 && ./configure --prefix=/root/vise/dep && make -j 2 && make install

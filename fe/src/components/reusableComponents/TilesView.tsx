@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import clsx from 'clsx'
 import { PhotoIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +8,7 @@ import Loader from './Loader'
 import { TIllustrationList } from '../../../../fe-shared/@types/illustration'
 import Paginator from './Paginator'
 import ShowError from './ShowError'
+import Tooltip from './Tooltip'
 import constructRecordDetailUrl from '../../utils/constructRecordDetailUrl'
 import BookMark from '../../assets/icons/bookmark.svg?react'
 import useMeQueryWrapper from '../../hooks/useMeQueryWrapper'
@@ -93,8 +94,12 @@ const TilesView: FC<Props> = ({
         </div>
       ) : null}
       <div className="mx-auto flex w-full flex-wrap justify-evenly">
-        {illustrations.map((i) =>
-          clickType === 'normal' ? (
+        {illustrations.map((i) => {
+          const selectedItem = selection?.items?.find(
+            (item) => item.book?.id === i.id || item.illustration?.id === i.id
+          )
+
+          return clickType === 'normal' ? (
             <Link
               to={
                 allowFastSwitch
@@ -130,34 +135,37 @@ const TilesView: FC<Props> = ({
                   {i.printEntry?.originators.join(' ')} {i.printEntry?.date}
                 </span>
               </div>
-              <button
-                aria-label="Bookmark"
-                disabled={!me}
-                type="button"
-                className={`absolute right-0 top-5 z-10 sm:right-5 ${
-                  me ? 'hover:text-red' : ''
-                } ${
-                  selection?.items?.find(
-                    (item) =>
-                      item.book?.id === i.id || item.illustration?.id === i.id
-                  )
-                    ? 'text-red'
-                    : 'text-lightgray'
-                }`}
-                onClick={(event) => {
-                  event.preventDefault()
-                  const item = selection?.items?.find(
-                    (it) => it.book?.id === i.id || it.illustration?.id === i.id
-                  )
-                  if (item) {
-                    handleDeletion(item)
-                  } else {
-                    handleAddition(i)
-                  }
-                }}
+              <Tooltip
+                className="absolute right-0 top-5 z-10 sm:right-5"
+                content={t('login_required_for_selection')}
+                show={!me}
               >
-                <BookMark className="text-inherit transition-all duration-300" />
-              </button>
+                <button
+                  aria-label="Bookmark"
+                  type="button"
+                  className={clsx({
+                    'hover:text-red': !!me,
+                    'cursor-not-allowed': !me,
+                    'text-red': !!selectedItem,
+                    'text-lightgray': !selectedItem,
+                  })}
+                  onClick={(event) => {
+                    event.preventDefault()
+
+                    if (!me) {
+                      return
+                    }
+
+                    if (selectedItem) {
+                      handleDeletion(selectedItem)
+                    } else {
+                      handleAddition(i)
+                    }
+                  }}
+                >
+                  <BookMark className="text-inherit transition-all duration-300" />
+                </button>
+              </Tooltip>
             </Link>
           ) : (
             <div
@@ -202,37 +210,40 @@ const TilesView: FC<Props> = ({
                   {i.printEntry?.originators.join(' ')} {i.printEntry?.date}
                 </Link>
               </div>
-              <button
-                aria-label="Bookmark"
-                disabled={!me}
-                type="button"
-                className={`absolute right-0 top-5 z-10 sm:right-5 ${
-                  me ? 'hover:text-red' : ''
-                } ${
-                  selection?.items?.find(
-                    (item) =>
-                      item.book?.id === i.id || item.illustration?.id === i.id
-                  )
-                    ? 'text-red'
-                    : 'text-lightgray'
-                }`}
-                onClick={(event) => {
-                  event.preventDefault()
-                  const item = selection?.items?.find(
-                    (it) => it.book?.id === i.id || it.illustration?.id === i.id
-                  )
-                  if (item) {
-                    handleDeletion(item)
-                  } else {
-                    handleAddition(i)
-                  }
-                }}
+              <Tooltip
+                className="absolute right-0 top-5 z-10 sm:right-5"
+                content={t('login_required_for_selection')}
+                show={!me}
               >
-                <BookMark className="text-inherit transition-all duration-300" />
-              </button>
+                <button
+                  aria-label="Bookmark"
+                  type="button"
+                  className={clsx({
+                    'hover:text-red': !!me,
+                    'cursor-not-allowed': !me,
+                    'text-red': !!selectedItem,
+                    'text-lightgray': !selectedItem,
+                  })}
+                  onClick={(event) => {
+                    event.preventDefault()
+
+                    if (!me) {
+                      return
+                    }
+
+                    if (selectedItem) {
+                      handleDeletion(selectedItem)
+                    } else {
+                      handleAddition(i)
+                    }
+                  }}
+                >
+                  <BookMark className="text-inherit transition-all duration-300" />
+                </button>
+              </Tooltip>
             </div>
           )
-        )}
+        })}
       </div>
       <div className="mx-auto mt-4 flex w-fit flex-col items-center gap-y-2 md:flex-row">
         <Paginator

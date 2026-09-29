@@ -4,19 +4,14 @@ Tento soubor definuje, jak mají agenti pracovat v tomto repozitáři.
 
 ## Scope
 
-Řeš pouze frontend části:
-- `fe`
-- `fe-admin`
-- `fe-shared`
+Řeš celý repozitář podle zadání uživatele.
 
-Mimo scope (pokud uživatel výslovně neřekne jinak):
-- backend (`eil-api`, `common`, `entity-views`, `index`, apod.)
-- infrastruktura (Docker/Gradle) mimo nutné FE nastavení
+Preferuj minimální bezpečné změny v dotčených částech (`fe`, `fe-admin`, `fe-shared`, backend i infrastruktura).
 
 ## Co je co
 
-- `fe`: veřejný frontend (React + TypeScript + Vite + Yarn 4)
-- `fe-admin`: administrace (React + TypeScript + Vite + Yarn 4)
+- `fe`: veřejný frontend (React + TypeScript + Vite + pnpm)
+- `fe-admin`: administrace (React + TypeScript + Vite + pnpm)
 - `fe-shared`: sdílené FE typy/kontrakty (`@types/*`)
 
 ## Základní pravidla práce
@@ -24,7 +19,7 @@ Mimo scope (pokud uživatel výslovně neřekne jinak):
 - Před změnou nejdřív projdi relevantní část kódu a navrhni minimální bezpečnou úpravu.
 - Dodrž existující styl projektu (lint, naming, struktura složek).
 - Neprováděj široké refactory bez výslovného zadání.
-- Pokud měníš API kontrakt, zkontroluj dopad v `fe` i `fe-admin` a případně uprav `fe-shared`.
+- Pokud měníš API kontrakt, zkontroluj dopad v backendu i konzumentech (`fe`, `fe-admin`) a případně uprav `fe-shared`.
 - Preferuj malé, dobře ověřitelné změny.
 
 ## Jak spouštět projekty
@@ -34,17 +29,17 @@ Používej příkazy v konkrétní složce projektu.
 ### `fe`
 
 ```bash
-yarn dev
-yarn lint
-yarn build
+pnpm dev
+pnpm lint
+pnpm build
 ```
 
 ### `fe-admin`
 
 ```bash
-yarn dev
-yarn lint
-yarn build
+pnpm dev
+pnpm lint
+pnpm build
 ```
 
 ### `fe-shared`
@@ -54,9 +49,9 @@ yarn build
 
 ## Ověření před odevzdáním
 
-- Spusť minimálně `yarn lint` v dotčeném FE projektu.
-- U změn s dopadem na kompilaci spusť `yarn build`.
-- Zkontroluj, že se změna nepromítla nechtěně do jiné části UI.
+- Spusť minimálně lint/testy v dotčeném projektu.
+- U změn s dopadem na kompilaci nebo runtime spusť build/relevantní testy.
+- Zkontroluj, že se změna nepromítla nechtěně do jiných částí systému.
 
 ## Výstup pro uživatele
 

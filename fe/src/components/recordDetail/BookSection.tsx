@@ -445,7 +445,6 @@ const BookSection: FC<TBookSectionProps> = ({
                     windows: [
                       {
                         imageToolsEnabled: true,
-                        // imageToolsOpen: true,
                         // loadedManifest: `/iiif/2/${record.identifier}.jpg/info.json`,
                         loadedManifest: `/api/eil/record/${record.id}/manifest.json`,
                         thumbnailNavigationPosition: 'far-bottom',

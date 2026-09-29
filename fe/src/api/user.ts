@@ -102,5 +102,19 @@ export const useRegistrationMutation = () =>
 export const useMeQuery = () =>
   useQuery({
     queryKey: ['me'],
-    queryFn: () => api().get('internal/me').json<TMe>(),
+    queryFn: async () => {
+      const response = await api().get('internal/me')
+
+      if (response.status === 204) {
+        return null
+      }
+
+      const body = await response.text()
+
+      if (!body.trim()) {
+        return null
+      }
+
+      return JSON.parse(body) as TMe
+    },
   })

@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { toast } from 'react-toastify'
@@ -7,14 +7,13 @@ import { useIdleTimer } from 'react-idle-timer'
 import { Dialog } from '@headlessui/react'
 import CloseIcon from '../assets/icons/close.svg?react'
 import LeftArrow from '../assets/icons/navigate_back.svg?react'
-import Search from '../assets/icons/search.svg?react'
-import BookMark from '../assets/icons/bookmark.svg?react'
 
 import Button from '../components/reusableComponents/Button'
 import SearchIllustration from '../components/exhibitions/SearchIllustration'
-import FromMySelection from '../components/exhibitions/FromMySelection'
 import AddedIllustration from '../components/exhibitions/AddedIllustration'
 import WYSIWYGEditor from '../components/reusableComponents/inputs/WYSIWYGEditor'
+import SelectionDialog from '../components/reusableComponents/SelectionDialog'
+import SelectionDialogButton from '../components/reusableComponents/SelectionDialogButton'
 
 import { useNewExhibitionStore } from '../store/useNewExhibitionStore'
 import TextInput from '../components/reusableComponents/inputs/TextInput'
@@ -27,8 +26,7 @@ import ShowError from '../components/reusableComponents/ShowError'
 import ShowInfoMessage from '../components/reusableComponents/ShowInfoMessage'
 
 const NewExhibition: FC = () => {
-  const [showSearch, setShowSearch] = useState(true)
-  const [showSelection, setShowSelection] = useState(false)
+  const [showSelectionDialog, setShowSelectionDialog] = useState(false)
   const [activityCheckModalOpen, setActivityCheckModalOpen] = useState(false)
   const { t, i18n } = useTranslation('exhibitions')
   const navigate = useNavigate()
@@ -56,9 +54,33 @@ const NewExhibition: FC = () => {
 
   const discardChanges = useCallback(() => {
     setInitialState()
-    setShowSearch(true)
-    setShowSelection(false)
+    setShowSelectionDialog(false)
   }, [setInitialState])
+
+  const handleSelectionToggle = useCallback(
+    (illustrationId: string, checked: boolean) => {
+      if (checked) {
+        if (items.some((item) => item.id === illustrationId)) {
+          return
+        }
+
+        setItems([
+          ...items,
+          {
+            id: illustrationId,
+            description: '',
+            name: '',
+            year: '',
+            preface: false,
+          },
+        ])
+        return
+      }
+
+      setItems(items.filter((item) => item.id !== illustrationId))
+    },
+    [items, setItems]
+  )
 
   const setLoadedData = useCallback(() => {
     if (isEditing && editedExhibition) {
@@ -84,9 +106,9 @@ const NewExhibition: FC = () => {
 
   useEffect(() => {
     if (!isEditing) {
-      discardChanges()
+      setInitialState()
     }
-  }, [discardChanges, isEditing])
+  }, [isEditing, setInitialState])
 
   const handleSave = (show = false) => {
     if (items.some((i) => i.preface)) {
@@ -162,22 +184,22 @@ const NewExhibition: FC = () => {
           </div>
         </div>
       </Dialog>
-      <div className="border-[1.5px] border-superlightgray py-10">
-        <div className="mr-8">
-          <div className="mx-auto flex max-w-7xl items-center">
+      <div className="border-[1.5px] border-superlightgray py-6 md:py-10">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto flex max-w-7xl items-center gap-3">
             <LeftArrow
               className="cursor-pointer text-red"
               onClick={() => {
                 navigate('/exhibitions')
               }}
             />
-            <h1 className="text-left text-4xl font-bold">
+            <h1 className="text-left text-2xl font-bold leading-tight md:text-4xl">
               {isEditing ? editedExhibition?.name : t('new_exhibition')}
             </h1>
           </div>
         </div>
       </div>
-      <div className="mx-auto flex max-w-7xl flex-col px-8">
+      <div className="mx-auto flex max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         {isEditing && editedExhibitionLoading ? (
           <div className="my-10 flex items-center justify-center">
             <Loader />
@@ -196,7 +218,7 @@ const NewExhibition: FC = () => {
           editedExhibition) ||
         !isEditing ? (
           <>
-            <div className="flex w-full flex-row items-center justify-between border-b border-b-superlightgray py-8">
+            <div className="flex w-full flex-col gap-4 border-b border-b-superlightgray py-6 md:flex-row md:items-center md:justify-between md:py-8">
               <a
                 href={
                   i18n.resolvedLanguage === 'cs'
@@ -204,13 +226,14 @@ const NewExhibition: FC = () => {
                     : 'https://e-ilustrace.cz/en/help/'
                 }
                 target="_blank"
-                className="font-bold text-black underline"
+                className="font-bold text-black underline md:text-base"
                 rel="noreferrer"
               >
                 {t('how_to_use_exhibitions')}
               </a>
-              <div className="flex gap-3">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-end">
                 <Button
+                  className="w-full sm:w-auto"
                   variant="secondary"
                   onClick={() =>
                     isEditing ? setLoadedData() : discardChanges()
@@ -220,6 +243,7 @@ const NewExhibition: FC = () => {
                   {t('discard_changes')}
                 </Button>
                 <Button
+                  className="w-full sm:w-auto"
                   variant="secondary"
                   onClick={() => handleSave(true)}
                   disabled={!items.length || savingStatus === 'pending'}
@@ -227,6 +251,7 @@ const NewExhibition: FC = () => {
                   {t('save_and_display')}
                 </Button>
                 <Button
+                  className="w-full sm:w-auto"
                   variant="submit"
                   onClick={() => handleSave()}
                   disabled={!items.length || savingStatus === 'pending'}
@@ -235,28 +260,28 @@ const NewExhibition: FC = () => {
                 </Button>
               </div>
             </div>
-            <div className="mt-4 flex gap-8">
-              <div className="basis-2/3">
+            <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:gap-8">
+              <div className="w-full lg:basis-2/3">
                 <TextInput
                   label={t('name_of_exhibition')}
-                  className="bg-opacity-50 outline-black"
+                  className="bg-superlightgray/50 focus:border-black"
                   id="name"
                   onChange={(value) => setName(value)}
                   value={name}
                 />
                 <WYSIWYGEditor
-                  label="Úvod (volitelné – maximálně 750 znaků)"
+                  label={t('introduction')}
                   value={description}
                   onChange={(value) => setDescription(value)}
                 />
               </div>
-              <div className="basis-1/3">
+              <div className="w-full lg:basis-1/3">
                 <div className="flex flex-col">
                   <span className="block text-sm font-medium text-gray">
                     {t('type_of_exhibition_view')}
                   </span>
-                  <div className="mt-3 flex items-center gap-4">
-                    <fieldset>
+                  <div className="mt-3">
+                    <fieldset className="flex flex-wrap gap-3">
                       <label
                         className="cursor-pointer font-bold text-black"
                         htmlFor="album"
@@ -272,7 +297,7 @@ const NewExhibition: FC = () => {
                         {t('album')}
                       </label>
                       <label
-                        className="ml-3 cursor-pointer font-bold text-black"
+                        className="cursor-pointer font-bold text-black"
                         htmlFor="storyline"
                       >
                         <input
@@ -286,7 +311,7 @@ const NewExhibition: FC = () => {
                         {t('storyline')}
                       </label>
                       <label
-                        className="ml-3 cursor-pointer font-bold text-black"
+                        className="cursor-pointer font-bold text-black"
                         htmlFor="slider"
                       >
                         <input
@@ -311,39 +336,10 @@ const NewExhibition: FC = () => {
                 key={`added-ill-${i.id}`}
               />
             ))}
-            {showSearch && (
-              <SearchIllustration close={() => setShowSearch(false)} />
-            )}
-            {showSelection && (
-              <FromMySelection close={() => setShowSelection(false)} />
-            )}
-            <div className="mt-4 flex justify-between border-y border-superlightgray py-4">
-              <h3 className="mt-2 text-lg font-bold">
-                {t('add_illustration')}
-              </h3>
-              <div className="flex flex-wrap items-center gap-4">
-                <Button
-                  startIcon={<Search />}
-                  onClick={() => {
-                    setShowSelection(false)
-                    setShowSearch((current) => !current)
-                  }}
-                >
-                  {t('search_illustration')}
-                </Button>
-                <Button
-                  startIcon={<BookMark />}
-                  onClick={() => {
-                    setShowSearch(false)
-                    setShowSelection((current) => !current)
-                  }}
-                >
-                  {t('from_selection')}
-                </Button>
-              </div>
-            </div>
-            <div className="mt-8 flex items-center justify-end gap-2 py-8">
+            <SearchIllustration />
+            <div className="mt-8 flex flex-col-reverse gap-3 py-6 sm:flex-row sm:justify-end sm:py-8">
               <Button
+                className="w-full sm:w-auto"
                 variant="secondary"
                 onClick={() => (isEditing ? setLoadedData() : discardChanges())}
                 disabled={savingStatus === 'pending'}
@@ -351,6 +347,7 @@ const NewExhibition: FC = () => {
                 {t('discard_changes')}
               </Button>
               <Button
+                className="w-full sm:w-auto"
                 variant="secondary"
                 onClick={() => handleSave(true)}
                 disabled={!items.length || savingStatus === 'pending'}
@@ -358,6 +355,7 @@ const NewExhibition: FC = () => {
                 {t('save_and_display')}
               </Button>
               <Button
+                className="w-full sm:w-auto"
                 variant="submit"
                 onClick={() => handleSave()}
                 disabled={!items.length || savingStatus === 'pending'}
@@ -365,6 +363,14 @@ const NewExhibition: FC = () => {
                 {t('save_exhibtion')}
               </Button>
             </div>
+            <SelectionDialog
+              showDialog={showSelectionDialog}
+              setShowDialog={setShowSelectionDialog}
+              mode="exhibition"
+              selectedIllustrationIds={items.map((item) => item.id)}
+              onIllustrationToggle={handleSelectionToggle}
+            />
+            <SelectionDialogButton setShowDialog={setShowSelectionDialog} />
           </>
         ) : null}
       </div>

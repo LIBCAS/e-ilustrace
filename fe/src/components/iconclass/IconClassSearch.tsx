@@ -4,11 +4,12 @@ import {
   SetStateAction,
   useDeferredValue,
   useEffect,
+  useRef,
   useState,
 } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router'
 import SearchIcon from '../../assets/icons/search.svg?react'
 import PaletteIcon from '../../assets/icons/palette.svg?react'
 
@@ -34,7 +35,7 @@ type Props = {
 const IconClassSearch: FC<Props> = ({ isMobile, setFilterOpen }) => {
   const { t } = useTranslation('iconclass')
   const [searchParams, setSearchParams] = useSearchParams()
-  const [searchParamsInitialized, setSearchParamsInitialized] = useState(false)
+  const searchParamsInitializedRef = useRef(false)
   const [showDialog, setShowDialog] = useState(false)
   const { filterValuesForDropdown } = useIconClassDropdownTranslations()
   const illustrationsPerPage = 20
@@ -68,7 +69,7 @@ const IconClassSearch: FC<Props> = ({ isMobile, setFilterOpen }) => {
   })
 
   useEffect(() => {
-    if (!searchParamsInitialized) {
+    if (!searchParamsInitializedRef.current) {
       const paramsPage = searchParams.get('page')
       const paramsSearch = searchParams.get('search')
       const paramsCategory = searchParams.get('category')
@@ -105,11 +106,10 @@ const IconClassSearch: FC<Props> = ({ isMobile, setFilterOpen }) => {
         }
       }
 
-      setSearchParamsInitialized(true)
+      searchParamsInitializedRef.current = true
     }
   }, [
     searchParams,
-    searchParamsInitialized,
     setCategory,
     setIcc,
     setPage,
@@ -149,7 +149,7 @@ const IconClassSearch: FC<Props> = ({ isMobile, setFilterOpen }) => {
             startIcon={<SearchIcon />}
             placeholder={t('search_illustration')}
             value={search}
-            className="h-full outline-black"
+            className="h-full focus:border-black"
             onChange={(newValue) => setSearch(newValue)}
           />
           <div className="min-w-[200px] lg:min-w-[250px]">

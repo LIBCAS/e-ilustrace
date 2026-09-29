@@ -32,3 +32,6 @@ eil-api/bin
 opencode.json
 
 **.DS_Store
+node_modules
+.eslintcache
+**/.eslintcache

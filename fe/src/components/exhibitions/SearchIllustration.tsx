@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { FC, useDeferredValue, useState } from 'react'
@@ -11,15 +11,9 @@ import ShowError from '../reusableComponents/ShowError'
 import ShowInfoMessage from '../reusableComponents/ShowInfoMessage'
 import ListOfSelectableIllustrations from './ListOfSelectableIllustrations'
 import { TIllustrationList } from '../../../../fe-shared/@types/illustration'
-import Button from '../reusableComponents/Button'
-import CloseIcon from '../../assets/icons/close.svg?react'
 import constructSearchUrl from '../../utils/constructSearchUrl'
 
-type TProps = {
-  close: () => void
-}
-
-const SearchIllustration: FC<TProps> = ({ close }) => {
+const SearchIllustration: FC = () => {
   const { t } = useTranslation()
   const [search, setSearch] = useState('')
   const { data, isFetching, isError } = useRecordListQuery({
@@ -47,22 +41,13 @@ const SearchIllustration: FC<TProps> = ({ close }) => {
         <h2 className="my-4 text-xl font-bold">
           {t('exhibitions:search_illustration')}
         </h2>
-        {/* <ActionButtons /> */}
-        <Button
-          iconButton
-          variant="text"
-          className="self-end justify-self-end border-none bg-white font-bold uppercase text-black hover:text-black hover:shadow-none"
-          onClick={() => close()}
-        >
-          <CloseIcon />
-        </Button>
       </div>
       <div className="w-5/6">
         <TextInput
           id="ill-search"
           value={search}
           onChange={(newValue) => setSearch(newValue)}
-          className="bg-opacity-50 outline-black"
+          className="bg-superlightgray/50 focus:border-black"
           startIcon={<Search />}
           placeholder={t('exhibitions:search_placeholder')}
         />

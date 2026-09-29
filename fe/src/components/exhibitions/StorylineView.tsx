@@ -1,12 +1,12 @@
 import { FC, Fragment } from 'react'
 import { PhotoIcon } from '@heroicons/react/24/outline'
-import DOMPurify from 'dompurify'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { TExhibitionItemDetail } from '../../../../fe-shared/@types/exhibition'
 import constructRecordDetailUrl from '../../utils/constructRecordDetailUrl'
 import constructSearchUrl from '../../utils/constructSearchUrl'
 import generateSearchSearchParams from '../../utils/generateSearchSearchParams'
+import sanitizeWysiwygHtml from '../../utils/sanitizeWysiwygHtml'
 
 const BlankImage = ({ classNames }: { classNames: string }) => {
   return <PhotoIcon className={`text-lightgray ${classNames}`} />
@@ -38,25 +38,28 @@ const StorylineView: FC<Props> = ({ items }) => {
             <Link
               target="_blank"
               to={constructRecordDetailUrl(i.illustration.id)}
-              className="ml-auto mr-20 block py-8"
+              className="ml-auto mr-10 block py-5"
             >
-              {i.illustration.illustrationScan ? (
-                <img
-                  className="justify-self-start rounded-xl transition-all duration-300"
-                  src={`/api/eil/files/${i.illustration.illustrationScan.id}`}
-                  alt={i.illustration.title}
-                />
-              ) : null}
-              {i.illustration.pageScan && !i.illustration.illustrationScan ? (
-                <img
-                  className="justify-self-start rounded-xl transition-all duration-300"
-                  src={`/api/eil/files/${i.illustration.pageScan.id}`}
-                  alt={i.illustration.title}
-                />
-              ) : null}
-              {!i.illustration.illustrationScan && !i.illustration.pageScan ? (
-                <BlankImage classNames="justify-self-start rounded-xl transition-all duration-300" />
-              ) : null}
+              <div className="flex h-[320px] w-[420px] max-w-full items-center justify-center rounded-xl bg-[#fafafa] p-3">
+                {i.illustration.illustrationScan ? (
+                  <img
+                    className="h-full w-full rounded-xl object-contain transition-all duration-300"
+                    src={`/api/eil/files/${i.illustration.illustrationScan.id}`}
+                    alt={i.illustration.title}
+                  />
+                ) : null}
+                {i.illustration.pageScan && !i.illustration.illustrationScan ? (
+                  <img
+                    className="h-full w-full rounded-xl object-contain transition-all duration-300"
+                    src={`/api/eil/files/${i.illustration.pageScan.id}`}
+                    alt={i.illustration.title}
+                  />
+                ) : null}
+                {!i.illustration.illustrationScan &&
+                !i.illustration.pageScan ? (
+                  <BlankImage classNames="h-20 w-20 transition-all duration-300" />
+                ) : null}
+              </div>
               {/* <img */}
               {/*  className="justify-self-start rounded-xl transition-all duration-300" */}
               {/*  // src={require(`assets/images/${i.image}`)} */}
@@ -67,8 +70,8 @@ const StorylineView: FC<Props> = ({ items }) => {
             <div className="relative bg-lightgray">
               <div className="absolute left-1/2 h-3 w-3 -translate-x-1/2 rounded-[50%] bg-red" />
             </div>
-            <div className="ml-20 flex flex-col py-8">
-              <h2 className="mb-2 mt-2 text-xl font-bold">
+            <div className="ml-10 flex w-full max-w-[620px] flex-col break-words py-5 pr-4">
+              <h2 className="mb-2 mt-1 text-xl font-bold">
                 <Link
                   target="_blank"
                   to={constructRecordDetailUrl(i.illustration.id)}
@@ -102,10 +105,10 @@ const StorylineView: FC<Props> = ({ items }) => {
                   </Link>
                 </span>
               ) : null}
-              <p
-                className="mt-2 text-gray"
+              <div
+                className="wysiwyg-editor-content mt-2 leading-relaxed text-gray"
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(i.description),
+                  __html: sanitizeWysiwygHtml(i.description),
                 }}
               />
             </div>

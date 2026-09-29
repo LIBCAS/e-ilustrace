@@ -48,6 +48,23 @@ const cz: typeof en = {
     'Registrace proběhla úspěšně, nyní prosím potvrďte svůj email',
   registration_activation_successful:
     'Aktivace účtu proběhla úspěšně, nyní se můžete přihlásit',
+  status_logged_in: 'Přihlášen',
+  status_logged_out: 'Nepřihlášen',
+  status_checking: 'Načítání',
+  citations_info: 'Pravidla citací',
+  citations_title: 'Zásady pro užívání',
+  citations_intro:
+    'Vstupem do databáze e-ilustrace se uživatel zavazuje odkázat na její využití ve všech výstupech.',
+  citations_recommendation:
+    'Při citování doporučujeme uvádět zdroj v následující formě:',
+  citations_database_reference:
+    'e-ilustrace.cz [online databáze]. Praha: Knihovna AV ČR, v. v. i., [cit. rrrr-mm-dd]. Dostupné z: https://e-ilustrace.cz/.',
+  citations_specific_record_title: 'Konkrétní záznam v databázi:',
+  citations_specific_reference:
+    'e-ilustrace.cz [online databáze], INC035_IL010. [cit. rrrr-mm-dd]. Dostupné z: https://app.e-ilustrace.cz/record-detail/2c44d885-1408-47e5-8cac-768e01b3720e/switch?back=search.',
+  citations_note:
+    'Pozn.: Pokud citujete jiný záznam, nahraďte číslo záznamu a URL příslušnými údaji ze záznamu.',
+  citations_accept: 'Souhlasím',
 }
 
 export default cz

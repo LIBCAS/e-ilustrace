@@ -66,6 +66,20 @@ type TIconClassInput = {
   id: string
 }
 
+type TDeleteIconClassInput = {
+  id: string
+}
+
+export const useDeleteIconClassMutation = () =>
+  useMutation({
+    mutationFn: ({ id }: TDeleteIconClassInput) =>
+      api().delete(`iconclass/${id}`),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['iconclass-list'] })
+    },
+  })
+
 export const useIconClassQuery = ({ id }: TIconClassInput) =>
   useQuery({
     queryKey: ['iconclass', id],

@@ -64,7 +64,7 @@ const SearchFilter = () => {
 
   return (
     <div className="flex h-full w-screen flex-col md:w-[370px]">
-      <div className="flex items-center justify-between px-6 pt-6 font-bold md:bg-superlightgray md:bg-opacity-30 md:p-4">
+      <div className="flex items-center justify-between px-6 pt-6 font-bold md:bg-superlightgray/30 md:p-4">
         <div className="flex w-full items-center justify-between border-b-[1.5px] border-superlightgray pb-2 md:border-none md:p-0">
           <h2 className="text-2xl font-bold md:text-base">
             {t('search.filter_results')}

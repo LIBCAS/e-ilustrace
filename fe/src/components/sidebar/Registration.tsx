@@ -1,47 +1,22 @@
 import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { z, ZodIssue } from 'zod'
+import { z } from 'zod'
 import { toast } from 'react-toastify'
-import i18next from '../../lang'
 
+import { $ZodIssue } from 'zod/v4/core'
 import LoginButton from '../reusableComponents/LoginButton'
 import Checkbox from '../reusableComponents/inputs/Checkbox'
 import TextInput from '../reusableComponents/inputs/TextInput'
 import { useRegistrationMutation } from '../../api/user'
 
-const registrationSchema = z
-  .object({
-    firstName: z.string({
-      required_error: i18next.t('navigation:field_is_required'),
-    }),
-    lastName: z.string({
-      required_error: i18next.t('navigation:field_is_required'),
-    }),
-    email: z
-      .string({
-        required_error: i18next.t('navigation:field_is_required'),
-      })
-      .email({
-        message: i18next.t('navigation:bad_email_format'),
-      }),
-    password: z.string({
-      required_error: i18next.t('navigation:field_is_required'),
-    }),
-    repeatedPassword: z.string({
-      required_error: i18next.t('navigation:field_is_required'),
-    }),
-    terms: z.literal<boolean>(true, {
-      errorMap: () => ({
-        message: i18next.t('navigation:accepted_terms_required'),
-      }),
-    }),
-  })
-  .refine((data) => data.password === data.repeatedPassword, {
-    message: i18next.t('navigation:bad_repeated_password'),
-    path: ['repeatedPassword'],
-  })
-
-type TRegistrationSchema = z.infer<typeof registrationSchema>
+type TRegistrationForm = {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  repeatedPassword: string
+  terms: boolean
+}
 
 // const validate = (values: TRegistrationSchema) => {
 //   const refinedObject = registrationSchema.refine(
@@ -77,8 +52,40 @@ const initialValues = {
 
 const Registration: FC = () => {
   const { t } = useTranslation('navigation')
-  const [errors, setErrors] = useState<ZodIssue[]>([])
-  const [values, setValues] = useState<TRegistrationSchema>(initialValues)
+  const registrationSchema = z
+    .object({
+      firstName: z
+        .string()
+        .trim()
+        .min(1, {
+          message: t('field_is_required'),
+        }),
+      lastName: z
+        .string()
+        .trim()
+        .min(1, {
+          message: t('field_is_required'),
+        }),
+      email: z.email({
+        message: t('bad_email_format'),
+      }),
+      password: z.string().min(1, {
+        message: t('field_is_required'),
+      }),
+      repeatedPassword: z.string().min(1, {
+        message: t('field_is_required'),
+      }),
+      terms: z.literal(true, {
+        error: t('accepted_terms_required'),
+      }),
+    })
+    .refine((data) => data.password === data.repeatedPassword, {
+      message: t('bad_repeated_password'),
+      path: ['repeatedPassword'],
+    })
+
+  const [errors, setErrors] = useState<$ZodIssue[]>([])
+  const [values, setValues] = useState<TRegistrationForm>(initialValues)
   const { mutateAsync: doRegistration, status: registrationStatus } =
     useRegistrationMutation()
   // const validateField = (field: keyof TRegistrationSchema, value: string) => {
@@ -107,7 +114,7 @@ const Registration: FC = () => {
       if (!values.terms) {
         toast.error(t('accepted_terms_required'))
       }
-      setErrors(validation.error.errors)
+      setErrors(validation.error.issues)
     }
   }
 
@@ -124,8 +131,8 @@ const Registration: FC = () => {
             firstName: value,
           }))
         }}
-        className={`w-full outline-superlightgray transition ${
-          values.firstName ? 'bg-white' : 'bg-opacity-30 caret-white'
+        className={`w-full transition ${
+          values.firstName ? 'bg-white' : 'bg-superlightgray/30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'firstName') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -141,8 +148,8 @@ const Registration: FC = () => {
             lastName: value,
           }))
         }}
-        className={`w-full outline-superlightgray transition ${
-          values.lastName ? 'bg-white' : 'bg-opacity-30 caret-white'
+        className={`w-full transition ${
+          values.lastName ? 'bg-white' : 'bg-superlightgray/30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'lastName') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -158,8 +165,8 @@ const Registration: FC = () => {
             email: value,
           }))
         }}
-        className={`w-full outline-superlightgray transition ${
-          values.email ? 'bg-white' : 'bg-opacity-30 caret-white'
+        className={`w-full transition ${
+          values.email ? 'bg-white' : 'bg-superlightgray/30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'email') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -176,8 +183,8 @@ const Registration: FC = () => {
             password: value,
           }))
         }}
-        className={`w-full outline-superlightgray transition ${
-          values.password ? 'bg-white' : 'bg-opacity-30 caret-white'
+        className={`w-full transition ${
+          values.password ? 'bg-white' : 'bg-superlightgray/30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'password') ? 'mb-0.5' : 'mb-6'
         }`}
@@ -194,8 +201,8 @@ const Registration: FC = () => {
             repeatedPassword: value,
           }))
         }}
-        className={`w-full outline-superlightgray transition ${
-          values.repeatedPassword ? 'bg-white' : 'bg-opacity-30 caret-white'
+        className={`w-full transition ${
+          values.repeatedPassword ? 'bg-white' : 'bg-superlightgray/30 caret-white'
         } font-bold placeholder-white ${
           errors.find((e) => e.path[0] === 'repeatedPassword')
             ? 'mb-0.5'

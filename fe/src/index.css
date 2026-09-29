@@ -1,6 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '../@/styles/_variables.scss';
+@import '../@/styles/_keyframe-animations.scss';
+
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-superlightgray: #e9ecef;
+  --color-lightgray: #ced4da;
+  --color-gray: #6c757d;
+  --color-footergray: #f2f4f5;
+  --color-darkgray: #343a40;
+  --color-black: #121416;
+  --color-red: #e2293f;
+  --color-green: #22be73;
+  --color-warning: #fcb62e;
+  --color-blue: #2298ee;
+
+  --shadow-3xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-lightgray, currentcolor);
+  }
+}
 
 :root {
   --scrollbar-width: 8px;
@@ -45,26 +81,68 @@
   grid-template-columns: 1fr 1px 1fr;
 }
 
-/* Temporary fix of react-quill bug when it shows two toolbars*/
-.quill > .ql-toolbar:first-child {
-  display: none !important;
+.wysiwyg-editor-content h1 {
+  @apply mb-3 text-2xl font-bold;
 }
 
-/* Quill custom styles*/
-.quill .ql-toolbar.ql-snow {
-  border: 1px solid var(--super-light-gray);
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+.wysiwyg-editor-content h2 {
+  @apply mb-2 text-xl font-bold;
 }
 
-.quill .ql-container.ql-snow {
-  min-height: 200px;
-  border: 1px solid var(--super-light-gray);
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  background-color: rgb(
-    233 236 239 / 0.5
-  ); /* superlightgray with 50% opacity */
+.wysiwyg-editor-content h3 {
+  @apply mb-2 text-lg font-bold;
+}
+
+.wysiwyg-editor-content h4 {
+  @apply mb-2 font-bold;
+}
+
+.wysiwyg-editor-content p {
+  @apply mb-2;
+}
+
+.wysiwyg-editor-content ul {
+  @apply mb-2 list-disc pl-6;
+}
+
+.wysiwyg-editor-content ol {
+  @apply mb-2 list-decimal pl-6;
+}
+
+.wysiwyg-editor-content blockquote {
+  @apply border-lightgray text-gray my-2 border-l-4 pl-4;
+}
+
+.wysiwyg-editor-content a {
+  @apply text-red font-bold underline;
+}
+
+.wysiwyg-editor-content pre {
+  @apply bg-darkgray my-2 overflow-x-auto rounded p-3 text-white;
+}
+
+.wysiwyg-editor-content code:not(pre code) {
+  @apply bg-superlightgray rounded px-1 py-0.5;
+}
+
+.wysiwyg-editor-content mark {
+  @apply rounded px-0.5;
+}
+
+.wysiwyg-editor-content hr {
+  @apply border-superlightgray my-4;
+}
+
+.wysiwyg-editor-content ul[data-type='taskList'] {
+  @apply list-none pl-0;
+}
+
+.wysiwyg-editor-content ul[data-type='taskList'] li {
+  @apply flex items-start gap-2;
+}
+
+.wysiwyg-editor-content ul[data-type='taskList'] li > div {
+  @apply min-w-0 flex-1;
 }
 
 .button:hover .icon {
@@ -74,7 +152,7 @@
 /* from index.html */
 
 input[type='checkbox']:checked ~ .check-1 {
-  @apply text-opacity-100;
+  @apply opacity-100;
 }
 .sidebar-item {
   @apply w-full cursor-pointer py-2;
@@ -103,8 +181,4 @@ input[type='checkbox']:checked ~ .check-1 {
 
 .MuiAppBar-root {
   z-index: 10 !important;
-}
-
-.quill > .ql-toolbar:first-child {
-  display: block !important;
 }

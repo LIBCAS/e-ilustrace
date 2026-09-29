@@ -1,6 +1,7 @@
 import { FC, ReactNode, useState } from 'react'
 
 import clsx from 'clsx'
+import { twMerge } from 'tailwind-merge'
 import VisibilityIcon from '../../../assets/icons/visibility.svg?react'
 
 type Props = {
@@ -44,12 +45,12 @@ const TextInput: FC<Props> = ({
       {label && (
         <label
           htmlFor={id}
-          className="text-md mb-2 block font-medium text-black"
+          className="mb-2 block text-base font-medium text-black"
         >
           {label}
         </label>
       )}
-      <div className="relative rounded-xl shadow-sm">
+      <div className="relative rounded-xl">
         {startIcon && (
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <div className="ml-1 text-black">{startIcon}</div>
@@ -60,21 +61,22 @@ const TextInput: FC<Props> = ({
           id={id}
           value={value}
           placeholder={placeholder}
-          className={clsx(
-            `block w-full py-3 outline-1 transition ${
+          className={twMerge(
+            clsx(
+            `block w-full border-2 border-transparent py-3 transition focus:border-lightgray focus:outline-none ${
               startIcon ? 'pl-12' : 'pl-3'
-            } border-gray-300 rounded-xl bg-superlightgray pr-6 sm:text-sm`,
+            } rounded-xl bg-superlightgray pr-6 sm:text-sm`,
             {
-              'font-bold placeholder-white outline-superlightgray':
-                color === 'red',
+              'font-bold placeholder-white': color === 'red',
             },
             { 'bg-white': color === 'red' && value.length > 0 },
             {
-              'bg-opacity-30 caret-white':
+              'bg-superlightgray/30 caret-white':
                 color === 'red' && value.length === 0,
             },
             // { 'bg-superlightgray': color === 'white' },
             className
+          )
           )}
           onChange={(event) => onChange(event.target.value)}
         />

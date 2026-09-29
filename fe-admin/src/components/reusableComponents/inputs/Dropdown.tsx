@@ -25,7 +25,7 @@ type DropdownProps = {
 const NoOptionsMessage = (props: any) => {
   const { t } = useTranslation()
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
+     
     <components.NoOptionsMessage {...props}>
       <span className="custom-css-class">{t('search.no_options')}</span>
     </components.NoOptionsMessage>

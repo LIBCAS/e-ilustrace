@@ -72,7 +72,6 @@ interface TState extends TSearchVariablesState {
   setIIIFFormat: (newValue: boolean) => void
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const useSearchStore = create<TState>()((set) => ({
   sort: null,
   year: { from: 0, to: 1990 },

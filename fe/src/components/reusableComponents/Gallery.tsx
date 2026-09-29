@@ -1,11 +1,13 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { PhotoIcon } from '@heroicons/react/24/outline'
+import { useTranslation } from 'react-i18next'
 import BookMark from '../../assets/icons/bookmark.svg?react'
 
 import { TIllustrationList } from '../../../../fe-shared/@types/illustration'
 import Loader from './Loader'
 import ShowError from './ShowError'
+import Tooltip from './Tooltip'
 import { useMySelectionQuery } from '../../api/my-selection'
 import useAddToMySelectionMutationWrapper from '../../hooks/useAddToMySelectionMutationWrapper'
 import useRemoveFromMySelectionMutationWrapper from '../../hooks/useRemoveFromMySelectionMutationWrapper'
@@ -26,6 +28,7 @@ type Props = {
 
 const Gallery: FC<Props> = ({ items, loading, error, backPath }) => {
   const { me } = useMeQueryWrapper()
+  const { t } = useTranslation('search')
   const { data: selection } = useMySelectionQuery(!!me)
   const { doAdd } = useAddToMySelectionMutationWrapper()
   const { doRemove } = useRemoveFromMySelectionMutationWrapper()
@@ -52,37 +55,41 @@ const Gallery: FC<Props> = ({ items, loading, error, backPath }) => {
       ) : null}
       {!loading && !error ? (
         <>
-          {items.map((item) => (
-            <Link
-              to={constructRecordDetailUrl(item.id, backPath)}
-              className="explore-item relative mx-auto flex max-w-[180px] flex-col items-center justify-start p-4 md:mx-0"
-              key={item.id}
-            >
-              <BookMark
-                className={`${
-                  selection?.items?.find(
-                    (i) =>
-                      i.book?.id === item.id || i.illustration?.id === item.id
-                  )
-                    ? 'text-red'
-                    : 'text-lightgray'
-                } absolute right-5 top-5 z-10 ${
-                  me ? 'cursor-pointer' : 'cursor-default'
-                }`}
-                onClick={(e) => {
-                  e.preventDefault()
+          {items.map((item) => {
+            const selectedItem = selection?.items?.find(
+              (i) => i.book?.id === item.id || i.illustration?.id === item.id
+            )
 
-                  const selected = selection?.items?.find(
-                    (it) =>
-                      it.book?.id === item.id || it.illustration?.id === item.id
-                  )
-                  if (selected) {
-                    handleDeletion(selected)
-                  } else {
-                    handleAddition(item)
-                  }
-                }}
-              />
+            return (
+              <Link
+                to={constructRecordDetailUrl(item.id, backPath)}
+                className="explore-item relative mx-auto flex max-w-[180px] flex-col items-center justify-start p-4 md:mx-0"
+                key={item.id}
+              >
+                <Tooltip
+                  className="absolute right-5 top-5 z-10"
+                  content={t('login_required_for_selection')}
+                  show={!me}
+                >
+                  <BookMark
+                    className={`${
+                      selectedItem ? 'text-red' : 'text-lightgray'
+                    } ${me ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+
+                      if (!me) {
+                        return
+                      }
+
+                      if (selectedItem) {
+                        handleDeletion(selectedItem)
+                      } else {
+                        handleAddition(item)
+                      }
+                    }}
+                  />
+                </Tooltip>
               {item.illustrationScan ? (
                 <img
                   className="max-h-[170px] justify-self-start transition-all duration-300"
@@ -112,8 +119,9 @@ const Gallery: FC<Props> = ({ items, loading, error, backPath }) => {
                   </span>
                 ) : null}
               </div>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </>
       ) : null}
     </div>
